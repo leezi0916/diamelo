@@ -13,7 +13,11 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
+<<<<<<< HEAD
         return "index";
+=======
+        return "myPage/myPage";
+>>>>>>> 5baecf63b1e2bbd43fca6230b3659c619850e8d5
     }
 
 }
