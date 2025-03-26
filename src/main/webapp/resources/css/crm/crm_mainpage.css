@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
+    font-style: normal;
+}
+
+body{
+    background-color: #F8F8F8;
+}
+
+/* 상단광고 */
+
+#ad img{
+    width: 100%;
+    height: 350px;
+    cursor:pointer;
+}
+
+/* 상품추천 */
+
+#ad_inner{
+    padding: 80px 140px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.ad_inner table img{
+    cursor:pointer;
+}
+
+.ad_inner table img:hover{
+    scale: 1.02;
+}
+
+.ad_inner_title{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.another span{
+    color: #a9a9a9;
+    float: right;
+}
+
+.another span a{
+    text-decoration: none;
+    color: #A9A9A9;
+}
+
+#line{
+    border: 1px solid black;
+}
