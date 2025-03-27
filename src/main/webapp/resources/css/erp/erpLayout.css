@@ -1,31 +1,110 @@
-*{
+* {
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    margin: 0;
 }
 
-
-.layout-wrapper{
+.layout-wrapper {
     display: flex;
     height: 100%;
 }
 
 /***************** 사이드바 *************************/
-
-.sidebar-container{
+.sidebar-container {
     width: 12%;
     height: 100%;
-    border-right: 1px solid #A9A9A9;
     background: #fcfcfc;
-    box-shadow: 1px 0px 4px 0 rgba(0,0,0,0.25)
+    border-right: 2px solid #a9a9a9;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.category {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.categoryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
 /***************** 상단바 *************************/
-.header-container{
+.header-container {
     width: 100%;
-    border-bottom: 1px solid #A9A9A9;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
     background: #fcfcfc;
-    box-shadow: 1px 0px 4px 0 rgba(0,0,0,0.25)
+    border-bottom: 1px solid;
+    border-color: rgba(169, 169, 169, 0.4);
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
+/* 왼쪽 (홈 아이콘 + 텍스트) */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
+.header-left svg {
+    margin-bottom: 44px;
+}
 
+.home-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.home-sub {
+    font-size: 20px;
+    font-weight: 500;
+    color: #a9a9a9;
+    text-align: center;
+}
+
+.home-main {
+    font-size: 24px;
+    font-weight: 500;
+    color: #000;
+}
+
+/* 오른쪽 (사람 + 로그아웃 + 텍스트) */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.welcome-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #655c5c;
+}
+
+/***************** 상단바 + 메인 컨테츠 영역 (전체 100% - 사이드 12% -> width88%) *************************/
+.main-area {
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f8f8;
+}

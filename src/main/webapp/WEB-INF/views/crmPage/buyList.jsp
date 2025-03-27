@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="../crmPage/crm_header.jsp"/>
+<jsp:include page="../common/crm/header.jsp"/>
 
 <div id="list">
     <div id="list_header">
@@ -40,6 +40,6 @@
 </div>
 
 
-<jsp:include page="../crmPage/crm_footer.jsp"/>
+<jsp:include page="../common/crm/footer.jsp"/>
 </body>
 </html>

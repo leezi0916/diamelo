@@ -39,7 +39,7 @@
 .div-imgarea{
     height: 100%;
     width: 50%;
-    background-image: url(/resources/image/myPage_img.png);
+    background-image: url(/resources/image/etc/myPage_img.png);
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -173,7 +173,7 @@ a{
 .div-imgarea1{
     height: 100%;
     width: 50%;
-    background-image: url(/resources/image/updatemyPage_img.png);
+    background-image: url(/resources/image/etc/updatemyPage_img.png);
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;

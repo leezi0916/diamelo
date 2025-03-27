@@ -18,7 +18,7 @@
             <div class="div-area1">
                 <div id="imgdiv1">
                     <div id="imgdiv">
-                        <img src="/resources/image/logo.png" alt="로고이미지">
+                        <img src="/resources/image/etc/logo.png" alt="로고이미지">
                     </div>
                 </div>
                 <br>
