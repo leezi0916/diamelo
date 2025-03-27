@@ -50,7 +50,7 @@
 .div-imgarea{/* 전체화면의 오른쪽 이미지용 div*/
     height: 100%;
     width: 50%;
-    background-image: url(/resources/image/dyxm.PNG);
+    background-image: url(/resources/image/etc/dyxm.PNG);
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
