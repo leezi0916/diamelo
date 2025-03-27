@@ -1,3 +1,5 @@
+
+/*myPage 와 updatemyPage의 css*/
 * {
     box-sizing: border-box;
     font-family: "Noto Sans KR", sans-serif;
@@ -5,49 +7,31 @@
     margin: 0;
 }
 
-
-.div-area{
+.div-area{ /* */
     height: 100%;
     width: 100%;
     background: #F8F8F8F8;
     display: flex;
 }
 
-.div-loginarea{  /* 전체화면의 왼쪽 loginPage size */
+.div-loginarea{
+
     height: 100%;
     width: 50%;
 }
 
-#imgdiv1{ /* 이미지 div */
-    height: 30%;
-    width: 100%;
-    align-items: center;
-    align-content: center;
-}
-
-#imgdiv{ /* 로고이미지 중앙 정렬*/
+#imgdiv{
     width: 100%;
     height: 70%;
     display: flex;
+
+
     align-content: center;
     justify-content: center;
     margin: 0 auto;
-}
 
-#form1{ /* 로그인 창*/
-    height: 40%;
-    align-content: space-between;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    margin: 0 auto;
-    gap: 17%;
-    padding-top: 10%;
-    padding-left: 10%;
-    padding-right: 10%;
 }
-
-.div-imgarea{/* 전체화면의 오른쪽 이미지용 div*/
+.div-imgarea{
     height: 100%;
     width: 50%;
     background-image: url(/resources/image/etc/dyxm.PNG);
@@ -58,9 +42,16 @@
     outline: 0;
 }
 
-#thId{ /* 아이디 입력칸 div*/
-    border: 1px solid green;
-    height: 20%;
+
+.div-loginarea>.loginForm{
+    padding-right: 5%;
+    padding-left: 5%;
+    margin: 0 auto;
+}
+
+#thId{
+    border: 1.5px solid green;
+    height: 50px;
     width: 100%;
     padding-right: 5%;
     align-items: center;
@@ -69,19 +60,35 @@
     padding-left: 5%;
     border-radius: 15px;
     gap: 5%;
-}
+    background: white;
 
-#thId input{ /* 아이디 입력칸 input*/
+
+}
+#thId input{
     width: 100%;
     border: none;
     outline: none;
-    background: #F8F8F8;
+
+    background: white;
     font-size: 16px;
+
+
 }
 
-#thPwd{ /* 비밀번호 입력칸 div*/
-    border: 1px solid green;
-    height: 20%;
+
+
+#thPwd input{
+    width: 100%;
+    border: none;
+    background: white;
+    font-size: 16px;
+    outline: none;
+
+
+}
+#thPwd{
+    border: 1.5px solid green;
+    height: 50px;
     width: 100%;
     padding-right: 5%;
     justify-content: space-around;
@@ -90,57 +97,146 @@
     padding-left: 5%;
     border-radius: 15px;
     gap: 5%;
+    background: white;
 }
 
-#thPwd input{ /* 비밀번호 입력칸 input*/
-    width: 100%;
-    border: none;
-    background: #F8F8F8;
-    font-size: 16px;
-    outline: none;
-}
-
-#loginFormdiv{ /* 로그인 버튼 div*/
-
-    height: 20%;
-    width: 100%;
-}
-#loginForm{ /* 로그인 버튼 button*/
-    border: 1px solid green;
+.loginForm{
+    text-align: center;
+    align-items: center;
     background: #529471;
-    height: 40px;
+    height: 50px;
     width: 100%;
-    padding-right: 5%;
-    align-items: center;
-    display: flex;
-    padding-left: 5%;
+    border: none;
     border-radius: 15px;
+    color: white;
     font-size: 16px;
-    color: #ffffff;
-    gap: 5%;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-#thdiv{ /* 아이디찾기, 비밀번호찾기, 회원 가입 div*/
+#form1{
+    align-content: center;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    margin: 0 auto;
     padding-left: 10%;
     padding-right: 10%;
-    display: flex;
-    gap: 2%;
+
+}
+#form1>div{
+    align-content: center;
 }
 
-#thdiv *{ /* 아이디찾기, 비밀번호찾기, 회원 가입 폰트 컬러 */
-    color: #A9A9A9;
+#loginFormdiv{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-content: center;
+    justify-content: center;
+
 }
 
 a{
     text-decoration: none;
     color: black;
-}
 
-.div-area1{ /*왼쪽*/
+}
+#thdiv {
+    align-items: center;
+    justify-content: center;
+    height: 5%;
+    width: 80%;
+    padding-left: 10%;
+    display: flex;
+    gap: 2%;
+
+}
+#thdiv *{
+    color: #A9A9A9;
+}
+#imgdiv1{
+    height: 30%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+}
+.div-area1{
+    gap: 100px;
     align-items: center;
     height: 100%;
     padding-right: 15%;
     padding-left: 15%;
+
+}
+/*updateMyPage*/
+.div-imgarea1{
+    height: 100%;
+    width: 50%;
+    background-image: url(/resources/image/etc/updatemyPage_img.png);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    outline: 0;
+}
+
+#userDelete{
+    background: #E73C40;
+}
+
+
+/* 모달 스타일 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    text-align: center;
+    border-radius: 15px;
+}
+.modal-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-content p{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.modal-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 15px;
+}
+
+.btn-danger {
+    background-color:#E73C40;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: gray;
+    color: white;
+}
+/* 비활성화된 버튼 */
+#confirmDelete:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
 }
