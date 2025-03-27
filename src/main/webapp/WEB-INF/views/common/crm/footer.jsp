@@ -38,7 +38,7 @@
   </div>
   <div id="footer_2">
     <div>
-      <img src="/resources/project_image/logo.png" alt="로고이미지" onclick="location.href='${pageContext.servletContext.contextPath}'">
+      <img src="/resources/image/etc/logo.png" alt="로고이미지" onclick="location.href='${pageContext.servletContext.contextPath}'">
     </div>
     <div>
       <p class="font_bold">디아멜로 주식회사</p>
