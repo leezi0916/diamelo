@@ -1,0 +1,224 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
+    font-style: normal;
+}
+
+li ,ul{
+    list-style: none;
+    padding: 0;
+}
+
+#pagingArea {width:fit-content; margin:auto;}
+
+#list{
+    padding: 0 140px;
+}
+
+#list_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #a9a9a9;
+    padding: 20px 0;
+    height: 90px;
+}
+
+#list_header div span{
+    font-size: 24px;
+    font-weight: 500;
+}
+
+#search{
+    width: 600px;
+    border-radius: 20px;
+    border: 1px solid #7AC38F;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#search:hover{
+    border: 2px solid #7AC38F;
+
+}
+
+#icon{
+    padding: 8px 20px;
+}
+
+#search div svg{
+    padding-top: 5px;
+}
+
+#search_bar{
+    width: 100%;
+    padding-right: 18px;
+
+}
+
+#search_bar_input{
+    width: 100%;
+    height: 28px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#list_content{
+    padding: 30px 0;
+}
+
+.product_table1{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.product_table_inner{
+    border: 1px solid #a9a9a9;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px;
+    cursor: pointer;
+
+}
+
+.product_table_inner:hover{
+    scale: 1.02;
+}
+
+.product_img{
+    padding: 10px;
+}
+
+.product_img img{
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px ;
+}
+
+.product_name{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 10px 10px 10px;
+}
+
+.product_name span{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.product_number{
+    padding: 10px 0;
+}
+
+
+
+.product_number_inner input{
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+}
+
+.number_button1 input{
+    border: 1px solid #a9a9a9;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    outline: none;
+}
+
+.number input{
+    border-top: 1px solid #a9a9a9;
+    border-bottom: 1px solid #a9a9a9;
+}
+
+.number_button2 input{
+    border: 1px solid #a9a9a9;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.product_number_inner{
+    display: flex;
+    justify-content: center;
+}
+
+#list_footer{
+    padding: 3% 10%;
+    width: 100%;
+}
+
+#content_footer{
+    box-shadow: 5px 5px 20px black;
+}
+
+#list_footer_header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #7AC38F;
+    padding: 20px 100px;
+}
+
+#list_go{
+    cursor: pointer;
+}
+
+#list_footer_title span{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#hidden_button{
+    cursor: pointer;
+}
+
+#shopping_list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+}
+
+#shopping_list_ul1 > li{
+    display: inline-block;
+    cursor: pointer;
+}
+
+#shopping_list_ul1 > li:hover{
+    scale: 1.02;
+}
+
+
+.shopping_list_ul2{
+    padding: 20px;
+}
+
+.shopping_list_ul2 li{
+    display: block;
+}
+
+.shopping_list_ul2 img{
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 20px;
+}
+
+.shopping_list_ul2 li{
+    text-align: center;
+    padding: 5px 0;
+}
+
+.shopping_list_ul2 span{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.next_list_button{
+    cursor: pointer;
+}
