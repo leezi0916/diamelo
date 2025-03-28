@@ -1,10 +1,5 @@
-/* 전체 요소 공통 설정 */
-* {
-    box-sizing: border-box;
-    font-family: "Noto Sans KR", sans-serif;
-    font-style: normal;
-    margin: 0;
-}
+
+/*myPage 와 updatemyPage의 css*/
 
 .div-area{ /* 로그인 전체 영역 설정 */
     height: 100%;
