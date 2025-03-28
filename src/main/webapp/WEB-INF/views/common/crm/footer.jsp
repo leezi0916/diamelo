@@ -8,10 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/resources/css/crm/crm_footer.css" />
+  <link rel="stylesheet" href="/resources/css/crm/footer.css" />
+  <link rel="stylesheet" href="/resources/css/default.css">
+
     <title>Title</title>
 </head>
 <body>
