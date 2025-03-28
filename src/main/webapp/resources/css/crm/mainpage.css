@@ -1,11 +1,6 @@
-*{
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Noto Sans KR", sans-serif;
-    font-style: normal;
-}
 
-body{
+
+#content{
     background-color: #F8F8F8;
 }
 

@@ -1,11 +1,5 @@
 
 /*myPage 와 updatemyPage의 css*/
-* {
-    box-sizing: border-box;
-    font-family: "Noto Sans KR", sans-serif;
-    font-style: normal;
-    margin: 0;
-}
 
 .div-area{ /* */
     height: 100%;
