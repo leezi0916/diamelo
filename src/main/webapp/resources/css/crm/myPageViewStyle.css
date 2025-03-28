@@ -56,7 +56,6 @@
     gap: 5%;
     background: #ffffff;
 
-
 }
 #thId input{
     width: 100%;
@@ -64,7 +63,6 @@
     outline: none;
     background: white;
     font-size: 16px;
-
 
 }
 
@@ -76,8 +74,6 @@
     background: white;
     font-size: 16px;
     outline: none;
-
-
 }
 #thPwd{
     border: 1.5px solid green;
@@ -186,4 +182,3 @@ a{
 .loginForm:hover {
     background-color: #7AC38F;
 }
-
