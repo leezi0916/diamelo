@@ -13,7 +13,13 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
+
         
+<<<<<<< HEAD
         return "crmPage/productList";
+=======
+        return "erpPage/salesDetailPage";
+
+>>>>>>> 80db4340f8c93ffd6329c3ded1a329bf5d3768f7
     }
 }

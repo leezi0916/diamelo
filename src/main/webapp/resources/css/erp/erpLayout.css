@@ -1,10 +1,22 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    margin: 0;
+
+}
+
 .layout-wrapper {
     display: flex;
     height: 100%;
+
 }
 
 /***************** 사이드바 *************************/
 .sidebar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 12%;
     height: 100%;
     background: #fcfcfc;
@@ -39,12 +51,15 @@
 
 /***************** 상단바 *************************/
 .header-container {
-    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 12%;
+    width: 88%;
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 24px;
+    padding: 10px 24px;
     background: #fcfcfc;
     border-bottom: 1px solid;
     border-color: rgba(169, 169, 169, 0.4);
@@ -96,8 +111,9 @@
 
 /***************** 상단바 + 메인 컨테츠 영역 (전체 100% - 사이드 12% -> width88%) *************************/
 .main-area {
+    margin-top: 100px;
+    margin-left: 12%;
     width: 88%;
     display: flex;
     flex-direction: column;
-    background-color: #f8f8f8;
 }
