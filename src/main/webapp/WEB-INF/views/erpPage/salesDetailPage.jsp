@@ -3,14 +3,10 @@
 <head>
     <title>Diamelo</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/salesDetailPageStyle.css" />
 
-    <style>
-        .table td{
-            padding-right: 30px;
-        }
-    </style>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -38,40 +34,51 @@
 
                             <th>구매 기업: 올리브영</th>
                             <th></th>
-                            <th>총 물품 개수: 290개</th>
-                            <th></th>
+                            <th colspan="2">총 물품 개수: 290개</th>
+
                         </tr>
                         </thead>
                         <tbody>
                         <tr class="page-body-content-td">
                             <td class="page-body-content-sales-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list">100</td>
-                            <td>개</td>
+                            <td class="page-body-content-sales-list" colspan="2">100개</td>
+
                         </tr>
                         <tr class="page-body-content-td">
                             <td class="page-body-content-sales-list-img" style="background-image: url('/resources/image/productImgae/product2.png')"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list">100</td>
-                            <td>개</td>
+                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
+
                         </tr>
                         <tr class="page-body-content-td">
                             <td class="page-body-content-sales-list-img" style="background-image: url('/resources/image/productImgae/product3.png')"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list">100</td>
-                            <td>개</td>
+                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
+
                         </tr>
                         <tr class="page-body-content-td">
                             <td class="page-body-content-sales-list-img" style="background-image: url('/resources/image/productImgae/product4.png')"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list">100</td>
-                            <td class="page-body-content-sales-list-amount">개</td>
+                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
+
                         </tr>
 
 
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div id="page-body-button-div">
+                <button class="searchBtn">
+                    승인
+                </button>
+                <button class="searchBtn">
+                    반려
+                </button>
+                <button class="searchBtn">
+                    돌아가기
+                </button>
             </div>
         </div>
     </div>
