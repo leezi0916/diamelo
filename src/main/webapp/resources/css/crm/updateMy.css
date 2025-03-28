@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
+    font-style: normal;
+}
+body {
+    background: #F8F8F8;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    background: #F8F8F8;
+    overflow: hidden;
+    position: relative;
+    padding: 12px;
+
+}
+
+.form-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 120px auto 0;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+}
+
+.logo{
+
+    display: flex;
+    justify-content: center;
+}
+img{
+    width: 175px;
+    height: 155px;
+}
+
+.title {
+    text-align: center;
+    font-size: 20px;
+
+    font-weight: 500;
+    color: black;
+    margin-bottom: 12px;
+}
+
+.input-boxs  {
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-box {
+    width: 100%;
+    max-width: 400px;
+    height: 50px;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #529471;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0px 0px 0px 0px;
+    padding-left: 10px;
+    outline: none;
+}
+
+.input-name{
+    margin: 15px auto;
+}
+.input-name > p{
+    margin: 0px 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #A9A9A9;
+}
+
+input::placeholder{
+    color: #A9A9A9;
+}
+
+.error-message {
+    width: 100%;
+    max-width: 460px;
+    color: #FF0000;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 6px;
+}
+
+.button {
+    width: 100%;
+    height: 50px;
+    background: #529471;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+}
+
+.button:hover {
+    background-color: #7AC38F;
+}
+
+#buttons{
+    margin-top: 30px;
+}
+
+.logo {
+    width: 120px;
+    height: 110px;
+    margin: 25px auto;
+}
+
+button {
+    border: none;
+}
+
+/* 반응형 스타일 */
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 95%;
+    }
+    .form-container {
+        max-width: 460px;
+    }
+    .input-box, .button, .small-button {
+        font-size: 14px;
+        height: 42px;
+    }
+}
+
+@media screen  {
+    .container {
+        width: 100%;
+    }
+    .form-container {
+        max-width: 400px;
+        margin-top: 80px;
+    }
+    .title {
+        font-size: 16px;
+    }
+    .input-box {
+        font-size: 14px;
+        height: 40px;
+    }
+    .button, .small-button {
+        font-size: 14px;
+        height: 40px;
+    }
+
+
+    /* 일반 버튼 호버 효과 */
+
+}

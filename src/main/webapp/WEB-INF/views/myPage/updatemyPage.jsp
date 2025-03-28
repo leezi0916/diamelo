@@ -51,9 +51,14 @@
         </div>
 
             <input id="thPwd" placeholder="비밀번호 입력해주세요.">
+
+        <div class="modal-check">
             <label>
                 <input type="checkbox" id="confirmCheck"> 동의합니다.
             </label>
+            <p>계정삭제 모든 정보가 삭제되며 복구 불가능합니다.</p>
+        </div>
+
 
 
         <div class="modal-footer">

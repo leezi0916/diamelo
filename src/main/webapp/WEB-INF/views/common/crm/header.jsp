@@ -17,7 +17,7 @@
 <body>
 <div id="header">
     <div id="logo">
-        <img src="/resources/project_image/logo.png" alt="로고이미지" onclick="location.href='${pageContext.servletContext.contextPath}'">
+        <img src="/resources/image/etc/logo.png" alt="로고이미지" onclick="location.href='${pageContext.servletContext.contextPath}'">
     </div>
     <div id="category">
         <div>
