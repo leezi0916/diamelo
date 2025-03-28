@@ -15,3 +15,8 @@ a {
     text-decoration: none;
     line-height: 1;
 }
+
+/* erpPage 전체바탕컬러 강제성 */
+body{
+    background: #f8f8f8 !important;
+}
