@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<body>
+<body style="background: #f8f8f8">
 <div class="layout-wrapper">
     <!-- 왼쪽 고정 사이드바 -->
     <jsp:include page="../common/erp/sidebar.jsp" />

@@ -18,10 +18,11 @@
   <style>
 
     .page-body{
-      height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
+      background: #f8f8f8;
 
     }
     .page-body{
@@ -67,7 +68,7 @@
 
     #ingre_upper{
       width: 100%;
-      height: 300px;
+      height: 200px;
       display: flex;
       align-items: start;
     }
@@ -148,7 +149,6 @@
       align-items: center;
       margin-top: 20px;
 
-
     }
 
     input::placeholder{
@@ -187,11 +187,11 @@
     }
 
     #input-memo-area{
-      display: flex;
-      align-items: center;
+
+      align-items: start;
       width: 100%;
       height: 80%;
-      justify-content: center;
+
 
     }
 
@@ -204,7 +204,11 @@
       font-size: 20px;
       font-weight: 500;
       color: #000000;
+      display: flex;
+      padding-left: 8px;
     }
+
+
 
     #input-memo-box{
       width: 60%;
@@ -257,7 +261,7 @@
 
     #bigo{
       flex-grow: 1;
-      width: auto;
+      width: 100%;
 
       height: 50px;
       background: white;
@@ -274,8 +278,9 @@
     }
 
     #category{
-      width: 100%;
+      width: fit-content;
       align-items: end;
+      margin-left: 30px;
 
 
     }
@@ -286,11 +291,12 @@
       align-items: center;
       font-size: 20px;
       font-weight: 500;
+      outline: none;
     }
 
   </style>
 </head>
-<body>
+<body style="background: #f8f8f8">
 <div class="layout-wrapper">
   <!-- 왼쪽 고정 사이드바 -->
   <jsp:include page="../common/erp/sidebar.jsp" />
@@ -361,7 +367,7 @@
           <div id="ingre_lower">
             <div id="ingre_lower_memo">
               <div id="input-memo-area">
-                <div id="memo">비고</div>
+                <div id="memo"><div class="star">*</div>재료목록</div>
                 <textarea id="input-memo-box" type="text" placeholder=""></textarea>
               </div>
             </div>
@@ -376,7 +382,9 @@
 
         </div>
       </form>
-
+    </div>
+  </div>
+</div>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const insertImageDiv = document.getElementById("insert_image");
@@ -408,4 +416,5 @@
 
     </script>
 </body>
+
 </html>

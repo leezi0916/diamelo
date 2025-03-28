@@ -1,16 +1,16 @@
 
+
 .page-body{
-    height: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-
-}
-.page-body{
+    background: #f8f8f8;
     padding-left: 10%;
     padding-right: 10%;
 
 }
+
 
 .page-body-header{
     height: 100px;
