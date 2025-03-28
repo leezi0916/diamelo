@@ -39,7 +39,7 @@
 <form action="">
     <div class="container">
         <div class="logo">
-            <img src="/resources/image/logo.png" alt="로고">
+            <img src="/resources/image/employeeImage/divh.png" alt="로고">
         </div>
         <div class="form-container">
             <div class="title">회원가입 정보를 입력해주세요!</div>
