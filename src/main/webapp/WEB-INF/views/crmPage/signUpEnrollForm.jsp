@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>enroll</title>
-    <link rel="stylesheet" href="/resources/css/crm/signUpEnrollForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/crm/signUpEnrollForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 
     <%-- Noto Sans KR Font--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
