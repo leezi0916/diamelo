@@ -35,7 +35,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M32.5332 32.3194C30.8398 26.9643 26.2898 23.896 20.0448 23.896H19.9998C13.7382 23.861 9.16482 26.951 7.46815 32.3194L7.27148 32.9427L7.82815 33.2827C11.0915 35.2727 15.1615 36.281 19.9215 36.281C19.9748 36.281 20.0282 36.281 20.0798 36.281C24.9065 36.281 28.8632 35.2993 32.1732 33.2827L32.7298 32.9427L32.5332 32.3194Z" fill="#529471"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0007 20.1824C24.539 20.1824 28.2324 16.4907 28.2324 11.9524C28.2324 7.41237 24.539 3.7207 20.0007 3.7207C15.4624 3.7207 11.7707 7.41237 11.7707 11.9524C11.7707 16.4907 15.4624 20.1824 20.0007 20.1824Z" fill="#529471"/>
                                     </svg>
-                                    <input type="text" placeholder="user01">
+                                    <input type="text" placeholder="user01" onclick="this">
                                 </th>
                             </div>
 
@@ -47,6 +47,7 @@
                                     <input  type="text" placeholder="비밀번호를 입력하세요.">
                                 </th>
                             </div>
+
                     </tr>
 
                     <input class="loginForm" type="submit" value="로그인">
@@ -78,7 +79,12 @@
 
     </div>
 </div>
+    <script>
+        function idclick(this)
+
+    </script>
 </div>
+
 
 </body>
 </html>
