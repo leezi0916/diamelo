@@ -158,17 +158,17 @@ a{
     padding-left: 15%;
 
 }
-/*!*updateMyPage*!*/
-/*.div-imgarea1{*/
-/*    height: 100%;*/
-/*    width: 50%;*/
-/*    background-image: url(/resources/image/etc/updatemyPage_img.png);*/
-/*    background-size: 100% 100%;*/
-/*    background-position: center;*/
-/*    background-repeat: no-repeat;*/
-/*    cursor: pointer;*/
-/*    outline: 0;*/
-/*}*/
+/*updateMyPage*/
+.div-imgarea1{
+    height: 100%;
+    width: 50%;
+    background-image: url(/resources/image/etc/updatemyPage_img.png);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    outline: 0;
+}
 
 /*------------------------버튼들 호버------------------------*/
 

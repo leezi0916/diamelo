@@ -27,7 +27,7 @@
                         <img src="/resources/image/etc/logo.png" alt="로고이미지">
                     </div>
                 </div>
-<<<<<<< HEAD
+
                 <%-- 로그인 폼 --%>
                 <form action="" id="form1">
                     <div id="loginFormdiv">
@@ -52,7 +52,7 @@
                         <%-- 로그인 버튼 --%>
                         <input class="loginForm" type="submit" value="로그인">
                     </div>
-=======
+
                     <%-- 로그인 폼 --%>
                 <form action="" id="form1">
                         <div id="loginFormdiv">
@@ -77,7 +77,7 @@
                                 <%-- 로그인 버튼 --%>
                             <input class="loginForm" type="submit" value="로그인">
                         </div>
->>>>>>> 5a605115130381f7694057a683a88ba7bc20a0c0
+
 
                     <%-- 아이디/비밀번호 찾기 및 회원가입 링크 --%>
                     <div id="thdiv">
@@ -93,7 +93,7 @@
                     </div>
                 </form>
             </div>
-<<<<<<< HEAD
+
         </div>
         <%-- 우측 이미지 영역 --%>
         <div class="div-imgarea">
@@ -103,7 +103,7 @@
 
 
 </div>
-=======
+
         </div>
             <%-- 우측 이미지 영역 --%>
     <div class="div-imgarea">
@@ -113,13 +113,6 @@
 
     
 </div>
-  
-
-
->>>>>>> 5a605115130381f7694057a683a88ba7bc20a0c0
-
-
-
 
 </body>
 </html>
