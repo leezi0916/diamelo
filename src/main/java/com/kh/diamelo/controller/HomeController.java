@@ -15,8 +15,8 @@ public class HomeController {
     public String home() {
 
 
-        
-        return "erpPage/homePage";
+
+        return "erpPage/insertProduct";
 
     }
 }

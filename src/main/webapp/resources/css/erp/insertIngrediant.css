@@ -47,7 +47,7 @@
     margin: 50px auto;
 }
 
-#inger_upper{
+#ingre_upper{
     width: 100%;
     height: 300px;
     display: flex;
@@ -58,16 +58,16 @@
     height: 300px;
 }
 
-#inger_upper_left{
+#ingre_upper_left{
     align-content: center;
     width: 50%;
 }
 
-#inger_upper_left *{
+#ingre_upper_left *{
     justify-content: center;
 }
 
-#inger_upper_right{
+#ingre_upper_right{
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -131,7 +131,7 @@ input::placeholder{
     color: #A9A9A9;
 }
 
-#inger_image{
+#ingre_image{
     height: 190px;
     margin-top: 15px;
 }
