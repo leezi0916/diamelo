@@ -8,6 +8,7 @@
 .layout-wrapper {
     display: flex;
     height: 100%;
+    background: #f8f8f8;
 }
 
 /***************** 사이드바 *************************/

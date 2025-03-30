@@ -4,6 +4,7 @@
         <title>Diamelo</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/homePageStyle.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -11,214 +12,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
-        <style>
-            .page-body-wrap{
-                padding: 5%;
-            }
-            .page-body-wrap1{
-                padding: 20px 0px;
-            }
-
-           #page-body-header{
-               border-radius: 15px;
-               width: 100%;
-               height: 180px;
-               background-color: #ffffff;
-               box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
-               display: flex;
-               align-items: center;
-
-           }
-           #page-body-content{
-               border-radius: 15px;
-               width: 100%;
-               height: 500px;
-               background-color: #ffffff;
-               box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
-
-           }
-           .header{
-               width: 25%;
-               height: 100%;
-               padding: 1%;
-           }
-            /*상단 1*/
-           #sales-container{
-               width: 100%;
-               height: 100%;
-           }
-           #sales-title{
-               width: 100%;
-               height: 20%;
-               font-size: 20px;
-               font-weight: 500;
-               text-align: center;
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               border-bottom: 1px solid black;
-
-           }
-            #sales-content{
-                width: 100%;
-                height: 80%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-            }
-            #sales-title > p{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            #sales-content > p{
-                display: flex;
-                align-items: center;
-                margin-top: 15px;
-                gap: 10px;
-            }
-            /*상단 2*/
-            #employee-container{
-                width: 100%;
-                height: 100%;
-            }
-            #employee-title{
-                width: 100%;
-                height: 20%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-bottom: 1px solid black;
-
-            }
-            #employee-content{
-                width: 100%;
-                height: 80%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-            }
-            #employee-title > p{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            #employee-content > p{
-                display: flex;
-                align-items: center;
-                margin-top: 15px;
-                gap: 10px;
-            }
-            /*상단 3*/
-            #prosales-container{
-                width: 100%;
-                height: 100%;
-            }
-            #prosales-title{
-                width: 100%;
-                height: 20%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-bottom: 1px solid black;
-
-            }
-            #prosales-content{
-                width: 100%;
-                height: 80%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-            }
-            #prosales-title > p{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            #prosales-content > p{
-                display: flex;
-                align-items: center;
-                margin-top: 15px;
-                gap: 10px;
-                padding: 10px;
-            }
-
-            /*상단 4*/
-            #prostock-container{
-                width: 100%;
-                height: 100%;
-            }
-            #prostock-title{
-                width: 100%;
-                height: 20%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-bottom: 1px solid black;
-
-            }
-            #prostock-content{
-                width: 100%;
-                height: 80%;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            #prostock-content1{
-                display: flex;
-                text-align: center;
-                justify-content: space-around;
-                padding: 10px;
-                color: #A9A9A9;
-            }
-            #prostock-content2{
-                display: flex;
-                text-align: center;
-                justify-content: space-around;
-                padding: 10px;
-            }
-
-
-
-        /* 주간 매출표*/
-            #week-sales{
-                width: 100%;
-                height: 100px;
-                padding: 1%;
-
-            }
-
-            #week-sales1{
-                width: 20%;
-                text-align: center;
-                font-size: 24px;
-            }
-           
-        </style>
     </head>
     <body>
         <div class="layout-wrapper">
@@ -327,15 +120,104 @@
                                     <p>주간 매출표</p>
                                     <p style="color: #A9A9A9">주간 매출 300,000원</p>
                                 </div>
+                                <div id="week-sales2">
+                                    <div style="background: red"></div>
+                                    <div style="background: green"></div>
+                                    <div style="background: blue"></div>
+                                    <div style="background: yellow"></div>
+                                </div>
+                                <div id="week-sales3">
+                                    <div>1주차</div>
+                                    <div>2주차</div>
+                                    <div>3주차</div>
+                                    <div>4주차</div>
+                                </div>
                             </div>
                         </div>
                      </div>
-                        <div class="page-body-wrap1">
-                            <div id="page-body-content">
-                                <div id="week-sales">
-                                    <div id="week-sales1">
-                                        <p>주간 매출표</p>
-                                        <p style="color: #A9A9A9">주간 매출 300,000원</p>
+                        <div class="page-body-wrap2">
+                            <div id="page-body-content1">
+                                <div id="myInfoPage">
+                                    <div id="myInfo">
+                                        <div id="myInfo-image">
+                                            <img id="myPhoto" src="/resources/image/etc/myInfoImg.png" alt="마이페이지 사진" />
+                                        </div>
+                                    </div>
+
+                                    <div id="myInfo-info">
+                                        <div id="myInfo-name">
+                                            <div>이름</div>
+                                            <input type="text" readonly>
+                                        </div>
+                                        <div id="myInfo-department">
+                                            <div>부서</div>
+                                            <input type="text" readonly>
+                                        </div>
+                                        <div id="myInfo-job">
+                                            <div>직급</div>
+                                            <input type="text" readonly>
+                                        </div>
+                                        <div id="myInfo-email">
+                                            <div>이메일</div>
+                                            <input type="text" readonly>
+                                        </div>
+                                        <div id="myInfo-phone">
+                                            <div>전화번호</div>
+                                            <input type="text" readonly>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="myInfoPage1">
+                                    <div class="myInfo-table">
+                                        <div class="myInfo-table-title">공지사항</div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>작성자</th>
+                                                <th>제목</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>김길동</td>
+                                                <td>3월 월급입니다.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>이길동</td>
+                                                <td>2월 월급입니다.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>박길동</td>
+                                                <td>1월 월급입니다.</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="myInfo-table">
+                                        <div class="myInfo-table-title">문의사항</div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>작성자</th>
+                                                <th>제목</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>김길동</td>
+                                                <td>3월 월급언제...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>이길동</td>
+                                                <td>2월 월급언제...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>박길동</td>
+                                                <td>1월 월급언제...</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
