@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/resources/css/crm/shoppingList.css">
     <link rel="stylesheet" href="/resources/css/default.css">
 
+
+
     <title>Title</title>
 </head>
 <body>
@@ -55,8 +57,6 @@
     <div id="buy_button"><input type="button" value="구매 확정"></div>
 
 </div>
-
-
 
 
 <jsp:include page="../common/crm/footer.jsp"/>
