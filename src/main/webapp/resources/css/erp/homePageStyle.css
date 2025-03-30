@@ -1,0 +1,348 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    margin: 0;
+}
+
+input{
+    outline: none;
+}
+select{
+    outline: none;
+}
+
+button{
+    outline: none;
+}
+.page-body{
+    background: #f8f8f8;
+}
+
+.page-body-wrap{
+    padding: 5%;
+}
+.page-body-wrap1{
+    padding: 20px 0px;
+}
+
+.page-body-wrap2{
+    /*    없어도 될듯*/
+}
+
+#page-body-header{
+    border-radius: 15px;
+    width: 100%;
+    height: 180px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+
+}
+#page-body-content{
+    border-radius: 15px;
+    width: 100%;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+}
+
+
+.header{
+    width: 25%;
+    height: 100%;
+    padding: 1%;
+}
+/*상단 1*/
+#sales-container{
+    width: 100%;
+    height: 100%;
+}
+#sales-title{
+    width: 100%;
+    height: 20%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+}
+#sales-content{
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#sales-title > p{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#sales-content > p{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+}
+/*상단 2*/
+#employee-container{
+    width: 100%;
+    height: 100%;
+}
+#employee-title{
+    width: 100%;
+    height: 20%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+
+}
+#employee-content{
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#employee-title > p{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#employee-content > p{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+}
+/*상단 3*/
+#prosales-container{
+    width: 100%;
+    height: 100%;
+}
+#prosales-title{
+    width: 100%;
+    height: 20%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+
+}
+#prosales-content{
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#prosales-title > p{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#prosales-content > p{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+    padding: 10px;
+}
+
+/*상단 4*/
+#prostock-container{
+    width: 100%;
+    height: 100%;
+}
+#prostock-title{
+    width: 100%;
+    height: 20%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+
+}
+#prostock-content{
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#prostock-content1{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    padding: 10px;
+    color: #A9A9A9;
+}
+#prostock-content2{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+
+
+/* 주간 매출표*/
+#week-sales{
+    width: 100%;
+    height: 100px;
+    padding: 1%;
+
+}
+
+#week-sales1{
+    width: 20%;
+    text-align: center;
+    font-size: 24px;
+}
+
+
+#week-sales2{
+    height: 300px;
+    display: flex;
+    padding: 1%;
+    padding-bottom: 0;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+}
+
+#week-sales2 > div{
+    width: 5%;
+}
+#week-sales3{
+    height: 70px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    font-weight: 500;
+}
+#week-sales3 > div{
+    width: 5%;
+    text-align: center;
+}
+
+
+
+/*myInfoPage 부분*/
+#page-body-content1{
+    border-radius: 15px;
+    width: 100%;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+}
+
+#myInfoPage{
+    width: 50%;
+    height: 500px;
+    display: flex;
+    background: #DDDDDD;
+    border-radius: 15px;
+}
+#myInfoPage1{
+    width: 50%;
+    height: 500px;
+}
+
+#myInfo{
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+}
+#myInfo-image{
+    width: 100%;
+    height: 100%;
+}
+#myInfo-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+
+#myInfo-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+#myInfo-info input{
+    width: 100%;
+    border: 1px solid black;
+    height: 40px;
+    border-radius: 15px;
+    background: #ffffff;
+}
+
+#myInfo-name{
+    width: 100%;
+    text-align: start;
+}
+#myInfo-department{
+    width: 100%;
+    text-align: start;
+}
+#myInfo-job{
+    width: 100%;
+    text-align: start;
+}
+#myInfo-email{
+    width: 100%;
+    text-align: start;
+}
+#myInfo-phone{
+    width: 100%;
+    text-align: start;
+}
+
+.myInfo-table{
+    width: 100%;
+    height: 50%;
+    padding: 10px;
+    border-radius: 15px;
+
+}
+
+.myInfo-table-title{
+    background-color: #F0F3CB;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+}
