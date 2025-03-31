@@ -78,7 +78,7 @@
                             <div id="input-memo-area">
 
                                     <div id="memo">비고</div>
-                                    <textarea id="input-memo-box" type="text" placeholder=""></textarea>
+                                    <textarea id="input-memo-box" type="text" placeholder="MEMO"></textarea>
 
                             </div>
                         </div>

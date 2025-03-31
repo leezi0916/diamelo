@@ -68,7 +68,7 @@
 }
 
 #ingre_upper_left * {
-    justify-content: center;
+    justify-content: start;
 }
 
 #ingre_upper_right {
@@ -106,6 +106,7 @@
 
 .input-boxs {
     width: 100%;
+
 }
 
 .input-name > p {
@@ -129,7 +130,8 @@
 
 .input-name {
     display: flex;
-    align-items: center;
+    align-content: center;
+
     margin-top: 20px;
     max-width: 400px;
 

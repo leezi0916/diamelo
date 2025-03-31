@@ -188,7 +188,7 @@ input::placeholder{
     border-radius: 15px;
     border: 1px solid #000000;
     display: flex;
-    justify-items: center;
+    justify-items: start;
     font-size: 20px;
     font-weight: 400;
     color: #000000;
