@@ -3,7 +3,6 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     margin: 0;
-
 }
 
 .layout-wrapper {
@@ -73,8 +72,13 @@
     gap: 20px;
 }
 
+.header-right svg {
+    cursor: pointer;
+}
+
 .header-left svg {
     margin-bottom: 44px;
+    cursor: pointer;
 }
 
 .home-labels {

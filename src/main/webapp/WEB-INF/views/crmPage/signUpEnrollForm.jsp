@@ -66,9 +66,8 @@
                 </div>
 
                 <button class="button" type="submit">가입하기</button>
-                <button class="button">뒤로가기</button>
+                <button type="button" class="button" onclick="location.href='/'">뒤로가기</button>
             </div>
-
         </div>
     </div>
 </form>
