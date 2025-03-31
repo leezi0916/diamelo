@@ -13,10 +13,11 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "erpPage/insertIngrediantPage";
 
 
 
+
+        return "erpPage/boardMainPage";
 
     }
 }
