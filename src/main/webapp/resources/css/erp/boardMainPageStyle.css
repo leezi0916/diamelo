@@ -5,12 +5,21 @@
     font-style: normal;
     margin: 0;
 }
+/*테이블 css 입니다*/
+.table thead th{
+    text-align: center;
+}
+.table tbody td{
+    text-align: center;
+}
 
 input{
     outline: none;
+    border: 1px solid #D0D5DD;
 }
 select{
     outline: none;
+    border: 1px solid #D0D5DD;
 }
 
 button{
@@ -37,20 +46,22 @@ button{
     padding-left: 5%;
     display: flex;
     border-bottom: 1px solid black;
+    align-items: center;
 }
 
-#proBtn {
-    color: #A9A9A9; /* 연한 회색 */
-
-}
-
-#mtBtn {
-    color: black;
-}
 #page-body-content{
     border-radius: 15px;
     width: 100%;
-    height: 680px;
+    height: 700px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+}
+
+#page-body-content1{
+    border-radius: 15px;
+    width: 100%;
+    height: 700px;
     background-color: #ffffff;
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     margin-top: 10px;
@@ -65,29 +76,42 @@ button{
 }
 
 /*테이블 css 입니다*/
+
 .table thead th{
     text-align: center;
 }
 .table tbody td{
     text-align: center;
 }
+
 th{
     background: #ededed !important;
     text-align: center;
     vertical-align: middle;
 }
+.icon-button {
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
+    padding: 0; /* 내부 여백 제거 */
+    cursor: pointer; /* 마우스 오버 시 클릭 가능하도록 설정 */
+}
 
-#search-company{
+.icon-button img {
+    display: block; /* 버튼 내부에서 이미지 정렬 */
+}
 
+#search-board{
     height: 100px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 20px;
     padding: 0 5%;
 }
 
-#search-companyName{
+
+
+
+#search-user{
     width: 10%;
     border: 1px solid #D0D5DD;
     height: 50px;
@@ -98,9 +122,14 @@ th{
 }
 
 
-
-#search-ceoName{
+#search-category{
     width: 10%;
+    height: 50px;
+    border-radius: 15px;
+
+}
+#search-title{
+    width: 30%;
     border: 1px solid #D0D5DD;
     height: 50px;
     border-radius: 15px;
@@ -109,13 +138,14 @@ th{
     text-align: center;
 }
 #searchBtn{
-    border: 1px solid #D0D5DD;
+    border: 0px;
     height: 50px;
     border-radius: 15px;
     gap: 5%;
     background: #ffffff;
     text-align: center;
     width: 10%;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     outline: none;
 }
 #searchBtn:hover{
@@ -123,11 +153,13 @@ th{
 }
 
 #add-btn-wrap{
+
     display: flex;
     width: 50%;
     justify-content: end;
 }
 #addBtn{
+
     width: 30%;
     height: 50px;
     border-radius: 15px;
@@ -146,45 +178,3 @@ th{
 #addBtn:hover{
     background-color: #529471;
 }
-
-/* 페이징처리 div */
-#page-body-page-div{
-    width: 100%;
-    height: 15%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-}
-#page-body-page-div>div{
-    display: flex;
-
-    border-radius: 15px;
-}
-#page-body-page-div>div>div{
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    border: 1px solid #A9A9A9;
-
-}
-#page-body-page-div>div>div>p{
-    align-items: center;
-    display: flex;
-    margin: 0 auto;
-}
-#page-body-page-div>div>div:hover{
-    background: #E4E4E4;
-}
-.page-body-page-div-end{
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-.page-body-page-div-start{
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-
-}
-

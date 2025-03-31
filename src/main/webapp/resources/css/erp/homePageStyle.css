@@ -7,6 +7,7 @@
 
 input{
     outline: none;
+
 }
 select{
     outline: none;
@@ -274,6 +275,7 @@ button{
     background: #DDDDDD;
     border-radius: 15px;
 }
+
 #myInfoPage1{
     width: 50%;
     height: 500px;
@@ -304,7 +306,7 @@ button{
 }
 #myInfo-info input{
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid #D0D5DD;
     height: 40px;
     border-radius: 15px;
     background: #ffffff;
