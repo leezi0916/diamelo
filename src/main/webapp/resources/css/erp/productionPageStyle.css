@@ -1,0 +1,219 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    margin: 0;
+}
+/*테이블 css 입니다*/
+.table thead th{
+    text-align: center;
+}
+.table tbody td{
+    text-align: center;
+}
+
+input{
+    outline: none;
+    border: 1px solid #D0D5DD;
+}
+select{
+    outline: none;
+    border: 1px solid #D0D5DD;
+}
+
+button{
+    outline: none;
+}
+.page-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+.page-body-header{
+    height: 100px;
+    width: 100%;
+    gap: 10%;
+    align-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    left: 30px;
+    padding-top: 30px;
+    padding-left: 5%;
+    display: flex;
+    border-bottom: 1px solid black;
+    align-items: center;
+}
+
+#page-body-content{
+    border-radius: 15px;
+    width: 100%;
+    height: 700px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+}
+
+
+.page-body-header-text button{
+    border : none;
+    background-color: #f8f8f8;
+}
+.page-body-header-text button:focus {
+    outline: none;
+}
+
+/*테이블 css 입니다*/
+
+.table thead th{
+    text-align: center;
+}
+.table tbody td{
+    text-align: center;
+}
+
+th{
+    background: #ededed !important;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#header{
+    display: flex;
+    width: 100%;
+    height: 300px;
+}
+
+#header-left{
+    width: 50%;
+    height: 100%;
+    padding: 7%;
+
+}
+
+#header-right{
+    width: 50%;
+    height: 100%;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+#product{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    align-items: center;
+}
+#product-name{
+    width: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#product-select{
+    width: 50%;
+}
+#product-select1{
+    width: 100%;
+    border: 1px solid #D0D5DD;
+    border-radius: 15px;
+    height: 50px;
+}
+
+#product-name p{
+    color : red;
+    margin-bottom: 0;
+}
+
+
+#product1{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    align-items: center;
+    margin-top: 50px;
+}
+#product-name1{
+    width: 50%;
+    height: 100%;
+    padding-left: 30px;
+
+}
+#product-amount{
+    width: 50%;
+}
+#product-amount input{
+    width: 100%;
+    border: 1px solid #D0D5DD;
+    border-radius: 15px;
+    height: 50px;
+}
+
+#product-image{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+}
+
+#image{
+    width: 100%;
+    height: 100%;
+    background: #FEFDE5;
+    border: 1px solid black;
+
+}
+
+#body{
+    width: 100%;
+    height: 300px;
+}
+
+#footer{
+    width: 100%;
+    height: 100px;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer-wrap{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+}
+
+#footer-wrap button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    text-align: center;
+    background: #7AC38F;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+
+}
+
+#footer-wrap button:hover{
+    background-color: #529471;
+}
