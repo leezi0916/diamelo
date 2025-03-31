@@ -172,9 +172,9 @@
 
           <%-- 매출 합계 조회 영역 --%>
           <div id="table-header">
-            <div id="table-header-title" class="table-header"><p>총 매출</p></div>
-            <div id="table-header-price" class="table-header"><p>10,000</p></div>
-            <div id="table-header-unit" class="table-header"><p>(단위:만원)</p></div>
+            <div id="table-header-title" class="table-header">총 매출</div>
+            <div id="table-header-price" class="table-header">10,000</div>
+            <div id="table-header-unit" class="table-header">(단위:만원)</div>
           </div>
         </div>
     </div>
