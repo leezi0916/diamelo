@@ -12,15 +12,53 @@
     <link rel="stylesheet" href="/resources/css/crm/productList.css">
     <link rel="stylesheet" href="/resources/css/default.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <title>Document</title>
-    <style>
-        ul{
-            margin: 0;
-        }
-    </style>
+
 </head>
 <body>
 <jsp:include page="../common/crm/header.jsp"/>
+<style>
+    ul{
+        margin: 0;
+    }
+
+    /* modal */
+    .modal-dialog{
+        margin-top: 262px;
+        margin-bottom: 262px;
+    }
+
+    #sort{
+        display: flex;
+        justify-content: center;
+    }
+
+    .modal-footer{
+        align-items: center;
+        justify-content: center;
+    }
+
+    #modal-footer-title span{
+        font-size: 20px;
+        font-weight: 700;
+
+    }
+
+    #modal-footer-note{
+        padding: 0 70px;
+    }
+
+    .modal-footer-font{
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+
+</style>
 <div id="list">
     <div id="list_header">
         <div><span>상품 리스트</span></div>
@@ -41,14 +79,17 @@
     </div>
     <div id="list_content">
         <div class="product_table1">
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -57,6 +98,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="product_table_inner">
                 <div class="product_img">
                     <img src="/resources/image/productImgae/product1.png" alt="상품">
@@ -172,6 +214,8 @@
                 </div>
             </div>
         </div>
+
+<%--    paging bar    --%>
         <div id="pagingArea">
             <ul class="pagination">
 
@@ -280,6 +324,28 @@
                         </defs>
                     </svg>
                 </div>
+            </div>
+        </div>
+    </div>
+
+<%--  productList modal  --%>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div id="sort"><img src="${pageContext.request.contextPath}/resources/image/productImgae/product1.png"></div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div id="modal-footer-title"><span>1025 독도 앰플 45g</span></div>
+                    <div id="modal-footer-note" class="modal-footer-font"><span>독도 앰플은 독도 100주년 기념하여 만든 앰플이며 피부에 아주 좋은 앰플입니다.</span></div>
+                    <div id="modal-footer-price" class="modal-footer-font"><span>15,600원</span></div>
+                    <div><button type="button" class="btn btn-danger" data-dismiss="modal">Close</button></div>
+                </div>
+
             </div>
         </div>
     </div>
