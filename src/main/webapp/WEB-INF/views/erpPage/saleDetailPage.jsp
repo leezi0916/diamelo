@@ -5,7 +5,7 @@
     <%-- 공통 레이아웃 및 스타일 css 파일들 --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/salesDetailPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/saleDetailPageStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">
