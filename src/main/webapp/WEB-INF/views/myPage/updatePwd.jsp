@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>enroll</title>
-    <link rel="stylesheet" href="/resources/css/crm/updateMy.css">
+    <link rel="stylesheet" href="/resources/css/crm/updatePwd.css">
+    <link rel="stylesheet" href="/resources/css/default.css">
 
     <%-- Noto Sans KR Font--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +45,7 @@
 
             <div id="buttons">
                 <button class="button" type="submit">변경하기</button>
-                <button class="button">뒤로가기</button>
+                <button type="button" class="button" onclick="location.href='/'">뒤로가기</button>
             </div>
 
         </div>
