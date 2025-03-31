@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -78,7 +78,14 @@
                 </svg>
 
                 <!-- 로그아웃 아이콘 -->
-                <svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                    width="35"
+                    height="34"
+                    viewBox="0 0 35 34"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    onclick="logout()"
+                >
                     <path
                         fill-rule="evenodd"
                         clip-rule="evenodd"
@@ -97,5 +104,15 @@
                 <span class="welcome-text">디아멜로 님 어서오세요!</span>
             </div>
         </div>
+
+        <script>
+            function logout() {
+                const checkLogout = confirm('정말 로그아웃 하시겠습니까?');
+
+                if (checkLogout) {
+                    location.href = '/';
+                }
+            }
+        </script>
     </body>
 </html>
