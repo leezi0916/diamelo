@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/crm/myPageViewStyle.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
     <title>Title</title>
 
 </head>
@@ -19,7 +18,7 @@
             <div class="div-area1">
                 <div id="imgdiv1">
                     <div id="imgdiv">
-                        <img src="/resources/image/etc/logo.png" alt="로고이미지">
+                        <img src="/resources/image/etc/divh.png" alt="로고이미지">
                     </div>
                 </div>
                 <br>
@@ -51,15 +50,10 @@
             <p>계정을 삭제하려면 현재 사용중인 비밀번호를 입력하세요</p>
         </div>
 
-            <input id="thPwd" placeholder="비밀번호 입력해주세요.">
-
-        <div class="modal-check">
-            <label>
-                <input type="checkbox" id="confirmCheck"> 동의합니다.
-            </label>
-            <p>계정삭제 모든 정보가 삭제되며 복구 불가능합니다.</p>
-        </div>
-
+        <input id="thPwd" placeholder="비밀번호 입력해주세요.">
+        <label>
+            <input type="checkbox" id="confirmCheck"> 동의합니다.
+        </label>
 
 
         <div class="modal-footer">

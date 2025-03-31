@@ -64,7 +64,13 @@ button{
     outline: none;
 }
 
-
+/*테이블 css 입니다*/
+.table thead th{
+    text-align: center;
+}
+.table tbody td{
+    text-align: center;
+}
 th{
     background: #ededed !important;
     text-align: center;
@@ -83,7 +89,7 @@ th{
 
 #search-companyName{
     width: 10%;
-    border: 1px solid black;
+    border: 1px solid #D0D5DD;
     height: 50px;
     border-radius: 15px;
     gap: 5%;
@@ -95,7 +101,7 @@ th{
 
 #search-ceoName{
     width: 10%;
-    border: 1px solid black;
+    border: 1px solid #D0D5DD;
     height: 50px;
     border-radius: 15px;
     gap: 5%;
@@ -103,14 +109,13 @@ th{
     text-align: center;
 }
 #searchBtn{
-    border: 0px;
+    border: 1px solid #D0D5DD;
     height: 50px;
     border-radius: 15px;
     gap: 5%;
     background: #ffffff;
     text-align: center;
     width: 10%;
-    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     outline: none;
 }
 #searchBtn:hover{

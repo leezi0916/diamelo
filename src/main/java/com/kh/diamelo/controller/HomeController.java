@@ -13,13 +13,10 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-<<<<<<< HEAD
-        return "erpPage/incomePage";
-=======
 
->>>>>>> 88b708e9706fd758950551217462fe8c5f67eb20
 
-        return "erpPage/employeeDetailPage";
+        return "index";
+
 
     }
 }
