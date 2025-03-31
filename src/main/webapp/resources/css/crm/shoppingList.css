@@ -29,13 +29,15 @@
     width: 100%;
     border-collapse: collapse;
 }
-#list_content img{
-    width: 150px;
-    box-shadow: 1px 1px 5px ;
-}
+
 
 #table_header{
     border-bottom: 1px solid black;
+}
+
+.list_img img{
+    width: 150px;
+    box-shadow: 1px 1px 5px;
 }
 
 .table_header td{
@@ -46,6 +48,17 @@
 .table_header span{
     font-size: 20px;
     font-weight: 500;
+}
+
+.table_header button{
+    border: none;
+    background-color:transparent;
+    outline: none;
+}
+
+.table_header button img{
+    width: 20px;
+    height: 20px;
 }
 
 #buy_button{
