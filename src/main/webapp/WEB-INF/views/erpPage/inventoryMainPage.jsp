@@ -4,8 +4,33 @@
   <title>Diamelo</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/inventoryMainPageStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 </head>
 <body>
+
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="modal-content-upper">
+      <div class="modal-content-left">
+        <h2>상품 상세 정보</h2>
+        <p><strong>번호:</strong> <span class="modal-number"></span></p>
+        <p><strong>품목:</strong> <span class="modal-name"></span></p>
+        <p><strong>분류:</strong> <span class="modal-category"></span></p>
+        <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
+        <p><strong>가격:</strong> <span class="modal-price"></span></p>
+        <p><strong>비고:</strong> <span class="modal-description"></span></p>
+      </div>
+
+      <div class="modal-content-right">
+        <div class="image-area">
+          <img src="/resources/image/productImgae/product1.png" alt="상품">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="layout-wrapper">
   <!-- 왼쪽 고정 사이드바 -->
   <jsp:include page="../common/erp/sidebar.jsp" />
@@ -31,6 +56,9 @@
 
 
       <div id="page-body-content">
+
+
+
 
         <form id="search-inventory">
 
@@ -69,7 +97,7 @@
             <th>번호</th>
             <th>품목</th>
             <th>분류</th>
-            <th>재고 수량</th>
+            <th>재고 수량(단위:EA)</th>
             <th>가격</th>
             <th>비고</th>
             <th>수정</th>
@@ -77,7 +105,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>5</td>
             <td>E제품</td>
             <td>미용</td>
@@ -95,7 +123,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>4</td>
             <td>D제품</td>
             <td>썬크림</td>
@@ -113,7 +141,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>3</td>
             <td>C제품</td>
             <td>로션</td>
@@ -131,7 +159,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>2</td>
             <td>B제품</td>
             <td>스킨</td>
@@ -149,7 +177,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>1</td>
             <td>A제품</td>
             <td>스킨</td>
@@ -172,6 +200,8 @@
       </div>
 
       <div id="page-body-content1" style="display: none">
+
+
 
         <form id="search-inventory1">
 
@@ -202,7 +232,7 @@
           <tr>
             <th>번호</th>
             <th>품목</th>
-            <th>재고 수량</th>
+            <th>재고 수량(단위:g)</th>
             <th>가격</th>
             <th>비고</th>
             <th>수정</th>
@@ -210,7 +240,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>5</td>
             <td>재료5</td>
             <td>100</td>
@@ -226,8 +256,11 @@
                 <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
+
+
           </tr>
-          <tr>
+
+          <tr onclick="openModal(this)">
             <td>4</td>
             <td>재료4</td>
             <td>200</td>
@@ -244,7 +277,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>3</td>
             <td>재료3</td>
             <td>150</td>
@@ -261,7 +294,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>2</td>
             <td>재료2</td>
             <td>400</td>
@@ -278,7 +311,7 @@
               </button>
             </td>
           </tr>
-          <tr>
+          <tr onclick="openModal(this)">
             <td>1</td>
             <td>재료1</td>
             <td>300</td>
@@ -358,6 +391,49 @@
     document.getElementById("page-body-content1").style.display = "block";
     document.getElementById("page-body-content").style.display = "none";
   });
+
+
+<%-- modal --%>
+
+  function openModal(row) {
+    const modal = document.getElementById("productModal");
+    const modalNumber = modal.querySelector(".modal-number");
+    const modalName = modal.querySelector(".modal-name");
+    const modalCategory = modal.querySelector(".modal-category");
+    const modalQuantity = modal.querySelector(".modal-quantity");
+    const modalPrice = modal.querySelector(".modal-price");
+    const modalDescription = modal.querySelector(".modal-description");
+
+    // 행의 데이터를 가져오기
+    const cells = row.getElementsByTagName("td");
+    modalNumber.textContent = cells[0].textContent;
+    modalName.textContent = cells[1].textContent;
+    modalCategory.textContent = cells[2].textContent;
+    modalQuantity.textContent = cells[3].textContent;
+    modalPrice.textContent = cells[4].textContent;
+    modalDescription.textContent = cells[5].textContent;
+
+    // 모달 표시
+    modal.style.display = "block";
+
+    // 닫기 버튼 기능 추가
+    const closeButton = modal.querySelector(".close");
+    closeButton.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+
+    // 모달 외부 클릭 시 닫기
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
+
+
+
+
+
 
 </script>
 </body>
