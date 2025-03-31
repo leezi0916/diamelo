@@ -113,7 +113,9 @@
         </div>
       </div>
 
-
+      <div id="page-body-backBtn-div">
+        <button id="backBtn" type="submit">뒤로 가기</button>
+      </div>
     </div>
   </div>
 </div>
