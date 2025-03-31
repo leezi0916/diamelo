@@ -13,7 +13,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "index";
+        return "crmPage/productList";
 
 
 

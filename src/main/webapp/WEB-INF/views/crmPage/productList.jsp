@@ -182,7 +182,7 @@
             </div>
         </div>
 
-
+<%--   두번째 테이블     --%>
         <div class="product_table1">
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
@@ -431,12 +431,7 @@
     </div>
 </div>
 
-<script>
-    $('#onModal').click(function (){
-        $('#myModal').fadeIn(10000);
-        $('.modal-content').fadeIn(10000);
-    })
-</script>
+
 
 <jsp:include page="../common/crm/footer.jsp"/>
 </body>
