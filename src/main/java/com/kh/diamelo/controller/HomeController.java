@@ -15,7 +15,7 @@ public class HomeController {
     public String home() {
 
 
-        return "erpPage/employeeDetailPage";
+        return "crmPage/signUpEnrollForm";
 
     }
 }

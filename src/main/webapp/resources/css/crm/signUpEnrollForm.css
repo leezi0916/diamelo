@@ -154,8 +154,8 @@ button {
         max-width: 460px;
     }
     .input-box, .button, .small-button {
-        font-size: 14px;
-        height: 42px;
+        font-size: 16px;
+        height: 50px;
     }
 }
 
@@ -171,12 +171,12 @@ button {
         font-size: 16px;
     }
     .input-box {
-        font-size: 14px;
-        height: 40px;
+        font-size: 16px;
+        height: 50px;
     }
     .button, .small-button {
-        font-size: 14px;
-        height: 40px;
+        font-size: 16px;
+        height: 50px;
     }
 
 
