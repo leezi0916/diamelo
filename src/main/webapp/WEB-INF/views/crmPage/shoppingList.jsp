@@ -26,31 +26,48 @@
     <div id="list_content">
         <table>
             <tr id="table_header" class="table_header">
-                <td><span>구매 기업 : 올리브영</span></td>
+                <td ><span>구매 기업 : 올리브영</span></td>
                 <td><span>상품명</span></td>
                 <td><span>총 구매 금액 : 2,900,000원</span></td>
                 <td><span>총 물품 개수 : 290개</span></td>
+                <td></td>
             </tr>
             <tr class="table_header">
-                <td><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                <td class="list_img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
                 <td><span>독도앰플</span></td>
                 <td><span>2,900,000 원(개당)</span></td>
                 <td><span>290 개</span></td>
+                <td>
+                    <button>
+                        <img src="/resources/image/delete_icon.png">
+                    </button>
+                </td>
             </tr>
 
             <tr class="table_header">
-                <td><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                <td class="list_img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
                 <td><span>독도앰플</span></td>
                 <td><span>2,900,000 원(개당)</span></td>
                 <td><span>290 개</span></td>
+                <td>
+                    <button>
+                        <img src="/resources/image/delete_icon.png">
+                    </button>
+                </td>
             </tr>
 
             <tr class="table_header">
-                <td><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                <td class="list_img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
                 <td><span>독도앰플</span></td>
                 <td><span>2,900,000 원(개당)</span></td>
                 <td><span>290 개</span></td>
+                <td>
+                    <button>
+                        <img src="/resources/image/delete_icon.png">
+                    </button>
+                </td>
             </tr>
+
         </table>
     </div>
 
