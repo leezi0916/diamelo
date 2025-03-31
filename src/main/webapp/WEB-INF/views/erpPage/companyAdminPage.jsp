@@ -57,6 +57,7 @@
             </button>
           </div>
         </div>
+        </form>
 
         <table class="table table-hover">
           <thead>
@@ -274,9 +275,51 @@
           </tr>
           </tbody>
         </table>
-      </form>
+
       </div>
 
+      <div id="page-body-page-div">
+        <div>
+          <div class="page-body-page-div-start">
+            <p>이전</p>
+          </div>
+          <div>
+            <p>1</p>
+          </div>
+          <div>
+            <p>2</p>
+          </div>
+          <div>
+            <p>3</p>
+          </div>
+          <div>
+            <p>4</p>
+          </div>
+          <div>
+            <p>5</p>
+          </div>
+          <div>
+            <p>6</p>
+          </div>
+          <div>
+            <p>7</p>
+          </div>
+          <div>
+            <p>8</p>
+          </div>
+          <div>
+            <p>9</p>
+          </div>
+          <div>
+            <p>10</p>
+          </div>
+          <div class="page-body-page-div-end">
+            <p>다음</p>
+          </div>
+        </div>
+
+
+      </div>
       
     </div>
   </div>

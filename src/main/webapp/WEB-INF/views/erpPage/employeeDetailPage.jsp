@@ -74,5 +74,35 @@
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const insertImageDiv = document.getElementById("insert_image");
+    const imageUploadInput = document.getElementById("imageUpload");
+
+    // 클릭 이벤트 로그 확인
+    insertImageDiv.addEventListener("click", function() {
+      console.log("insert_image 클릭됨");  // ✅ 디버깅용
+      imageUploadInput.click();
+    });
+
+    imageUploadInput.addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        console.log("파일 선택됨:", file.name);  // ✅ 디버깅용
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          console.log("이미지 로딩 완료");  // ✅ 디버깅용
+          insertImageDiv.style.backgroundImage = `url(${e.target.result})`;
+          insertImageDiv.style.backgroundSize = "cover";
+          insertImageDiv.style.backgroundPosition = "center";
+          insertImageDiv.style.backgroundRepeat = "no-repeat";
+          insertImageDiv.textContent = "";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+
+</script>
 </body>
 </html>
