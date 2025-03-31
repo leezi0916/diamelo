@@ -17,7 +17,7 @@ public class HomeController {
         
 
 
-        return "erpPage/salesDetailPage";
+        return "erpPage/insertProductPage";
 
 
     }
