@@ -62,7 +62,7 @@ img{
     display: flex;
     align-items: center;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
     color: #000000;
     margin: 0px 0px 0px 0px;
     padding-left: 10px;
@@ -139,8 +139,8 @@ button {
         max-width: 460px;
     }
     .input-box, .button, .small-button {
-        font-size: 14px;
-        height: 42px;
+        font-size: 16px;
+        height: 50px;
     }
 }
 
@@ -156,12 +156,12 @@ button {
         font-size: 16px;
     }
     .input-box {
-        font-size: 14px;
-        height: 40px;
+        font-size: 16px;
+        height: 50px;
     }
     .button, .small-button {
-        font-size: 14px;
-        height: 40px;
+        font-size: 16px;
+        height: 50px;
     }
 
 

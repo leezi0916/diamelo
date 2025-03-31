@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diamelo</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/insertIngrediant.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/insertIngrediantPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 
-    <%-- Noto Sans KR Font--%>
+
+
+<%-- Noto Sans KR Font--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -17,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<body style="background: #f8f8f8">
+<body >
 <div class="layout-wrapper">
     <!-- 왼쪽 고정 사이드바 -->
     <jsp:include page="../common/erp/sidebar.jsp" />
@@ -75,14 +78,14 @@
                             <div id="input-memo-area">
 
                                     <div id="memo">비고</div>
-                                    <textarea id="input-memo-box" type="text" placeholder=""></textarea>
+                                    <textarea id="input-memo-box" type="text" placeholder="MEMO"></textarea>
 
                             </div>
                         </div>
 
                         <div id="ingre_lower_button">
                             <button class="button" type="submit">+재료등록</button>
-                            <button class="button">돌아가기</button>
+                            <button type="button" class="button" onclick="location.href='/'">뒤로가기</button>
                         </div>
                     </div>
                  </div>

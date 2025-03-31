@@ -14,9 +14,10 @@ public class HomeController {
     @RequestMapping("/")
     public String home() {
 
+        
 
-        return "erpPage/productionPage";
 
+        return "erpPage/boardMainPage";
 
     }
 }

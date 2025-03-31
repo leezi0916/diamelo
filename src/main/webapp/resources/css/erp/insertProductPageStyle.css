@@ -1,18 +1,20 @@
 
-
-.page-body{
+.page-body {
 
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #f8f8f8;
+
+}
+
+.page-body {
     padding-left: 10%;
     padding-right: 10%;
 
 }
 
-
-.page-body-header{
+.page-body-header {
     height: 100px;
     width: 100%;
 
@@ -27,7 +29,8 @@
     padding-right: 5%;
 
 }
-.page-body-content{
+
+.page-body-content {
     margin-top: 2%;
     border-radius: 15px;
     width: 100%;
@@ -37,52 +40,50 @@
 
 }
 
-#page-body-header-text{
+#page-body-header-text {
     padding-left: 5%;
 }
 
-#ingrediant_area{
+#ingrediant_area {
     width: 80%;
     height: 600px;
     margin: 50px auto;
 }
 
-#ingre_upper{
+#ingre_upper {
     width: 100%;
-    height: 300px;
+    height: 200px;
     display: flex;
-    align-items: center;
+    align-items: start;
 }
-#ingre_lower{
+
+#ingre_lower {
     width: 100%;
     height: 300px;
 }
 
-#ingre_upper_left{
+#ingre_upper_left {
     align-content: center;
     width: 50%;
 }
 
-#ingre_upper_left *{
-    justify-content: center;
+#ingre_upper_left * {
+    justify-content: start;
 }
 
-#ingre_upper_right{
+#ingre_upper_right {
     width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+
 
 }
 
 
 
-#ingre_lower_memo{
-    height: 250px;
-}
 
-#ingre_lower_button{
+#ingre_lower_button {
     height: 50px;
 }
 
@@ -95,7 +96,7 @@
     border: 1px solid #000000;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     color: #000000;
     margin: 0px 0px 0px 0px;
@@ -103,15 +104,22 @@
     outline: none;
 }
 
-.input-name > p{
+.input-boxs {
+    width: 100%;
+
+}
+
+.input-name > p {
     margin: 0px 5px;
     font-size: 20px;
     font-weight: 500;
     color: #000000;
-    width: 30%;
+    width: 80px;
+    min-width: 80px;
+    height: fit-content;
 }
 
-.star{
+.star {
     font-size: 25px;
     color: #E73C40;
     align-items: center;
@@ -120,23 +128,30 @@
 
 }
 
-.input-name{
+.input-name {
     display: flex;
-    align-items: center;
+    align-content: center;
+
     margin-top: 20px;
+    max-width: 400px;
+
 }
 
-input::placeholder{
+#ingre_upper_right > .input-box {
+    max-width: 400px;
+}
+
+input::placeholder {
     font-size: 20px;
     color: #A9A9A9;
 }
 
-#ingre_image{
+#ingre_image {
     height: 190px;
     margin-top: 15px;
 }
 
-#text{
+#text {
     margin: auto;
     font-size: 20px;
     font-weight: 500;
@@ -161,43 +176,16 @@ input::placeholder{
     overflow: hidden;
 }
 
-#input-memo-area{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 80%;
-    justify-content: center;
 
+
+#memo {
+    max-width: 100%;
 }
 
-#memo{
-    height: fit-content;
 
-    margin: 0;
 
-    margin-right:80px ;
-    font-size: 20px;
-    font-weight: 500;
-    color: #000000;
-}
 
-#input-memo-box{
-    width: 60%;
-    height: 80%;
-    background: white;
-    border-radius: 15px;
-    border: 1px solid #000000;
-    display: flex;
-    justify-items: center;
-    font-size: 20px;
-    font-weight: 400;
-    color: #000000;
-    margin: 0px 0px 0px 0px;
-    padding-left: 10px;
-    outline: none;
-}
-
-#ingre_lower_button{
+#ingre_lower_button {
     display: flex;
     padding: 0px 50px;
     gap: 100px;
@@ -226,6 +214,98 @@ input::placeholder{
 
 }
 
+.button:focus {outline: none;}
+
+
 .button:hover {
     background-color: #529471;
+}
+
+
+#category {
+    width: fit-content;
+    align-items: end;
+    margin-left: 30px;
+
+
+}
+
+.select {
+    height: 50px;
+    border-radius: 15px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    outline: none;
+}
+
+#ingre_lower{
+    display: flex;
+}
+#ingre_lower_left{
+    width: 70%;
+}
+#ingre_lower_right{
+    width: 30%;
+}
+
+#table-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 0.5px solid black;
+}
+
+#dynamicTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    border-top: none;
+}
+
+#dynamicTable th, #dynamicTable td {
+    width: 30%;
+    padding: 5px;
+    border-top: none;
+}
+
+
+#add_button {
+    width: fit-content;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: #ffffff;
+}
+
+.table-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+#delete-btn {
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #E73C40;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+}
+
+
+#button_th{
+    width: 15%;
+}
+
+#ingre_lower_right{
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
