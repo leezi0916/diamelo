@@ -179,11 +179,11 @@
 
 #shopping_list_ul1 > li{
     display: inline-block;
-    cursor: pointer;
 }
 
-#shopping_list_ul1 > li:hover{
+#shopping_list_ul1 > li img:hover{
     scale: 1.02;
+    cursor: pointer;
 }
 
 
@@ -191,8 +191,22 @@
     padding: 20px;
 }
 
+.shopping_list_both{
+    position: relative;
+}
+
 .shopping_list_ul2 li{
     display: block;
+}
+
+.shopping_list_ul2 li button{
+    border: none;
+    padding: 0;
+    outline: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color:transparent;
 }
 
 .shopping_list_ul2 img{
@@ -210,6 +224,11 @@
     font-size: 16px;
     font-weight: 500;
     text-align: center;
+}
+
+
+.shopping_list_both button svg:hover{
+    scale: 1.1;
 }
 
 .next_list_button{

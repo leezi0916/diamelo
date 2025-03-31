@@ -27,9 +27,13 @@
     }
 
     /* modal */
+
+    .modal{
+
+    }
+
     .modal-dialog{
-        margin-top: 262px;
-        margin-bottom: 262px;
+        margin-top: 200px;
     }
 
     #sort{
@@ -37,13 +41,18 @@
         justify-content: center;
     }
 
+    #sort img{
+        border-radius: 10px;
+    }
+
     .modal-footer{
+        display: flex;
         align-items: center;
         justify-content: center;
     }
 
     #modal-footer-title span{
-        font-size: 20px;
+        font-size: 28px;
         font-weight: 700;
 
     }
@@ -57,6 +66,19 @@
         font-weight: 500;
     }
 
+    #modal-footer-both button{
+        width: 100%;
+    }
+
+    #modal-footer-both div{
+        padding: 10px;
+    }
+
+    #modal-footer-price{
+        font-size: 24px;
+        font-weight: 700;
+        border-bottom: black;
+    }
 
 </style>
 <div id="list">
@@ -99,14 +121,17 @@
                 </div>
             </div>
 
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -115,14 +140,18 @@
                     </div>
                 </div>
             </div>
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -131,14 +160,18 @@
                     </div>
                 </div>
             </div>
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -148,15 +181,20 @@
                 </div>
             </div>
         </div>
+
+
         <div class="product_table1">
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -165,14 +203,18 @@
                     </div>
                 </div>
             </div>
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -181,14 +223,18 @@
                     </div>
                 </div>
             </div>
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -197,14 +243,18 @@
                     </div>
                 </div>
             </div>
-            <div class="product_table_inner">
-                <div class="product_img">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
+
+            <div class="product_table_inner" >
+                <div data-toggle="modal" data-target="#myModal">
+                    <div class="product_img" >
+                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                    </div>
+                    <div class="product_name">
+                        <span>독도앰플</span>
+                        <span>15,600원</span>
+                    </div>
                 </div>
-                <div class="product_name">
-                    <span>독도앰플</span>
-                    <span>15,600원</span>
-                </div>
+
                 <div class="product_number">
                     <div class="product_number_inner">
                         <div class="number_button1"><input type="button" value="-"></div>
@@ -263,17 +313,20 @@
                             <image id="image0_280_4433" width="96" height="96" preserveAspectRatio="none" xlink:href="data:image/png;base64,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"/>
                         </defs>
                     </svg>
-
                 </div>
+
                 <div id="list_footer_title">
                     <span>장바구니 목록</span>
                 </div>
+
                 <div id="hidden_button">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.25 15H18.75M27.5 15C27.5 21.9036 21.9036 27.5 15 27.5C8.09644 27.5 2.5 21.9036 2.5 15C2.5 8.09644 8.09644 2.5 15 2.5C21.9036 2.5 27.5 8.09644 27.5 15Z" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </div>
+
             </div>
+
             <!-- 장바구니 목록에 li가 생성되면서 제품사진, 제품이름, 장바구니에담긴갯수를 작성 -->
             <div id="shopping_list">
                 <div class="next_list_button">
@@ -290,7 +343,31 @@
                 <ul id="shopping_list_ul1">
                     <li>
                         <ul class="shopping_list_ul2">
-                            <li><img src="/resources/image/productImgae/product1.png" alt=""></li>
+                            <li class="shopping_list_both">
+                                <img src="/resources/image/productImgae/product1.png" alt="">
+                                <button>
+                                    <svg width="24" height="24" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.64385 8.85616L12.3562 12.5685M8.64385 12.5685L12.3562 8.85615M19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751 19.25 1.75 15.3325 1.75 10.5C1.75 5.66751 5.66751 1.75 10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li><span>독도앰플</span></li>
+                            <li>
+                                <span>20개</span>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <ul class="shopping_list_ul2">
+                            <li class="shopping_list_both">
+                                <img src="/resources/image/productImgae/product1.png" alt="">
+                                <button>
+                                    <svg width="24" height="24" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.64385 8.85616L12.3562 12.5685M8.64385 12.5685L12.3562 8.85615M19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751 19.25 1.75 15.3325 1.75 10.5C1.75 5.66751 5.66751 1.75 10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </li>
                             <li><span>독도앰플</span></li>
                             <li><span>20개</span></li>
                         </ul>
@@ -298,15 +375,14 @@
 
                     <li>
                         <ul class="shopping_list_ul2">
-                            <li><img src="/resources/image/productImgae/product1.png" alt=""></li>
-                            <li><span>독도앰플</span></li>
-                            <li><span>20개</span></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <ul class="shopping_list_ul2">
-                            <li><img src="/resources/image/productImgae/product1.png" alt=""></li>
+                            <li class="shopping_list_both">
+                                <img src="/resources/image/productImgae/product1.png" alt="">
+                                <button>
+                                    <svg width="24" height="24" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.64385 8.85616L12.3562 12.5685M8.64385 12.5685L12.3562 8.85615M19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751 19.25 1.75 15.3325 1.75 10.5C1.75 5.66751 5.66751 1.75 10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </li>
                             <li><span>독도앰플</span></li>
                             <li><span>20개</span></li>
                         </ul>
@@ -342,14 +418,25 @@
                 <div class="modal-footer">
                     <div id="modal-footer-title"><span>1025 독도 앰플 45g</span></div>
                     <div id="modal-footer-note" class="modal-footer-font"><span>독도 앰플은 독도 100주년 기념하여 만든 앰플이며 피부에 아주 좋은 앰플입니다.</span></div>
-                    <div id="modal-footer-price" class="modal-footer-font"><span>15,600원</span></div>
-                    <div><button type="button" class="btn btn-danger" data-dismiss="modal">Close</button></div>
+
+                    <div id="modal-footer-both">
+                        <div id="modal-footer-price"><span>15,600원</span></div>
+                        <div><button type="button" class="btn btn-danger" data-dismiss="modal">Close</button></div>
+                    </div>
+
                 </div>
 
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $('#onModal').click(function (){
+        $('#myModal').fadeIn(10000);
+        $('.modal-content').fadeIn(10000);
+    })
+</script>
 
 <jsp:include page="../common/crm/footer.jsp"/>
 </body>
