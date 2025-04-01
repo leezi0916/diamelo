@@ -48,7 +48,7 @@
             </button>
           </form>
           <div class="searchBtndiv">
-            <button class="searchBtn">
+            <button class="searchBtn"  onclick="location.href='empAdmin.erp'">
               인사 관리자 페이지
               <div><svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="5.92462" cy="5.48047" r="5" fill="#FE5E5E"/>

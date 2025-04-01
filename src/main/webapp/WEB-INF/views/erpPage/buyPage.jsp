@@ -22,7 +22,7 @@
       <%-- 페이지 제목 영역 --%>
       <div class="page-body-header">
         <div id="page-body-header-text">
-          전체
+          전체 (?)
         </div>
       </div>
       <%-- 검색 필터 + 테이블 리스트 영역 --%>
@@ -68,7 +68,7 @@
             </thead>
             <tbody>
             <%-- 반복 가능한 판매 내역 행 --%>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>10</td>
               <td>이지묵</td>
@@ -77,7 +77,7 @@
 
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>9</td>
               <td>황윤창</td>
@@ -86,7 +86,7 @@
 
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>8</td>
               <td>김진석</td>
@@ -95,7 +95,7 @@
 
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>7</td>
               <td>양동민</td>
@@ -103,7 +103,7 @@
               <td>2024-06-18</td>
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>6</td>
               <td>홍승민</td>
@@ -111,7 +111,7 @@
               <td>2024-10-10</td>
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>5</td>
               <td>이지묵</td>
@@ -119,7 +119,7 @@
               <td>2024-11-11</td>
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>4</td>
               <td>김진석</td>
@@ -127,7 +127,7 @@
               <td>2025-01-25</td>
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>3</td>
               <td>양동민</td>
@@ -136,7 +136,7 @@
 
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>2</td>
               <td>황윤창</td>
@@ -144,7 +144,7 @@
               <td>2025-03-05</td>
 
             </tr>
-            <tr>
+            <tr onclick="goToDetail()">
 
               <td>1</td>
               <td>홍승민</td>
@@ -203,5 +203,11 @@
   </div>
 </div>
 </div>
+
+<script>
+  function goToDetail() {
+    location.href = 'detail.buy';
+  }
+</script>
 </body>
 </html>

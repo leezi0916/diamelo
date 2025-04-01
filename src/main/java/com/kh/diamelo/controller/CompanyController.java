@@ -12,4 +12,8 @@ public class CompanyController {
         return "erpPage/companyMainPage";
     }
 
+    //거래처 관리자 페이지로 들어가기
+    @GetMapping("compAdmin.erp")
+    public String compAdmin() {return "erpPage/companyAdminPage";}
+
 }

@@ -114,7 +114,7 @@
       </div>
 
       <div id="page-body-backBtn-div">
-        <button id="backBtn" type="submit">뒤로 가기</button>
+        <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로 가기</button>
       </div>
     </div>
   </div>

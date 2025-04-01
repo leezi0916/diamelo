@@ -12,4 +12,9 @@ public class IncomeController {
         return "erpPage/incomePage";
     }
 
+    // 매출 상세보기
+    @GetMapping("detail.in")
+    public String detailIncome() {
+        return "erpPage/incomeDetailPage";
+    }
 }

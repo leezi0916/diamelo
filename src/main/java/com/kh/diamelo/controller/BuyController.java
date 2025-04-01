@@ -25,9 +25,17 @@ public class BuyController {
         return "erpPage/materialBuyPage";
     }
 
+    //구매 상세보기
+    @GetMapping("detail.buy")
+    public String detailBuy() {
+        return "erpPage/buyDetailPage";
+    }
+
     //재료구매신청 버튼
     @PostMapping("mat.buy")
     public String materialBuy() {
         return null;
     }
+
+
 }
