@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ErpController {
+public class SaleController {
 
-    @GetMapping("home.erp")
-    public String main() {
-        return "erpPage/homePage";
+    // 판매관리 페이지로 가기
+    @GetMapping("sale.erp")
+    public String sale() {
+        return "erpPage/salePage";
     }
+
 }
