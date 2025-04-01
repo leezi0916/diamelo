@@ -23,7 +23,7 @@
             <%-- 페이지 제목 영역 --%>
             <div class="page-body-header">
                 <div id="page-body-header-text">
-                    전체
+                    구매 상세보기
                 </div>
             </div>
             <%-- 검색 필터 + 테이블 리스트 영역 --%>
@@ -40,7 +40,7 @@
                 <table class="content-table table-hover">
                     <thead>
                     <tr class="page-body-content-th">
-                        <th><input type="checkbox"></th>
+
                         <th></th>
                         <th>0품목</th>
                         <th>총 수량</th>
@@ -51,21 +51,20 @@
                     <tbody>
                     <%-- 각 제품 항목(이미지, 이름, 수량) 5  15% 15% 30% 15% 15%--%>
                     <tr>
-                        <td class="page-body-content-material-list-check"><input type="checkbox"></td>
                         <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                         <td class="page-body-content-material-list-name">히알루론산</td>
                         <td class="page-body-content-material-list-description">수량 5개</td>
                         <td class="page-body-content-material-list-capacity">9,330원</td>
                     </tr>
                     <tr>
-                        <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                         <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                         <td class="page-body-content-material-list-name">히알루론산</td>
                         <td class="page-body-content-material-list-description">수량 5개</td>
                         <td class="page-body-content-material-list-capacity">9,330원</td>
                     </tr>
                     <tr>
-                        <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                         <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                         <td class="page-body-content-material-list-name">히알루론산</td>
                         <td class="page-body-content-material-list-description">수량 5개</td>
@@ -83,38 +82,31 @@
                 <form>
                     <div id="page-body-content-div">
                         <div class="page-body-content-div-input-div">
-                            <p>이름</p>
+                            <p>구매자</p>
                             <input type="text" class="input-box" readonly value="admin">
-                            <p>입사 날짜</p>
-                            <input type="text" class="input-box" readonly value="2020-01-15">
+                            <p>담당자명</p>
+                            <input type="text" class="input-box" readonly value="최지원">
                         </div>
                         <div class="page-body-content-div-input-div">
-                            <p>전화번호</p>
-                            <input type="text" class="input-box" readonly value="010-1111-2222">
-                            <p>직급</p>
-                            <input type="text" class="input-box" readonly value="부장">
+                            <p>구매일자</p>
+                            <input type="text" class="input-box" readonly value="2025/03/01">
+                            <p>담당자 연락처</p>
+                            <input type="text" class="input-box" readonly value="010-5252-5252">
                         </div>
                         <div class="page-body-content-div-input-div">
-                            <p>이메일</p>
-                            <input type="text" class="input-box" readonly value="admin@naver.com">
-                            <p>월급</p>
-                            <input type="text" class="input-box" readonly value="3,000,000">
+                            <p>구매처</p>
+                            <input type="text" class="input-box" readonly value="그린코스">
+                            <p>담당자 이메일</p>
+                            <input type="text" class="input-box" readonly value="greencos@gmail.com">
                         </div>
-                        <div id="page-body-content-div-input-div">
-                            <p></p>
-                            <p></p>
-                            <p>비고</p>
-                            <input type="text" class="input-box" readonly value="admin">
 
-
-                        </div>
                     </div>
-
                 </form>
             </div>
                 <div id="page-body-content-button-div">
-                    <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기">
+                    <input type="button" class="submitBtn" value="구매  페이지 돌아가기" onclick="location.href='buy.erp'">
                 </div>
+        </div>
 
         </div>
     </div>

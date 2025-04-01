@@ -1,3 +1,8 @@
+input {
+    outline: none;
+}
+
+
 /*본문 전체 레이아웃*/
 .page-body{
     display: flex;

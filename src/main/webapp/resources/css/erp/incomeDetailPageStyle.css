@@ -1,3 +1,6 @@
+button{
+    outline:none;
+}
 
 /*전체 본문 레이아웃*/
 .page-body{
@@ -115,3 +118,4 @@
 .searchBtn:hover{
     background: #529471;
 }
+

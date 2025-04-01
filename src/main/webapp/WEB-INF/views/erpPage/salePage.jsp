@@ -28,7 +28,7 @@
             <div class="page-body-content">
                 <%-- 검색 필터 영역 --%>
                 <div id="page-body-content-search-button">
-                    <form action="" class="search-form">
+                    <form action="select.sale" class="search-form">
                         <input type="date" name="" id="" class="input-box" >
                         <input type="date" class="input-box" >
                         <input type="text" class="input-box" placeholder="구매 기업">
@@ -61,7 +61,7 @@
                         </thead>
                         <tbody>
                         <%-- 반복 가능한 판매 내역 행 --%>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -79,7 +79,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -94,7 +94,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -109,7 +109,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -124,7 +124,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -142,7 +142,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -157,7 +157,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -172,7 +172,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -187,7 +187,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -202,7 +202,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr onclick="goToDetail()">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -268,5 +268,10 @@
         </div>
     </div>
 </div>
+<script>
+    function goToDetail() {
+        location.href = 'detail.sale';
+    }
+</script>
 </body>
 </html>
