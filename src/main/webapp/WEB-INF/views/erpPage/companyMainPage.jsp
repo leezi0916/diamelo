@@ -36,7 +36,7 @@
             조회
           </button>
           <div id="add-btn-wrap">
-            <button id="addBtn">
+            <button id="addBtn" type="button" onclick="location.href='compAdmin.erp'">
               거래처 관리자 페이지
             </button>
           </div>

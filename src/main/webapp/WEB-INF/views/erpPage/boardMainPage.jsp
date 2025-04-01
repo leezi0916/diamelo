@@ -42,7 +42,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap">
-                        <button id="addBtn">
+                        <button id="addBtn" type="button" onclick="location.href='boardEnrollForm'">
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>

@@ -34,7 +34,6 @@
               <p>이름</p>
               <input type="text" class="input-box" readonly value="admin">
               <p>프로필</p>
-
                 <div id="insert_image">
                   <label for="file" id="image">
                     <div></div>
@@ -43,9 +42,7 @@
                   </label>
                   <input type="file" name="file" id="file" accept="image/*" onchange="changeImage(this)">
                 </div>
-
             </div>
-
             <div class="page-body-content-div-input-div">
               <p>전화번호</p>
               <input type="text" class="input-box" readonly value="010-1111-2222">
@@ -77,7 +74,7 @@
               </svg>
               수정하기
             </button>
-            <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기">
+            <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기" onclick="location.href='empAdmin.erp'">
           </div>
         </form>
       </div>
