@@ -28,35 +28,43 @@
       </div>
       <%-- 검색 필터 + 테이블 리스트 영역 --%>
       <div class="page-body-content">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           <div id="page-body-content-div">
             <div class="page-body-content-div-input-div">
               <p>이름</p>
               <input type="text" class="input-box" readonly value="admin">
-              <p>입사 날짜</p>
-              <input type="text" class="input-box" readonly value="2020-01-15">
+              <p>프로필</p>
+                <div id="insert_image">
+                  <label for="file" id="image">
+                    <div></div>
+                    <div id="image-text">사진 추가</div>
+                    <div></div>
+                  </label>
+                  <input type="file" name="file" id="file" accept="image/*" onchange="changeImage(this)">
+                </div>
             </div>
             <div class="page-body-content-div-input-div">
               <p>전화번호</p>
               <input type="text" class="input-box" readonly value="010-1111-2222">
-              <p>직급</p>
-              <input type="text" class="input-box" readonly value="부장">
+              <p>입사 날짜</p>
+              <input type="text" class="input-box" readonly value="2020-01-15">
+
             </div>
+
             <div class="page-body-content-div-input-div">
               <p>이메일</p>
               <input type="text" class="input-box" readonly value="admin@naver.com">
-              <p>월급</p>
-              <input type="text" class="input-box" readonly value="3,000,000">
+              <p>직급</p>
+              <input type="text" class="input-box" readonly value="부장">
+
             </div>
-            <div id="page-body-content-div-input-div">
+
+            <div class="page-body-content-div-input-div">
               <p>아이디</p>
               <input type="text" class="input-box" readonly value="admin">
-              <p>프로필</p>
-              <div>
-              <div id="insert_image">
-                  <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-              </div>
-              </div>
+              <p>월급</p>
+              <input type="text" class="input-box" readonly value="3,000,000">
+
             </div>
           </div>
           <div id="page-body-content-button-div">
@@ -75,34 +83,22 @@
   </div>
 </div>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const insertImageDiv = document.getElementById("insert_image");
-    const imageUploadInput = document.getElementById("imageUpload");
+  <%--  제품 사진 추가 및 삭제 --%>
 
-    // 클릭 이벤트 로그 확인
-    insertImageDiv.addEventListener("click", function() {
-      console.log("insert_image 클릭됨");  // ✅ 디버깅용
-      imageUploadInput.click();
-    });
+  function changeImage(input) {
+    let file = input.files[0];
 
-    imageUploadInput.addEventListener("change", function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        console.log("파일 선택됨:", file.name);  // ✅ 디버깅용
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          console.log("이미지 로딩 완료");  // ✅ 디버깅용
-          insertImageDiv.style.backgroundImage = `url(${e.target.result})`;
-          insertImageDiv.style.backgroundSize = "cover";
-          insertImageDiv.style.backgroundPosition = "center";
-          insertImageDiv.style.backgroundRepeat = "no-repeat";
-          insertImageDiv.textContent = "";
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  });
+    let img = document.createElement("img");
 
+    img.src = URL.createObjectURL(file);
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+
+    let container = document.getElementById('image');
+    container.innerHTML = "";
+    container.appendChild(img);
+  }
 </script>
 </body>
 </html>
