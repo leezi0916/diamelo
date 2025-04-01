@@ -55,12 +55,8 @@
       </div>
 
 
-      <div id="page-body-content">
-
-
-
-
-        <form id="search-inventory">
+      <form id="page-body-content" action="select.pro" method="get">
+        <div id="search-inventory">
 
           <select id="search-category">
             <option>분류</option>
@@ -75,14 +71,14 @@
           <input  type="text" placeholder="제품명을 입력하세요." id="search-product">
 
 
-          <button id="searchBtn">
+          <button id="searchBtn" type="submit">
             <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M4.14111 11.0614C4.14111 7.18044 7.29911 4.02344 11.1801 4.02344C15.0601 4.02344 18.2181 7.18044 18.2181 11.0614C18.2181 14.9424 15.0601 18.1004 11.1801 18.1004C7.29911 18.1004 4.14111 14.9424 4.14111 11.0614ZM22.6361 21.5204L18.0371 16.9334C19.3931 15.3524 20.2181 13.3034 20.2181 11.0614C20.2181 6.07844 16.1631 2.02344 11.1801 2.02344C6.19611 2.02344 2.14111 6.07844 2.14111 11.0614C2.14111 16.0454 6.19611 20.1004 11.1801 20.1004C13.2021 20.1004 15.0651 19.4244 16.5721 18.2974L21.2241 22.9364L22.6361 21.5204Z" fill="black"/>
             </svg>
             조회
           </button>
           <div id="add-btn-wrap">
-            <button id="addBtn">
+            <button id="addBtn" type="button" onclick="location.href='proAdd.erp'">
               <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -90,7 +86,7 @@
               제품 등록
             </button>
           </div>
-        </form>
+        </div>
         <table class="table table-hover">
           <thead>
           <tr>
@@ -197,13 +193,11 @@
           </tr>
           </tbody>
         </table>
-      </div>
+      </form>
 
-      <div id="page-body-content1" style="display: none">
+      <form id="page-body-content1" style="display: none" action="select.ing" method="get">
 
-
-
-        <form id="search-inventory1">
+        <div id="search-inventory1">
 
 
               <input type="text" placeholder="번호" id="search-number1">
@@ -211,14 +205,14 @@
               <input  type="text" placeholder="재료명을 입력하세요." id="search-product1">
 
 
-              <button id="searchBtn1">
+              <button id="searchBtn1" type="submit">
                 <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M4.14111 11.0614C4.14111 7.18044 7.29911 4.02344 11.1801 4.02344C15.0601 4.02344 18.2181 7.18044 18.2181 11.0614C18.2181 14.9424 15.0601 18.1004 11.1801 18.1004C7.29911 18.1004 4.14111 14.9424 4.14111 11.0614ZM22.6361 21.5204L18.0371 16.9334C19.3931 15.3524 20.2181 13.3034 20.2181 11.0614C20.2181 6.07844 16.1631 2.02344 11.1801 2.02344C6.19611 2.02344 2.14111 6.07844 2.14111 11.0614C2.14111 16.0454 6.19611 20.1004 11.1801 20.1004C13.2021 20.1004 15.0651 19.4244 16.5721 18.2974L21.2241 22.9364L22.6361 21.5204Z" fill="black"/>
                 </svg>
                 조회
               </button>
           <div id="add-btn-wrap1">
-            <button id="addBtn1">
+            <button id="addBtn1" type="button" onclick="location.href='ingAdd.erp'">
               <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -226,7 +220,7 @@
               재료 등록
             </button>
           </div>
-            </form>
+            </div>
         <table class="table table-hover">
           <thead>
           <tr>
@@ -330,7 +324,7 @@
           </tr>
           </tbody>
         </table>
-      </div>
+      </form>
       <div id="page-body-page-div">
         <div>
           <div class="page-body-page-div-start">

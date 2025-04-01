@@ -58,6 +58,7 @@
                         <th>제목</th>
                         <th>작성자</th>
                         <th>작성일시</th>
+                        <th>조회수</th>
                         <th>수정</th>
                         <th>삭제</th>
                     </tr>
@@ -70,6 +71,7 @@
                         <td>3월 월급입니다. 확인해주세요.</td>
                         <td>admin</td>
                         <td>2025/03/01</td>
+                        <td>0</td>
                         <td>
                             <button class="icon-button">
                                 <img src="/resources/image/update_icon.png" alt="수정" width="20">
@@ -88,6 +90,7 @@
                         <td>2월 월급입니다. 확인해주세요.</td>
                         <td>admin</td>
                         <td>2025/02/01</td>
+                        <td>0</td>
                         <td>
                             <button class="icon-button">
                                 <img src="/resources/image/update_icon.png" alt="수정" width="20">
@@ -106,6 +109,7 @@
                         <td>1월 월급입니다. 확인해주세요.</td>
                         <td>admin</td>
                         <td>2025/01/01</td>
+                        <td>0</td>
                         <td>
                             <button class="icon-button">
                                 <img src="/resources/image/update_icon.png" alt="수정" width="20">
@@ -124,6 +128,7 @@
                         <td>월급 언제 주나요..</td>
                         <td>이지묵</td>
                         <td>2024/12/01</td>
+                        <td>0</td>
                         <td>
                             <button class="icon-button">
                                 <img src="/resources/image/update_icon.png" alt="수정" width="20">
@@ -142,6 +147,7 @@
                         <td>배고파요......</td>
                         <td>이지묵</td>
                         <td>2024/11/01</td>
+                        <td>0</td>
                         <td>
                             <button class="icon-button">
                                 <img src="/resources/image/update_icon.png" alt="수정" width="20">

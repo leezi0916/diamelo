@@ -54,7 +54,7 @@
             </svg>
 
             <div class="categoryContent">
-                <div class="category">
+                <div class="category"  onclick="location.href='home.erp'">
                     <div>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -65,7 +65,7 @@
                     </div>
                     <div>HOME</div>
                 </div>
-                <div class="category">
+                <div class="category" onclick="location.href='inv.erp'">
                     <div>
                         <svg
                             width="25"
@@ -97,7 +97,7 @@
                     </div>
                     <div>재고 관리</div>
                 </div>
-                <div class="category">
+                <div class="category" onclick="location.href='prdc.erp'">
                     <div>
                         <svg
                             width="25"
@@ -130,7 +130,7 @@
                     <div>제작 관리</div>
                 </div>
 
-                <div class="category">
+                <div class="category" onclick="location.href='buy.erp'">
                     <div>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -141,7 +141,7 @@
                     </div>
                     <div>구매 관리</div>
                 </div>
-                <div class="category">
+                <div class="category" onclick="location.href='sale.erp'">
                     <div>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -152,7 +152,7 @@
                     </div>
                     <div>판매 관리</div>
                 </div>
-                <div class="category">
+                <div class="category" onclick="location.href='income.erp'">
                     <div>
                         <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -164,7 +164,7 @@
                     <div>매출 관리</div>
                 </div>
 
-                <div class="category">
+                <div class="category" onclick="location.href='company.erp'">
                     <div>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -175,7 +175,7 @@
                     </div>
                     <div>거래 관리</div>
                 </div>
-                <div class="category">
+                <div class="category" onclick="location.href='employee.erp'">
                     <div>
                         <svg
                             width="25"
@@ -207,7 +207,7 @@
                     </div>
                     <div>인사 관리</div>
                 </div>
-                <div class="category">
+                <div class="category" onclick="location.href='board.erp'">
                     <div>
                         <svg
                             width="25"
