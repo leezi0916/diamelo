@@ -48,9 +48,10 @@
     margin-top: 10px;
     border-radius: 15px;
     width: 100%;
-    height: calc(1000px + 15%);
+    height: 660px;
+    min-height: auto;
     background-color: #ffffff;
-    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 /*검색 필터 영역 높이 설정*/
@@ -68,6 +69,13 @@
     align-items: center;
     padding-right: 10%;
 
+}
+
+/* th영역 백그라운드 설정*/
+th{
+    background: #ededed !important;
+    text-align: center;
+    vertical-align: middle;
 }
 
 #page-body-content-search-list{

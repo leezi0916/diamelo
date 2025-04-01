@@ -112,6 +112,7 @@
     color: white;
     border: none;
     gap: 10%;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 /*버튼 감싸는 영역(가운데 정렬 + 여백)*/
 #page-body-button-div{
@@ -228,7 +229,7 @@
 
 /*이미지 셀 스타일(배경으로 이미지 삽입)*/
 .page-body-content-material-list-img{
-    background-size: 80%; /*이미지 크기 비율*/
+    background-size: 35%; /*이미지 크기 비율*/
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;

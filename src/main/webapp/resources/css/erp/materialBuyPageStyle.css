@@ -7,6 +7,7 @@
     padding-left: 10%;
     padding-right: 10%;
 
+
 }
 
 /*본문 해더(타이틀 부분)*/
@@ -16,17 +17,13 @@
     align-content: center;
     font-size: 24px;
     font-weight: 500;
-    left: 30px;
-
+    box-sizing: border-box;
     border-bottom: 1px solid black;
     padding-left: 5%;
     padding-right: 5%;
-
     margin-bottom: 10px;
+
 }
-
-/*헤더 내부 텍스트 위치 조정*/
-
 
 /*테이블 영역 전체 박스*/
 .page-body-content{
@@ -63,7 +60,7 @@
 
 /*이미지 셀 스타일(배경으로 이미지 삽입)*/
 .page-body-content-material-list-img{
-    background-size: 80%; /*이미지 크기 비율*/
+    background-size: 40%; /*이미지 크기 비율*/
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -118,6 +115,7 @@
     width: 30%;
     color: white;
     border: none;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 /*버튼 감싸는 영역(가운데 정렬 + 여백)*/
 #page-body-button-div{
@@ -127,7 +125,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 30px 10% 30px 10%;
+   padding: 30px;
 }
 
 /*버튼 호버 효과*/
