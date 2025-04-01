@@ -22,14 +22,8 @@
                     제품 제작
                 </div>
             </div>
-
-
             <div id="page-body-content">
-<<<<<<< HEAD
-                <form method="post" action="" enctype="multipart/form-data">
-=======
-                <form action="create.pro" method="post">
->>>>>>> 2d808f2903f96b1197cea423c2b68b61519a5b99
+                <form action="create.pro" method="post"  enctype="multipart/form-data">
                     <div id="header">
                         <div id="header-left">
                             <div id="product">
