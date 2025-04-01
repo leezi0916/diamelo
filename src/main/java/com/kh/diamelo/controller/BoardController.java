@@ -12,6 +12,7 @@ public class BoardController {
         return "erpPage/boardMainPage";
     }
 
+
     @GetMapping("enroll.bo")
     public String boardEnroll() {
         return "erpPage/boardEnrollForm";
@@ -31,6 +32,7 @@ public class BoardController {
     public String boardUpdate() {
         return "";
     }
+
 
 
 }
