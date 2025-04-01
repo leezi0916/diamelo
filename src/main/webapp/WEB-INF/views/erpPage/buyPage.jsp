@@ -29,7 +29,7 @@
       <div class="page-body-content">
         <%-- 검색 필터 영역 --%>
         <div id="page-body-content-search-button">
-          <form action="" class="search-form">
+          <form action="search.buy" method="get" class="search-form">
             <input type="date" name="" id="" class="input-box" >
             <input type="date" class="input-box" >
             <input type="text" class="input-box" placeholder="구매 기업">
@@ -42,7 +42,7 @@
             </button>
           </form>
           <div class="searchBtndiv">
-            <button class="searchBtn">
+            <button class="searchBtn" type="button" onclick="location.href='buyAdd.erp'">
               구매서 등록
             </button>
           </div>

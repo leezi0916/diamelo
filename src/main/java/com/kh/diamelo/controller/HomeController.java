@@ -14,7 +14,12 @@ public class HomeController {
     @RequestMapping("/")
     public String home() {
 
+<<<<<<< HEAD
         return "erpPage/productionPage";
+=======
+
+        return "index";
+>>>>>>> 2d808f2903f96b1197cea423c2b68b61519a5b99
 
     }
 }

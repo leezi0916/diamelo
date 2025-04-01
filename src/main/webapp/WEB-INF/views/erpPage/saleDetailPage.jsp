@@ -63,6 +63,11 @@
                             <td class="page-body-content-sales-lists">A제품</td>
                             <td class="page-body-content-sales-list"  colspan="2">100개</td>
                         </tr>
+                        <tr class="page-body-content-td">
+                            <td class="page-body-content-sales-list-img" style="background-image: url('/resources/image/productImgae/product4.png')"></td>
+                            <td class="page-body-content-sales-lists">A제품</td>
+                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

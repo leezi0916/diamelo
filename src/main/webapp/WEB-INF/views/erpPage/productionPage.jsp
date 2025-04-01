@@ -25,7 +25,11 @@
 
 
             <div id="page-body-content">
+<<<<<<< HEAD
                 <form method="post" action="" enctype="multipart/form-data">
+=======
+                <form action="create.pro" method="post">
+>>>>>>> 2d808f2903f96b1197cea423c2b68b61519a5b99
                     <div id="header">
                         <div id="header-left">
                             <div id="product">
@@ -107,7 +111,7 @@
                                 </svg>
                                 제품 제작
                             </button>
-                            <button>재고관리 페이지</button>
+                            <button type="button" onclick="location.href='inv.erp'">재고관리 페이지</button>
                         </div>
                     </div>
                 </form>

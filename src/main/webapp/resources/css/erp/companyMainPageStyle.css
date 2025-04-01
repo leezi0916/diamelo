@@ -26,17 +26,22 @@ button{
 
 }
 .page-body-header{
-    height: 100px;
+    min-height: 80px;
     width: 100%;
     gap: 10%;
     align-content: center;
     font-size: 24px;
     font-weight: 500;
     left: 30px;
-    padding-top: 30px;
+
     padding-left: 5%;
     display: flex;
     border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.page-body-header-text > p {
+    margin-bottom: 0;
 }
 
 #proBtn {
@@ -62,6 +67,10 @@ button{
 }
 .page-body-header-text button:focus {
     outline: none;
+}
+
+.page-body-header-text{
+    align-content: center;
 }
 
 /*테이블 css 입니다*/
