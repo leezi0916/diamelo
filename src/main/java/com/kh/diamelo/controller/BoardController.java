@@ -11,5 +11,4 @@ public class BoardController {
     public String board() {
         return "erpPage/boardMainPage";
     }
-
 }

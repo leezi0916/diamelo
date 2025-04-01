@@ -28,7 +28,7 @@
       </div>
       <%-- 검색 필터 + 테이블 리스트 영역 --%>
       <div class="page-body-content">
-        <form>
+        <form action="" method="post">
           <div id="page-body-content-div">
             <div class="page-body-content-div-input-div">
               <p>이름</p>
@@ -66,7 +66,7 @@
               </svg>
               수정하기
             </button>
-            <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기">
+            <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기" onclick="location.href='empAdmin.erp'">
           </div>
         </form>
       </div>
