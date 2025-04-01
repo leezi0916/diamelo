@@ -30,27 +30,27 @@
 
         <div class="input-name">
           <p>아이디</p>
-          <input class="input-box" type="text" placeholder="ID" readonly></input>
+          <input class="input-box" type="text" placeholder="ID" readonly>
         </div>
 
         <div class="input-name">
           <p>이름</p>
-          <input class="input-box" type="text" placeholder="이름"></input>
+          <input class="input-box box" type="text" placeholder="이름">
         </div>
 
         <div class="input-name">
           <p>전화번호</p>
-          <input class="input-box" type="text" placeholder="전화번호"></input>
+          <input class="input-box box" type="text" placeholder="전화번호">
         </div>
 
         <div class="input-name">
           <p>E-MAIL</p>
-          <input class="input-box" type="text" placeholder="이메일"></input>
+          <input class="input-box box" type="text" placeholder="이메일">
         </div>
 
         <div class="input-name">
           <p>개인 / 기업명</p>
-          <input class="input-box" type="text" placeholder="개인 / 기업명"></input>
+          <input class="input-box box" type="text" placeholder="개인 / 기업명">
         </div>
       </div>
 

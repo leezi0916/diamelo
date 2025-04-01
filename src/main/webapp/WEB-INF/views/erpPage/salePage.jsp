@@ -61,7 +61,7 @@
                         </thead>
                         <tbody>
                         <%-- 반복 가능한 판매 내역 행 --%>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -77,9 +77,8 @@
                                 </g>
                             </svg>
                             </td>
-
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -94,7 +93,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -109,7 +108,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -124,7 +123,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -142,7 +141,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -157,7 +156,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -172,7 +171,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -187,7 +186,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>
@@ -202,7 +201,7 @@
                             </td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-click">
                             <td><input type="checkbox"></td>
                             <td>5</td>
                             <td>E제품</td>

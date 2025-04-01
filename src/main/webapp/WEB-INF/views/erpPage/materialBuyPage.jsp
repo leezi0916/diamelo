@@ -17,16 +17,17 @@
         <!-- 오른쪽 상단바 + 콘텐츠 -->
         <jsp:include page="../common/erp/header.jsp" />
 
+        <form action="mat.buy" method="post">
         <!-- 페이지 본문 -->
         <div class="page-body">
             <%-- 본문 상단 제목 영역 --%>
             <div class="page-body-header">
                 <div id="page-body-header-text">
-<%--                    판매 내역 상세보기--%>
-                    게시글 보기
+                    구매 내역 상세보기
                 </div>
             </div>
             <%-- 테이블 포함 본문 내용 영역 --%>
+
             <div class="page-body-content">
                 <div id="page-body-content-search-list">
 
@@ -165,11 +166,12 @@
                     </svg>
                     구매 신청
                 </button>
-                <button class="searchBtn">
+                <button class="searchBtn" type="button" onclick="location.href='buy.erp'">
                     돌아가기
                 </button>
             </div>
         </div>
+        </form>
     </div>
 </div>
 </body>
