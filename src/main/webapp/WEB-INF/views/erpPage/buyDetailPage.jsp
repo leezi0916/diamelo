@@ -113,7 +113,7 @@
                 </form>
             </div>
                 <div id="page-body-content-button-div">
-                    <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기">
+                    <input type="button" class="submitBtn" value="돌아가기">
                 </div>
 
         </div>
