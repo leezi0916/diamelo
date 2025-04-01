@@ -24,4 +24,10 @@ public class EmployeeController {
     //인사 상세 페이지에서 수정하기 눌렀을 때의 redirect
     @PostMapping("empAdmin.erp")
     public String empAdminPost() {return null;}
+
+    @GetMapping("emplist.erp")
+    public String emplist() {return "erpPage/employeeListPage";}
+
+
+
 }
