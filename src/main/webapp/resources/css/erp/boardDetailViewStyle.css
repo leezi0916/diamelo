@@ -31,7 +31,11 @@ button{
 
 }
 .page-body-header{
+<<<<<<< HEAD
     height: 200px;
+=======
+    min-height: 80px;
+>>>>>>> ddd90bc4e9d0e63984044aa391192515fbd08ba3
     width: 100%;
     gap: 10px;
     align-content: center;
@@ -42,6 +46,7 @@ button{
     display: flex;
     border-bottom: 1px solid black;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 #page-body-content{
@@ -62,6 +67,7 @@ button{
 .page-body-header-text button:focus {
     outline: none;
 }
+
 
 #header{
     width: 100%;
