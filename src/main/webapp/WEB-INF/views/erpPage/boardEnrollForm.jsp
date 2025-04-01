@@ -59,7 +59,7 @@
         <div id="footer">
           <div id="footer-wrap">
             <button id="addBtn">게시글 등록</button>
-            <button id="backBtn">뒤로가기</button>
+            <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로가기</button>
           </div>
         </div>
       </div>
