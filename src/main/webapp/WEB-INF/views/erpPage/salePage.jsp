@@ -46,7 +46,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th> <input type="checkbox"></th>
+
                             <th>판매번호
                                 <%-- 정렬 아이콘 --%>
                                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@
                         <tbody>
                         <%-- 반복 가능한 판매 내역 행 --%>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -80,7 +80,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -95,7 +95,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -110,7 +110,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -125,7 +125,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -143,7 +143,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -158,7 +158,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -173,7 +173,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -188,7 +188,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>
@@ -203,7 +203,7 @@
 
                         </tr>
                         <tr>
-                            <td><input type="checkbox"></td>
+
                             <td>5</td>
                             <td>E제품</td>
                             <td>미용</td>

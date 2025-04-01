@@ -145,11 +145,7 @@ th{
     text-align: center;
 }
 #searchBtn{
-<<<<<<< HEAD
     border: 1px solid #D0D5DD;
-=======
-
->>>>>>> ddd90bc4e9d0e63984044aa391192515fbd08ba3
     height: 50px;
     border-radius: 15px;
     gap: 5%;
@@ -157,7 +153,7 @@ th{
     text-align: center;
     width: 10%;
     outline: none;
-    border: 1px solid #D0D5DD;
+    
 }
 #searchBtn:hover{
     background-color: #fcfcfc; /* 기존보다 약간 어두운 회색 */
