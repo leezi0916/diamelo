@@ -35,7 +35,7 @@
                     <table class="content-table table-hover">
                         <thead>
                         <tr class="page-body-content-th">
-                            <th><input type="checkbox"></th>
+
                             <th>품목</th>
                             <th></th>
                             <th>비고</th>
@@ -46,91 +46,91 @@
                         <tbody>
                         <%-- 각 제품 항목(이미지, 이름, 수량) 5  15% 15% 30% 15% 15%--%>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr><tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr>
-                            <td class="page-body-content-material-list-check"><input type="checkbox"></td>
+
                             <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
                             <td class="page-body-content-material-list-name">히알루론산</td>
                             <td class="page-body-content-material-list-description">가나다라마바사</td>
                             <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td class="page-body-content-material-list-amount">10개</td>
+                            <td><input type="number" class="input-box"> </td>
                         </tr>
                         <tr id="page-body-content-material-list-last">
                             <td colspan="2">0<span>개</span></td>
@@ -170,6 +170,7 @@
                     돌아가기
                 </button>
             </div>
+
         </div>
         </form>
     </div>
