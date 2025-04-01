@@ -4,6 +4,7 @@
     <title>Diamelo</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/productionPageStyle.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -24,7 +25,11 @@
 
 
             <div id="page-body-content">
+<<<<<<< HEAD
+                <form method="post" action="" enctype="multipart/form-data">
+=======
                 <form action="create.pro" method="post">
+>>>>>>> 2d808f2903f96b1197cea423c2b68b61519a5b99
                     <div id="header">
                         <div id="header-left">
                             <div id="product">
@@ -52,7 +57,10 @@
 
                         <div id="header-right">
                             <div id="product-image">
-                                <div id="image"><img></div>
+                                <label for="file" id="image">
+                                    <div id="image-text">제품 사진 추가</div>
+                                    <input type="file" name="file" id="file" accept="image/*" onchange="changeImage(this)">
+                                </label>
                                 <div>제품 이미지</div>
                             </div>
                         </div>
@@ -97,7 +105,7 @@
                     </div>
                     <div id="footer">
                         <div id="footer-wrap">
-                            <button>
+                            <button type="submit">
                                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.1542 4.89062V16.1092M4.54492 10.4999H15.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -111,5 +119,25 @@
         </div>
     </div>
 </div>
+
+<script>
+<%--  제품 사진 추가 및 삭제 --%>
+function changeImage(input){
+let file = input.files[0];
+
+let img = document.createElement("img");
+let text = document.getElementById("image-text");
+
+text.style.display = 'none';
+
+img.src = URL.createObjectURL(file);
+img.style.width = "100%";
+img.style.height = "100%";
+img.style.objectFit = "cover";
+
+let container = document.getElementById('image');
+container.appendChild(img);
+}
+</script>
 </body>
 </html>
