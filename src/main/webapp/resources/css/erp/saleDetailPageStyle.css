@@ -10,25 +10,25 @@
 
 /*본문 해더(타이틀 부분)*/
 .page-body-header{
-    height: 100px;
+    min-height: 80px;
     width: 100%;
     align-content: center;
     font-size: 24px;
     font-weight: 500;
     left: 30px;
-    padding-top: 30px;
+
     border-bottom: 1px solid black;
     padding-right: 5%;
+    padding-left: 5%;
+
+    margin-bottom: 10px;
 }
 
 /*헤더 내부 텍스트 위치 조정*/
-#page-body-header-text{
-    padding-left: 5%;
-}
 
 /*테이블 영역 전체 박스*/
 .page-body-content{
-    margin-top: 2%;
+    margin-top: 10px;
     border-radius: 15px;
     width: 100%;
     min-height: fit-content;

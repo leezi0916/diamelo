@@ -26,25 +26,26 @@
 
 /*페이지 상단 타이틀 영역*/
 .page-body-header{
-    height: 100px;
+    min-height: 80px;
     width: 100%;
     align-content: center;
     font-size: 24px;
     font-weight: 500;
     left: 30px;
-    padding-top: 30px;
+
     border-bottom: 1px solid black;
     padding-right: 5%;
+    padding-left: 5%;
+
+    margin-bottom: 10px;
 }
 
 /*제목 텍스트 여백 설정*/
-#page-body-header-text{
-    padding-left: 5%;
-}
+
 
 /*테이블 및 검색 포함한 컨텐츠 전체*/
 .page-body-content{
-    margin-top: 2%;
+    margin-top: 10px;
     border-radius: 15px;
     width: 100%;
     height: 660px;
