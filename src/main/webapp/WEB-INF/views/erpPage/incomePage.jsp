@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/incomePage.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
     <title>Title</title>
 </head>
 <body>

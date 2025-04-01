@@ -50,7 +50,6 @@ button{
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    cursor: pointer;
     outline: 0;
 }
 
@@ -73,8 +72,12 @@ button{
     border-radius: 15px;
     gap: 5%;
     background: #ffffff;
-
 }
+
+#thId:hover{
+    border: 1px solid #7AC38F;
+}
+
 #thId input{
     width: 100%;
     border: none;
@@ -84,15 +87,6 @@ button{
 
 }
 
-
-
-#thPwd input{
-    width: 100%;
-    border: none;
-    background: white;
-    font-size: 16px;
-    outline: none;
-}
 #thPwd{
     border: 1.5px solid green;
     height: 50px;
@@ -105,6 +99,18 @@ button{
     border-radius: 15px;
     gap: 5%;
     background: white;
+}
+
+#thPwd:hover{
+    border: 1px solid #7AC38F;
+}
+
+#thPwd input{
+    width: 100%;
+    border: none;
+    background: white;
+    font-size: 16px;
+    outline: none;
 }
 
 .loginForm{
@@ -184,7 +190,6 @@ a{
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    cursor: pointer;
     outline: 0;
 }
 
