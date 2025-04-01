@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <form class="page-body-content">
+            <form class="page-body-content" action="insert.pro" method="post">
                 <div id="ingrediant_area">
                     <div id="ingre_upper">
                         <div id="ingre_upper_left">
@@ -128,7 +128,7 @@
 
                     <div id="ingre_lower_button">
                         <button class="button" type="submit">+재료등록</button>
-                        <button type="button" class="button" onclick="location.href='/'">뒤로가기</button>
+                        <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                     </div>
                 </div>
             </form>
