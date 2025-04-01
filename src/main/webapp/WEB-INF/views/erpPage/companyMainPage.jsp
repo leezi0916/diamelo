@@ -4,7 +4,7 @@
   <title>Diamelo</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/companyMainPageStyle.css" />
-
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
 </head>
 <body>
 <div class="layout-wrapper">

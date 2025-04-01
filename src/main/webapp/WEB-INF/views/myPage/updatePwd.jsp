@@ -29,17 +29,17 @@
 
                 <div class="input-name">
                     <p>현재 비밀번호</p>
-                    <input class="input-box" type="text" placeholder="PWD" readonly></input>
+                    <input class="input-box" type="text" placeholder="PWD" readonly>
                 </div>
 
                 <div class="input-name">
                     <p>새 비밀번호</p>
-                    <input class="input-box" type="text" placeholder="NEW PWD"></input>
+                    <input class="input-box box" type="text" placeholder="NEW PWD">
                 </div>
 
                 <div class="input-name">
                     <p>새 비밀번호 확인</p>
-                    <input class="input-box" type="text" placeholder="CHECK PWD"></input>
+                    <input class="input-box box" type="text" placeholder="CHECK PWD">
                 </div>
             </div>
 

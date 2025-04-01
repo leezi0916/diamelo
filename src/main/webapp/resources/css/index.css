@@ -31,7 +31,6 @@
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    cursor: pointer;
     outline: 0;
 }
 
@@ -92,14 +91,20 @@
     background: white;
 }
 
+#thId:hover{
+    border: 1.5px solid #7AC38F;
+}
+
 /* 아이디 입력 input 스타일 */
 #thId input{
     width: 100%;
+    height: 100%;
     border: none;
     outline: none;
     background: white;
     font-size: 16px;
 }
+
 
 /* 비밀번호 입력 필드 스타일 */
 #thPwd{
@@ -116,14 +121,20 @@
     background: white;
 }
 
+#thPwd:hover{
+    border: 1.5px solid #7AC38F;
+}
+
 /* 비밀번호 입력 input 스타일 */
 #thPwd input{
     width: 100%;
+    height: 100%;
     border: none;
     background: white;
     font-size: 16px;
     outline: none;
 }
+
 
 /* 로그인 버튼 박스 여백 설정 */
 .div-loginarea>.loginForm{

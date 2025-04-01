@@ -69,6 +69,10 @@ img{
     outline: none;
 }
 
+.box:hover{
+    border: 1px solid #7AC38F;
+}
+
 .input-name{
     margin: 15px auto;
 }
