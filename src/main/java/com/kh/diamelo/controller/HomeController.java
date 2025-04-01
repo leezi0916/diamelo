@@ -17,7 +17,7 @@ public class HomeController {
         
 
 
-        return "erpPage/boardMainPage";
+        return "erpPage/boardDetailView";
 
     }
 }

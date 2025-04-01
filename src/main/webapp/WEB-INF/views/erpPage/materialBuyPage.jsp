@@ -22,7 +22,8 @@
             <%-- 본문 상단 제목 영역 --%>
             <div class="page-body-header">
                 <div id="page-body-header-text">
-                    판매 내역 상세보기
+<%--                    판매 내역 상세보기--%>
+                    게시글 보기
                 </div>
             </div>
             <%-- 테이블 포함 본문 내용 영역 --%>
