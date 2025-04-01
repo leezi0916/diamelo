@@ -4,7 +4,7 @@
   <title>Diamelo</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/companyMainPageStyle.css" />
-
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -36,7 +36,7 @@
             조회
           </button>
           <div id="add-btn-wrap">
-            <button id="addBtn">
+            <button id="addBtn" type="button" onclick="location.href='compAdmin.erp'">
               거래처 관리자 페이지
             </button>
           </div>

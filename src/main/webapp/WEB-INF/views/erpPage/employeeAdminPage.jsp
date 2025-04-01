@@ -86,7 +86,7 @@
               </td>
               <td>J6</td>
               <td>
-                <button class="icon-button">
+                <button class="icon-button" onclick="location.href='empDetail.erp'">
                   <img src="/resources/image/update_icon.png" alt="수정" width="20">
                 </button>
               </td>
@@ -112,7 +112,7 @@
               </td>
               <td>J5</td>
               <td>
-                <button class="icon-button">
+                <button class="icon-button" onclick="location.href='empDetail.erp'">
                   <img src="/resources/image/update_icon.png" alt="수정" width="20">
                 </button>
               </td>
@@ -138,7 +138,7 @@
               </td>
               <td>J1</td>
               <td>
-                <button class="icon-button">
+                <button class="icon-button" onclick="location.href='empDetail.erp'">
                   <img src="/resources/image/update_icon.png" alt="수정" width="20">
                 </button>
               </td>
@@ -163,7 +163,7 @@
               </td>
               <td>J1</td>
               <td>
-                <button class="icon-button">
+                <button class="icon-button" onclick="location.href='empDetail.erp'">
                   <img src="/resources/image/update_icon.png" alt="수정" width="20">
                 </button>
               </td>
@@ -188,7 +188,7 @@
               </td>
               <td>J1</td>
               <td>
-                <button class="icon-button">
+                <button class="icon-button" onclick="location.href='empDetail.erp'">
                   <img src="/resources/image/update_icon.png" alt="수정" width="20">
                 </button>
               </td>
@@ -203,7 +203,7 @@
           </table>
         </div>
         <div id="page-body-content-button-div">
-          <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기">
+          <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기" onclick="location.href='employee.erp'">
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@
     <title>Diamelo</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/productionPageStyle.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -21,10 +22,8 @@
                     제품 제작
                 </div>
             </div>
-
-
             <div id="page-body-content">
-                <form action="create.pro" method="post">
+                <form action="create.pro" method="post" enctype="multipart/form-data">
                     <div id="header">
                         <div id="header-left">
                             <div id="product">
@@ -52,7 +51,11 @@
 
                         <div id="header-right">
                             <div id="product-image">
-                                <div id="image"><img></div>
+                                <label for="file" id="image">
+                                    <div id="image-text">제품 사진 추가</div>
+                                </label>
+                                <input type="file" name="file" id="file" accept="image/*"
+                                       onchange="changeImage(this)">
                                 <div>제품 이미지</div>
                             </div>
                         </div>
@@ -97,9 +100,11 @@
                     </div>
                     <div id="footer">
                         <div id="footer-wrap">
-                            <button>
-                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.1542 4.89062V16.1092M4.54492 10.4999H15.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
+                            <button type="submit">
+                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.1542 4.89062V16.1092M4.54492 10.4999H15.7635" stroke="white"
+                                          stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 제품 제작
                             </button>
@@ -111,5 +116,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    <%--  제품 사진 추가 및 삭제 --%>
+
+    function changeImage(input) {
+        let file = input.files[0];
+
+        let img = document.createElement("img");
+
+        img.src = URL.createObjectURL(file);
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+
+        let container = document.getElementById('image');
+        container.innerHTML = "";
+        container.appendChild(img);
+    }
+</script>
 </body>
 </html>

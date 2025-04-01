@@ -12,4 +12,27 @@ public class BoardController {
         return "erpPage/boardMainPage";
     }
 
+
+    @GetMapping("enroll.bo")
+    public String boardEnroll() {
+        return "erpPage/boardEnrollForm";
+    }
+
+    @GetMapping("detail.bo")
+    public String boardDetail() {
+        return "erpPage/boardDetailView";
+    }
+
+    @GetMapping("search.bo")
+    public String boardSearch() {
+        return "";
+    }
+
+    @GetMapping("update.bo")
+    public String boardUpdate() {
+        return "";
+    }
+
+
+
 }

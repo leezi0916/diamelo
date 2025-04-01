@@ -52,12 +52,6 @@
     </div>
     <div class="div-imgarea"></div>
   </div>
-
-
 </div>
-
-
-
-
 </body>
 </html>

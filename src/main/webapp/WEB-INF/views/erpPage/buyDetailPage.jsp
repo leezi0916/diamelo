@@ -104,7 +104,9 @@
                 </form>
             </div>
                 <div id="page-body-content-button-div">
+
                     <input type="button" class="submitBtn" value="구매  페이지 돌아가기" onclick="location.href='buy.erp'">
+
                 </div>
         </div>
 

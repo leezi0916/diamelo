@@ -4,7 +4,7 @@
   <title>Diamelo</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/companyAdminPageStyle.css" />
-
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -39,20 +39,20 @@
             조회
           </button>
           <div id="add-btn-wrap">
-            <button id="addBtn">
+            <button id="addBtn" type="button" onclick="location.href='company.erp'">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.1535 4.00586V15.2245M4.54419 9.61516H15.7628" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               거래처 승인
             </button>
-            <button id="deleteBtn">
+            <button id="deleteBtn" type="button" onclick="location.href='company.erp'">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 10H16" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
               거래처 반려
             </button>
-            <button id="backBtn">
+            <button id="backBtn" type="button" onclick="location.href='company.erp'">
               돌아가기
             </button>
           </div>
