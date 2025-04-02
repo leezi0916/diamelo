@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Diamelo</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/productionPageStyle.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -30,70 +32,41 @@
                                 <div id="product-name"><p>*</p>제품명</div>
                                 <div id="product-select">
                                     <select id="product-select1">
-                                        <option>A제품</option>
-                                        <option>B제품</option>
-                                        <option>C제품</option>
-                                        <option>D제품</option>
-                                        <option>E제품</option>
-                                        <option>F제품</option>
-                                        <option>G제품</option>
-                                        <option>H제품</option>
-                                        <option>I제품</option>
-                                        <option>J제품</option>
+                                        <option value="">제품을 선택하세요</option>
+                                        <c:forEach var="product" items="${productList}">
+                                            <option value="${product.proNo}">${product.proName}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
                             <div id="product1">
                                 <div id="product-name1">수량</div>
-                                <div id="product-amount"><input type="text" placeholder="수량" id="amount-input"></div>
+                                <div id="product-amount">
+                                    <input type="text" placeholder="수량" id="amount-input" name="quantity">
+                                </div>
                             </div>
                         </div>
 
                         <div id="header-right">
                             <div id="product-image">
-                                <label for="file" id="image">
-                                    <div id="image-text">제품 사진 추가</div>
-                                </label>
-                                <input type="file" name="file" id="file" accept="image/*"
-                                       onchange="changeImage(this)">
-                                <div>제품 이미지</div>
+                                <!-- 제품 이미지 -->
+                                <img id="product-img" src="" alt="제품 이미지" style="display:none; width:200px; height:200px;">
                             </div>
                         </div>
                     </div>
                     <div id="body">
+                        <!-- 재료 목록 테이블 -->
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>번호</th>
+                                <th>재료 번호</th>
                                 <th>재료명</th>
                                 <th>필요 수량(g)</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="material-list">
                             <tr>
-                                <td>5</td>
-                                <td>A재료</td>
-                                <td>800</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>B재료</td>
-                                <td>200</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>C재료</td>
-                                <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>D재료</td>
-                                <td>700</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>E재료</td>
-                                <td>500</td>
+                                <td colspan="3">제품을 선택하면 필요한 재료가 표시됩니다.</td>
                             </tr>
                             </tbody>
                         </table>
@@ -108,7 +81,7 @@
                                 </svg>
                                 제품 제작
                             </button>
-                            <button type="button" onclick="location.href='inv.erp'">재고관리 페이지</button>
+                            <button type="button" onclick="location.href='${pageContext.request.contextPath}/inv.erp'">재고관리 페이지</button>
                         </div>
                     </div>
                 </form>
@@ -118,22 +91,59 @@
 </div>
 
 <script>
-    <%--  제품 사진 추가 및 삭제 --%>
+    $(document).ready(function() {
+        $("#product-select1").change(function() {
+            let selectedProductNo = $(this).val();
 
-    function changeImage(input) {
-        let file = input.files[0];
+            if (selectedProductNo) {
+                // AJAX 요청: 제품의 이미지 및 레시피 가져오기
+                $.ajax({
+                    url: "/products/details",
+                    method: "GET",
+                    data: { productNo: selectedProductNo },
+                    success: function(response) {
+                        let materialList = response.materials; // 재료 목록
+                        let imagePath = response.imagePath; // 제품 이미지
+                        let materialTableBody = $("#material-list");
 
-        let img = document.createElement("img");
+                        // ✅ 제품 이미지 업데이트
+                        if (imagePath) {
+                            $("#product-img").attr("src", imagePath).show();
+                        } else {
+                            $("#product-img").hide();
+                        }
 
-        img.src = URL.createObjectURL(file);
-        img.style.width = "100%";
-        img.style.height = "100%";
-        img.style.objectFit = "cover";
+                        // ✅ 기존 테이블 내용 초기화
+                        materialTableBody.empty();
 
-        let container = document.getElementById('image');
-        container.innerHTML = "";
-        container.appendChild(img);
-    }
+                        // ✅ 재료가 없을 경우
+                        if (materialList.length === 0) {
+                            materialTableBody.append("<tr><td colspan='3'>등록된 레시피가 없습니다.</td></tr>");
+                            return;
+                        }
+
+                        // ✅ 새로운 데이터 추가
+                        materialList.forEach(function(material) {
+                            let row = `
+                            <tr>
+                                <td>${material.matNo}</td>
+                                <td>${material.materialName}</td>
+                                <td>${material.amount} g</td>
+                            </tr>`;
+                            materialTableBody.append(row);
+                        });
+                    },
+                    error: function() {
+                        alert("레시피 정보를 불러오는 데 실패했습니다.");
+                    }
+                });
+            } else {
+                // 제품이 선택되지 않으면 기본 메시지 표시
+                $("#material-list").html('<tr><td colspan="3">제품을 선택하면 필요한 재료가 표시됩니다.</td></tr>');
+                $("#product-img").hide();
+            }
+        });
+    });
 </script>
 </body>
 </html>
