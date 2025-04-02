@@ -1,4 +1,4 @@
-package com.kh.diamelo.domian.vo;
+package com.kh.diamelo.domain.vo;
 
 import lombok.*;
 

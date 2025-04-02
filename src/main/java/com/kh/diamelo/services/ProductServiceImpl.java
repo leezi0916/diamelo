@@ -1,0 +1,55 @@
+package com.kh.diamelo.services;
+
+import com.kh.diamelo.domain.vo.PageInfo;
+import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.mappers.ProductMapper;
+import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+public class ProductServiceImpl implements ProductService {
+
+    private final ProductMapper productMapper;
+    /*
+    @Override
+    public int countProductsByType(String isProduct) {
+        return productMapper.countByIsProduct(isProduct);
+    }
+
+    @Override
+    public List<Product> getProductsByType(String isProduct) {
+        return productMapper.findByIsProduct(isProduct);
+    }
+    */
+
+
+    //제품 갯수
+    @Override
+    public int selectProductCount() {
+        return productMapper.selectProductCount();
+    }
+
+    //재료 갯수
+    @Override
+    public int selectMaterialCount() {
+        return productMapper.selectMaterialCount();
+    }
+
+    //제품 리스트
+    @Override
+    public ArrayList<Product> selectProductList(PageInfo pi) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+        return productMapper.selectProductList(rowBounds);
+    }
+
+
+
+
+}

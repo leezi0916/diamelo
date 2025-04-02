@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.diamelo.mappers.ProductMapper">
+    <resultMap id="productResult" type="Product">
+        <result column="PRO_NO" property="proNo"/>
+        <result column="PROCATEGORY_NO" property="proCategoryNo"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="PRO_DETAIL" property="proDetail"/>
+        <result column="PRO_PRICE" property="proPrice"/>
+        <result column="PRO_DELETED" property="proDeleted"/>
+        <result column="IS_PRODUCT" property="isProduct"/>
+
+        <result column="PRO_CATEGORY" property="categoryName"/>
+        <result column="PRO_INVENT_STOCK" property="proInventStock"/>
+    </resultMap>
+
+
+    <select id="selectProductCount" resultType="_int">
+        SELECT COUNT(*) FROM PRODUCT
+        WHERE IS_PRODUCT = 'Y' AND PRO_DELETED = 'N'
+    </select>
+
+    <select id="selectMaterialCount" resultType="_int">
+        SELECT COUNT(*) FROM PRODUCT
+        WHERE IS_PRODUCT = 'N' AND PRO_DELETED = 'N'
+    </select>
+
+    <select id="selectProductList" resultMap="productResult">
+        SELECT A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE, B.PRO_INVENT_STOCK, C.PRO_CATEGORY ,A.IS_PRODUCT
+        FROM PRODUCT A
+        INNER JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE PRO_DELETED = 'N'
+    </select>
+
+<!--        <select id="countByIsProduct" resultType="int">-->
+<!--            SELECT COUNT(*)-->
+<!--            FROM PRODUCT-->
+<!--            WHERE IS_PRODUCT = #{isProduct}-->
+<!--            AND PRO_DELETED = 'N'-->
+<!--        </select>-->
+
+<!--        <select id="findByIsProduct" resultMap="productResult">-->
+<!--            SELECT A.PRO_NO, A.PROCATEGORY_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,-->
+<!--            A.PRO_DELETED, A.IS_PRODUCT,-->
+<!--            C.PRO_CATEGORY AS CATEGORY_NAME, B.PRO_INVENT_STOCK-->
+<!--            FROM PRODUCT A-->
+<!--            INNER JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO-->
+<!--            INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO-->
+<!--            WHERE A.IS_PRODUCT = #{isProduct}-->
+<!--            AND A.PRO_DELETED = 'N'-->
+<!--        </select>-->
+
+
+
+
+
+</mapper>
