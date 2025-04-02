@@ -28,7 +28,7 @@
                 <img
                     src="/resources/image/etc/logo.png"
                     alt="로고이미지"
-                    onclick="location.href='${pageContext.servletContext.contextPath}'"
+                    onclick="location.href='home.crm'"
                 />
             </div>
             <div id="category">
@@ -87,7 +87,7 @@
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink"
-                            onclick="location.href='${pageContext.servletContext.contextPath}'"
+                            onclick="location.href='shoppingList.crm'"
                         >
                             <g clip-path="url(#clip0_38_5771)">
                                 <rect width="40" height="40" fill="url(#pattern0_38_5771)" />
