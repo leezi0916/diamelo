@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
 @Controller
+@RequiredArgsConstructor
+
 public class CompanyController {
 
     private final CompanyService companyService;

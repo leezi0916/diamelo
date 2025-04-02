@@ -6,12 +6,13 @@ import com.kh.diamelo.mappers.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
+
 public class CompanyServiceImpl implements CompanyService {
+
     private final CompanyMapper companyMapper;
 
     //거래관리 페이징을 위한 거래처 상태가 Y인 총 회사 수
