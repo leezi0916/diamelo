@@ -12,7 +12,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
 
-        <title>Title</title>
+        <title>Diamelo</title>
     </head>
     <body>
         <div id="fullarea">
@@ -88,7 +88,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                 </div>
                                 <div><a href="">비밀번호 찾기</a></div>
                                 <div><p>|</p></div>
-                                <div><a href="signUp.me">회원 가입</a></div>
+                                <div><a href="signUpEnrollForm.me">회원 가입</a></div>
                             </div>
                         </form>
                     </div>
