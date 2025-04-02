@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kh.boot.mappers.company-mapper">
+<mapper namespace="com.kh.diamelo.mappers.CompanyMapper">
+    <resultMap id="User_InfoResult" type="UserInfo">
+        <result column="USER_ID" property="userId"/>
+        <result column="JOB_CODE" property="jobCode"/>
+        <result column="DEPT_CODE" property="deptCode"/>
+        <result column="USER_PWD" property="userPwd"/>
+        <result column="COMPANY_NAME" property="companyName"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="PHONE" property="phone"/>
+        <result column="EMAIL" property="email"/>
+        <result column="ENROLL_DATE" property="enrollDate"/>
+        <result column="MODIFY_DATE" property="modifyDate"/>
+        <result column="STATUS" property="status"/>
+        <result column="USER_DELETED" property="userProfile"/>
+    </resultMap>
 
+    <!--  거래관리 페이징을 위한 거래처 상태가 Y인 총 회사 수  -->
+    <select id="selectCompanySuccessCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+        AND STATUS = 'Y'
+    </select>
+
+    <!--  거래관리 페이지에 기업명, 대표자명, 연락처, 이메일을 테이블에서 찾아옴  -->
+    <select id="selectCompanyList" resultMap="User_InfoResult">
+        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0' AND STATUS = 'Y'
+        ORDER BY ENROLL_DATE DESC
+    </select>
+
+    <!--  거래관리 관리자용 페이지에서 모든 거래처의 총 수  -->
+    <select id="selectCompanyReadyCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+    </select>
+
+
+    <select id="selectAllList" resultMap="User_InfoResult">
+        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+        ORDER BY ENROLL_DATE DESC
+    </select>
 </mapper>
