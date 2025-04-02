@@ -71,6 +71,10 @@ button{
     margin-top: 10px;
 }
 
+.page-body-header-text{
+    display: flex;
+}
+
 .page-body-header-text button{
     border : none;
     background-color: #f8f8f8;

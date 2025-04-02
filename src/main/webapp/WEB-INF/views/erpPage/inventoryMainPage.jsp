@@ -44,13 +44,15 @@
       <div class="page-body-header">
         <div class="page-body-header-text">
           <button id="proBtn">
-            제품 (?)
+            제품
           </button>
+          <div>(?)</div>
         </div>
         <div class="page-body-header-text">
           <button id="mtBtn">
-            재료 (?)
+            재료
           </button>
+          <div>(?)</div>
         </div>
       </div>
 
