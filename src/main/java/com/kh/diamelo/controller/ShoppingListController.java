@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CrmController {
+public class ShoppingListController {
 
-    @GetMapping("home.crm")
-    public String home() {
-        return "crmPage/mainPage";
+    @GetMapping("shoppingList.crm")
+    public String shoppingListCrm() {
+        return "crmPage/shoppingList";
     }
 }

@@ -7,13 +7,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MemberController {
 
-    @GetMapping("signUp.me")
+    @GetMapping("signUpEnrollForm.me")
     public String signUp() {
+        return "crmPage/signUpEnrollForm";
+    }
+
+    @PostMapping("signUp.me")
+    public String signUpEnrollForm() {
         return "crmPage/signUpEnrollForm";
     }
 
     @PostMapping("login.me")
     public String login() {
+
         return "crmPage/mainPage";
     }
 }

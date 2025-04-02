@@ -1,4 +1,4 @@
-package com.kh.diamelo.domian.vo;
+package com.kh.diamelo.domain.vo;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class Job {
-    private String job_Code; //직급 코드
-    private String job_Name; //직급명
+    private String jobCode; //직급 코드
+    private String jobName; //직급명
     private int salary; //급여
 }
