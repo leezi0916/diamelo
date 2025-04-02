@@ -5,11 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@RequiredArgsConstructor
 @Controller
+@RequiredArgsConstructor
+
 public class CompanyController {
 
     private final CompanyService companyService;
+
     // 거래관리 페이지로 가기
     @GetMapping("company.erp")
     public String company() {
