@@ -10,6 +10,7 @@ import java.sql.Date;
 @ToString
 @NoArgsConstructor
 public class Attachment {
+
     private int proNo; //제품 번호
     private String userId; //사용자 ID
     private int salNo; //매출 번호
@@ -17,4 +18,5 @@ public class Attachment {
     private String changeName; //변경된 파일명
     private String filePath; //저장된 파일 경로
     private Date updateDate; //업로드 일자
+
 }
