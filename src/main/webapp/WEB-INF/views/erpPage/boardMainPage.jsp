@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,7 +22,6 @@
                 <div class="page-body-header-text">
                         게시판
                 </div>
-                <div>(?)</div>
             </div>
 
 
@@ -29,9 +29,9 @@
             <form action="search.bo">
                 <div id="search-board">
                     <select id="search-category">
-                        <option>전체</option>
-                        <option>공지</option>
-                        <option>문의</option>
+                        <option value="*">전체</option>
+                        <option value="1">공지</option>
+                        <option value="2">문의</option>
                     </select>
                     <input  type="text" placeholder="제목" id="search-title">
                     <input type="text" placeholder="작성자" id="search-user">
@@ -42,10 +42,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap">
-
                         <button id="addBtn" type="button" onclick="location.href='enroll.bo'">
-
-
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -61,160 +58,80 @@
                         <th>제목</th>
                         <th>작성자</th>
                         <th>작성일시</th>
-                        <th>조회수</th>
                         <th>수정</th>
                         <th>삭제</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr onclick="gotoDetail()">
-                        <td>5</td>
-                        <td>공지</td>
-                        <td>3월 월급입니다. 확인해주세요.</td>
-                        <td>admin</td>
-                        <td>2025/03/01</td>
-                        <td>0</td>
-                        <td >
-                            <button class="icon-button" type="button">
-                                <img onclick="gotoUpdate()" src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                        </td>
-                        <td>
-                            <button class="icon-button" type="button">
-                                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>공지</td>
-                        <td>2월 월급입니다. 확인해주세요.</td>
-                        <td>admin</td>
-                        <td>2025/02/01</td>
-                        <td>0</td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                        </td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>공지</td>
-                        <td>1월 월급입니다. 확인해주세요.</td>
-                        <td>admin</td>
-                        <td>2025/01/01</td>
-                        <td>0</td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                        </td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>문의</td>
-                        <td>월급 언제 주나요..</td>
-                        <td>이지묵</td>
-                        <td>2024/12/01</td>
-                        <td>0</td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                        </td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>문의</td>
-                        <td>배고파요......</td>
-                        <td>이지묵</td>
-                        <td>2024/11/01</td>
-                        <td>0</td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                        </td>
-                        <td>
-                            <button class="icon-button">
-                                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                        </td>
-                    </tr>
+                    <c:choose>
+                        <c:when test="${not empty list}">
+                            <c:forEach var="c" items="${list}">
+                                <tr>
+                                    <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.postId}</td>
+                                    <td onclick="location.href='detail.bo?bno=${c.postId}'">
+                                            <c:choose>
+                                                <c:when test="${c.type == '1'}">
+                                                    공지사항
+                                                </c:when>
+                                                <c:otherwise>
+                                                    문의사항
+                                                </c:otherwise>
+                                            </c:choose>
+                                    </td>
+                                    <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.title}</td>
+                                    <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.userId}</td>
+                                    <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.createdDate}</td>
+                                    <td>
+                                        <button class="icon-button" type="button" onclick="location.href='updateForm.bo?bno=${c.postId}'">
+                                            <img  src="/resources/image/update_icon.png" alt="수정" width="20">
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="icon-button" type="button">
+                                            <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                        </button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr><h3>게시판이 없습니다.</h3></tr>
+                        </c:otherwise>
+                    </c:choose>
                     </tbody>
                 </table>
             </form>
             </div>
 
-            <div id="page-body-page-div">
-                <div>
-                    <div class="page-body-page-div-start">
-                        <p>이전</p>
-                    </div>
-                    <div>
-                        <p>1</p>
-                    </div>
-                    <div>
-                        <p>2</p>
-                    </div>
-                    <div>
-                        <p>3</p>
-                    </div>
-                    <div>
-                        <p>4</p>
-                    </div>
-                    <div>
-                        <p>5</p>
-                    </div>
-                    <div>
-                        <p>6</p>
-                    </div>
-                    <div>
-                        <p>7</p>
-                    </div>
-                    <div>
-                        <p>8</p>
-                    </div>
-                    <div>
-                        <p>9</p>
-                    </div>
-                    <div>
-                        <p>10</p>
-                    </div>
-                    <div class="page-body-page-div-end">
-                        <p>다음</p>
-                    </div>
-                </div>
+            <div id="pagingArea">
+                <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${ pi.currentPage eq 1 }">
+                            <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="board.erp?bpage=${pi.currentPage - 1}">이전</a></li>
+                        </c:otherwise>
+                    </c:choose>
 
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                        <li class="page-item"><a class="page-link" href="board.erp?bpage=${p}">${p}</a></li>
+                    </c:forEach>
+
+                    <c:choose>
+                        <c:when test="${ pi.currentPage eq pi.maxPage }">
+                            <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="board.erp?bpage=${pi.currentPage + 1}">다음</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
 
             </div>
         </div>
     </div>
-</div>
-<script>
-    function gotoDetail() {
-        location.href="detail.bo";
-    }
 
-    function gotoUpdate() {
-        location.href="update.bo";
-    }
-</script>
 </body>
 </html>
