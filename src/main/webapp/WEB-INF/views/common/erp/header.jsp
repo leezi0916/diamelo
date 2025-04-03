@@ -34,6 +34,32 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            #pagingArea{
+                padding: 20px;
+            }
+
+            #pagingArea ul{
+                margin: 0;
+            }
+            .page-item.disabled .page-link{
+                background: #f8f8f8;
+                border: 1px solid #A9A9A9;
+            }
+
+            .page-link{
+                color: black;
+                background: #f8f8f8;
+                border: 1px solid #A9A9A9;
+            }
+
+            .page-link:hover{
+                background: #E4E4E4;
+                color: black;
+                border: 1px solid #A9A9A9;
+            }
+
+        </style>
     </head>
     <body>
         <div class="header-container">
