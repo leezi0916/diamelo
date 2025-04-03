@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -57,54 +58,39 @@ public class ProductServiceImpl implements ProductService {
         return materials;
     }
 
-    // 제품 생산 기능 추가
+
+//    제품 생성 파트
     @Transactional
+    @Override
+
     public boolean produceProduct(int productNo, int quantity) {
-        // 1. 제품에 필요한 재료 정보 조회
-        ArrayList<Product> materials = getMaterialsByProductNo(productNo);
+        //  필요한 원자재들의 재고가 충분한지 확인
+        ArrayList<Product> materials = productMapper.getMaterialsByProductNo(productNo);
 
-        if (materials == null || materials.isEmpty()) {
-            System.out.println("해당 제품의 재료 정보가 없습니다.");
-            return false;
-        }
-
-        // 2. 재료 수량 확인 (부족하면 생산 불가)
+        // 원자재들의 현재 재고 조회
         ArrayList<Product> materialStocks = productMapper.getMaterialStock(productNo);
 
-        // 재료 개수와 재고 개수가 일치하는지 확인
-        if (materialStocks.size() != materials.size()) {
-            System.out.println("🚨 오류: 재료 개수와 재고 개수가 일치하지 않습니다.");
-            return false;
+        // 원자재 재고를 Map으로 변환 (키: 원자재 번호, 값: 현재 재고)
+        HashMap<Integer, Integer> stockMap = new HashMap<>();
+        for (Product stock : materialStocks) {
+            stockMap.put(stock.getProNo(), stock.getStock());
         }
 
-        for (int i = 0; i < materials.size(); i++) {
-            Product material = materials.get(i);
-            Product stockData = materialStocks.get(i);
-
-            int requiredAmount = material.getStock() * quantity;
-            int currentStock = stockData.getStock(); // Product 객체에서 재고 정보 가져오기
+        // 필요한 재료가 충분한지 확인
+        for (Product material : materials) {
+            int requiredAmount = material.getAmount() * quantity;
+            int currentStock = stockMap.getOrDefault(material.getProNo(), 0); // 재고 없으면 0으로 처리
 
             if (currentStock < requiredAmount) {
-                System.out.println("재료 부족: " + material.getProName() +
-                        " (필요량: " + requiredAmount + ", 현재 재고: " + currentStock + ")");
-                return false;
+                return false; // 재료 부족
             }
         }
 
-        // 3. 제품 생산 (재고 증가)
+        // 제품 생산 (완제품 재고 증가)
         productMapper.increaseProductStock(productNo, quantity);
-        System.out.println("제품 생산 완료: " + productNo + ", 생산량: " + quantity);
 
-        // 4. 사용한 재료 차감
-        for (Product material : materials) {
-            int usedAmount = material.getStock() * quantity;
-            productMapper.decreaseMaterialStock(material.getProNo(), usedAmount);
-            System.out.println("✔ DEBUG: material.getStock() = " + material.getStock());
-            System.out.println("✔ DEBUG: quantity = " + quantity);
-            System.out.println("✔ DEBUG: usedAmount = " + usedAmount);
-
-            System.out.println("재료 차감 완료: " + material.getProName() + " (-" + usedAmount + ")");
-        }
+        // 원자재 사용 (원자재 재고 감소)
+        productMapper.decreaseMaterialStock(productNo, quantity);
 
         return true;
     }

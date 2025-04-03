@@ -31,7 +31,7 @@
                             <div id="product">
                                 <div id="product-name"><p>*</p>제품명</div>
                                 <div id="product-select">
-                                    <select id="product-select1">
+                                    <select id="product-select1" name="productNo">
                                         <option value="">제품을 선택하세요</option>
                                         <c:forEach var="product" items="${productList}">
                                             <option value="${product.proNo}">${product.proName}</option>
@@ -73,7 +73,7 @@
                     </div>
                     <div id="footer">
                         <div id="footer-wrap">
-                            <button type="button" id="produce-btn">
+                            <button type="submit" id="produce-btn">
                                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.1542 4.89062V16.1092M4.54492 10.4999H15.7635" stroke="white"
@@ -82,6 +82,8 @@
                                 제품 제작
                             </button>
                             <button type="button" onclick="location.href='${pageContext.request.contextPath}/inv.erp'">재고관리 페이지</button>
+
+
                         </div>
                     </div>
                 </form>
@@ -91,43 +93,30 @@
 </div>
 
 <script>
-
-
+    <%--첫 로딩시 --%>
     $(document).ready(function() {
-        $("#produce-btn").click(function() {
-            let productNo = $("#product-select1").val();
-            let quantity = $("#amount-input").val();
+        // 처음 로딩 시 수량 입력 필드를 비활성화
+        $("#amount-input").prop("readonly", true);
 
-            if (!productNo || !quantity || quantity <= 0) {
-                alert("제품과 수량을 올바르게 입력하세요.");
-                return;
+        $("#product-select1").change(function() {
+            let selectedProductNo = $(this).val();
+            $("#amount-input").val(''); // 수량 초기화
+
+            if (selectedProductNo) {
+                $("#amount-input").prop("readonly", false); // 제품 선택 시 입력 가능
+            } else {
+                $("#amount-input").prop("readonly", true); // 제품 선택 안 하면 다시 비활성화
             }
-
-            $.ajax({
-                url: "/api/production/create",
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({ productNo: productNo, quantity: quantity }),
-                success: function(response) {
-                    alert(response.message);
-                    location.reload();
-                },
-                error: function(xhr) {
-                    alert("제작 실패: " + xhr.responseJSON.message);
-                }
-            });
         });
     });
 
-
-
-
-
-
-<%--  ----------------  select 누를시 제품의 맞는 이미지와 레시피 재료정보---------------------------%>
+    <%--  ----------------  select 누를시 제품의 맞는 이미지와 레시피 재료정보---------------------------%>
     $(document).ready(function() {
         $("#product-select1").change(function() {
             let selectedProductNo = $(this).val();
+
+            // 수량 입력 필드 초기화
+            $("#amount-input").val('');
 
             if (selectedProductNo) {
                 $.ajax({
@@ -181,6 +170,41 @@
                 $("#product-img").hide();
             }
         });
+    });
+
+    // 제품 및 수량입력 안하고 제작 버튼 클릭시 메세지
+    $(document).ready(function() {
+        $("#produce-btn").click(function(event) {
+            let selectedProductNo = $("#product-select1").val();
+            let quantity = $("#amount-input").val();
+
+            if (!selectedProductNo) {
+                alert("제품을 선택하세요!");
+                event.preventDefault(); // 폼 제출 방지
+                return false;
+            }
+
+            if (!quantity || quantity <= 0) {
+                alert("수량을 입력하세요!");
+                event.preventDefault(); // 폼 제출 방지
+                return false;
+            }
+        });
+    });
+
+    // 제작후 성공 or 실패 메시지 부분
+    $(document).ready(function() {
+        // Flash Attribute 메시지(alert) 표시
+        let successMessage = "${message}";
+        let errorMessage = "${error}";
+
+        if (successMessage) {
+            alert(successMessage);
+        }
+
+        if (errorMessage) {
+            alert(errorMessage);
+        }
     });
 </script>
 

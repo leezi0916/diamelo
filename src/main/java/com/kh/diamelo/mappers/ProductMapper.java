@@ -15,9 +15,13 @@ public interface ProductMapper {
 
     String getProductImage(int productNo);
 
+//    제품에 필요한 재료 목록 조회
     ArrayList<Product> getMaterialsByProductNo(@Param("productNo")int productNo);
 
-    ArrayList<Product> getMaterialStock(@Param("productNo") int productNo); // 재료 재고 조회
-    void increaseProductStock(int productNo, int quantity); // 제품 재고 증가
-    void decreaseMaterialStock(int productNo, int quantity); // 재료 재고 차감
+
+    //  특정 제품의 재고 가져오기
+    ArrayList<Product> getMaterialStock(@Param("productNo") int productNo);
+    //재료 재고 업데이트
+    void increaseProductStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
+    void decreaseMaterialStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
 }

@@ -48,8 +48,9 @@
     </select>
 
     <!-- 재료 재고 조회 -->
+    <!-- 생산할때 필요한 재료들의 번호와 그 재료들의 남은 수량이 조회됨 -->
     <select id="getMaterialStock" resultMap="ProductWithStockResultMap">
-        SELECT PI.PRO_NO, PI.PRO_INVENT_STOCK, P.PRO_NAME
+        SELECT PI.PRO_NO, PI.PRO_INVENT_STOCK
         FROM PRODUCT_INVENTORY PI
         JOIN PRODUCT P ON PI.PRO_NO = P.PRO_NO
         WHERE PI.PRO_NO IN (
@@ -58,6 +59,7 @@
     </select>
 
     <!-- 제품 재고 증가 -->
+    <!-- 입력한 생산량 만큼 제품 재고테이블에서 재고량이 증가됨   -->
     <update id="increaseProductStock" parameterType="map">
         UPDATE PRODUCT_INVENTORY
         SET PRO_INVENT_STOCK = PRO_INVENT_STOCK + #{quantity}
@@ -65,6 +67,7 @@
     </update>
 
     <!-- 재료 재고 차감 -->
+    <!-- 제품번호로 그에 맞는 레시피를 통한 재료정보에 있는 생산 요구량을 제품재고테이블에서 감소시킴   -->
     <update id="decreaseMaterialStock" parameterType="map">
         UPDATE PRODUCT_INVENTORY PI
         SET PI.PRO_INVENT_STOCK = PI.PRO_INVENT_STOCK - (
