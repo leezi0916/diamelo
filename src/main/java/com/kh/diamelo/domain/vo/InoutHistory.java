@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class Inout_History {
+public class InoutHistory {
     private int historyNo; //내역 번호
     private int proNo; //제품 번호
     private String history_ype; //유형 (입고 : O, 출고(판매) : I)

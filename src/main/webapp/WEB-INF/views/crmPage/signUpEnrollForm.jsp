@@ -2,40 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>enroll</title>
-    <link rel="stylesheet" href="/resources/css/crm/signUpEnrollForm.css">
-    <link rel="stylesheet" href="/resources/css/default.css">
-
-    <!-- JavaScript -->
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-    <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-    <!-- Semantic UI theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
-    <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <%-- Noto Sans KR Font--%>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap"
-          rel="stylesheet">
-</head>
 <body>
 <form action="signUp.me" method="post" id="enroll-form">
     <div class="container">
@@ -53,7 +19,7 @@
                 </div>
 
                 <input class="input-box" type="password" placeholder="비밀번호" name="userPwd" required/>
-                <input class="input-box" type="password" placeholder="비밀번호 확인" name="userPwdCheck" required/>
+                <input class="input-box" type="password" placeholder="비밀번호 확인" id="userPwdCheck" required/>
                 <input class="input-box" type="text" placeholder="이름" name="userName" required maxlength="5"/>
                 <input class="input-box" type="text" placeholder="전화번호 ( '-' 제외)" name="phone" required maxlength="11"/>
                 <input class="input-box" type="email" placeholder="이메일" name="email" required/>
@@ -174,7 +140,7 @@
 
             // 비밀번호 , 비밀번호 확인 같은지 여부 변수
             const pwd = document.querySelector('#enroll-form input[name=userPwd]').value;
-            const pwdCheck = document.querySelector('#enroll-form input[name=userPwdCheck]').value;
+            const pwdCheck = document.querySelector('#enroll-form #userPwdCheck').value;
 
             // 전화번호 양식 확인 변수
             const phone = document.querySelector('#enroll-form input[name=phone]').value;
@@ -208,5 +174,24 @@
     </script>
 </form>
 </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enroll</title>
+    <link rel="stylesheet" href="/resources/css/crm/signUpEnrollForm.css">
+    <link rel="stylesheet" href="/resources/css/default.css">
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <%-- Noto Sans KR Font--%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+</head>
 
 </html>
