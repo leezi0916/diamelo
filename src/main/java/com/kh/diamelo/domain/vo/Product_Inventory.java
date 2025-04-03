@@ -7,8 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class Cart {
+public class Product_Inventory {
+    private int proInvenNo; //제품 재고 번호
     private int proNo; //제품 번호
-    private String userId; //유저 ID
-    private int proStock; //상품 구매 수량
+    private int proInventStock; //제품 재고 수량
 }

@@ -8,6 +8,6 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class Product_Category {
-    private int procategory_No; //제품 카테고리 번호
-    private String pro_Category; //제품 카테고리명 (화장품 종류)
+    private int proCategoryNo; //제품 카테고리 번호
+    private String proCategory; //제품 카테고리명 (화장품 종류)
 }
