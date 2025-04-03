@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/boardDetailViewStyle.css"/>
+    <link rel="stylesheet" href="/resources/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="/resources/css/default.css"/>
+    <link rel="stylesheet" href="/resources/css/erp/boardDetailViewStyle.css"/>
 </head>
 <body onload="init()">
 <div class="layout-wrapper">
@@ -25,10 +25,18 @@
             </div>
 
             <div id="page-body-content">
-                <form>
                     <div id="header">
                         <div id="category">
-                            <div id="category0">공지사항</div>
+                            <div id="category0">
+                                <c:choose>
+                                    <c:when test="${b.type == '1'}">
+                                        공지사항
+                                    </c:when>
+                                    <c:otherwise>
+                                        문의사항
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         </div>
                         <div id="title">
                             <div id="title0">제목</div>
@@ -61,12 +69,12 @@
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
 
             <div id="reply-content">
                 <div id="reply-header"><h4>댓글(<span id="rCount">0</span>)</h4></div>
                 <div id="reply-inner"></div>
+
             </div>
 
             <div id="page-body-backBtn-div">
@@ -78,23 +86,25 @@
 
 <script>
     function init(){
-        drawReplyList({refBno : ${b.postId}})
+        drawReplyList({postId : ${b.postId}})
     }
 
     function addReply(){
+        //댓글내용, 작성자, 게시글번호
         const postId = ${b.postId};
-        const userId = "${loginUser.userId}";
+        const userId = "ee";
+        <%-- ${loginUser.userId}--%>
         const content = document.querySelector('#reply-text').value;
 
         insertReply({
-            refBno: postId,
-            replyWriter : userId,
-            replyContent : content
+            postId: postId,
+            writer : userId,
+            content : content
         }, drawReplyList)
     }
 
     function drawReplyList(data){
-        getReplyList({boardNo:data.refBno}, function (replyList){
+        getReplyList({postId:data.postId}, function (replyList){
             const countSpan = document.querySelector("#rcount");
             countSpan.innerHTML = replyList.length;
 
@@ -105,12 +115,12 @@
                                 + "<div id='reply-content-name'>" + "<span>" + reply.user_id + "</span>" + "</div>"
                                 + "<div id='reply-content-createDate'>" + "<span>" + reply.create_date + "</span>" + "</div>"
                             + "</div>"
-                            + "<div id='reply-content-inner'>" + "<textarea>" + reply.reply_content + "</textarea>" + "</div>"
+                            + "<div id='reply-content-inner'>" + "<textarea readonly>" + reply.reply_content + "</textarea>" + "</div>"
                         + "</div>";
             }
 
             const contentBody = document.querySelector("#reply-inner");
-            contentBody.innerHTML =info;
+            contentBody.innerHTML = info;
         })
     }
 
@@ -120,7 +130,6 @@
             type: 'get',
             data : data,
             success : function (res){
-                console.log(res);
                 callback(res);
             },
             error:function (){
@@ -141,7 +150,8 @@
                 }else{
                     console.log("reply insert 실패");
                 }
-            },error: function (){
+            },
+            error: function (){
                     console.log("reply insert ajax 요청 실패");
             }
         })

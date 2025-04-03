@@ -13,7 +13,11 @@ public interface BoardMapper {
     int selectBoardCount();
     ArrayList<Board> selectBoardAllList(RowBounds rowBounds);
     Board selectDetailView(@Param("bno") int bno);
-    ArrayList<Reply> selectReplyView(@Param("bno") int bno);
+
+    //댓글 추가
     int insertReply(Reply r);
-    ArrayList<Reply> selectReplyList(@Param("boardNo")int boardNo);
+    //해당 게시판 번호의 댓글 가져오기
+    ArrayList<Reply> selectReplyList(@Param("postId")int postId);
+
+    int updateBoard(Board board);
 }

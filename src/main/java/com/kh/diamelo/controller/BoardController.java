@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -52,11 +53,21 @@ public class BoardController {
         return "";
     }
 
-    @GetMapping("update.bo")
-    public String boardUpdate() {
+    @GetMapping("updateForm.bo")
+    public String boardUpdateForm(@RequestParam(value = "bno") int bno, Model model) {
+        Board b1 = boardService.selectDetailView(bno);
+
+        model.addAttribute("b1", b1);
         return "erpPage/boardUpdate";
     }
 
 
+    @GetMapping("update.bo")
+    public String boardUpdate(Model model,Board board) {
+        System.out.println(board);
+        int b2 = boardService.updateBoard(board);
 
+        model.addAttribute("b2", b2);
+        return "redirect:/detail.bo?bno=" + board.getPostId();
+    }
 }
