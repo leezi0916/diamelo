@@ -8,6 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class User_Info {
+
     private String userId; //아이디
     private String jobCode; //직급 코드 (J1 ~ J6, 거래처는 J0)
     private String deptCode; //부서 코드 (D1 ~ D5, 거래처는 D0)
@@ -20,4 +21,5 @@ public class User_Info {
     private String modifyDate; //수정일
     private String status; //승인 상태값(Y / N)
     private String userProfile; //프로필 경로
+
 }

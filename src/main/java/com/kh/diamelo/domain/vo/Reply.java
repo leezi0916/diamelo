@@ -10,7 +10,9 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class Reply {
+
     @JsonProperty("reply_no")
+
     private int repNo; //댓글 번호
     @JsonIgnore
     private int postId; //게시글 번호
@@ -24,4 +26,5 @@ public class Reply {
     private String updateDate; //수정일자
 
     private String replyDeleted; //삭제됨 Y, 삭제안됨 N
+
 }
