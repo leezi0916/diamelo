@@ -15,4 +15,8 @@ public class Product {
     private int proPrice; //단가
     private String proDeleted; //삭제됨 Y, 삭제안됨 N
     private String isProduct; //완제품 여부(제품 : Y, 재료 : N)
+
+    private int amount;
+
+    private int stock;
 }

@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div id="page-body-content">
-                <form action="create.pro" method="post" enctype="multipart/form-data">
+                <form id="production-form" action="create.pro" method="post">
                     <div id="header">
                         <div id="header-left">
                             <div id="product">
@@ -42,7 +42,7 @@
                             <div id="product1">
                                 <div id="product-name1">수량</div>
                                 <div id="product-amount">
-                                    <input type="text" placeholder="수량" id="amount-input" name="quantity">
+                                    <input type="number" placeholder="수량" id="amount-input" name="quantity">
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div id="footer">
                         <div id="footer-wrap">
-                            <button type="submit">
+                            <button type="button" id="produce-btn">
                                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.1542 4.89062V16.1092M4.54492 10.4999H15.7635" stroke="white"
@@ -91,46 +91,84 @@
 </div>
 
 <script>
+
+
+    $(document).ready(function() {
+        $("#produce-btn").click(function() {
+            let productNo = $("#product-select1").val();
+            let quantity = $("#amount-input").val();
+
+            if (!productNo || !quantity || quantity <= 0) {
+                alert("제품과 수량을 올바르게 입력하세요.");
+                return;
+            }
+
+            $.ajax({
+                url: "/api/production/create",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ productNo: productNo, quantity: quantity }),
+                success: function(response) {
+                    alert(response.message);
+                    location.reload();
+                },
+                error: function(xhr) {
+                    alert("제작 실패: " + xhr.responseJSON.message);
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+<%--  ----------------  select 누를시 제품의 맞는 이미지와 레시피 재료정보---------------------------%>
     $(document).ready(function() {
         $("#product-select1").change(function() {
             let selectedProductNo = $(this).val();
 
             if (selectedProductNo) {
-                // AJAX 요청: 제품의 이미지 및 레시피 가져오기
                 $.ajax({
-                    url: "/products/details",
+                    url: "/api/production/details",
                     method: "GET",
                     data: { productNo: selectedProductNo },
                     success: function(response) {
+                        console.log(response); // 응답 데이터 확인
                         let materialList = response.materials; // 재료 목록
                         let imagePath = response.imagePath; // 제품 이미지
                         let materialTableBody = $("#material-list");
 
-                        // ✅ 제품 이미지 업데이트
+                        // 제품 이미지 업데이트
                         if (imagePath) {
                             $("#product-img").attr("src", imagePath).show();
                         } else {
                             $("#product-img").hide();
                         }
 
-                        // ✅ 기존 테이블 내용 초기화
+                        // 기존 테이블 초기화
                         materialTableBody.empty();
 
-                        // ✅ 재료가 없을 경우
+                        // 재료가 없을 경우
                         if (materialList.length === 0) {
                             materialTableBody.append("<tr><td colspan='3'>등록된 레시피가 없습니다.</td></tr>");
                             return;
                         }
+                        console.log(materialList);
 
-                        // ✅ 새로운 데이터 추가
+
+                        //  새로운 데이터 추가
                         materialList.forEach(function(material) {
-                            let row = `
-                            <tr>
-                                <td>${material.matNo}</td>
-                                <td>${material.materialName}</td>
-                                <td>${material.amount} g</td>
-                            </tr>`;
-                            materialTableBody.append(row);
+                            console.log(material); // 각 재료 데이터가 정상적으로 출력되는지 확인
+
+                            let row = "<tr>" +
+                                            "<td>" + material.proNo  + "</td>" +
+                                            "<td>" + material.proName  + "</td>" +
+                                            "<td>" + (material.amount ? material.amount + ' g' : '정보 없음')  + "</td>" +
+                                        "</tr>";
+
+                            materialTableBody.append(row); // 테이블에 추가
                         });
                     },
                     error: function() {
@@ -145,5 +183,7 @@
         });
     });
 </script>
+
+
 </body>
 </html>
