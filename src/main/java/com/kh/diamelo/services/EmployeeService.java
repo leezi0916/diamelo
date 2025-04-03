@@ -1,8 +1,7 @@
-package com.kh.diamelo.service;
+package com.kh.diamelo.services;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.User_Info;
-import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
 
@@ -33,4 +32,10 @@ public interface EmployeeService {
     int employeeDetailImageSearch(User_Info userInfo);
 
     int employeeDetailImageInsert(User_Info userInfo);
+
+    int empStatusDelete(String userId);
+
+    User_Info empStatusSearch(String userId);
+
+    int empUserDelete(String userId);
 }

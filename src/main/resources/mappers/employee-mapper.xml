@@ -152,5 +152,24 @@
         #{changeName},
         #{filePath})
     </insert>
+    
+    <update id="empStatusDelete">
+        UPDATE USER_INFO SET
+        USER_DELETED = 'Y'
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <select id="empStatusSearch"  parameterType="User_Info" resultMap="UserResult">
+        SELECT STATUS
+        FROM USER_INFO
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <delete id="empUserDelete">
+        DELETE FROM USER_INFO
+        WHERE USER_ID = #{userId}
+    </delete>
+
+
 
 </mapper>

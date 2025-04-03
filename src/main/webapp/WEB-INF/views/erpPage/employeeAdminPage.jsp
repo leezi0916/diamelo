@@ -243,22 +243,21 @@
     }
 
     $.ajax({
-      url: "empdelete.erp",
+      url: "/api/employee/empDelete.erp",
       type: "POST",
       data:{userId: selectedUserId},
-      success: function(res){
-        alert("삭제 성공");
-        location.href="empAdminList.erp";},
+      success: function(res) {
+        if (res === "1") {
+          alert("삭제 성공");
+          location.href = "empAdminList.erp";
+        } else {
+          alert("삭제 실패");
+        }},
       error: function (){
-        alert("삭제 실패");
+        alert("AJAX 통신 실패");
+        modal.style.display = "none";
       }
     });
-
-
-
-    alert(`${selectedUserId} 삭제 처리되었습니다.`);
-    modal.style.display = "none";
-
     // 실제 삭제 AJAX 또는 location.href 등으로 연결 가능
   };
 

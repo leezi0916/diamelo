@@ -1,4 +1,4 @@
-package com.kh.diamelo.service;
+package com.kh.diamelo.services;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.User_Info;
@@ -90,6 +90,21 @@ public class EmployeeServiceImpl implements   EmployeeService{
     @Override
     public int employeeDetailImageInsert(User_Info userInfo) {
         return employeeMapper.employeeDetailImageInsert(userInfo);
+    }
+
+    @Override
+    public int empStatusDelete(String userId) {
+        return employeeMapper.empStatusDelete(userId);
+    }
+
+    @Override
+    public User_Info empStatusSearch(String userId) {
+        return employeeMapper.empStatusSearch(userId);
+    }
+
+    @Override
+    public int empUserDelete(String userId) {
+        return employeeMapper.empUserDelete(userId);
     }
 
 

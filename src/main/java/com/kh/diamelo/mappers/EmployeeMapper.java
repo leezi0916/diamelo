@@ -36,4 +36,9 @@ public interface EmployeeMapper {
 
     int employeeDetailImageInsert(User_Info userInfo);
 
+    int empStatusDelete(String userId);
+
+    User_Info empStatusSearch(String userId);
+
+    int empUserDelete(String userId);
 }

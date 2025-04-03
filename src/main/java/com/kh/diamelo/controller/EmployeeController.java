@@ -2,7 +2,7 @@ package com.kh.diamelo.controller;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.User_Info;
-import com.kh.diamelo.service.EmployeeService;
+import com.kh.diamelo.services.EmployeeService;
 import com.kh.diamelo.utils.Template;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
