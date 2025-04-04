@@ -12,7 +12,7 @@ public interface BuyService {
 
     ArrayList<SalesDetails> selectBuyList(PageInfo pi);
 
-    ArrayList<Product> selectProduceBuyList(int salNo);
+    ArrayList<Product> selectProduceBuyList();
 
 
 }

@@ -25,10 +25,10 @@ public class BuyController {
     }
 
     // 구매서 등록
-    @GetMapping("buyAdd.erp")
-    public String buyAddPage() {
-        return "erpPage/materialBuyPage";
-    }
+//    @GetMapping("buyAdd.erp")
+//    public String buyAddPage() {
+//        return "erpPage/materialBuyPage";
+//    }
 
     //구매 상세보기
     @GetMapping("detail.buy")
@@ -56,10 +56,14 @@ public class BuyController {
         return "erpPage/buyPage";
     }
 
-    @GetMapping("buyDetail.erp")
-    public String buyDetail(int salNo, Model model){
-        ArrayList<Product> list = buyService.selectProduceBuyList(salNo);
-        return "erpPage/buyDetailPage";
+    // 구매서 등록
+    @GetMapping("buyAdd.erp")
+    public String buyDetail(Model model){
+        ArrayList<Product> list = buyService.selectProduceBuyList();
+
+        System.out.println("buyDetail : "+list);
+        model.addAttribute("list", list);
+        return "erpPage/materialBuyPage";
     }
 
 

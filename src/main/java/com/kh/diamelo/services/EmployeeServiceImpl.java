@@ -1,7 +1,7 @@
 package com.kh.diamelo.services;
 
 import com.kh.diamelo.domain.vo.PageInfo;
-import com.kh.diamelo.domain.vo.User_Info;
+import com.kh.diamelo.domain.vo.UserInfo;
 import com.kh.diamelo.mappers.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements   EmployeeService{
     }
 
     @Override
-    public ArrayList<User_Info> selectUserInfoList(PageInfo pi){
+    public ArrayList<UserInfo> selectUserInfoList(PageInfo pi){
         int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 
@@ -34,14 +34,14 @@ public class EmployeeServiceImpl implements   EmployeeService{
     }
 
     @Override
-    public ArrayList<User_Info> selectAdminList(PageInfo pi) {
+    public ArrayList<UserInfo> selectAdminList(PageInfo pi) {
         int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
         return employeeMapper.selectAdminList(rowBounds);
     }
 
     @Override
-    public User_Info selectEmployeeDetail(String userId) {
+    public UserInfo selectEmployeeDetail(String userId) {
 
         return employeeMapper.selectEmployeeDetail(userId);
     }
@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements   EmployeeService{
     }
 
     @Override
-    public ArrayList<User_Info> selectSearchUserInfoList(PageInfo pi, String userName, String jobCode) {
+    public ArrayList<UserInfo> selectSearchUserInfoList(PageInfo pi, String userName, String jobCode) {
         int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
         return employeeMapper.selectSearchUserInfoList(rowBounds, userName, jobCode);
@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements   EmployeeService{
     }
 
     @Override
-    public ArrayList<User_Info> selectAdminSearchUserInfoList(PageInfo pi, String userId, String userName) {
+    public ArrayList<UserInfo> selectAdminSearchUserInfoList(PageInfo pi, String userId, String userName) {
         int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
         return employeeMapper.selectAdminSearchUserInfoList(rowBounds, userId, userName);
@@ -73,22 +73,22 @@ public class EmployeeServiceImpl implements   EmployeeService{
 
 
     @Override
-    public int updateEmployeeDetailSearch(User_Info userInfo) {
+    public int updateEmployeeDetailSearch(UserInfo userInfo) {
         return employeeMapper.updateEmployeeDetailSearch(userInfo);
     }
 
     @Override
-    public int updateEmployeeImage(User_Info userInfo) {
+    public int updateEmployeeImage(UserInfo userInfo) {
         return employeeMapper.updateEmployeeImage(userInfo);
     }
 
     @Override
-    public int employeeDetailImageSearch(User_Info userInfo) {
+    public int employeeDetailImageSearch(UserInfo userInfo) {
         return employeeMapper.employeeDetailImageSearch(userInfo);
     }
 
     @Override
-    public int employeeDetailImageInsert(User_Info userInfo) {
+    public int employeeDetailImageInsert(UserInfo userInfo) {
         return employeeMapper.employeeDetailImageInsert(userInfo);
     }
 
@@ -98,7 +98,7 @@ public class EmployeeServiceImpl implements   EmployeeService{
     }
 
     @Override
-    public User_Info empStatusSearch(String userId) {
+    public UserInfo empStatusSearch(String userId) {
         return employeeMapper.empStatusSearch(userId);
     }
 

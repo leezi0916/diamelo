@@ -31,5 +31,4 @@ public class Product {
     private int stock;
 
 
-
 }

@@ -26,8 +26,8 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public ArrayList<Product> selectProduceBuyList(int salNo) {
-        return buyMapper.selectProduceBuyList(salNo);
+    public ArrayList<Product> selectProduceBuyList() {
+        return buyMapper.selectProduceBuyList();
     }
 
 

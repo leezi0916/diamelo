@@ -1,179 +1,155 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 스타일 css 파일들 --%>
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/materialBuyPageStyle.css" />
+
 </head>
 <body>
 <div class="layout-wrapper">
     <!-- 왼쪽 고정 사이드바 -->
-    <jsp:include page="../common/erp/sidebar.jsp" />
-
+    <jsp:include page="../common/erp/sidebar.jsp"/>
 
     <div class="main-area">
         <!-- 오른쪽 상단바 + 콘텐츠 -->
-        <jsp:include page="../common/erp/header.jsp" />
+        <jsp:include page="../common/erp/header.jsp"/>
 
         <form action="mat.buy" method="post">
-        <!-- 페이지 본문 -->
-        <div class="page-body">
-            <%-- 본문 상단 제목 영역 --%>
-            <div class="page-body-header">
-                <div id="page-body-header-text">
-                    구매 내역 상세보기
+            <!-- 페이지 본문 -->
+            <div class="page-body">
+                <!-- 본문 상단 제목 영역 -->
+                <div class="page-body-header">
+                    <div id="page-body-header-text">
+                        구매 내역 상세보기
+                    </div>
+                </div>
+                <!-- 테이블 포함 본문 내용 영역 -->
+                <div class="page-body-content">
+                    <div id="page-body-content-search-list">
+                        <table class="content-table table-hover">
+                            <thead>
+                            <tr class="page-body-content-th">
+                                <th>품목</th>
+                                <th></th>
+                                <th>비고</th>
+                                <th>구매 단가(그람)</th>
+                                <th>발주 수량</th>
+                            </tr>
+                            </thead>
+                            <!-- 제품 목록과 요약 영역을 포함한 tbody -->
+                            <tbody id="product-body">
+                            <c:forEach var="m" items="${list}">
+                                <tr>
+                                    <td class="page-body-content-material-list-img"
+                                        style="background-image: url('${m.changeName}')"></td>
+                                    <td class="page-body-content-material-list-name">${m.proName}</td>
+                                    <td class="page-body-content-material-list-description">${m.proDetail}</td>
+                                    <td class="page-body-content-material-list-capacity">${m.proPrice}</td>
+                                    <td>
+                                        <input type="number"
+                                               class="input-box order-input"
+                                               data-name="${m.proName}"
+                                               data-price="${m.proPrice}"
+                                               min="0"
+                                               value="0" />
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            <tr id="page-body-content-material-list-last">
+                                <td colspan="2"><span id="itemsCount"></span>개</td>
+                                <td colspan="2">총 수량 <span id="totalQty"></span></td>
+                                <td colspan="2">합계 금액 <span id="totalPrice">0</span>원</td>
+                            </tr>
+                            </tbody>
+                            <!-- 동적 상세 항목을 위한 tbody (수량이 0 이상인 항목에 대해 JS가 <tr> 생성) -->
+                            <tbody id="order-details">
+                            <!-- JS에서 <tr> 태그들이 추가됩니다. -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 하단 버튼 영역(승인, 반려, 돌아가기) -->
+                <div id="page-body-button-div">
+                    <button class="searchBtn">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.15422 1.00586V12.2245M1.54492 6.61516H12.7635" stroke="white"
+                                  stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        구매 신청
+                    </button>
+                    <button class="searchBtn" type="button" onclick="location.href='buy.erp'">
+                        돌아가기
+                    </button>
                 </div>
             </div>
-            <%-- 테이블 포함 본문 내용 영역 --%>
 
-            <div class="page-body-content">
-                <div id="page-body-content-search-list">
-
-                    <%-- 판매 상세 테이블, hover추가 --%>
-                    <table class="content-table table-hover">
-                        <thead>
-                        <tr class="page-body-content-th">
-
-                            <th>품목</th>
-                            <th></th>
-                            <th>비고</th>
-                            <th>구매 단가(그람)</th>
-                            <th>발주 수량</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%-- 각 제품 항목(이미지, 이름, 수량) 5  15% 15% 30% 15% 15%--%>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr><tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr>
-
-                            <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-material-list-name">히알루론산</td>
-                            <td class="page-body-content-material-list-description">가나다라마바사</td>
-                            <td class="page-body-content-material-list-capacity">9,330</td>
-                            <td><input type="number" class="input-box"> </td>
-                        </tr>
-                        <tr id="page-body-content-material-list-last">
-                            <td colspan="2">0<span>개</span></td>
-                            <td colspan="2"><span>총 수량</span>0</td>
-                            <td colspan="2">합계 금액<span>0</span>원</td>
-                        </tr>
-                        <tr class="page-body-content-material-list-last">
-                            <td colspan="2">히알루론산</td>
-                            <td colspan="2">수량<span>0</span></td>
-                            <td colspan="2"><span></span>원</td>
-                        </tr>
-                        <tr class="page-body-content-material-list-last">
-                            <td colspan="2">정제수</td>
-                            <td colspan="2">수량<span>0</span></td>
-                            <td colspan="2"><span></span>원</td>
-                        </tr>
-                        <tr class="page-body-content-material-list-last">
-                            <td colspan="2">콜라겐</td>
-                            <td colspan="2">수량<span>0</span></td>
-                            <td colspan="2"><span></span>원</td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-<%--             하단 버튼 영역(승인, 반려, 돌아가기)--%>
-            <div id="page-body-button-div">
-
-                <button class="searchBtn">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.15422 1.00586V12.2245M1.54492 6.61516H12.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    구매 신청
-                </button>
-                <button class="searchBtn" type="button" onclick="location.href='buy.erp'">
-                    돌아가기
-                </button>
-            </div>
-
-        </div>
         </form>
     </div>
 </div>
+
+<script>
+    // 모든 발주 수량 input 요소들을 선택
+    const inputs = document.querySelectorAll('.order-input');
+
+    // 계산 결과를 출력할 DOM 요소들
+    const detailsEl = document.getElementById('order-details');
+    const itemCountEl = document.getElementById('itemsCount');
+    const totalQtyEl = document.getElementById('totalQty');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    // 수량 입력 시 호출되는 함수
+    function updateSummary() {
+        let totalItems = 0;
+        let totalQty = 0;
+        let totalPrice = 0;
+        let detailsHtml = '';
+
+        inputs.forEach(input => {
+            const qty = parseInt(input.value) || 0;
+            const name = input.getAttribute('data-name');
+            const price = parseInt(input.getAttribute('data-price'));
+
+            // 디버그 로그 (정상 출력 확인용)
+            // console.log("이름:", name, "수량:", qty, "단가:", price);
+
+            if (qty > 0) {
+                const itemTotal = qty * price;
+                console.log("이름:", name, "수량:", qty, "단가:", price);
+
+                totalItems += 1;
+                totalQty += qty;
+                totalPrice += itemTotal;
+
+
+                detailsHtml +=
+                    "<tr class='page-body-content-material-list-last'>" +
+                    "<td colspan='2'>" + name + "</td>" +
+                    "<td colspan='2'>" + qty + "</td>" +
+                    "<td colspan='2'>" + itemTotal + "<td>" +
+                    "</tr>";
+            }
+        });
+
+        itemCountEl.textContent = totalItems;
+        totalQtyEl.textContent = totalQty;
+        totalPriceEl.textContent = totalPrice.toLocaleString();
+        detailsEl.innerHTML = detailsHtml;
+    }
+
+    // 모든 input에 이벤트 리스너 등록
+    inputs.forEach(input => {
+        input.addEventListener('input', updateSummary);
+    });
+    document.getElementById('order-details').innerHTML = "<tr><td colspan='6'>테스트 데이터</td></tr>";
+    // 페이지 로딩 시 초기 계산 실행
+    updateSummary();
+</script>
 </body>
 </html>
