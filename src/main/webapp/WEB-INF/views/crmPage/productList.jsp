@@ -9,8 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link rel="stylesheet" href="/resources/css/crm/productList.css">
-    <link rel="stylesheet" href="/resources/css/default.css">
+    <link rel="stylesheet" href="/css/crm/productList.css">
+    <link rel="stylesheet" href="/css/default.css">
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -104,7 +104,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -124,7 +124,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -144,7 +144,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -164,7 +164,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -187,7 +187,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -207,7 +207,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -227,7 +227,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -247,7 +247,7 @@
             <div class="product_table_inner" >
                 <div data-toggle="modal" data-target="#myModal">
                     <div class="product_img" >
-                        <img src="/resources/image/productImgae/product1.png" alt="상품">
+                        <img src="/image/productImgae/product1.png" alt="상품">
                     </div>
                     <div class="product_name">
                         <span>독도앰플</span>
@@ -344,7 +344,7 @@
                     <li>
                         <ul class="shopping_list_ul2">
                             <li class="shopping_list_both">
-                                <img src="/resources/image/productImgae/product1.png" alt="">
+                                <img src="/image/productImgae/product1.png" alt="">
                                 <button>
                                     <svg width="24" height="24" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.64385 8.85616L12.3562 12.5685M8.64385 12.5685L12.3562 8.85615M19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751 19.25 1.75 15.3325 1.75 10.5C1.75 5.66751 5.66751 1.75 10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
@@ -361,7 +361,7 @@
                     <li>
                         <ul class="shopping_list_ul2">
                             <li class="shopping_list_both">
-                                <img src="/resources/image/productImgae/product1.png" alt="">
+                                <img src="/image/productImgae/product1.png" alt="">
                                 <button>
                                     <svg width="24" height="24" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.64385 8.85616L12.3562 12.5685M8.64385 12.5685L12.3562 8.85615M19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751 19.25 1.75 15.3325 1.75 10.5C1.75 5.66751 5.66751 1.75 10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
@@ -376,7 +376,7 @@
                     <li>
                         <ul class="shopping_list_ul2">
                             <li class="shopping_list_both">
-                                <img src="/resources/image/productImgae/product1.png" alt="">
+                                <img src="/image/productImgae/product1.png" alt="">
                                 <button>
                                     <svg width="24" height="24" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.64385 8.85616L12.3562 12.5685M8.64385 12.5685L12.3562 8.85615M19.25 10.5C19.25 15.3325 15.3325 19.25 10.5 19.25C5.66751 19.25 1.75 15.3325 1.75 10.5C1.75 5.66751 5.66751 1.75 10.5 1.75C15.3325 1.75 19.25 5.66751 19.25 10.5Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
@@ -411,7 +411,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div id="sort"><img src="${pageContext.request.contextPath}/resources/image/productImgae/product1.png"></div>
+                    <div id="sort"><img src="${pageContext.request.contextPath}/image/productImgae/product1.png"></div>
                 </div>
 
                 <!-- Modal footer -->

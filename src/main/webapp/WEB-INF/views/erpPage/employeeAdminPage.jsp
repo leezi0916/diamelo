@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/employeeadminPageStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/employeeadminPageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -101,14 +101,14 @@
                 <td>${u.jobName}</td>
                 <td>
                   <button class="icon-button"  onclick="location.href='empDetail.erp?uId=${u.userId}'">
-                    <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                    <img src="/image/update_icon.png" alt="수정" width="20">
                   </button>
                 </td>
                 <td>
                   <button class="icon-button userDelete"
                           data-userid="${u.userId}"
                           data-status="${u.status}">
-                    <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                    <img src="/image/delete_icon.png" alt="삭제" width="20">
                   </button>
                 </td>
               </tr>
@@ -146,12 +146,12 @@
                 <td>${e.jobName}</td>
                 <td>
                   <button class="icon-button"  onclick="location.href='empDetail.erp?uId=${e.userId}'">
-                    <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                    <img src="/image/update_icon.png" alt="수정" width="20">
                   </button>
                 </td>
                 <td>
                   <button class="icon-button" >
-                    <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                    <img src="/image/delete_icon.png" alt="삭제" width="20">
 <%--                          <input class="loginForm" id="userDelete" type="button" value="회원탈퇴">--%>
                   </button>
                 </td>

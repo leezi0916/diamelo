@@ -2,9 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/incomePage.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/incomePage.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
     <title>Title</title>
 </head>
 <body>

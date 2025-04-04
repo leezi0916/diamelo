@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/boardMainPageStyle.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/boardMainPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -83,12 +83,12 @@
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.createdDate}</td>
                                     <td>
                                         <button class="icon-button" type="button" onclick="location.href='updateForm.bo?bno=${c.postId}'">
-                                            <img  src="/resources/image/update_icon.png" alt="수정" width="20">
+                                            <img  src="/image/update_icon.png" alt="수정" width="20">
                                         </button>
                                     </td>
                                     <td>
                                         <button class="icon-button" type="button">
-                                            <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                            <img src="/image/delete_icon.png" alt="삭제" width="20">
                                         </button>
                                     </td>
                                 </tr>

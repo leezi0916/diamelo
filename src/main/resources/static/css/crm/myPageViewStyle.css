@@ -46,7 +46,7 @@ button{
 .div-imgarea{
     height: 100%;
     width: 50%;
-    background-image: url(/resources/image/etc/tksaor.PNG);
+    background-image: url(/image/etc/tksaor.PNG);
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -186,7 +186,7 @@ a{
 .div-imgarea1{
     height: 100%;
     width: 50%;
-    background-image: url(/resources/image/etc/updatemyPage_img.png);
+    background-image: url(/image/etc/updatemyPage_img.png);
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;

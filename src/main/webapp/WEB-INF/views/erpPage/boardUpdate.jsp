@@ -3,9 +3,9 @@
 <html>
 <head>
   <title>Diamelo</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/boardEnrollStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/boardEnrollStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">

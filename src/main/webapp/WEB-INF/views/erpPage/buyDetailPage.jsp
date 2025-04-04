@@ -4,9 +4,9 @@
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/buyDetailPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/buyDetailPageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -51,21 +51,21 @@
                     <tbody>
                     <%-- 각 제품 항목(이미지, 이름, 수량) 5  15% 15% 30% 15% 15%--%>
                     <tr>
-                        <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
+                        <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
                         <td class="page-body-content-material-list-name">히알루론산</td>
                         <td class="page-body-content-material-list-description">수량 5개</td>
                         <td class="page-body-content-material-list-capacity">9,330원</td>
                     </tr>
                     <tr>
 
-                        <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
+                        <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
                         <td class="page-body-content-material-list-name">히알루론산</td>
                         <td class="page-body-content-material-list-description">수량 5개</td>
                         <td class="page-body-content-material-list-capacity">9,330원</td>
                     </tr>
                     <tr>
 
-                        <td class="page-body-content-material-list-img" style="background-image: url('/resources/image/productImgae/product1.png')"></td>
+                        <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
                         <td class="page-body-content-material-list-name">히알루론산</td>
                         <td class="page-body-content-material-list-description">수량 5개</td>
                         <td class="page-body-content-material-list-capacity">9,330원</td>

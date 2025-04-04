@@ -3,9 +3,9 @@
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 스타일 css 파일들 --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/saleDetailPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/saleDetailPageStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -41,25 +41,25 @@
                         <tbody>
                         <%-- 각 제품 항목(이미지, 이름, 수량) --%>
                         <tr class="page-body-content-td table-click" >
-                            <td class="page-body-content-sales-list-img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                            <td class="page-body-content-sales-list-img"><img src="/image/productImgae/product1.png" alt="상품1"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
                             <td class="page-body-content-sales-list" colspan="2">100개</td>
 
                         </tr>
                         <tr class="page-body-content-td table-click">
-                            <td class="page-body-content-sales-list-img" ><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                            <td class="page-body-content-sales-list-img" ><img src="/image/productImgae/product1.png" alt="상품1"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
                             <td class="page-body-content-sales-list"  colspan="2">100개</td>
 
                         </tr>
                         <tr class="page-body-content-td table-click">
-                            <td class="page-body-content-sales-list-img" ><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                            <td class="page-body-content-sales-list-img" ><img src="/image/productImgae/product1.png" alt="상품1"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
                             <td class="page-body-content-sales-list"  colspan="2">100개</td>
 
                         </tr>
                         <tr class="page-body-content-td table-click">
-                            <td class="page-body-content-sales-list-img" ><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                            <td class="page-body-content-sales-list-img" ><img src="/image/productImgae/product1.png" alt="상품1"></td>
                             <td class="page-body-content-sales-lists">A제품</td>
                             <td class="page-body-content-sales-list"  colspan="2">100개</td>
                         </tr>
