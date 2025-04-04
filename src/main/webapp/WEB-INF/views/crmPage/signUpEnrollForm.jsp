@@ -43,7 +43,7 @@
                 </div>
 
                 <button class="button" type="submit" onclick="return validateForm()">가입하기</button>
-                <button type="button" class="button" onclick="location.href='/'">뒤로가기</button>
+                <button type="button" class="button" onclick="location.href='loginForm.me'">뒤로가기</button>
             </div>
         </div>
     </div>

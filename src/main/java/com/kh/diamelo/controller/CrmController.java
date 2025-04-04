@@ -5,9 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CrmController {
+    @GetMapping("loginForm.me")
+    public String loginForm() {
+        return "crmPage/loginPage";
+    }
 
-    @GetMapping("home.crm")
-    public String home() {
-        return "crmPage/mainPage";
+    @GetMapping("signUpEnrollForm.me")
+    public String signUpEnrollForm() {
+        return "crmPage/signUpEnrollForm";
     }
 }
