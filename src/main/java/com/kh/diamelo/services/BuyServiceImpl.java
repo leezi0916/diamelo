@@ -3,7 +3,7 @@ package com.kh.diamelo.services;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
-import com.kh.diamelo.domain.vo.Sales_Details;
+import com.kh.diamelo.domain.vo.SalesDetails;
 import com.kh.diamelo.mappers.BuyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public ArrayList<Sales_Details> selectBuyList(PageInfo pi) {
+    public ArrayList<SalesDetails> selectBuyList(PageInfo pi) {
         return buyMapper.selectBuyList(pi);
     }
 
