@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -31,15 +32,15 @@
                 <%-- 검색 필터 영역 --%>
                 <div id="page-body-content-search-button">
 
-                    <form action="search.in" class="search-form">
+                    <form action="search.in" method="get" class="search-form">
                         <select class="input-box" name="type">
                             <option value="" selected>전체</option>
-                            <option value="I">소득</option>
-                            <option value="O">지출</option>
+                            <option value="I" ${type == 'I' ? 'selected' : ''}>소득</option>
+                            <option value="O" ${type == 'O' ? 'selected' : ''}>지출</option>
                         </select>
-                        <input type="date" name="date1" class="input-box">
-                        <input type="date" name="date2" class="input-box">
-                        <input type="text" name="company" class="input-box" placeholder="거래처">
+                        <input type="date" name="date1" value="${startDate}" class="input-box">
+                        <input type="date" name="date2" value="${endDate}" class="input-box">
+                        <input type="text" name="company" value="${company}" class="input-box" placeholder="거래처">
                         <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
                         <button type="submit" class="input-box">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
@@ -62,23 +63,15 @@
                             <th>거래처</th>
                             <th>분류</th>
                             <th>매출 일자</th>
-                            <th>
-                                매출/매입
-                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.61683 1.01172V9.9866M5.61683 9.9866L10.1043 5.49916M5.61683 9.9866L1.12939 5.49916"
-                                          stroke="black" stroke-width="1.28213" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                </svg>
-                            </th>
+                            <th>매출/매입</th>
                         </tr>
                         </thead>
                         </tbody>
                         <c:choose>
                             <c:when test="${not empty list}">
                                 <c:forEach var="item" items="${list}">
-                                    <tr onclick="location.href='detail.in?sno='${item.salNo}">
-                                        <td>${item.salNo}</td>
+                                    <tr onclick="location.href='detail.in?sno=${item.salNo}'">
+                                    <td>${item.salNo}</td>
                                         <td>${item.companyName}</td>
                                         <td>
                                             <c:choose>
@@ -89,15 +82,17 @@
                                         <td>${item.salesDate}</td>
                                         <td style="font-weight: 500; color: ${item.type eq 'I' ? 'blue' : 'red'};">
                                             <c:choose>
-                                                <c:when test="${item.type eq 'I'}">+${item.salesAmount}</c:when>
-                                                <c:otherwise>- ${item.salesAmount}</c:otherwise>
+                                                <c:when test="${item.type eq 'I'}">+<fmt:formatNumber value="${item.salesAmount}" type="number"/></c:when>
+                                                <c:otherwise> -<fmt:formatNumber value="${item.salesAmount}" type="number"/></c:otherwise>
                                             </c:choose>
                                         </td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <h3>정보가 없습니다.</h3>
+                                <tr>
+                                    <td colspan="5" style="text-align:center;">정보가 없습니다.</td>
+                                </tr>
                             </c:otherwise>
                         </c:choose>
                         </tbody>
@@ -137,14 +132,16 @@
                     <%-- 검색 필터 영역 --%>
                     <div id="page-body-content-search-button">
 
-                        <form action="" class="search-form">
-                            <select class="input-box">
-                                <option value="전체" selected>전체</option>
-                                <option value="소득">소득</option>
-                                <option value="지출">지출</option>
+                        <form action="search.insum" class="search-form">
+                            <select name="type" class="input-box">
+                                <option value="" selected>전체</option>
+                                <option value="I">소득</option>
+                                <option value="O">지출</option>
                             </select>
-                            <input type="date" name="" id="" class="input-box">
-                            <input type="date" class="input-box">
+                            <input type="date" name="date1" class="input-box">
+                            <input type="date" name="date2" class="input-box">
+
+
                             <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
                             <button type="submit" class="input-box">
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
@@ -162,17 +159,18 @@
                     <%-- 매출 합계 조회 영역 --%>
                     <div id="table-header">
                         <div id="table-header-title" class="table-header">총 매출</div>
-                        <div id="table-header-price" class="table-header">10,000</div>
+                        <div id="table-header-price" class="table-header">${salesAmount}</div>
                         <div id="table-header-unit" class="table-header">(단위:만원)</div>
                     </div>
                 </div>
     </div>
 </div>
 <script>
+
+
     function goToDetail() {
         location.href = 'detail.in';
     }
-
 
 
 </script>

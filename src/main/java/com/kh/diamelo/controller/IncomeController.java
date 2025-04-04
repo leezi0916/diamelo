@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -39,24 +40,33 @@ public class IncomeController {
             @RequestParam(value = "date1", required = false) String startDate,
             @RequestParam(value = "date2", required = false) String endDate,
             @RequestParam(value = "company", required = false) String company,
-            Model model) {
+            @RequestParam(defaultValue = "1") int inpage, Model model) {
 
-        // type이 빈 문자열이면 null로 처리 (검색 조건에서 제외)
-        if (type != null && type.isEmpty()) {
-            type = null;
-        }
-
-        // 모든 값이 없으면 검색 막기
-        if ((startDate == null || startDate.isEmpty()) &&
+        if ((type == null || type.isEmpty()) &&
+                (startDate == null || startDate.isEmpty()) &&
                 (endDate == null || endDate.isEmpty()) &&
                 (company == null || company.isEmpty())) {
-            model.addAttribute("error", "검색 조건을 하나 이상 입력해주세요.");
-            return "erpPage/incomePage"; // 검색 페이지로 다시 이동
+            return "redirect:/income.erp";
         }
 
+        // 조건에 맞는 매출 수 구하기
+        int incomeCount = incomeService.selectSerachIncomeCount(type, startDate, endDate, company);
+        PageInfo pi = new PageInfo(incomeCount, inpage, 10, 10);
+
         // 검색 실행
-//        ArrayList<SalesDetails> incomeList = incomeService.selectIncomeList(type, startDate, endDate, company);
-//        model.addAttribute("list", incomeList);
+        ArrayList<SalesDetails> list = incomeService.selectSearchIncomeList(pi, type, startDate, endDate, company);
+        if (list.isEmpty()) {
+            model.addAttribute("message", "검색 결과가 없습니다.");
+        }
+        model.addAttribute("incomeCount", incomeCount);
+        model.addAttribute("pi", pi);
+        model.addAttribute("list", list);
+
+        // 검색 조건도 모델에 담아야 페이지 이동할 때 유지됨
+        model.addAttribute("type", type);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("company", company);
 
         return "erpPage/incomePage"; // 결과 페이지
     }
@@ -65,5 +75,35 @@ public class IncomeController {
     @GetMapping("detail.in")
     public String detailIncome() {
         return "erpPage/incomeDetailPage";
+    }
+
+
+//     매출 총합 검색하기
+    @GetMapping("/search.insum")
+    public String searchSumIncome(
+            @RequestParam(value = "type", required = false) String type,
+            @RequestParam(value = "date1", required = false) String startDate,
+            @RequestParam(value = "date2", required = false) String endDate, Model model) {
+
+        if ((type == null || type.isEmpty()) &&
+                (startDate == null || startDate.isEmpty()) &&
+                (endDate == null || endDate.isEmpty())) {
+            return "redirect:/income.erp";
+        }
+
+        int salesAmount = incomeService.searchIncomeSum(type, startDate, endDate);
+
+        if (salesAmount == 0) {
+            model.addAttribute("message", "검색 결과가 없습니다.");
+        }
+
+        model.addAttribute("salesAmount", salesAmount);
+
+        // 검색 조건도 모델에 담아야 페이지 이동할 때 유지됨
+        model.addAttribute("type", type);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+
+        return "erpPage/incomePage"; // 결과 페이지
     }
 }

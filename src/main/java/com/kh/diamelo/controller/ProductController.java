@@ -59,7 +59,7 @@ public class ProductController {
 
     @PostMapping("/create.pro")
     public String createProduct(@RequestParam("productNo") int productNo, @RequestParam("quantity") int quantity,
-                                RedirectAttributes redirectAttributes, HttpSession session) {
+                                RedirectAttributes redirectAttributes) {
         boolean success = productService.produceProduct(productNo, quantity);
 
         if (success) {
