@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
 
         // 원자재들의 현재 재고 조회
         ArrayList<Product> materialStocks = productMapper.getMaterialStock(productNo);
-
+/*
         // 원자재 재고를 Map으로 변환 (키: 원자재 번호, 값: 현재 재고)
         HashMap<Integer, Integer> stockMap = new HashMap<>();
         for (Product stock : materialStocks) {
@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
                 return false; // 재료 부족
             }
         }
-
+*/
         // 제품 생산 (완제품 재고 증가)
         productMapper.increaseProductStock(productNo, quantity);
 

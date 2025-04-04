@@ -46,12 +46,12 @@
     <div class="main-area">
         <jsp:include page="../common/erp/header.jsp"/>
 
-<
-    <!-- 페이지 본문 -->onclick="location.href='empDetail.erp?uId=${u.userId}'"
+
+    <!-- 페이지 본문 -->
     <div class="page-body">
       <div class="page-body-header">
         <div class="page-body-header-text">
-          <button id="proBtn" onclick="location.href='inventory.erp.?uId=2">
+          <button id="proBtn" onclick="location.href=''">
               제품 (${pCount})
           </button>
         </div>
