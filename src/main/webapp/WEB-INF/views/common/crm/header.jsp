@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -7,8 +8,8 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="/resources/css/crm/header.css" />
-        <link rel="stylesheet" href="/resources/css/default.css" />
+        <link rel="stylesheet" href="/css/crm/header.css" />
+        <link rel="stylesheet" href="/css/default.css" />
 
         <!-- CSS -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
@@ -25,7 +26,7 @@
     <body>
         <div id="header">
             <div id="logo">
-                <img src="/resources/image/etc/logo.png" alt="로고이미지" onclick="location.href='/'" />
+                <img src="/image/etc/logo.png" alt="로고이미지" onclick="location.href='/'" />
             </div>
             <div id="category">
                 <div>
@@ -51,7 +52,7 @@
                             viewBox="0 0 40 40"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            onclick="location.href='${pageContext.servletContext.contextPath}'"
+                            onclick="location.href='myPageForm.me'"
                         >
                             <g clip-path="url(#clip0_38_5769)">
                                 <path

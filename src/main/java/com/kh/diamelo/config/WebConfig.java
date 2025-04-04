@@ -14,8 +14,22 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/static/**", "/error/**");
 
+//        registry.addInterceptor(new LoginInterceptor())
+//                .addPathPatterns("/","/myPage.me")
+//                .excludePathPatterns("/static/**", "/error/**");
+
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/")
-                .excludePathPatterns("/static/**", "/error/**");
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/css/**",
+                        "/image/**",
+                        "/uploadfile/**",
+                        "/default.png",
+                        "/loginForm.me",
+                        "/login.me",
+                        "/logoutSuccess.me",
+                        "/signUpEnrollForm.me",
+                        "/signUp.me"
+                );
     }
 }

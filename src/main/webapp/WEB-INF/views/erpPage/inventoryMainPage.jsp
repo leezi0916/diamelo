@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Diamelo</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/inventoryMainPageStyle.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/inventoryMainPageStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 
       <div class="modal-content-right">
         <div class="image-area">
-          <img src="/resources/image/productImgae/product1.png" alt="상품">
+          <img src="/image/productImgae/product1.png" alt="상품">
         </div>
       </div>
     </div>
@@ -110,12 +110,12 @@
             <td>남성용 비비크림</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -128,12 +128,12 @@
             <td>SPA+50 자외선 차단</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -146,12 +146,12 @@
             <td>피부보습 올인원 로션</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -164,12 +164,12 @@
             <td>밤에 케어하는 스킨</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -182,12 +182,12 @@
             <td>차은우 스킨</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -242,12 +242,12 @@
             <td>~ 성분</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
 
@@ -262,12 +262,12 @@
             <td>~ 성분</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -279,12 +279,12 @@
             <td>~ 성분</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -296,12 +296,12 @@
             <td>~ 성분</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>
@@ -313,12 +313,12 @@
             <td>~ 성분</td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                <img src="/image/update_icon.png" alt="수정" width="20">
               </button>
             </td>
             <td>
               <button class="icon-button">
-                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                <img src="/image/delete_icon.png" alt="삭제" width="20">
               </button>
             </td>
           </tr>

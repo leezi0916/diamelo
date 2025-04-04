@@ -13,7 +13,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
 
         if(session.getAttribute("loginUser") != null) {
-            return true; // 계속 실행
+            return true;
         } else {
             session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
             response.sendRedirect("/loginForm.me");
