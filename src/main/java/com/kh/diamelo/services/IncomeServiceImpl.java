@@ -27,4 +27,21 @@ public class IncomeServiceImpl implements IncomeService {
         RowBounds rowBounds = new RowBounds (offset, pi.getBoardLimit());
         return incomeMapper.selectIncomeList(rowBounds);
     }
+
+    @Override
+    public int selectSerachIncomeCount(String type, String startDate, String endDate, String company) {
+        return incomeMapper.selectSerachIncomeCount(type, startDate, endDate, company);
+    }
+
+    @Override
+    public ArrayList<SalesDetails> selectSearchIncomeList(PageInfo pi, String type, String startDate, String endDate, String company) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds (offset, pi.getBoardLimit());
+        return incomeMapper.selectSearchIncomeList(rowBounds, type, startDate, endDate, company);
+    }
+
+    @Override
+    public int searchIncomeSum(String type, String startDate, String endDate, String company) {
+        return incomeMapper.searchIncomeSum(type, startDate, endDate, company);
+    }
 }
