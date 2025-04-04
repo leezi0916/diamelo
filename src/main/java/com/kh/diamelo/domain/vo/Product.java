@@ -27,4 +27,9 @@ public class Product {
 
     private Date proEnrollDate;
 
+    private int amount;
+    private int stock;
+
+
+
 }
