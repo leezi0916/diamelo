@@ -13,7 +13,7 @@ public class PageInfo {
     private int listCount; // 현재 총 게시글 수
     private int currentPage; // 현재 페이지(사용자가 요청한 페이지)
     private int pageLimit; // 하단의 보여질 페이징바의 수
-    private int boardLimit; // 한 페이지내에 보여질 게시글 최대 수
+    private int boardLimit ; // 한 페이지내에 보여질 게시글 최대 수
     // 위 4개의 값을 기준으로 아래 3개의 값을 계산
 
     private int maxPage; // 가장 마지막 페이지(총 페이지수)
@@ -21,6 +21,7 @@ public class PageInfo {
     private int endPage; // 하단의 보여질 페이징바의 끝 수
 
     public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
+        super();
         this.listCount = listCount;
         this.currentPage = currentPage;
         this.pageLimit = pageLimit;
