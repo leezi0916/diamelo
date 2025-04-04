@@ -41,45 +41,41 @@
                 </div>
             </div>
 
-            <form class="page-body-content" action="insert.pro" method="post">
+            <form class="page-body-content" action="insert.pro" method="post" enctype="multipart/form-data">
                 <div id="ingrediant_area">
                     <div id="ingre_upper">
                         <div id="ingre_upper_left">
                             <div class="input-boxs">
-
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" placeholder="NAME"></input>
+                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
                                 </div>
-
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="text" placeholder="DATE"></input>
+                                    <input class="input-box" type="date" name="proDate" placeholder="DATE">
                                 </div>
                             </div>
                         </div>
 
                         <div id="ingre_upper_right">
                             <div class="input-boxs">
-
                                 <div class="input-name">
                                     <p>비고</p>
-                                    <input class="input-box" id="memo" type="text" placeholder="MEMO"></input>
+                                    <input class="input-box" id="memo" name="proDetail" type="text" placeholder="MEMO">
                                 </div>
-
                                 <div class="input-name">
                                     <p>가격</p>
-                                    <input class="input-box" type="text" placeholder="PRICE"></input>
-
+                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
                                     <div id="category">
-                                        <select name="category" class="select">
+                                        <select name="proCategoryNo" class="select">
                                             <option disabled selected>분류</option>
-                                            <option value="apple">스킨</option>
-                                            <option value="orange">로션</option>
-                                            <option value="grape">선크림</option>
-                                            <option value="melon">미용</option>
+                                            <option value="1">스킨</option>
+                                            <option value="2">로션</option>
+                                            <option value="3">선크림</option>
+                                            <option value="4">수분크림</option>
+                                            <option value="5">앰플</option>
                                         </select>
                                     </div>
                                 </div>
@@ -99,7 +95,7 @@
                                     <thead>
                                     <tr>
                                         <th>재료명</th>
-                                        <th id="amount_th">수량</th>
+                                        <th id="amount_th">수량(단위:g)</th>
                                         <th>가격</th>
                                         <th id="button_th">
                                             <button id="add_button" type="button" onclick="addRow()">+ADD</button>
@@ -115,7 +111,7 @@
 
                             <div id="ingre_image">
                                 <div id="insert_image">
-                                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" style="display: none;">
                                 </div>
                                 <div id="text">재료 이미지</div>
                             </div>
@@ -127,7 +123,7 @@
 
 
                     <div id="ingre_lower_button">
-                        <button class="button" type="submit">+재료등록</button>
+                        <button class="button" type="submit">+제품등록</button>
                         <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                     </div>
                 </div>
@@ -141,19 +137,18 @@
         const insertImageDiv = document.getElementById("insert_image");
         const imageUploadInput = document.getElementById("imageUpload");
 
-        // 클릭 이벤트 로그 확인
         insertImageDiv.addEventListener("click", function() {
-            console.log("insert_image 클릭됨");  // ✅ 디버깅용
+            console.log("insert_image 클릭됨");
             imageUploadInput.click();
         });
 
         imageUploadInput.addEventListener("change", function(event) {
             const file = event.target.files[0];
             if (file) {
-                console.log("파일 선택됨:", file.name);  // ✅ 디버깅용
+                console.log("파일 선택됨:", file.name);
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    console.log("이미지 로딩 완료");  // ✅ 디버깅용
+                    console.log("이미지 로딩 완료");
                     insertImageDiv.style.backgroundImage = `url(${e.target.result})`;
                     insertImageDiv.style.backgroundSize = "cover";
                     insertImageDiv.style.backgroundPosition = "center";
@@ -163,21 +158,31 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // 폼 제출 시 콘솔에 입력값 확인
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();  // ✅ 폼 제출 막기
+
+            const formData = new FormData(this);
+
+            console.log("📌 [폼 데이터 배열 변환]", [...formData.entries()]);
+            console.log("📌 [선택한 파일]", formData.get("imageUpload"));
+
+            // 실제 제출하려면 아래 코드 주석 해제
+            // event.target.submit();
+        });
     });
 
-
-
-
-
+    // 재료 추가/삭제 기능
     function addRow() {
         const table = document.getElementById("dynamicTable").getElementsByTagName('tbody')[0];
 
         const newRow = table.insertRow();
         newRow.innerHTML = `
-        <td><input type="text" placeholder="재료명" class="table-input"></td>
-        <td><input type="number" placeholder="수량" class="table-input"></td>
-        <td><input type="text" placeholder="PRICE" class="table-input"></td>
-        <td><button type="button" onclick="removeRow(this)" id="delete-btn" class="button">삭제</button></td>
+        <td><input type="text" name="proName[]" placeholder="재료명" class="table-input"></td>
+        <td><input type="number" name="proInventStock[]" placeholder="수량" class="table-input"></td>
+        <td><input type="text" name="proPrice[]" placeholder="가격" class="table-input"></td>
+        <td><button type="button" id="delete-btn" onclick="removeRow(this)">삭제</button></td>
     `;
 
         updateScroll();
@@ -199,9 +204,8 @@
             tableContainer.style.overflowY = "hidden";
         }
     }
-
-
 </script>
+
 
 </body>
 

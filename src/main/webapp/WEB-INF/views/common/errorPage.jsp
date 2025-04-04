@@ -7,7 +7,6 @@
         <title>ErrorPage</title>
     </head>
     <body>
-
         <br />
         <div align="center">
             <img
@@ -17,6 +16,5 @@
             <h1 style="font-weight: bold; color: red">${errorMsg}</h1>
         </div>
         <br />
-
     </body>
 </html>

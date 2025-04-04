@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class Product_Inventory {
+public class ProductInventory {
     private int proInvenNo; //제품 재고 번호
     private int proNo; //제품 번호
     private BigDecimal proInventStock; //제품 재고 수량
+
+
 }

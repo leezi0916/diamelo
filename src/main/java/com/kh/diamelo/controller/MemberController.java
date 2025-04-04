@@ -164,7 +164,7 @@ public class MemberController {
 
         // 세션 생성
         session = request.getSession(true);
-        
+
         //세션에 메세지 담기
         session.setAttribute("alertMsg", alertMsg);
 

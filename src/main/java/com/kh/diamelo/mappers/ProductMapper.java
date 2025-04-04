@@ -2,14 +2,17 @@ package com.kh.diamelo.mappers;
 
 
 import com.kh.diamelo.domain.vo.Product;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.Map;
 
+
 @Mapper
 public interface ProductMapper {
+
 
     ArrayList<Product> getProductList();
 
@@ -24,4 +27,5 @@ public interface ProductMapper {
     //재료 재고 업데이트
     void increaseProductStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
     void decreaseMaterialStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
+
 }

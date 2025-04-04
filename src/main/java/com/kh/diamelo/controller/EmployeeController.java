@@ -42,9 +42,9 @@ public class EmployeeController {
     }
 
     @GetMapping("empList.erp")
-    public String selectUserInfoList(@RequestParam(defaultValue = "1") int cpage, Model model) {
+    public String selectUserInfoList(@RequestParam(defaultValue = "1") int epage, Model model) {
         int UserCount = employeeService.selectUserInfoCount();
-        PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
+        PageInfo pi = new PageInfo(UserCount, epage, 10, 10);
         ArrayList<User_Info> list = employeeService.selectUserInfoList(pi);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
@@ -52,9 +52,9 @@ public class EmployeeController {
     }
 
     @GetMapping("empAdminList.erp")
-    public String selectAdminList(@RequestParam(defaultValue = "1") int cpage, Model model) {
+    public String selectAdminList(@RequestParam(defaultValue = "1") int epage, Model model) {
         int UserCount = employeeService.selectAdminUserInfoCount();
-        PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
+        PageInfo pi = new PageInfo(UserCount, epage, 10, 10);
         ArrayList<User_Info> list = employeeService.selectAdminList(pi);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);

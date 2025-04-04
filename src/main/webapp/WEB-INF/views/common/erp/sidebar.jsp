@@ -132,7 +132,7 @@
                     <div>제작 관리</div>
                 </div>
 
-                <div class="category" onclick="location.href='buy.erp'">
+                <div class="category" onclick="location.href='buyList.erp'">
                     <div>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
