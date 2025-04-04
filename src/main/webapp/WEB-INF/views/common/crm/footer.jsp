@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <link rel="stylesheet" href="/resources/css/crm/footer.css" />
-        <link rel="stylesheet" href="/resources/css/default.css" />
+        <link rel="stylesheet" href="/css/crm/footer.css" />
+        <link rel="stylesheet" href="/css/default.css" />
 
         <title>Title</title>
     </head>
@@ -31,7 +32,7 @@
             <div id="footer_2">
                 <div>
                     <img
-                        src="/resources/image/etc/logo.png"
+                        src="/image/etc/logo.png"
                         alt="로고이미지"
                         onclick="location.href='${pageContext.servletContext.contextPath}'"
                     />

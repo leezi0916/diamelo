@@ -5,9 +5,11 @@
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 스타일 css 파일들 --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/materialBuyPageStyle.css"/>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/materialBuyPageStyle.css" />
+
 </head>
 <body>
 <div class="layout-wrapper">
@@ -87,6 +89,7 @@
                     </button>
                 </div>
             </div>
+
         </form>
     </div>
 </div>

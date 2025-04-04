@@ -1,9 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/incomePage.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/incomePage.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
     <title>Title</title>
 </head>
 <body>
@@ -15,12 +16,14 @@
     <div class="main-area">
         <jsp:include page="../common/erp/header.jsp"/>
 
+
+
         <!-- 페이지 본문 -->
         <div class="page-body">
             <%-- 페이지 제목 영역 --%>
             <div class="page-body-header">
                 <div id="page-body-header-text">
-                    매출내역(5)
+                    매출내역 (<c:out value="${incomeCount}"/>)
                 </div>
             </div>
             <%-- 검색 필터 + 테이블 리스트 영역 --%>
@@ -28,15 +31,15 @@
                 <%-- 검색 필터 영역 --%>
                 <div id="page-body-content-search-button">
 
-                    <form action="" class="search-form">
-                        <select class="input-box">
-                            <option value="전체" selected>전체</option>
-                            <option value="소득">소득</option>
-                            <option value="지출">지출</option>
+                    <form action="search.in" class="search-form">
+                        <select class="input-box" name="type">
+                            <option value="" selected>전체</option>
+                            <option value="I">소득</option>
+                            <option value="O">지출</option>
                         </select>
-                        <input type="date" name="" id="" class="input-box">
-                        <input type="date" class="input-box">
-                        <input type="text" class="input-box" placeholder="거래처">
+                        <input type="date" name="date1" class="input-box">
+                        <input type="date" name="date2" class="input-box">
+                        <input type="text" name="company" class="input-box" placeholder="거래처">
                         <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
                         <button type="submit" class="input-box">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
@@ -70,126 +73,65 @@
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <%-- 반복 가능한 판매 내역 행 --%>
-                        <tr class="table-detail" onclick="goToDetail()">
-                            <td>5</td>
-                            <td>올리브영</td>
-                            <td>소득</td>
-                            <td>2025/03/02</td>
-                            <td style="color: blue">1,750,000</td>
-                        </tr>
-
-                        <tr class="table-detail" onclick="goToDetail()">
-                            <td>4</td>
-                            <td>아리따움</td>
-                            <td>소득</td>
-                            <td>2025/03/02</td>
-                            <td style="color: blue">6,000,000</td>
-                        </tr>
-
-                        <tr class="table-detail" onclick="goToDetail()">
-                            <td>3</td>
-                            <td>올리브영</td>
-                            <td>소득</td>
-                            <td>2025/03/02</td>
-                            <td style="color: blue">4,500,000</td>
-                        </tr>
-
-                        <tr class="table-detail" onclick="goToDetail()">
-                            <td>2</td>
-                            <td>A공장</td>
-                            <td>지출</td>
-                            <td>2025/03/02</td>
-                            <td style="color: red">6,000,000</td>
-                        </tr>
-
-                        <tr class="table-detail" onclick="goToDetail()">
-                            <td>1</td>
-                            <td>B공장</td>
-                            <td>지출</td>
-                            <td>2025/03/02</td>
-                            <td style="color: red">6,000,000</td>
-                        </tr>
-
+                        </tbody>
+                        <c:choose>
+                            <c:when test="${not empty list}">
+                                <c:forEach var="item" items="${list}">
+                                    <tr onclick="location.href='detail.in?sno='${item.salNo}">
+                                        <td>${item.salNo}</td>
+                                        <td>${item.companyName}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${item.type eq 'I'}">소득</c:when>
+                                                <c:otherwise>지출</c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>${item.salesDate}</td>
+                                        <td style="font-weight: 500; color: ${item.type eq 'I' ? 'blue' : 'red'};">
+                                            <c:choose>
+                                                <c:when test="${item.type eq 'I'}">+${item.salesAmount}</c:when>
+                                                <c:otherwise>- ${item.salesAmount}</c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>정보가 없습니다.</h3>
+                            </c:otherwise>
+                        </c:choose>
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
-                <div id="page-body-page-div">
-                    <div>
-                        <div class="page-body-page-div-start">
-                            <p>이전</p>
-                        </div>
-                        <div>
-                            <p>1</p>
-                        </div>
-                        <div>
-                            <p>2</p>
-                        </div>
-                        <div>
-                            <p>3</p>
-                        </div>
-                        <div>
-                            <p>4</p>
-                        </div>
-                        <div>
-                            <p>5</p>
-                        </div>
-                        <div>
-                            <p>6</p>
-                        </div>
-                        <div>
-                            <p>7</p>
-                        </div>
-                        <div>
-                            <p>8</p>
-                        </div>
-                        <div>
-                            <p>9</p>
-                        </div>
-                        <div>
-                            <p>10</p>
-                        </div>
-                        <div class="page-body-page-div-end">
-                            <p>다음</p>
-                        </div>
-                    </div>
-            <%--  pagingArea --%>
-<%--            <div id="pagingArea">--%>
-<%--                <ul class="pagination">--%>
+                <div id="pagingArea">
+                    <ul class="pagination">
+                        <c:choose>
+                            <c:when test="${ pi.currentPage eq 1 }">
+                                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="income.erp?inpage=${pi.currentPage - 1}">이전</a></li>
+                            </c:otherwise>
+                        </c:choose>
 
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${ pi.currentPage eq 1 }">--%>
-<%--                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>--%>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}">Previous</a>--%>
-<%--                            </li>--%>
-<%--                        </c:otherwise>--%>
-<%--                    </c:choose>--%>
+                        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                            <li class="page-item"><a class="page-link" href="income.erp?inpage=${p}">${p}</a></li>
+                        </c:forEach>
 
-<%--                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">--%>
-<%--                        <li class="page-item"><a class="page-link" href="list.bo?cpage=${p}">${p}</a></li>--%>
-<%--                    </c:forEach>--%>
-
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${ pi.currentPage eq pi.maxPage }">--%>
-<%--                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>--%>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            <li class="page-item"><a class="page-link"--%>
-<%--                                                     href="list.bo?cpage=${pi.currentPage + 1}">Next</a></li>--%>
-<%--                        </c:otherwise>--%>
-<%--                    </c:choose>--%>
-
-<%--                </ul>--%>
-<%--            </div>--%>
+                        <c:choose>
+                            <c:when test="${ pi.currentPage eq pi.maxPage }">
+                                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="income.erp?inpage=${pi.currentPage + 1}">다음</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
 
 
-        </div>
                 <%-- 검색 필터 + 테이블 리스트 영역 --%>
                 <div class="page-body-content2">
                     <%-- 검색 필터 영역 --%>
@@ -230,6 +172,9 @@
     function goToDetail() {
         location.href = 'detail.in';
     }
+
+
+
 </script>
 </body>
 </html>
