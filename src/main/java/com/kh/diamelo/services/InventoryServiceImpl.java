@@ -20,17 +20,6 @@ public class InventoryServiceImpl implements InventoryService {
 
     private final InventoryMapper inventoryMapper;
 
-    /*
-    @Override
-    public int countProductsByType(String isProduct) {
-        return productMapper.countByIsProduct(isProduct);
-    }
-
-    @Override
-    public List<Product> getProductsByType(String isProduct) {
-        return productMapper.findByIsProduct(isProduct);
-    }
-    */
 
 
     //제품 갯수
@@ -52,6 +41,14 @@ public class InventoryServiceImpl implements InventoryService {
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 
         return inventoryMapper.selectProductList(rowBounds);
+    }
+
+    @Override
+    public ArrayList<Product> selectMaterialList(PageInfo pi) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+        return inventoryMapper.selectMaterialList(rowBounds);
     }
 
     @Override

@@ -15,20 +15,24 @@ import java.util.ArrayList;
 
 public interface InventoryService {
 
+
+
         int selectProductCount();
 
         int selectMaterialCount();
 
         ArrayList<Product> selectProductList(PageInfo pi);
+        ArrayList<Product> selectMaterialList(PageInfo pi);
 
         int insertIngrediant(Product product);
 
 
 
 
-    /*
-    int countProductsByType(String isProduct);
 
-    public List<Product> getProductsByType(String isProduct);
+
+    /*
+        int countProductsByType(String isProduct);
+        public List<Product> getProductsByType(String isProduct);
      */
 }

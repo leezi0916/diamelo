@@ -13,11 +13,15 @@ import java.util.List;
 @Mapper
 public interface InventoryMapper {
 
+
+
     int selectProductCount();
 
     int selectMaterialCount();
 
     ArrayList<Product> selectProductList(RowBounds rowBounds);
+
+    ArrayList<Product> selectMaterialList(RowBounds rowBounds);
 
     int insertIngrediant(Product product);
 

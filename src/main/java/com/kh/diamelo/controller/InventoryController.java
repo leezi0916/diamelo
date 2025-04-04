@@ -3,6 +3,7 @@ package com.kh.diamelo.controller;
 import com.kh.diamelo.domain.vo.Board;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.domain.vo.User_Info;
 import com.kh.diamelo.services.InventoryService;
 import com.kh.diamelo.services.ProductService;
 import com.kh.diamelo.utils.Template;
@@ -30,7 +31,12 @@ public class InventoryController {
 
     // 재고관리 페이지로 가기
     @GetMapping("inv.erp")
-    public String inventory(@RequestParam(defaultValue = "1") int cpage, Model model) {
+
+    public String inventory(@RequestParam(value = "cpage", defaultValue = "1") int cpage,
+                            @RequestParam(value = "tab", defaultValue = "product") String tab,
+                            Model model) {
+
+
 
         int productCount = inventoryService.selectProductCount();
         model.addAttribute("pCount",productCount);
@@ -40,22 +46,31 @@ public class InventoryController {
         model.addAttribute("mCount",materialCount);
         System.out.println("materialCount: " + materialCount);
 
-        PageInfo pi = new PageInfo((productCount+materialCount), cpage, 10, 10);
+        // 현재 탭에 따라 전체 개수 설정
+        int totalCount = (tab.equals("product")) ? productCount : materialCount;
+
+        PageInfo pi = new PageInfo(totalCount, cpage, 10, 10);
         System.out.println("pi: " + pi);
-        ArrayList<Product> list = inventoryService.selectProductList(pi);
+
+        ArrayList<Product> list ;
+        if (tab.equals("product")) {
+            list = inventoryService.selectProductList(pi); // 제품 리스트 조회
+        } else {
+            list = inventoryService.selectMaterialList(pi); // 재료 리스트 조회
+        }
 
         System.out.println("list: " + list);
 
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
+        model.addAttribute("tab", tab);  // 현재 탭 정보 추가
+    /*
+        int finishedProductCount = inventoryService.countProductsByType("Y"); // 완제품 개수
+        int materialProductCount = inventoryService.countProductsByType("N"); // 재료 개수
 
 
-        /*
-        int finishedProductCount = productService.countProductsByType("Y"); // 완제품 개수
-        int materialProductCount = productService.countProductsByType("N"); // 재료 개수
-
-        List<Product> finishedProducts = productService.getProductsByType("Y"); // 완제품 목록
-        List<Product> materialProducts = productService.getProductsByType("N"); // 재료 목록
+        List<Product> finishedProducts = inventoryService.getProductsByType("Y"); // 완제품 목록
+        List<Product> materialProducts = inventoryService.getProductsByType("N"); // 재료 목록
 
 
         model.addAttribute("finishedCount", finishedProductCount);
@@ -65,7 +80,23 @@ public class InventoryController {
 
         System.out.println("완제품 목록: " + finishedProducts);
         System.out.println("재료 목록: " + materialProducts);
+       */
+        /*
+        PageInfo pi = new PageInfo((productCount+materialCount), cpage, 10, 5);
+        System.out.println("pi: " + pi);
+        ArrayList<Product> list = inventoryService.selectProductList(pi);
+
+        System.out.println("list: " + list);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
         */
+
+
+
+
+
+
 
 
         return "erpPage/inventoryMainPage";
@@ -77,16 +108,30 @@ public class InventoryController {
 
     // ------------ 제품 -----------------
 
+
+
     //제품조회
-    @GetMapping("select.pro")
+    @GetMapping("search.pro")
     public String selectProduct() {
         return null;
     }
 
     // 제품등록 페이지로 가기
-    @GetMapping("proAdd.erp")
+    @GetMapping("add.pro")
     public String proAddPage() {
         return "erpPage/insertProductPage";
+    }
+
+    // 재료 수정버튼 클릭시
+    @GetMapping("update.pro")
+    public String proUpdatePage() {
+        return "erpPage/updateProductPage";
+    }
+
+    // 제품 삭제버튼 클릭시
+    @GetMapping("delete.pro")
+    public String deleteProduct() {
+        return null;
     }
 
     // 제품등록 버튼 클릭시 (* redirect 해야함)
@@ -100,16 +145,30 @@ public class InventoryController {
 
     // ------------ 재료 -----------------
 
+
+
     //재료조회
-    @GetMapping("select.ing")
-    public String selectIngredient() {
-        return null;
+    @GetMapping("search.ing")
+    public String searchIngrediant(@RequestParam(defaultValue = "1") int cpage, String proName, Product proNo, Model model) {
+       return null;
     }
 
     // 재료등록 페이지로 가기
-    @GetMapping("ingAdd.erp")
+    @GetMapping("add.ing")
     public String ingAddPage() {
         return "erpPage/insertIngredientPage";
+    }
+
+    // 재료 수정버튼 클릭시
+    @GetMapping("update.ing")
+    public String ingUpdatePage() {
+        return "erpPage/updateIngredientPage";
+    }
+
+    // 재료 삭제버튼 클릭시
+    @GetMapping("delete.ing")
+    public String ingDeletePage() {
+        return null;
     }
 
     // 재료등록 버튼 클릭시 (* redirect 해야함)

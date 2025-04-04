@@ -111,9 +111,10 @@
 
                             <div id="ingre_image">
                                 <div id="insert_image">
-                                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" style="display: none;">
+                                    <input type="file" name="upfile" accept="image/*" onchange="changeImage(this)"></input>
+                                    <div id="image_preview"></div> <!-- ✅ 미리보기 이미지 영역 추가 -->
                                 </div>
-                                <div id="text">재료 이미지</div>
+                                재료 이미지
                             </div>
 
                         </div>
@@ -133,31 +134,23 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const insertImageDiv = document.getElementById("insert_image");
-        const imageUploadInput = document.getElementById("imageUpload");
+    <%--  제품 사진 추가 및 삭제 --%>
 
-        insertImageDiv.addEventListener("click", function() {
-            console.log("insert_image 클릭됨");
-            imageUploadInput.click();
-        });
+    function changeImage(input) {
+        let file = input.files[0];
 
-        imageUploadInput.addEventListener("change", function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                console.log("파일 선택됨:", file.name);
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    console.log("이미지 로딩 완료");
-                    insertImageDiv.style.backgroundImage = `url(${e.target.result})`;
-                    insertImageDiv.style.backgroundSize = "cover";
-                    insertImageDiv.style.backgroundPosition = "center";
-                    insertImageDiv.style.backgroundRepeat = "no-repeat";
-                    insertImageDiv.textContent = "";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+        if (file) {
+            let img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.style.width = "100%";
+            img.style.height = "100%";
+            img.style.objectFit = "cover";
+
+            let container = document.getElementById("image_preview"); // ✅ 미리보기 영역으로 변경
+            container.innerHTML = ""; // 기존 이미지 삭제
+            container.appendChild(img); // 새 이미지 추가
+        }
+    }
 
         // 폼 제출 시 콘솔에 입력값 확인
         document.querySelector("form").addEventListener("submit", function(event) {
@@ -170,7 +163,7 @@
 
             // 실제 제출하려면 아래 코드 주석 해제
             // event.target.submit();
-        });
+
     });
 
     // 재료 추가/삭제 기능

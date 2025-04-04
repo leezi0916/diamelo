@@ -28,11 +28,25 @@
     </select>
 
     <select id="selectProductList" resultMap="productResult">
-        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE, B.PRO_INVENT_STOCK, C.PRO_CATEGORY ,A.IS_PRODUCT
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT
         FROM PRODUCT A
-        INNER JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
         INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
         WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'Y'
+    </select>
+
+    <select id="selectMaterialList" resultMap="productResult">
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT
+        FROM PRODUCT A
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'N'
     </select>
 
     <!--        <select id="countByIsProduct" resultType="int">-->
@@ -76,5 +90,13 @@
         'N'
         )
     </insert>
+
+
+
+
+
+
+
+
 
 </mapper>
