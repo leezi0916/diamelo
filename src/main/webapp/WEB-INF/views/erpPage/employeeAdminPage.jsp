@@ -164,6 +164,33 @@
           <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기" onclick="location.href='empList.erp'">
         </div>
       </div>
+            <%-- 페이지바 --%>
+        <div id="pagingArea">
+          <ul class="pagination">
+            <c:choose>
+              <c:when test="${ pi.currentPage eq 1 }">
+                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empAdminList.erp?epage=${pi.currentPage - 1}">이전</a></li>
+              </c:otherwise>
+            </c:choose>
+
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+              <li class="page-item"><a class="page-link" href="empAdminList.erp?epage=${p}">${p}</a></li>
+            </c:forEach>
+
+            <c:choose>
+              <c:when test="${ pi.currentPage eq pi.maxPage }">
+                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empAdminList.erp?epage=${pi.currentPage + 1}">다음</a></li>
+              </c:otherwise>
+            </c:choose>
+          </ul>
+        </div>
+
     </div>
   </div>
 </div>

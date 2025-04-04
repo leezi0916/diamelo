@@ -80,7 +80,6 @@ th{
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .searchBtn{
@@ -93,8 +92,8 @@ th{
     gap: 10%;
     display: flex;
     align-items: center;
-    padding-left: 5%;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    justify-content: center;
 }
 /*버튼 감싸는 영역(가운데 정렬 + 여백)*/
 #page-body-button-div{
@@ -148,6 +147,7 @@ th{
     text-align: center;
 
 }
+
 /* 페이징처리 div */
 #page-body-page-div{
     width: 100%;
@@ -156,6 +156,8 @@ th{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
 
 }
 #page-body-page-div>div{

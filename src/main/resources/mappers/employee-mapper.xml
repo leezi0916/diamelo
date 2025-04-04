@@ -60,6 +60,7 @@
         JOIN JOB J USING(JOB_CODE)
         WHERE USER_DELETED = 'N'
         AND JOB_CODE != 'J5'
+        AND JOB_CODE != 'J0'
         ORDER BY STATUS ASC))
     </select>
 

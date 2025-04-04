@@ -25,14 +25,14 @@ public class ProductController {
         ArrayList<Product> productList = productService.getProductList();
 
         // 로그 추가
-        System.out.println("불러온 제품 개수: " + productList.size());
+//        System.out.println("불러온 제품 개수: " + productList.size());
 
         // productList가 null인지 확인
         if (productList == null) {
-            System.out.println("⚠productList가 null입니다!");
+//            System.out.println("⚠productList가 null입니다!");
         } else {
             for (Product p : productList) {
-                System.out.println("제품 정보: " + p); // 전체 데이터 출력
+//                System.out.println("제품 정보: " + p); // 전체 데이터 출력
             }
         }
 
