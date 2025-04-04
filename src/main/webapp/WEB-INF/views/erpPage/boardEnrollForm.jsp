@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Diamelo</title>
-  <link rel="stylesheet" href="/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="/resources/css/default.css" />
-  <link rel="stylesheet" href="/resources/css/erp/boardEnrollStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/boardEnrollStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -34,8 +34,8 @@
             <div id="category">
               <div id="category0"><p>*</p>게시글 분류</div>
               <div id="category1">
-                <select name="type">
-                  <option selected disabled>분류</option>
+                <select id="selectOption" name="type">
+                  <option selected disabled value="0">분류</option>
                   <option value="1">공지</option>
                   <option value="2">문의</option>
                 </select>
@@ -59,15 +59,23 @@
 
         <div id="footer">
           <div id="footer-wrap">
-            <button id="addBtn" type="submit">게시글 등록</button>
+            <button id="addBtn" type="submit" onclick="insertBoard()">게시글 등록</button>
             <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로가기</button>
           </div>
         </div>
       </form>
-
     </div>
   </div>
 </div>
 
+<script>
+    const select = document.getElementById("selectOption").value;
+
+
+    function insertBoard(){
+
+    }
+console.log(value);
+</script>
 </body>
 </html>

@@ -98,7 +98,7 @@ public class BoardController {
         }
     }
 
-    @PostMapping("select.bo")
+    @GetMapping("select.bo")
     public String boardSelect(@RequestParam(defaultValue = "1")int bpage, Model model, Board board
             ,@RequestParam(value="type")int type, @RequestParam(value = "title")String title, @RequestParam(value = "userId")String userId) {
         int boardCount = boardService.selectBoardCount();
