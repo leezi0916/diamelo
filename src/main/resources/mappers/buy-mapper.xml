@@ -13,7 +13,7 @@
         <result column="IS_PRODUCT" property="isProduct"/>
     </resultMap>
 
-    <resultMap id="SalesDetailsResult" type="Sales_Details">
+    <resultMap id="SalesDetailsResult" type="SalesDetails">
         <result column="SAL_NO" property="salNo"/>
         <result column="USER_ID" property="userId"/>
         <result column="SALES_DATE" property="salesDate"/>
@@ -31,7 +31,7 @@
 
 
 
-    <select id="selectBuyList" parameterType="Sales_Details" resultMap="SalesDetailsResult">
+    <select id="selectBuyList" parameterType="SalesDetails" resultMap="SalesDetailsResult">
         SELECT RNUM, SAL_NO, USER_NAME, SALES_DATE
         FROM (SELECT ROWNUM AS RNUM, SAL_NO, USER_NAME, SALES_DATE
         FROM (SELECT  SAL_NO, USER_NAME, SALES_DATE
