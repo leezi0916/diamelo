@@ -77,18 +77,25 @@
 
     <select id="searchIncomeSum" resultType="_int">
         SELECT SUM(SALES_AMOUNT)
-        FROM SALES_DETAILS
+        FROM SALES_DETAILS s
+        JOIN USER_INFO u ON s.USER_ID = u.USER_ID
         WHERE 1=1
         <if test="type != null and type != ''">
-            AND TYPE = #{type}
+            AND s.TYPE = #{type}
+        </if>
+        <if test="type != null and type != ''">
+            AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= #{startDate}
         </if>
         <if test="endDate != null and endDate != ''">
-            AND SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= #{endDate}
         </if>
-        AND STATUS = 'Y'
+        <if test="company != null and company != ''">
+            AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+        AND s.STATUS = 'Y'
     </select>
 
 </mapper>

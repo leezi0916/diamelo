@@ -19,5 +19,5 @@ public interface IncomeService {
     ArrayList<SalesDetails> selectSearchIncomeList(PageInfo pi, String type, String startDate, String endDate, String company);
 
     //조건에 맞는 매출 리스트 보여주기
-    int searchIncomeSum(String type, String startDate, String endDate);
+    int searchIncomeSum(String type, String startDate, String endDate, String company);
 }

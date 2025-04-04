@@ -41,7 +41,7 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     @Override
-    public int searchIncomeSum(String type, String startDate, String endDate) {
-        return incomeMapper.searchIncomeSum(type, startDate, endDate);
+    public int searchIncomeSum(String type, String startDate, String endDate, String company) {
+        return incomeMapper.searchIncomeSum(type, startDate, endDate, company);
     }
 }
