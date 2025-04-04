@@ -98,7 +98,7 @@ public class BoardController {
         }
     }
 
-    @PostMapping("select.bo")
+    @GetMapping("select.bo")
     public String boardSelect(@RequestParam(defaultValue = "1")int bpage, Model model, Board board
             ,@RequestParam(value="type")int type, @RequestParam(value = "title")String title, @RequestParam(value = "userId")String userId) {
         int boardCount = boardService.selectBoardCount();
@@ -108,6 +108,10 @@ public class BoardController {
 
         model.addAttribute("list1", list1);
         model.addAttribute("pi", pi);
+
+        model.addAttribute("type", type);
+        model.addAttribute("title", title);
+        model.addAttribute("userId", userId);
         return "erpPage/boardMainPage";
     }
 }

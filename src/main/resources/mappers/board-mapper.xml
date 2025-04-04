@@ -119,13 +119,11 @@
             <if test="type != null and type != 0">
                 AND TYPE = #{type}
             </if>
-
             <if test="title != null and title != ''">
-                AND TITLE LIKE CONCAT('%', #{title}, '%')
+                AND TITLE LIKE '%' || #{title} || '%'
             </if>
-
             <if test="userId != null and userId != ''">
-                AND USER_ID LIKE CONCAT('%', #{userId}, '%')
+                AND USER_ID LIKE '%' || #{userId} || '%'
             </if>
     ORDER BY POST_ID DESC
     </select>

@@ -60,9 +60,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public ArrayList<Board> selectBoard(int type, String title, String userId, Board board, PageInfo pi) {
-        System.out.println(type);
-        System.out.println(title);
-        System.out.println(userId);
         int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
         RowBounds rowBounds = new RowBounds (offset, pi.getBoardLimit());
 
