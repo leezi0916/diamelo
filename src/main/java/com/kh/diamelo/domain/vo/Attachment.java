@@ -17,6 +17,8 @@ public class Attachment {
     private String originName; //원본 파일명
     private String changeName; //변경된 파일명
     private String filePath; //저장된 파일 경로
+
     private Date updateDate; //업로드 일자
+
 
 }
