@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.diamelo.mappers.EmployeeMapper">
+    <resultMap id="UserResult" type="User_Info">
+        <result column="USER_ID" property="userId"/>
+        <result column="JOB_CODE" property="jobCode"/>
+        <result column="DEPT_CODE" property="deptCode"/>
+        <result column="USER_PWD" property="userPwd"/>
+        <result column="COMPANY_NAME" property="companyName"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="PHONE" property="phone"/>
+        <result column="EMAIL" property="email"/>
+        <result column="ENROLL_DATE" property="enrollDate"/>
+        <result column="MODIFY_DATE" property="modifyDate"/>
+        <result column="STATUS" property="status"/>
+        <result column="USER_DELETED" property="userProfile"/>
+        <result column="JOB_NAME" property="jobName"/>
+        <result column="DEPT_NAME" property="deptName"/>
+        <result column="SALARY" property="salary"/>
+        <result column="RNUM" property="rNum"/>
+        <result column="ORIGIN_NAME" property="originName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="FILE_PATH" property="filePath"/>
+
+
+
+    </resultMap>
+
+    <select id="selectUserInfoCount" resultType="int">
+        SELECT COUNT(*) FROM USER_INFO
+        WHERE STATUS = 'Y' AND
+        USER_DELETED = 'N'
+    </select>
+    <select id="selectUserInfoList" parameterType="User_Info" resultMap="UserResult">
+        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        FROM USER_INFO U
+        JOIN JOB J USING(JOB_CODE)
+        WHERE STATUS = 'Y' AND
+        USER_DELETED = 'N'
+        AND JOB_CODE != 'J0'
+        ORDER BY JOB_CODE DESC))
+    </select>
+
+    <select id="selectAdminUserInfoCount" resultType="int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE USER_DELETED = 'N'
+        AND JOB_CODE != 'J5'
+    </select>
+
+    <select id="selectAdminList" parameterType="User_Info" resultMap="UserResult">
+        SELECT RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
+        FROM (SELECT ROWNUM AS RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
+        FROM (SELECT USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
+        FROM USER_INFO U
+        JOIN JOB J USING(JOB_CODE)
+        WHERE USER_DELETED = 'N'
+        AND JOB_CODE != 'J5'
+        AND JOB_CODE != 'J0'
+        ORDER BY STATUS ASC))
+    </select>
+
+    <select id="selectEmployeeDetail" parameterType="User_Info" resultMap="UserResult">
+        SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE, ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME, FILE_PATH
+        FROM USER_INFO
+        LEFT JOIN JOB  USING(JOB_CODE)
+        LEFT JOIN ATTACHMENT USING(USER_ID)
+        WHERE USER_ID = #{userId}
+    </select>
+    
+    <select id="selectSearchUserInfoCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE USER_NAME = #{userName}
+        AND JOB_CODE = #{jobCode}
+    </select>
+
+    <select id="selectSearchUserInfoList"  parameterType="User_Info" resultMap="UserResult">
+        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        FROM USER_INFO U
+        JOIN JOB J USING(JOB_CODE)
+        WHERE STATUS = 'Y' AND
+        USER_DELETED = 'N'
+        AND JOB_CODE != 'J0'
+        AND USER_NAME = #{userName}
+        AND JOB_CODE = #{jobCode}
+        ORDER BY JOB_CODE DESC))
+    </select>
+
+
+    <select id="selectAdminSearchUserInfoCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE USER_DELETED = 'N'
+        AND USER_ID = #{userId}
+        AND USER_NAME = #{userName}
+    </select>
+
+    <select id="selectAdminSearchUserInfoList"  parameterType="User_Info" resultMap="UserResult">
+        SELECT RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
+        FROM (SELECT ROWNUM AS RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
+        FROM (SELECT USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
+        FROM USER_INFO U
+        JOIN JOB J USING(JOB_CODE)
+        WHERE USER_DELETED = 'N'
+        AND JOB_CODE != 'J5'
+        AND USER_ID = #{userId}
+        AND USER_NAME = #{userName}
+        ORDER BY STATUS ASC))
+    </select>
+
+    <update id="updateEmployeeDetailSearch">
+        UPDATE USER_INFO
+        SET USER_NAME = #{userName},
+        PHONE = #{phone},
+        MODIFY_DATE = SYSDATE,
+        EMAIL = #{email},
+        JOB_CODE = #{jobCode},
+        STATUS = #{status}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <update id="updateEmployeeImage">
+        UPDATE ATTACHMENT SET
+        ORIGIN_NAME = #{originName},
+        CHANGE_NAME = #{changeName},
+        UPDATE_DATE = SYSDATE
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <select id="employeeDetailImageSearch" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        JOIN ATTACHMENT USING(USER_ID)
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="employeeDetailImageInsert">
+        INSERT INTO ATTACHMENT
+        (USER_ID,
+        ORIGIN_NAME,
+        CHANGE_NAME,
+        FILE_PATH)
+        VALUES
+        (#{userId},
+        #{originName},
+        #{changeName},
+        #{filePath})
+    </insert>
+    
+    <update id="empStatusDelete">
+        UPDATE USER_INFO SET
+        USER_DELETED = 'Y'
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <select id="empStatusSearch"  parameterType="User_Info" resultMap="UserResult">
+        SELECT STATUS
+        FROM USER_INFO
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <delete id="empUserDelete">
+        DELETE FROM USER_INFO
+        WHERE USER_ID = #{userId}
+    </delete>
+
+
+
+</mapper>

@@ -29,9 +29,9 @@
             <form action="search.bo">
                 <div id="search-board">
                     <select id="search-category">
-                        <option>전체</option>
-                        <option>공지</option>
-                        <option>문의</option>
+                        <option value="*">전체</option>
+                        <option value="1">공지</option>
+                        <option value="2">문의</option>
                     </select>
                     <input  type="text" placeholder="제목" id="search-title">
                     <input type="text" placeholder="작성자" id="search-user">
@@ -82,7 +82,7 @@
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.userId}</td>
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.createdDate}</td>
                                     <td>
-                                        <button class="icon-button" type="button" onclick="gotoUpdate()">
+                                        <button class="icon-button" type="button" onclick="location.href='updateForm.bo?bno=${c.postId}'">
                                             <img  src="/resources/image/update_icon.png" alt="수정" width="20">
                                         </button>
                                     </td>
@@ -132,12 +132,6 @@
             </div>
         </div>
     </div>
-</div>
-<script>
 
-    function gotoUpdate() {
-        location.href="update.bo";
-    }
-</script>
 </body>
 </html>

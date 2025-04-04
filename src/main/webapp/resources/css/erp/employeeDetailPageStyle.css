@@ -10,7 +10,7 @@
 
 /*검색창 & 조회버튼 입력 필드 공통 스타일*/
 .input-box {
-    width: 100px;
+    width: 25%;
     max-width: 400px;
     height: 45px;
     background: white;
@@ -75,6 +75,14 @@
     gap: 10%;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
+#page-body-content-div>div:nth-child(1){
+    justify-content: start;
+}
+#page-body-content-div>div:nth-child(5){
+    justify-content: start;
+}
+
+
 /*버튼 감싸는 영역(가운데 정렬 + 여백)*/
 #page-body-button-div{
     height: 20%;
@@ -130,6 +138,10 @@
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
+}
+img{
+    width: 160px;
+    height: 200px;
 }
 
 #image-text{

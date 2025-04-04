@@ -29,48 +29,58 @@
     </select>
 
     <select id="selectBoardAllList" resultMap="BoardResult">
-        SELECT POST_ID, TYPE, TITLE, USER_ID, CREATED_DATE
+        SELECT POST_ID,
+                TYPE,
+                TITLE,
+                USER_ID,
+                TO_CHAR(CREATED_DATE, 'YYYY-MM-DD') CREATED_DATE
         FROM BOARD
         WHERE BOARD_DELETED = 'N'
         ORDER BY POST_ID DESC
     </select>
 
     <select id="selectDetailView" resultMap="BoardResult">
-        SELECT POST_ID, TITLE, CONTENT, USER_ID
+        SELECT POST_ID, TITLE, CONTENT, USER_ID, TYPE
         FROM BOARD
         WHERE BOARD_DELETED = 'N' AND POST_ID = #{bno}
     </select>
 
-    <select id="selectReplyView" resultMap="ReplyResult">
-        SELECT REP_NO, CONTENT, WRITER, CREATED_DATE
-        FROM REPLY
-        WHERE REPLY_DELETED = 'N' AND POST_ID = #{bno}
-        ORDER BY REP_NO DESC
-    </select>
-
+<!--  댓글 추가  -->
     <insert id="insertReply">
         INSERT
         INTO REPLY(
             REP_NO,
-            CONTENT,
             POST_ID,
+            CONTENT,
             WRITER
         ) VALUES(
-            SEQ.RNO.NEXTVAL,
-            #{replyContent},
-            #{refBno},
-            #{replyWriter}
+            SEQ_RNO.NEXTVAL,
+            #{postId},
+            #{content},
+            #{writer}
         )
     </insert>
 
+<!--  해당 게시판 번호의 댓글 가져오기  -->
     <select id="selectReplyList" resultMap="ReplyResult">
         SELECT REP_NO,
             CONTENT,
             WRITER,
-            CREATED_DATE
+            TO_CHAR(CREATED_DATE, 'YYYY-MM-DD') CREATED_DATE
         FROM REPLY
             WHERE REPLY_DELETED = 'N'
-            AND POST_ID = #{boardNo}
+            AND POST_ID = #{postId}
             ORDER BY REP_NO DESC
     </select>
+
+    <update id="updateBoard">
+        UPDATE BOARD
+                SET POST_ID = #{postId},
+                USER_ID = #{userId},
+                TITLE = #{title},
+                CONTENT = #{content},
+                TYPE = #{type},
+                UPDATE_DATE = SYSDATE
+        WHERE POST_ID = #{postId}
+    </update>
 </mapper>

@@ -11,7 +11,9 @@ public interface BoardService {
     int selectBoardCount();
     ArrayList<Board> selectBoardAllList(PageInfo pi);
     Board selectDetailView(int bno);
-    ArrayList<Reply> selectReplyView(int bno);
+
     int insertReply(Reply r);
-    ArrayList<Reply> selectReplyList(int boardNo);
+    ArrayList<Reply> selectReplyList(int postId);
+
+    int updateBoard(Board board);
 }
