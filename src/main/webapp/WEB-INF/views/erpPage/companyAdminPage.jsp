@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/companyAdminPageStyle.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/companyAdminPageStyle.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -117,7 +117,7 @@
                                     </td>
                                     <td>
                                         <button style="outline: none" class="icon-button" type="button" onclick="">
-                                            <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                            <img src="/image/delete_icon.png" alt="삭제" width="20">
                                         </button>
                                     </td>
                                 </tr>

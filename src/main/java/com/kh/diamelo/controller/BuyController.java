@@ -1,17 +1,22 @@
 package com.kh.diamelo.controller;
 
+import com.kh.diamelo.domain.vo.PageInfo;
+import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.domain.vo.SalesDetails;
+import com.kh.diamelo.services.BuyService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+
+@RequiredArgsConstructor
 @Controller
 public class BuyController {
-
-    // 구매관리 페이지로 가기
-    @GetMapping("buy.erp")
-    public String buy() {
-        return "erpPage/buyPage";
-    }
+    private final BuyService buyService;
 
     // 구매조회
     @GetMapping("search.buy")
@@ -20,10 +25,10 @@ public class BuyController {
     }
 
     // 구매서 등록
-    @GetMapping("buyAdd.erp")
-    public String buyAddPage() {
-        return "erpPage/materialBuyPage";
-    }
+//    @GetMapping("buyAdd.erp")
+//    public String buyAddPage() {
+//        return "erpPage/materialBuyPage";
+//    }
 
     //구매 상세보기
     @GetMapping("detail.buy")
@@ -36,6 +41,31 @@ public class BuyController {
     public String materialBuy() {
         return null;
     }
+
+    //구매관리 페이지로 가기
+    @GetMapping("buyList.erp")
+    public String buyList(@RequestParam(defaultValue = "1") int bpage, Model model){
+        int buyCount = buyService.selectBuyCount();
+
+        PageInfo pi = new PageInfo(buyCount, bpage, 10, 10);
+        ArrayList<SalesDetails> list = buyService.selectBuyList(pi);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+
+        return "erpPage/buyPage";
+    }
+
+    // 구매서 등록
+    @GetMapping("buyAdd.erp")
+    public String buyDetail(Model model){
+        ArrayList<Product> list = buyService.selectProduceBuyList();
+
+        System.out.println("buyDetail : "+list);
+        model.addAttribute("list", list);
+        return "erpPage/materialBuyPage";
+    }
+
 
 
 }

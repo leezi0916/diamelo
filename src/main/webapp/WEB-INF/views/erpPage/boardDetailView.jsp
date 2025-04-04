@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="/resources/css/default.css"/>
-    <link rel="stylesheet" href="/resources/css/erp/boardDetailViewStyle.css"/>
+    <link rel="stylesheet" href="/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="/css/default.css"/>
+    <link rel="stylesheet" href="/css/erp/boardDetailViewStyle.css"/>
 </head>
 <body onload="init()">
 <div class="layout-wrapper">

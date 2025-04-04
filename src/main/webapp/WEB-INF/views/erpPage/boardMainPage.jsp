@@ -26,7 +26,6 @@
 
 
             <div id="page-body-content">
-
                 <div id="search-board">
                     <form action="select.bo" method="post">
                         <select id="search-category" name="type">
@@ -111,7 +110,7 @@
                 function checkDelete(){
                     const isDelete = confirm("정말 삭제하시겠습니까??");
                     if(isDelete){
-                        
+
                     }
                 }
             </script>

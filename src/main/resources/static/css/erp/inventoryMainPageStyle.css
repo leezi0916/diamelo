@@ -1,0 +1,355 @@
+
+*{
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    margin: 0;
+}
+
+input{
+
+    outline: none;
+}
+select{
+    outline: none;
+    border: 1px solid #D0D5DD;
+}
+
+button{
+    border: none;
+    outline: none;
+}
+.page-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+.page-body-header{
+    min-height: 80px;
+    width: 100%;
+    gap: 10%;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: 500;
+    left: 30px;
+
+    padding-right: 5%;
+    padding-left: 5%;
+    display: flex;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
+#proBtn {
+    color: #A9A9A9; /* 연한 회색 */
+
+}
+
+#mtBtn {
+    color: black;
+}
+#page-body-content{
+    border-radius: 15px;
+    width: 100%;
+    height: 700px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+}
+
+#page-body-content1{
+    border-radius: 15px;
+    width: 100%;
+    height: 700px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+}
+
+.page-body-header-text{
+    display: flex;
+}
+
+.page-body-header-text button{
+    border : none;
+    background-color: #f8f8f8;
+}
+.page-body-header-text button:focus {
+    outline: none;
+}
+
+/*테이블 css 입니다*/
+.table thead th{
+    text-align: center;
+}
+.table tbody td{
+    text-align: center;
+}
+
+th{
+    background: #ededed !important;
+    text-align: center;
+    vertical-align: middle;
+}
+.icon-button {
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
+    padding: 0; /* 내부 여백 제거 */
+    cursor: pointer; /* 마우스 오버 시 클릭 가능하도록 설정 */
+}
+
+.icon-button img {
+    display: block; /* 버튼 내부에서 이미지 정렬 */
+}
+
+#search-inventory{
+
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 5%;
+}
+
+
+
+
+#search-number{
+    width: 10%;
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    background: #ffffff;
+    text-align: center;
+}
+
+
+#search-category{
+    width: 10%;
+    height: 50px;
+    border-radius: 15px;
+
+}
+#search-product{
+    width: 30%;
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    background: #ffffff;
+    text-align: center;
+}
+#searchBtn{
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    background: #ffffff;
+    text-align: center;
+    width: 10%;
+
+    outline: none;
+}
+#searchBtn:hover{
+    background-color: #fcfcfc; /* 기존보다 약간 어두운 회색 */
+}
+
+#add-btn-wrap{
+
+    display: flex;
+    width: 50%;
+    justify-content: end;
+}
+#addBtn{
+    min-width: 200px;
+    width: 30%;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    text-align: center;
+    background: #7AC38F;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+
+}
+
+#addBtn:hover{
+    background-color: #529471;
+}
+
+#search-inventory1{
+
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 5%;
+}
+
+
+
+
+#search-number1{
+    width: 10%;
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    background: #ffffff;
+    text-align: center;
+}
+
+
+#search-category1{
+    width: 10%;
+    height: 50px;
+    border-radius: 15px;
+
+}
+#search-product1{
+    width: 30%;
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    background: #ffffff;
+    text-align: center;
+}
+#searchBtn1{
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    background: #ffffff;
+    text-align: center;
+    width: 10%;
+    outline: none;
+}
+#searchBtn1:hover{
+    background-color: #fcfcfc; /* 기존보다 약간 어두운 회색 */
+}
+
+#add-btn-wrap1{
+
+    display: flex;
+    width: 50%;
+    justify-content: end;
+}
+#addBtn1{
+    width: 30%;
+    min-width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    text-align: center;
+    background: #7AC38F;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+
+}
+
+#addBtn1:hover{
+    background-color: #529471;
+}
+
+/* 페이징처리 div */
+#page-body-page-div{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+#page-body-page-div>div{
+    display: flex;
+
+    border-radius: 15px;
+}
+#page-body-page-div>div>div{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #A9A9A9;
+
+}
+#page-body-page-div>div>div>p{
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+}
+#page-body-page-div>div>div:hover{
+    background: #E4E4E4;
+}
+.page-body-page-div-end{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.page-body-page-div-start{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close{
+    display: flex;
+    justify-content: end;
+}
+
+.modal-content-left{
+    width: 50%;
+}
+
+.modal-content-right{
+    width: 50%;
+}
+.modal-content-upper{
+    display: flex;
+    padding-left: 100px;
+}
+
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 1000px;
+    border-radius: 15px;
+
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
