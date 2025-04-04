@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/boardMainPageStyle.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
+    <link rel="stylesheet" href="/resources/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="/resources/css/erp/boardMainPageStyle.css" />
+    <link rel="stylesheet" href="/resources/css/default.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -26,23 +26,25 @@
 
 
             <div id="page-body-content">
-            <form action="search.bo">
+
                 <div id="search-board">
-                    <select id="search-category">
-                        <option value="*">전체</option>
-                        <option value="1">공지</option>
-                        <option value="2">문의</option>
-                    </select>
-                    <input  type="text" placeholder="제목" id="search-title">
-                    <input type="text" placeholder="작성자" id="search-user">
-                    <button id="searchBtn" type="submit">
-                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.14111 11.0614C4.14111 7.18044 7.29911 4.02344 11.1801 4.02344C15.0601 4.02344 18.2181 7.18044 18.2181 11.0614C18.2181 14.9424 15.0601 18.1004 11.1801 18.1004C7.29911 18.1004 4.14111 14.9424 4.14111 11.0614ZM22.6361 21.5204L18.0371 16.9334C19.3931 15.3524 20.2181 13.3034 20.2181 11.0614C20.2181 6.07844 16.1631 2.02344 11.1801 2.02344C6.19611 2.02344 2.14111 6.07844 2.14111 11.0614C2.14111 16.0454 6.19611 20.1004 11.1801 20.1004C13.2021 20.1004 15.0651 19.4244 16.5721 18.2974L21.2241 22.9364L22.6361 21.5204Z" fill="black"/>
-                        </svg>
-                        조회
-                    </button>
+                    <form action="select.bo" method="post">
+                        <select id="search-category" name="type">
+                            <option value="0">전체</option>
+                            <option value="1">공지</option>
+                            <option value="2">문의</option>
+                        </select>
+                        <input type="text" placeholder="제목" id="search-title" name="title">
+                        <input type="text" placeholder="작성자" id="search-user" name="userId">
+                        <button id="searchBtn" type="submit">
+                            <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.14111 11.0614C4.14111 7.18044 7.29911 4.02344 11.1801 4.02344C15.0601 4.02344 18.2181 7.18044 18.2181 11.0614C18.2181 14.9424 15.0601 18.1004 11.1801 18.1004C7.29911 18.1004 4.14111 14.9424 4.14111 11.0614ZM22.6361 21.5204L18.0371 16.9334C19.3931 15.3524 20.2181 13.3034 20.2181 11.0614C20.2181 6.07844 16.1631 2.02344 11.1801 2.02344C6.19611 2.02344 2.14111 6.07844 2.14111 11.0614C2.14111 16.0454 6.19611 20.1004 11.1801 20.1004C13.2021 20.1004 15.0651 19.4244 16.5721 18.2974L21.2241 22.9364L22.6361 21.5204Z" fill="black"/>
+                            </svg>
+                            조회
+                        </button>
+                    </form>
                     <div id="add-btn-wrap">
-                        <button id="addBtn" type="button" onclick="location.href='enroll.bo'">
+                        <button id="addBtn" type="button" onclick="location.href='enrollForm.bo'">
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white" stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -64,8 +66,8 @@
                     </thead>
                     <tbody>
                     <c:choose>
-                        <c:when test="${not empty list}">
-                            <c:forEach var="c" items="${list}">
+                        <c:when test="${not empty list1}">
+                            <c:forEach var="c" items="${list1}">
                                 <tr>
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.postId}</td>
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">
@@ -87,21 +89,32 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <button class="icon-button" type="button">
-                                            <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                                        </button>
+                                        <form action="delete.bo" method="get" name="deleteBoard">
+                                            <input type="hidden" name="postId" value="${c.postId}">
+                                            <button class="icon-button" type="submit" onclick="checkDelete()">
+                                                <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
-                            <tr><h3>게시판이 없습니다.</h3></tr>
+                            <tr><td colspan="7"><h3>게시판이 없습니다.</h3></td></tr>
                         </c:otherwise>
                     </c:choose>
                     </tbody>
                 </table>
-            </form>
             </div>
+
+            <script>
+                function checkDelete(){
+                    const isDelete = confirm("정말 삭제하시겠습니까??");
+                    if(isDelete){
+                        
+                    }
+                }
+            </script>
 
             <div id="pagingArea">
                 <ul class="pagination">

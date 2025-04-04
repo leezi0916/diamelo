@@ -92,7 +92,7 @@
     function addReply(){
         //댓글내용, 작성자, 게시글번호
         const postId = ${b.postId};
-        const userId = "ee";
+        const userId = "user10";
         <%-- ${loginUser.userId}--%>
         const content = document.querySelector('#reply-text').value;
 
