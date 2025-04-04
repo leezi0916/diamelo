@@ -1,6 +1,5 @@
 package com.kh.diamelo.services;
 
-import com.kh.diamelo.domain.vo.InoutHistory;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.SalesDetails;
 import com.kh.diamelo.mappers.IncomeMapper;
