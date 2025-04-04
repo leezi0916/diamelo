@@ -31,6 +31,12 @@
                 </div>
                 <!-- 테이블 포함 본문 내용 영역 -->
                 <div class="page-body-content">
+
+                    <!-- 숨겨진 입력 필드 추가 -->
+                    <input type="hidden" id="hiddenItemsCount" name="itemsCount" value="0">
+                    <input type="hidden" id="hiddenTotalQty" name="totalQty" value="0">
+                    <input type="hidden" id="hiddenTotalPrice" name="totalPrice" value="0">
+                    <input type="hidden" id="hiddenOrderDetails" name="orderDetails" value="">
                     <div id="page-body-content-search-list">
                         <table class="content-table table-hover">
                             <thead>
@@ -43,7 +49,7 @@
                             </tr>
                             </thead>
                             <!-- 제품 목록과 요약 영역을 포함한 tbody -->
-                            <tbody id="product-body">
+                            <tbody id="product-body" >
                             <c:forEach var="m" items="${list}">
                                 <tr>
                                     <td class="page-body-content-material-list-img"
@@ -104,17 +110,25 @@
     const totalQtyEl = document.getElementById('totalQty');
     const totalPriceEl = document.getElementById('totalPrice');
 
+
+    const hiddenItemsCount = document.getElementById('hiddenItemsCount');
+    const hiddenTotalQty = document.getElementById('hiddenTotalQty');
+    const hiddenTotalPrice = document.getElementById('hiddenTotalPrice');
+    const hiddenOrderDetails = document.getElementById('hiddenOrderDetails');
+
     // 수량 입력 시 호출되는 함수
     function updateSummary() {
         let totalItems = 0;
         let totalQty = 0;
         let totalPrice = 0;
         let detailsHtml = '';
+        let orderDetailsArray = []; // 각 항목의 상세 정보를 객체 배열로 저장
 
         inputs.forEach(input => {
             const qty = parseInt(input.value) || 0;
             const name = input.getAttribute('data-name');
             const price = parseInt(input.getAttribute('data-price'));
+
 
             // 디버그 로그 (정상 출력 확인용)
             // console.log("이름:", name, "수량:", qty, "단가:", price);
@@ -127,13 +141,14 @@
                 totalQty += qty;
                 totalPrice += itemTotal;
 
-
                 detailsHtml +=
                     "<tr class='page-body-content-material-list-last'>" +
                     "<td colspan='2'>" + name + "</td>" +
                     "<td colspan='2'>" + qty + "</td>" +
                     "<td colspan='2'>" + itemTotal + "<td>" +
                     "</tr>";
+
+                orderDetailsArray.push({ proName: name, qty: qty, itemTotal: itemTotal });
             }
         });
 
@@ -141,6 +156,13 @@
         totalQtyEl.textContent = totalQty;
         totalPriceEl.textContent = totalPrice.toLocaleString();
         detailsEl.innerHTML = detailsHtml;
+
+        hiddenItemsCount.value = totalItems;
+        hiddenTotalQty.value = totalQty;
+        hiddenTotalPrice.value = totalPrice;
+        hiddenOrderDetails.value = JSON.stringify(orderDetailsArray);
+
+
     }
 
     // 모든 input에 이벤트 리스너 등록
