@@ -11,13 +11,21 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
 
+    // 회원가입 - 아이디 중복 체크
     @Override
     public int idCheck(String userId) {
         return memberMapper.idCheck(userId);
     }
 
+    // 회원가입
     @Override
     public int insertMember(UserInfo userInfo) {
         return memberMapper.insertMember(userInfo);
+    }
+
+    // 로그인
+    @Override
+    public UserInfo loginMember(String userId) {
+        return memberMapper.loginMember(userId);
     }
 }

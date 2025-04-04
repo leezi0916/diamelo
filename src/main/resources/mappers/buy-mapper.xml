@@ -5,7 +5,7 @@
 <mapper namespace="com.kh.diamelo.mappers.EmployeeMapper">
     <resultMap id="UserResult" type="User_Info">
         <result column="USER_ID" property="userId"/>
-        
+
     </resultMap>
 
     <select id="selectUserInfoCount" resultType="int">
