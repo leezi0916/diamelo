@@ -2,6 +2,8 @@ package com.kh.diamelo.domain.vo;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,6 +22,8 @@ public class Product {
     private String categoryName;
     private String proInventStock;
 
+    
 
+    private Date proEnrollDate;
 
 }

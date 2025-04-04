@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
 </head>
 <body>
+<c:if test="${not empty sessionScope.alertMsg}">
+    <script>
+        alert('${sessionScope.alertMsg}');
+    </script>
+    <c:remove var="alertMsg" scope="session"/>
+</c:if>
 
 <div id="productModal" class="modal">
     <div class="modal-content">
@@ -15,7 +21,7 @@
         <div class="modal-content-upper">
             <div class="modal-content-left">
                 <h2>상품 상세 정보</h2>
-                <p><strong>번호:</strong> <span class="modal-number"></span></p>
+<%--                <p><strong>번호:</strong> <span class="modal-number"></span></p>--%>
                 <p><strong>품목:</strong> <span class="modal-name"></span></p>
                 <p><strong>분류:</strong> <span class="modal-category"></span></p>
                 <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
@@ -109,8 +115,8 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="p" items="${list}" varStatus="status">
-                        <c:if test="${p.isProduct=='Y'}">
+                    <c:forEach var="p" items ="${list}" varStatus="status">
+                        <c:if test="${p.isProduct =='Y'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>
                                 <td>${p.proName}</td>
@@ -252,8 +258,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="p" items="${list}" varStatus="status">
-                        <c:if test="${p.isProduct=='N'}">
+                    <c:forEach var="p" items ="${list}" varStatus="status">
+                        <c:if test="${p.isProduct == 'N'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>
                                 <td>${p.proName}</td>
@@ -413,7 +419,7 @@
 
     function openModal(row) {
         const modal = document.getElementById("productModal");
-        const modalNumber = modal.querySelector(".modal-number");
+        // const modalNumber = modal.querySelector(".modal-number");
         const modalName = modal.querySelector(".modal-name");
         const modalCategory = modal.querySelector(".modal-category");
         const modalQuantity = modal.querySelector(".modal-quantity");
@@ -422,7 +428,7 @@
 
         // 행의 데이터를 가져오기
         const cells = row.getElementsByTagName("td");
-        modalNumber.textContent = cells[0].textContent;
+        // modalNumber.textContent = cells[0].textContent;
         modalName.textContent = cells[1].textContent;
         modalCategory.textContent = cells[2].textContent;
         modalQuantity.textContent = cells[3].textContent;

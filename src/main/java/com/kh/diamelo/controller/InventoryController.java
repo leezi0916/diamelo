@@ -4,12 +4,17 @@ import com.kh.diamelo.domain.vo.Board;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.services.ProductService;
+import com.kh.diamelo.utils.Template;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,9 @@ import java.util.List;
 @Controller
 public class InventoryController {
     private final ProductService productService;
+
+//    @Autowired
+//    private ProductService productService;
 
     // 재고관리 페이지로 가기
     @GetMapping("inv.erp")
@@ -31,7 +39,8 @@ public class InventoryController {
         model.addAttribute("mCount",materialCount);
         System.out.println("materialCount: " + materialCount);
 
-        PageInfo pi = new PageInfo((productCount+materialCount), cpage, 10, 5);
+        PageInfo pi = new PageInfo((productCount+materialCount), cpage, 10, 10);
+        System.out.println("pi: " + pi);
         ArrayList<Product> list = productService.selectProductList(pi);
 
         System.out.println("list: " + list);
@@ -80,10 +89,11 @@ public class InventoryController {
     }
 
     // 제품등록 버튼 클릭시 (* redirect 해야함)
-    @PostMapping("insert.pro")
-    public String insertIngredient() {
+    @PostMapping("/insert.pro")
+    public String insertpro(@ModelAttribute Product product, MultipartFile upfile, HttpSession session, Model model) {
         return null;
     }
+
 
 
 
@@ -103,8 +113,26 @@ public class InventoryController {
 
     // 재료등록 버튼 클릭시 (* redirect 해야함)
     @PostMapping("insert.ing")
-    public String insertProduct() {
-        return null;
+    public String insertIngrediant(@ModelAttribute Product product, MultipartFile upfile, HttpSession session, Model model) {
+        System.out.println(product);
+        System.out.println(upfile);
+
+        if (!upfile.getOriginalFilename().equals("")) {
+            String changeName = Template.saveFile(upfile, session, "/resources/image/productImgae");
+
+            product.setChangeName("/resources/image/productImgae" + changeName);
+            product.setOriginName(upfile.getOriginalFilename());
+        }
+
+        int result = productService.insertIngrediant(product);
+
+        if (result > 0) {
+            session.setAttribute("alertMsg", "재료 등록 성공");
+            return "redirect:/inv.erp";
+        } else {
+            model.addAttribute("errorMsg", "재료 등록 실패");
+            return "common/errorPage";
+        }
     }
 
 }

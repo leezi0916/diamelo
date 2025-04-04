@@ -1,11 +1,13 @@
 package com.kh.diamelo.services;
 
+import com.kh.diamelo.domain.vo.Attachment;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.mappers.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
+
     /*
     @Override
     public int countProductsByType(String isProduct) {
@@ -49,7 +52,10 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.selectProductList(rowBounds);
     }
 
-
+    @Override
+    public int insertIngrediant(Product product) {
+        return productMapper.insertIngrediant(product);
+    }
 
 
 }

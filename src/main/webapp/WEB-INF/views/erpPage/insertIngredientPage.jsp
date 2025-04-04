@@ -37,8 +37,8 @@
                 </div>
             </div>
 
-            <form class="page-body-content" action="insert.ing" method="post">
-                <div id="ingrediant_area">
+            <form class="page-body-content" action="insert.ing" method="post" enctype="multipart/form-data">
+            <div id="ingrediant_area">
                     <div id="ingre_upper">
                         <div id="ingre_upper_left">
                             <div class="input-boxs">
@@ -46,19 +46,19 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" placeholder="NAME"></input>
+                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
                                 </div>
 
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="text" placeholder="DATE"></input>
+                                    <input class="input-box" type="date" name="proEnrollDate" placeholder="DATE">
                                 </div>
 
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>가격</p>
-                                    <input class="input-box" type="text" placeholder="PRICE"></input>
+                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
                                 </div>
                             </div>
                         </div>
@@ -71,8 +71,9 @@
                                         <div id="image-text">제품 사진 추가</div>
                                         <div></div>
                                     </label>
-                                    <input type="file" name="file" id="file" accept="image/*"
+                                    <input type="file" name="upfile" id="file" accept="image/*"
                                            onchange="changeImage(this)">
+
                                 </div>
                                 <div id="text">재료 이미지</div>
                             </div>
@@ -85,7 +86,7 @@
                             <div id="input-memo-area">
 
                                 <div id="memo">비고</div>
-                                <textarea id="input-memo-box" type="text" placeholder="MEMO"></textarea>
+                                <textarea id="input-memo-box" name="proDetail" placeholder="MEMO"></textarea>
 
                             </div>
                         </div>
