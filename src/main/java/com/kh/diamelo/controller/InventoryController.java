@@ -3,6 +3,7 @@ package com.kh.diamelo.controller;
 import com.kh.diamelo.domain.vo.Board;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.services.InventoryService;
 import com.kh.diamelo.services.ProductService;
 import com.kh.diamelo.utils.Template;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class InventoryController {
-    private final ProductService productService;
+    private final InventoryService inventoryService;
 
 //    @Autowired
 //    private ProductService productService;
@@ -31,17 +32,17 @@ public class InventoryController {
     @GetMapping("inv.erp")
     public String inventory(@RequestParam(defaultValue = "1") int cpage, Model model) {
 
-        int productCount = productService.selectProductCount();
+        int productCount = inventoryService.selectProductCount();
         model.addAttribute("pCount",productCount);
         System.out.println("productCount: " + productCount);
 
-        int materialCount = productService.selectMaterialCount();
+        int materialCount = inventoryService.selectMaterialCount();
         model.addAttribute("mCount",materialCount);
         System.out.println("materialCount: " + materialCount);
 
         PageInfo pi = new PageInfo((productCount+materialCount), cpage, 10, 10);
         System.out.println("pi: " + pi);
-        ArrayList<Product> list = productService.selectProductList(pi);
+        ArrayList<Product> list = inventoryService.selectProductList(pi);
 
         System.out.println("list: " + list);
 
@@ -124,7 +125,7 @@ public class InventoryController {
             product.setOriginName(upfile.getOriginalFilename());
         }
 
-        int result = productService.insertIngrediant(product);
+        int result = inventoryService.insertIngrediant(product);
 
         if (result > 0) {
             session.setAttribute("alertMsg", "재료 등록 성공");

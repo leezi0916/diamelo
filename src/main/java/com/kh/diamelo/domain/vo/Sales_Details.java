@@ -17,4 +17,8 @@ public class Sales_Details {
     private String status; //승인상태 대기 : N, 승인 : Y
     private String salesName; //제품 이름
 
+
+    private String userName;
+
+
 }

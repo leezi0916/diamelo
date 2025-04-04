@@ -22,7 +22,8 @@ public class Product {
     private String categoryName;
     private String proInventStock;
 
-    
+    private String changeName;
+    private String originName;
 
     private Date proEnrollDate;
 

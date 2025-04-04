@@ -1,30 +1,19 @@
 package com.kh.diamelo.services;
 
-import com.kh.diamelo.domain.vo.PageInfo;
+
+
 import com.kh.diamelo.domain.vo.Product;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
+    ArrayList<Product> getProductList();
 
+    String getProductImage(int productNo);
 
+    ArrayList<Product> getMaterialsByProductNo(int productNo);
 
-    int selectProductCount();
+    boolean produceProduct(int productNo, int quantity);
 
-    int selectMaterialCount();
-
-    ArrayList<Product> selectProductList(PageInfo pi);
-
-   int insertIngrediant(Product product);
-
-
-
-
-    /*
-    int countProductsByType(String isProduct);
-
-    public List<Product> getProductsByType(String isProduct);
-     */
 }

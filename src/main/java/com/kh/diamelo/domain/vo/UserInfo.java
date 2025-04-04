@@ -19,5 +19,5 @@ public class UserInfo {
     private String enrollDate; //가입일
     private String modifyDate; //수정일
     private String status; //승인 상태값(Y / N)
-    private String userProfile; //프로필 경로
+    private String userDeleted; // 회원 삭제 여부
 }

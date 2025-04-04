@@ -32,10 +32,6 @@ public class BoardServiceImpl implements BoardService {
         return boardMapper.selectDetailView(bno);
     }
 
-    @Override
-    public ArrayList<Reply> selectReplyView(int bno) {
-        return boardMapper.selectReplyView(bno);
-    }
 
     @Override
     public int insertReply(Reply r) {
@@ -43,7 +39,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public ArrayList<Reply> selectReplyList(int boardNo) {
-        return boardMapper.selectReplyList(boardNo);
+    public ArrayList<Reply> selectReplyList(int postId) {
+        return boardMapper.selectReplyList(postId);
+    }
+
+    @Override
+    public int updateBoard(Board board) {
+        return boardMapper.updateBoard(board);
     }
 }
