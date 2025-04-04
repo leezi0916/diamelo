@@ -11,4 +11,7 @@ public interface MemberService {
 
     // 로그인
     UserInfo loginMember(String userId);
+
+    // 개인정보 변경
+    int upDateMember(UserInfo userInfo);
 }

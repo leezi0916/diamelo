@@ -11,6 +11,8 @@
         <result column="PRO_PRICE" property="proPrice"/>
         <result column="PRO_DELETED" property="proDeleted"/>
         <result column="IS_PRODUCT" property="isProduct"/>
+        <result column="ORIGIN_NAME" property="originName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
     </resultMap>
 
     <resultMap id="SalesDetailsResult" type="SalesDetails">
@@ -24,7 +26,7 @@
         <result column="USER_NAME" property="userName"/>
     </resultMap>
 
-    <select id="selectBuyCount" resultType="int">
+    <select id="selectBuyCount" resultType="_int">
         SELECT COUNT(*) FROM SALES_DETAILS
         WHERE TYPE = 'O'
     </select>
@@ -39,6 +41,16 @@
         JOIN USER_INFO USING(USER_ID)
         ORDER BY SAL_NO DESC))
     </select>
+
+    <select id="selectProduceBuyList" parameterType="Product" resultMap="ProductResult">
+        SELECT PRO_NO,PRO_NAME, PRO_DETAIL, PRO_PRICE, ORIGIN_NAME, CHANGE_NAME
+        FROM PRODUCT
+        LEFT JOIN ATTACHMENT USING(PRO_NO)
+        WHERE PRO_DELETED = 'N' AND
+        IS_PRODUCT = 'N'
+    </select>
+
+
 
 <!--    <select id="selectAdminUserInfoCount" resultType="int">-->
 <!--        SELECT COUNT(*)-->

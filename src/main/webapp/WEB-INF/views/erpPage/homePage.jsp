@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/homePageStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/homePageStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap"
@@ -169,7 +169,7 @@
                         <div id="myInfoPage">
                             <div id="myInfo">
                                 <div id="myInfo-image">
-                                    <img id="myPhoto" src="/resources/image/etc/myInfoImg.png" alt="마이페이지 사진"/>
+                                    <img id="myPhoto" src="/image/etc/myInfoImg.png" alt="마이페이지 사진"/>
                                 </div>
                             </div>
 

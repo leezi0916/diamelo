@@ -28,6 +28,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public int insertBoard(Board board) {
+        return boardMapper.insertBoard(board);
+    }
+
+    @Override
     public Board selectDetailView(int bno) {
         return boardMapper.selectDetailView(bno);
     }
@@ -46,5 +51,22 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public int updateBoard(Board board) {
         return boardMapper.updateBoard(board);
+    }
+
+    @Override
+    public int deleteBoard(Board board) {
+        return boardMapper.deleteBoard(board);
+    }
+
+    @Override
+    public ArrayList<Board> selectBoard(int type, String title, String userId, Board board, PageInfo pi) {
+        System.out.println(type);
+        System.out.println(title);
+        System.out.println(userId);
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds (offset, pi.getBoardLimit());
+
+
+        return boardMapper.selectBoard(type, title, userId, board, rowBounds);
     }
 }

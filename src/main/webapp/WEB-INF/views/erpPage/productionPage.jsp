@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/productionPageStyle.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/productionPageStyle.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>

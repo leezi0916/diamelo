@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/inventoryMainPageStyle.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/inventoryMainPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 </head>
 <body>
 <c:if test="${not empty sessionScope.alertMsg}">
@@ -21,7 +21,7 @@
         <div class="modal-content-upper">
             <div class="modal-content-left">
                 <h2>상품 상세 정보</h2>
-<%--                <p><strong>번호:</strong> <span class="modal-number"></span></p>--%>
+                <%--                <p><strong>번호:</strong> <span class="modal-number"></span></p>--%>
                 <p><strong>품목:</strong> <span class="modal-name"></span></p>
                 <p><strong>분류:</strong> <span class="modal-category"></span></p>
                 <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
@@ -47,31 +47,32 @@
         <jsp:include page="../common/erp/header.jsp"/>
 
 
-    <!-- 페이지 본문 -->
-    <div class="page-body">
-      <div class="page-body-header">
-        <div class="page-body-header-text">
-          <button id="proBtn" onclick="location.href=''">
-              제품 (${pCount})
-          </button>
-        </div>
-        <div class="page-body-header-text">
-          <button id="mtBtn">
-              재료 (${mCount})
-          </button>
-        </div>
-      </div>
+        <!-- 페이지 본문 -->
+        <div class="page-body">
+            <div class="page-body-header">
+                <div class="page-body-header-text">
+                    <button id="proBtn" onclick="location.href=''">
+                        제품 (${ProductCount})
+                    </button>
+                </div>
+                <div class="page-body-header-text">
+                    <button id="mtBtn">
+                        재료 (${ProductCount})
+                    </button>
+                </div>
+            </div>
 
 
             <form id="page-body-content" action="select.pro" method="get">
                 <div id="search-inventory">
 
-                    <select id="search-category">
-                        <option>분류</option>
-                        <option>스킨</option>
-                        <option>로션</option>
-                        <option>썬크림</option>
-                        <option>미용</option>
+                    <select name="searchCategory" id="search-category" class="select">
+                        <option disabled selected>분류</option>
+                        <option value="1">스킨</option>
+                        <option value="2">로션</option>
+                        <option value="3">선크림</option>
+                        <option value="4">수분크림</option>
+                        <option value="5">앰플</option>
                     </select>
 
                     <input type="text" placeholder="번호" id="search-number">
@@ -114,7 +115,7 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="p" items ="${list}" varStatus="status">
+                    <c:forEach var="p" items ="finishedProducts" varStatus="status">
                         <c:if test="${p.isProduct =='Y'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>
@@ -257,7 +258,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="p" items ="${list}" varStatus="status">
+                    <c:forEach var="p" items ="materialProducts" varStatus="status">
                         <c:if test="${p.isProduct == 'N'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>

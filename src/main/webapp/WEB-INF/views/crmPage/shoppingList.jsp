@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="/resources/css/crm/shoppingList.css">
-    <link rel="stylesheet" href="/resources/css/default.css">
+    <link rel="stylesheet" href="/css/crm/shoppingList.css">
+    <link rel="stylesheet" href="/css/default.css">
 
 
 
@@ -33,37 +33,37 @@
                 <td></td>
             </tr>
             <tr class="table_header">
-                <td class="list_img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                <td class="list_img"><img src="/image/productImgae/product1.png" alt="상품1"></td>
                 <td><span>독도앰플</span></td>
                 <td><span>2,900,000 원(개당)</span></td>
                 <td><span>290 개</span></td>
                 <td>
                     <button>
-                        <img src="/resources/image/delete_icon.png">
+                        <img src="/image/delete_icon.png">
                     </button>
                 </td>
             </tr>
 
             <tr class="table_header">
-                <td class="list_img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                <td class="list_img"><img src="/image/productImgae/product1.png" alt="상품1"></td>
                 <td><span>독도앰플</span></td>
                 <td><span>2,900,000 원(개당)</span></td>
                 <td><span>290 개</span></td>
                 <td>
                     <button>
-                        <img src="/resources/image/delete_icon.png">
+                        <img src="/image/delete_icon.png">
                     </button>
                 </td>
             </tr>
 
             <tr class="table_header">
-                <td class="list_img"><img src="/resources/image/productImgae/product1.png" alt="상품1"></td>
+                <td class="list_img"><img src="/image/productImgae/product1.png" alt="상품1"></td>
                 <td><span>독도앰플</span></td>
                 <td><span>2,900,000 원(개당)</span></td>
                 <td><span>290 개</span></td>
                 <td>
                     <button>
-                        <img src="/resources/image/delete_icon.png">
+                        <img src="/image/delete_icon.png">
                     </button>
                 </td>
             </tr>

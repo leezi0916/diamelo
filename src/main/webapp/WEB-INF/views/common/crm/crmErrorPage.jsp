@@ -7,6 +7,8 @@
         <title>ErrorPage</title>
     </head>
     <body>
+        <jsp:include page="header.jsp" />
+
         <br />
         <div align="center">
             <img
@@ -16,5 +18,7 @@
             <h1 style="font-weight: bold; color: red">${errorMsg}</h1>
         </div>
         <br />
+
+        <jsp:include page="footer.jsp" />
     </body>
 </html>
