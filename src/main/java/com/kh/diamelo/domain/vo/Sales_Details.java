@@ -8,6 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class Sales_Details {
+
     private int salNo; //매출 번호
     private String userId; //작성자 ID
     private String salesDate; //판매 / 구매 일자

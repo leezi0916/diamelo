@@ -10,6 +10,7 @@ import java.sql.Date;
 @ToString
 @NoArgsConstructor
 public class Board {
+
     private int postId; //게시글 번호
     private String userId; //작성자 ID
     private String title; //제목

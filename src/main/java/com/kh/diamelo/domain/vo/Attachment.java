@@ -10,6 +10,7 @@ import java.sql.Date;
 @ToString
 @NoArgsConstructor
 public class Attachment {
+
     private int proNo; //제품 번호
     private String userId; //사용자 ID
     private int salNo; //매출 번호

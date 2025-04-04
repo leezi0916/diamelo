@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.diamelo.mappers.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="com.kh.diamelo.domain.vo.Product">
+        <result column="pro_no" property="proNo"/>
+        <result column="procategory_no" property="proCategoryNo"/>
+        <result column="pro_name" property="proName"/>
+        <result column="pro_detail" property="proDetail"/>
+        <result column="pro_price" property="proPrice"/>
+        <result column="pro_deleted" property="proDeleted"/>
+        <result column="is_product" property="isProduct"/>
+    </resultMap>
+
+    <resultMap id="ProductWithAmountResultMap" type="com.kh.diamelo.domain.vo.Product">
+        <result column="PRO_NO" property="proNo"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="AMOUNT" property="amount"/>
+    </resultMap>
+
+    <resultMap id="ProductWithStockResultMap" type="com.kh.diamelo.domain.vo.Product">
+        <result column="PRO_NO" property="proNo"/>
+        <result column="PRO_INVENT_STOCK" property="stock"/>
+        <result column="PRO_NAME" property="proName"/>
+    </resultMap>
+
+    <!-- 제품 목록 조회 -->
+    <select id="getProductList" resultMap="ProductResultMap">
+        SELECT pro_no, procategory_no, pro_name, pro_detail, pro_price, pro_deleted, is_product
+        FROM product
+        WHERE pro_deleted = 'N' AND IS_PRODUCT ='Y'
+    </select>
+
+    <!-- 제품 이미지 조회 -->
+    <select id="getProductImage" resultType="string">
+        SELECT FILE_PATH FROM ATTACHMENT WHERE PRO_NO = #{productNo}
+    </select>
+
+    <!-- 특정 제품의 재료 목록 조회 -->
+    <select id="getMaterialsByProductNo" resultMap="ProductWithAmountResultMap">
+        SELECT
+        m.PRO_NO AS PRO_NO,
+        m.PRO_NAME AS PRO_NAME,
+        r.AMOUNT AS AMOUNT
+        FROM RECIPE r
+        JOIN PRODUCT m ON r.MAT_NO = m.PRO_NO
+        WHERE r.PRO_NO = #{productNo}
+    </select>
+
+    <!-- 재료 재고 조회 -->
+    <!-- 생산할때 필요한 재료들의 번호와 그 재료들의 남은 수량이 조회됨 -->
+    <select id="getMaterialStock" resultMap="ProductWithStockResultMap">
+        SELECT PI.PRO_NO, PI.PRO_INVENT_STOCK
+        FROM PRODUCT_INVENTORY PI
+        JOIN PRODUCT P ON PI.PRO_NO = P.PRO_NO
+        WHERE PI.PRO_NO IN (
+        SELECT R.MAT_NO FROM RECIPE R WHERE R.PRO_NO = #{productNo}
+        )
+    </select>
+
+    <!-- 제품 재고 증가 -->
+    <!-- 입력한 생산량 만큼 제품 재고테이블에서 재고량이 증가됨   -->
+    <update id="increaseProductStock" parameterType="map">
+        UPDATE PRODUCT_INVENTORY
+        SET PRO_INVENT_STOCK = PRO_INVENT_STOCK + #{quantity}
+        WHERE PRO_NO = #{productNo}
+    </update>
+
+    <!-- 재료 재고 차감 -->
+    <!-- 제품번호로 그에 맞는 레시피를 통한 재료정보에 있는 생산 요구량을 제품재고테이블에서 감소시킴   -->
+    <update id="decreaseMaterialStock" parameterType="map">
+        UPDATE PRODUCT_INVENTORY PI
+        SET PI.PRO_INVENT_STOCK = PI.PRO_INVENT_STOCK - (
+        SELECT SUM(R.AMOUNT) * #{quantity}
+        FROM RECIPE R
+        WHERE R.PRO_NO = #{productNo} AND R.MAT_NO = PI.PRO_NO
+        )
+        WHERE EXISTS (
+        SELECT 1 FROM RECIPE R WHERE R.PRO_NO = #{productNo} AND R.MAT_NO = PI.PRO_NO
+        )
+    </update>
+
+</mapper>

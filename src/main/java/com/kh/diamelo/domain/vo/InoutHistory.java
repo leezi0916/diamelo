@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
+
 public class InoutHistory {
     private int historyNo; //내역 번호
     private int proNo; //제품 번호
