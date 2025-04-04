@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.diamelo.mappers.ProductMapper">
-
     <resultMap id="ProductResultMap" type="com.kh.diamelo.domain.vo.Product">
         <result column="pro_no" property="proNo"/>
         <result column="procategory_no" property="proCategoryNo"/>
@@ -79,5 +78,4 @@
         SELECT 1 FROM RECIPE R WHERE R.PRO_NO = #{productNo} AND R.MAT_NO = PI.PRO_NO
         )
     </update>
-
 </mapper>

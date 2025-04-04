@@ -138,7 +138,7 @@
 }
 
 #ingre_upper_right > .input-box {
-    max-width: 400px;
+    min-width: 200px;
 }
 
 input::placeholder {
