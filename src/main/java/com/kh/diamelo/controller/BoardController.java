@@ -108,6 +108,10 @@ public class BoardController {
 
         model.addAttribute("list1", list1);
         model.addAttribute("pi", pi);
+
+        model.addAttribute("type", type);
+        model.addAttribute("title", title);
+        model.addAttribute("userId", userId);
         return "erpPage/boardMainPage";
     }
 }
