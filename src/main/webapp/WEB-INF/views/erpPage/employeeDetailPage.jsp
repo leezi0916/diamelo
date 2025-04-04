@@ -55,6 +55,7 @@
                   </label>
                   <input type="file" name="refile" id="file" accept="image/*" onchange="changeImage(this)">
                 </div>
+
             </div>
             <div class="page-body-content-div-input-div">
               <p>전화번호</p>

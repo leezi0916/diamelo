@@ -38,8 +38,19 @@ public class BuyController {
 
     //재료구매신청 버튼
     @PostMapping("mat.buy")
-    public String materialBuy() {
-        return null;
+    public String materialBuy(@RequestParam("orderDetails")String orderDetail , Model model) {
+
+        Product product = new Product();
+        product.setProName(orderDetail.substring(orderDetail.indexOf(":")+1));
+        product.setQty(Integer.parseInt(orderDetail.substring(orderDetail.indexOf(":")+1)));
+        product.setItemTotal(Integer.parseInt(orderDetail.substring(orderDetail.indexOf(":")+1)));
+
+        System.out.println(product);
+
+
+        System.out.println("orderDetail"+orderDetail);
+        System.out.println("orderDetail.list"+orderDetail);
+        return "erpPage/buyPage";
     }
 
     //구매관리 페이지로 가기
@@ -65,6 +76,8 @@ public class BuyController {
         model.addAttribute("list", list);
         return "erpPage/materialBuyPage";
     }
+
+
 
 
 
