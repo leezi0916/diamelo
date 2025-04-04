@@ -4,6 +4,7 @@ import com.kh.diamelo.domain.vo.Board;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Reply;
 import com.kh.diamelo.services.BoardService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,19 +25,34 @@ public class BoardController {
         int boardCount = boardService.selectBoardCount();
 
         PageInfo pi = new PageInfo(boardCount, bpage, 10, 10);
-        ArrayList<Board> list = boardService.selectBoardAllList(pi);
+        ArrayList<Board> list1 = boardService.selectBoardAllList(pi);
 
-        model.addAttribute("list", list);
+        model.addAttribute("list1", list1);
         model.addAttribute("pi", pi);
 
         return "erpPage/boardMainPage";
     }
 
 
-    @GetMapping("enroll.bo")
-    public String boardEnroll() {
+    @GetMapping("enrollForm.bo")
+    public String boardEnrollForm() {
 
         return "erpPage/boardEnrollForm";
+    }
+
+    @PostMapping("insertBoard.bo")
+    public String boardInsert(Board board, HttpSession session, Model model) {
+        int boardInsert = boardService.insertBoard(board);
+
+
+        if(boardInsert > 0) {
+            session.setAttribute("alertMsg", "게시판 작성 성공");
+            return "redirect:/board.erp";
+        }else{
+            model.addAttribute("errorMsg","게시판 작성 실패");
+            return "common/erp/erpErrorPage";
+        }
+
     }
 
     @GetMapping("detail.bo")
@@ -45,12 +61,6 @@ public class BoardController {
 
         model.addAttribute("b", b);
         return "erpPage/boardDetailView";
-    }
-
-    @GetMapping("search.bo")
-    public String boardSearch(int bno, Model model) {
-
-        return "";
     }
 
     @GetMapping("updateForm.bo")
@@ -63,11 +73,41 @@ public class BoardController {
 
 
     @GetMapping("update.bo")
-    public String boardUpdate(Model model,Board board) {
-        System.out.println(board);
-        int b2 = boardService.updateBoard(board);
+    public String boardUpdate(Model model,Board board, HttpSession session) {
+        int boardUpdate = boardService.updateBoard(board);
 
-        model.addAttribute("b2", b2);
-        return "redirect:/detail.bo?bno=" + board.getPostId();
+        if(boardUpdate > 0) {
+            session.setAttribute("alertMsg", "게시판 수정 성공");
+            return "redirect:/detail.bo?bno=" + board.getPostId();
+        }else {
+            model.addAttribute("errorMsg", "게시판 수정 실패");
+            return "common/erp/erpErrorPage";
+        }
+    }
+
+    @GetMapping("delete.bo")
+    public String boardDelete(Model model, Board board, HttpSession session) {
+        int boardDelete = boardService.deleteBoard(board);
+
+        if(boardDelete > 0) {
+            session.setAttribute("alertMsg","게시판 삭제 성공");
+            return "redirect:/board.erp";
+        }else{
+            model.addAttribute("errorMsg", "게시판 삭제 실패");
+            return "common/erp/erpErrorPage";
+        }
+    }
+
+    @PostMapping("select.bo")
+    public String boardSelect(@RequestParam(defaultValue = "1")int bpage, Model model, Board board
+            ,@RequestParam(value="type")int type, @RequestParam(value = "title")String title, @RequestParam(value = "userId")String userId) {
+        int boardCount = boardService.selectBoardCount();
+
+        PageInfo pi = new PageInfo(boardCount, bpage, 10, 10);
+        ArrayList<Board> list1 = boardService.selectBoard(type, title, userId, board,pi);
+
+        model.addAttribute("list1", list1);
+        model.addAttribute("pi", pi);
+        return "erpPage/boardMainPage";
     }
 }
