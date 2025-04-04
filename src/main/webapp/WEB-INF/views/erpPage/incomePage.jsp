@@ -104,7 +104,21 @@
                     <%-- 매출 합계 조회 영역 --%>
                     <div id="table-header">
                         <div id="table-header-title" class="table-header">총 매출</div>
-                        <div id="table-header-price" class="table-header">${salesAmount}</div>
+                        <c:choose>
+                            <c:when test="${empty param.type}">
+                                <div id="table-header-price" class="table-header"></div>
+                            </c:when>
+                            <c:when test="${type == 'I'}">
+                                <div id="table-header-price" class="table-header" style="color: blue; font-weight: bold;">
+                                    +<fmt:formatNumber value="${salesAmount}" type="number"/>
+                                </div>
+                            </c:when>
+                            <c:when test="${type == 'O'}">
+                                <div id="table-header-price" class="table-header" style="color: red; font-weight: bold;">
+                                    -<fmt:formatNumber value="${salesAmount}" type="number"/>
+                                </div>
+                            </c:when>
+                        </c:choose>
                         <div id="table-header-unit" class="table-header">(단위:만원)</div>
                     </div>
                 </div>

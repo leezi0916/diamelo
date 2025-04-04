@@ -24,21 +24,36 @@ public class ProductController {
     public String production(Model model) {
         ArrayList<Product> productList = productService.getProductList();
 
-        // 로그 추가
-//        System.out.println("불러온 제품 개수: " + productList.size());
-
         // productList가 null인지 확인
         if (productList == null) {
-//            System.out.println("⚠productList가 null입니다!");
+
         } else {
             for (Product p : productList) {
-//                System.out.println("제품 정보: " + p); // 전체 데이터 출력
+
             }
         }
 
         model.addAttribute("productList", productList);
         return "erpPage/productionPage";
     }
+
+
+
+    @PostMapping("/create.pro")
+    public String createProduct(@RequestParam("productNo") int productNo, @RequestParam("quantity") int quantity,
+                                RedirectAttributes redirectAttributes) {
+        boolean success = productService.produceProduct(productNo, quantity);
+
+        if (success) {
+            redirectAttributes.addFlashAttribute("message", "제품 제작 완료!");
+            return "redirect:/prdc.erp";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "재료 부족으로 제작 실패!");
+            return "common/errorPage";
+        }
+    }
+
+
 
 //    @PostMapping("/create.pro")
 //    public ResponseEntity<HashMap<String, String>> createProduct(@RequestParam("productNo") int productNo,
@@ -56,19 +71,4 @@ public class ProductController {
 //
 //
 //    }
-
-    @PostMapping("/create.pro")
-    public String createProduct(@RequestParam("productNo") int productNo, @RequestParam("quantity") int quantity,
-                                RedirectAttributes redirectAttributes) {
-        boolean success = productService.produceProduct(productNo, quantity);
-
-        if (success) {
-            redirectAttributes.addFlashAttribute("message", "제품 제작 완료!");
-            return "redirect:/prdc.erp";
-        } else {
-            redirectAttributes.addFlashAttribute("error", "재료 부족으로 제작 실패!");
-            return "common/errorPage";
-        }
-    }
-
 }
