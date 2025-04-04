@@ -9,6 +9,9 @@
 
 
 }
+*{
+    color: black;
+}
 
 /*본문 해더(타이틀 부분)*/
 .page-body-header{

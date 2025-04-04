@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class Sales_Details {
+public class SalesDetails {
 
     private int salNo; //매출 번호
     private String userId; //작성자 ID
@@ -20,3 +20,4 @@ public class Sales_Details {
     private String userName;
 
 }
+

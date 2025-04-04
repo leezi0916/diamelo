@@ -19,4 +19,8 @@ public class Product {
     private int amount;
 
     private int stock;
+
+    private String originName;
+    private String changeName;
+
 }

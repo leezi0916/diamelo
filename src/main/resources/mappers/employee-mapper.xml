@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.diamelo.mappers.EmployeeMapper">
-    <resultMap id="UserResult" type="User_Info">
+    <resultMap id="UserResult" type="UserInfo">
         <result column="USER_ID" property="userId"/>
         <result column="JOB_CODE" property="jobCode"/>
         <result column="DEPT_CODE" property="deptCode"/>
@@ -33,7 +33,7 @@
         WHERE STATUS = 'Y' AND
         USER_DELETED = 'N'
     </select>
-    <select id="selectUserInfoList" parameterType="User_Info" resultMap="UserResult">
+    <select id="selectUserInfoList" parameterType="UserInfo" resultMap="UserResult">
         SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
@@ -52,7 +52,7 @@
         AND JOB_CODE != 'J5'
     </select>
 
-    <select id="selectAdminList" parameterType="User_Info" resultMap="UserResult">
+    <select id="selectAdminList" parameterType="UserInfo" resultMap="UserResult">
         SELECT RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
         FROM (SELECT ROWNUM AS RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
         FROM (SELECT USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
@@ -64,7 +64,7 @@
         ORDER BY STATUS ASC))
     </select>
 
-    <select id="selectEmployeeDetail" parameterType="User_Info" resultMap="UserResult">
+    <select id="selectEmployeeDetail" parameterType="UserInfo" resultMap="UserResult">
         SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE, ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME, FILE_PATH
         FROM USER_INFO
         LEFT JOIN JOB  USING(JOB_CODE)
@@ -79,7 +79,7 @@
         AND JOB_CODE = #{jobCode}
     </select>
 
-    <select id="selectSearchUserInfoList"  parameterType="User_Info" resultMap="UserResult">
+    <select id="selectSearchUserInfoList"  parameterType="UserInfo" resultMap="UserResult">
         SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
@@ -102,7 +102,7 @@
         AND USER_NAME = #{userName}
     </select>
 
-    <select id="selectAdminSearchUserInfoList"  parameterType="User_Info" resultMap="UserResult">
+    <select id="selectAdminSearchUserInfoList"  parameterType="UserInfo" resultMap="UserResult">
         SELECT RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
         FROM (SELECT ROWNUM AS RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
         FROM (SELECT USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME
@@ -160,7 +160,7 @@
         WHERE USER_ID = #{userId}
     </update>
 
-    <select id="empStatusSearch"  parameterType="User_Info" resultMap="UserResult">
+    <select id="empStatusSearch"  parameterType="UserInfo" resultMap="UserResult">
         SELECT STATUS
         FROM USER_INFO
         WHERE USER_ID = #{userId}
