@@ -25,11 +25,7 @@
     <body>
         <div id="header">
             <div id="logo">
-                <img
-                    src="/resources/image/etc/logo.png"
-                    alt="로고이미지"
-                    onclick="location.href='home.crm'"
-                />
+                <img src="/resources/image/etc/logo.png" alt="로고이미지" onclick="location.href='/'" />
             </div>
             <div id="category">
                 <div>
@@ -188,7 +184,7 @@
                 const checkLogout = confirm('정말 로그아웃 하시겠습니까?');
 
                 if (checkLogout) {
-                    location.href='/';
+                    location.href = 'logout.me';
                 }
             }
         </script>
