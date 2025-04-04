@@ -177,7 +177,7 @@
                     </div>
                     <div>거래 관리</div>
                 </div>
-                <div class="category" onclick="location.href='employee.erp'">
+                <div class="category" onclick="location.href='empList.erp'">
                     <div>
                         <svg
                             width="25"
