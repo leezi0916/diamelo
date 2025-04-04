@@ -1,6 +1,6 @@
 package com.kh.diamelo.RESTController;
 
-import com.kh.diamelo.domain.vo.User_Info;
+import com.kh.diamelo.domain.vo.UserInfo;
 import com.kh.diamelo.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ public class APIEmployeeController {
     public String empDelete(String userId) {
 
         int result;
-        User_Info list = employeeService.empStatusSearch(userId);
+        UserInfo list = employeeService.empStatusSearch(userId);
 
 
         String userStatus = list.getStatus();

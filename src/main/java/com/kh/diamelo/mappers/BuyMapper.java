@@ -2,7 +2,7 @@ package com.kh.diamelo.mappers;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
-import com.kh.diamelo.domain.vo.Sales_Details;
+import com.kh.diamelo.domain.vo.SalesDetails;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface BuyMapper {
     int selectBuyCount();
 
-    ArrayList<Sales_Details> selectBuyList(PageInfo pi);
+    ArrayList<SalesDetails> selectBuyList(PageInfo pi);
 
-    ArrayList<Product> selectProduceBuyList(int salNo);
+    ArrayList<Product> selectProduceBuyList();
 }

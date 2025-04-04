@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.diamelo.mappers.IncomeMapper">
+
+    <resultMap id="SalesDetailsResult" type="SalesDetails">
+        <result column="SAL_NO" property="salNo"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="SALES_DATE" property="salesDate"/>
+        <result column="SALES_AMOUNT" property="salesAmount"/>
+        <result column="TYPE" property="type"/>
+        <result column="STATUS" property="status"/>
+        <result column="SALES_NAME" property="salesName"/>
+        <result column="COMPANY_NAME" property="companyName"/>
+    </resultMap>
+
+    <select id="selectIncomeCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM SALES_DETAILS
+        WHERE STATUS = 'Y'
+    </select>
+
+    <select id="selectIncomeList" resultMap="SalesDetailsResult">
+        SELECT s.SAL_NO, u.COMPANY_NAME, s.TYPE, TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE, s.SALES_AMOUNT
+        FROM SALES_DETAILS s
+        JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        WHERE s.STATUS = 'Y'
+        ORDER BY SALES_DATE DESC, s.SAL_NO DESC
+    </select>
+
+<!--    <select id="selectDetailView" resultMap="BoardResult">-->
+<!--        SELECT POST_ID, TITLE, CONTENT, USER_ID-->
+<!--        FROM BOARD-->
+<!--        WHERE BOARD_DELETED = 'N' AND POST_ID = #{bno}-->
+<!--    </select>-->
+
+    <select id="selectSerachIncomeCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM SALES_DETAILS s
+        JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        WHERE 1=1
+        <if test="type != null and type != ''">
+            AND s.TYPE = #{type}
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND s.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            AND s.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test="company != null and company != ''">
+            AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+        AND s.STATUS = 'Y'
+    </select>
+
+    <select id="selectSearchIncomeList" resultMap="SalesDetailsResult">
+        SELECT s.SAL_NO, u.COMPANY_NAME, s.TYPE, TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE, s.SALES_AMOUNT
+        FROM SALES_DETAILS s
+        LEFT JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        WHERE 1=1
+        <if test="type != null and type != ''">
+            AND s.TYPE = #{type}
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND s.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            AND s.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test="company != null and company != ''">
+            AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+        AND s.STATUS = 'Y'
+        ORDER BY SALES_DATE DESC, s.SAL_NO DESC
+    </select>
+
+
+    <select id="searchIncomeSum" resultType="_int">
+        SELECT SUM(SALES_AMOUNT)
+        FROM SALES_DETAILS s
+        JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        WHERE 1=1
+        <if test="type != null and type != ''">
+            AND s.TYPE = #{type}
+        </if>
+        <if test="type != null and type != ''">
+            AND s.TYPE = #{type}
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND s.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            AND s.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test="company != null and company != ''">
+            AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+        AND s.STATUS = 'Y'
+    </select>
+
+</mapper>

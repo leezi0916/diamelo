@@ -3,9 +3,9 @@
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/salePageStyle.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/salePageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 </head>
 <body  style="background: #f8f8f8">
 <div class="layout-wrapper">

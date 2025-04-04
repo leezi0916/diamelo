@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Diamelo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/inventoryMainPageStyle.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/inventoryMainPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 </head>
 <body>
 <c:if test="${not empty sessionScope.alertMsg}">
@@ -21,7 +21,7 @@
         <div class="modal-content-upper">
             <div class="modal-content-left">
                 <h2>상품 상세 정보</h2>
-<%--                <p><strong>번호:</strong> <span class="modal-number"></span></p>--%>
+                <%--                <p><strong>번호:</strong> <span class="modal-number"></span></p>--%>
                 <p><strong>품목:</strong> <span class="modal-name"></span></p>
                 <p><strong>분류:</strong> <span class="modal-category"></span></p>
                 <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
@@ -47,6 +47,7 @@
         <jsp:include page="../common/erp/header.jsp"/>
 
 
+
     <!-- 페이지 본문 -->
     <div class="page-body">
       <div class="page-body-header">
@@ -61,6 +62,7 @@
           </button>
         </div>
       </div>
+
 
 
             <form id="page-body-content" action="search.pro" method="get">
@@ -115,7 +117,7 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="p" items ="${list}" varStatus="status">
+                    <c:forEach var="p" items ="finishedProducts" varStatus="status">
                         <c:if test="${p.isProduct =='Y'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>
@@ -184,7 +186,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="p" items ="${list}" varStatus="status">
+                    <c:forEach var="p" items ="materialProducts" varStatus="status">
                         <c:if test="${p.isProduct == 'N'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>

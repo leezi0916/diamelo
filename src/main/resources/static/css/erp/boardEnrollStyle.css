@@ -1,0 +1,253 @@
+
+input{
+    outline: none;
+    border: 1px solid #D0D5DD;
+}
+select{
+    outline: none;
+    border: 1px solid #D0D5DD;
+}
+
+button{
+    outline: none;
+}
+.page-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+.page-body-header{
+    width: 100%;
+    min-height: 80px;
+    gap: 10%;
+    align-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    left: 30px;
+    padding-left: 5%;
+    display: flex;
+    border-bottom: 1px solid black;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#board-insert{
+    width: 100%;
+}
+
+#page-body-content{
+    border-radius: 15px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+}
+
+
+
+.page-body-header-text button{
+    border : none;
+    background-color: #f8f8f8;
+}
+.page-body-header-text button:focus {
+    outline: none;
+}
+
+#header{
+    width: 100%;
+    padding: 3%;
+    height: 130px;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: solid 1px #ededed;
+}
+
+#userId{
+    width: 50%;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+#userId0{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+#userId0 p{
+    color : red;
+    margin-bottom: 0;
+}
+
+#userId input{
+    border: 1px solid #D0D5DD;
+    height: 50px;
+    border-radius: 15px;
+    background: #DDDDDD;
+    padding-left: 10px;
+}
+#category{
+    width: 50%;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+#category0{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+#category0 p{
+    color : red;
+    margin-bottom: 0;
+
+}
+
+#category1{
+    width: 30%;
+    height: 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+
+#category1 select{
+    border: 1px solid #D0D5DD;
+    width: 50%;
+    height: 50px;
+    border-radius: 15px;
+    background: #ffffff;
+    text-align: center;
+}
+
+
+#header1{
+    width: 100%;
+    padding: 3%;
+    height: 100px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    border-bottom: solid 1px #ededed;
+}
+
+
+#title{
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+
+}
+#title0{
+    width: 7%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#title0 p{
+    color : red;
+    margin-bottom: 0;
+}
+
+#title1{
+    width: 100%;
+}
+#title input{
+    border: 1px solid #D0D5DD;
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    background: #ffffff;
+    padding-left: 10px;
+}
+#content{
+    width: 100%;
+    padding: 2%;
+    height: 470px;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#content-name{
+    width: 100%;
+    height: 40px;
+}
+
+#content-input{
+    border: 1px solid #D0D5DD;
+    border-radius: 15px;
+    height: 100%;
+    padding: 1%;
+}
+
+#content-input textarea{
+    border: none;
+    outline: none; /* 클릭 시 테두리 제거 */
+    resize: none;
+    width: 100%;
+    height: 100%;
+}
+
+#footer{
+    width: 100%;
+}
+
+#footer-wrap{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+}
+#addBtn{
+
+    width: 20%;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    text-align: center;
+    background: #7AC38F;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+
+}
+
+#addBtn:hover{
+    background-color: #529471;
+}
+
+#backBtn{
+
+    width: 20%;
+    height: 50px;
+    border-radius: 15px;
+    gap: 5%;
+    text-align: center;
+    background: #7AC38F;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+
+}
+
+#backBtn:hover{
+    background-color: #529471;
+}

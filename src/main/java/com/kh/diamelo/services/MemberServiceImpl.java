@@ -28,4 +28,10 @@ public class MemberServiceImpl implements MemberService {
     public UserInfo loginMember(String userId) {
         return memberMapper.loginMember(userId);
     }
+
+    // 개인정보 변경
+    @Override
+    public int upDateMember(UserInfo userInfo) {
+        return memberMapper.upDateMember(userInfo);
+    }
 }
