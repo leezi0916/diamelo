@@ -5,27 +5,7 @@
 <mapper namespace="com.kh.diamelo.mappers.EmployeeMapper">
     <resultMap id="UserResult" type="User_Info">
         <result column="USER_ID" property="userId"/>
-        <result column="JOB_CODE" property="jobCode"/>
-        <result column="DEPT_CODE" property="deptCode"/>
-        <result column="USER_PWD" property="userPwd"/>
-        <result column="COMPANY_NAME" property="companyName"/>
-        <result column="USER_NAME" property="userName"/>
-        <result column="PHONE" property="phone"/>
-        <result column="EMAIL" property="email"/>
-        <result column="ENROLL_DATE" property="enrollDate"/>
-        <result column="MODIFY_DATE" property="modifyDate"/>
-        <result column="STATUS" property="status"/>
-        <result column="USER_DELETED" property="userProfile"/>
-        <result column="JOB_NAME" property="jobName"/>
-        <result column="DEPT_NAME" property="deptName"/>
-        <result column="SALARY" property="salary"/>
-        <result column="RNUM" property="rNum"/>
-        <result column="ORIGIN_NAME" property="originName"/>
-        <result column="CHANGE_NAME" property="changeName"/>
-        <result column="FILE_PATH" property="filePath"/>
-
-
-
+        
     </resultMap>
 
     <select id="selectUserInfoCount" resultType="int">
