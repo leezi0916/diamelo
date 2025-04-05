@@ -1,7 +1,7 @@
 package com.kh.diamelo.controller;
 
 import com.kh.diamelo.domain.vo.PageInfo;
-import com.kh.diamelo.domain.vo.User_Info;
+import com.kh.diamelo.domain.vo.UserInfo;
 import com.kh.diamelo.services.EmployeeService;
 import com.kh.diamelo.utils.Template;
 import jakarta.servlet.http.HttpSession;
@@ -42,20 +42,20 @@ public class EmployeeController {
     }
 
     @GetMapping("empList.erp")
-    public String selectUserInfoList(@RequestParam(defaultValue = "1") int cpage, Model model) {
+    public String selectUserInfoList(@RequestParam(defaultValue = "1") int epage, Model model) {
         int UserCount = employeeService.selectUserInfoCount();
-        PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
-        ArrayList<User_Info> list = employeeService.selectUserInfoList(pi);
+        PageInfo pi = new PageInfo(UserCount, epage, 10, 10);
+        ArrayList<UserInfo> list = employeeService.selectUserInfoList(pi);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
         return "erpPage/employeePage";
     }
 
     @GetMapping("empAdminList.erp")
-    public String selectAdminList(@RequestParam(defaultValue = "1") int cpage, Model model) {
+    public String selectAdminList(@RequestParam(defaultValue = "1") int epage, Model model) {
         int UserCount = employeeService.selectAdminUserInfoCount();
-        PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
-        ArrayList<User_Info> list = employeeService.selectAdminList(pi);
+        PageInfo pi = new PageInfo(UserCount, epage, 10, 10);
+        ArrayList<UserInfo> list = employeeService.selectAdminList(pi);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
         return "erpPage/employeeAdminPage";
@@ -65,7 +65,7 @@ public class EmployeeController {
     @GetMapping("empDetail.erp")
     public String selectEmployeeDetail(@RequestParam(value = "uId") String userId, Model model) {
 
-        User_Info empDetail = employeeService.selectEmployeeDetail(userId);
+        UserInfo empDetail = employeeService.selectEmployeeDetail(userId);
 
 
         model.addAttribute("e", empDetail);
@@ -76,7 +76,7 @@ public class EmployeeController {
     public String selectEmployeeSearch(@RequestParam(defaultValue = "1") int cpage, String userName, String jobCode, Model model) {
         int UserCount = employeeService.selectSearchUserInfoCount(userName, jobCode);
         PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
-        ArrayList<User_Info> list = employeeService.selectSearchUserInfoList(pi, userName, jobCode);
+        ArrayList<UserInfo> list = employeeService.selectSearchUserInfoList(pi, userName, jobCode);
 
         model.addAttribute("slist", list);
         model.addAttribute("spi", pi);
@@ -87,14 +87,14 @@ public class EmployeeController {
     public String selectAdminSearch(@RequestParam(defaultValue = "1") int cpage, String userId, String userName, Model model) {
         int UserCount = employeeService.selectAdminSearchUserInfoCount(userId, userName);
         PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
-        ArrayList<User_Info> list = employeeService.selectAdminSearchUserInfoList(pi, userId, userName);
+        ArrayList<UserInfo> list = employeeService.selectAdminSearchUserInfoList(pi, userId, userName);
         model.addAttribute("slist", list);
         model.addAttribute("spi", pi);
         return "erpPage/employeeAdminPage";
     }
 
     @PostMapping("empDetailSearch.erp")
-    public String updateEmployeeDetailSearch(@ModelAttribute User_Info userInfo, MultipartFile refile, HttpSession session, Model model) {
+    public String updateEmployeeDetailSearch(@ModelAttribute UserInfo userInfo, MultipartFile refile, HttpSession session, Model model) {
         int imgSearch = employeeService.employeeDetailImageSearch(userInfo);
         int result = employeeService.updateEmployeeDetailSearch(userInfo);
         if (refile != null && !refile.getOriginalFilename().isEmpty()) {
@@ -102,10 +102,10 @@ public class EmployeeController {
             if(userInfo.getOriginName() != null && !userInfo.getOriginName().equals("")){
                 new File(session.getServletContext().getRealPath(userInfo.getOriginName())).delete();
             }
-            String changeName = Template.saveFile(refile, session, "/resources/image/employeeImage/");
-            userInfo.setChangeName("/resources/image/employeeImage/" + changeName);
+            String changeName = Template.saveFile(refile, session, "/resources/uploadFile/");
+            userInfo.setChangeName("/resources/uploadFile/" + changeName);
             userInfo.setOriginName(refile.getOriginalFilename());
-            userInfo.setFilePath("/resources/image/employeeImage/");
+            userInfo.setFilePath("/resources/uploadFile/");
 
             if(imgSearch==0){
                 employeeService.employeeDetailImageInsert(userInfo);

@@ -19,6 +19,15 @@ public class UserInfo {
     private String enrollDate; //가입일
     private String modifyDate; //수정일
     private String status; //승인 상태값(Y / N)
-    private String userProfile; //프로필 경로
+    private String userDeleted; // 삭제 상태값(Y / N)
 
+    private String jobName;
+    private String deptName;
+    private String salary;
+    private int rNum;
+
+    private String originName;
+    private String changeName;
+    private String filePath;
+    private String userProfile; //프로필 경로
 }

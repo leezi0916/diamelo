@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/employeeadminPageStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/employeeadminPageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -101,14 +101,14 @@
                 <td>${u.jobName}</td>
                 <td>
                   <button class="icon-button"  onclick="location.href='empDetail.erp?uId=${u.userId}'">
-                    <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                    <img src="/image/update_icon.png" alt="수정" width="20">
                   </button>
                 </td>
                 <td>
                   <button class="icon-button userDelete"
                           data-userid="${u.userId}"
                           data-status="${u.status}">
-                    <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                    <img src="/image/delete_icon.png" alt="삭제" width="20">
                   </button>
                 </td>
               </tr>
@@ -146,12 +146,12 @@
                 <td>${e.jobName}</td>
                 <td>
                   <button class="icon-button"  onclick="location.href='empDetail.erp?uId=${e.userId}'">
-                    <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                    <img src="/image/update_icon.png" alt="수정" width="20">
                   </button>
                 </td>
                 <td>
                   <button class="icon-button" >
-                    <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                    <img src="/image/delete_icon.png" alt="삭제" width="20">
 <%--                          <input class="loginForm" id="userDelete" type="button" value="회원탈퇴">--%>
                   </button>
                 </td>
@@ -164,6 +164,33 @@
           <input type="button" class="submitBtn" value="인사 관리 페이지 돌아가기" onclick="location.href='empList.erp'">
         </div>
       </div>
+            <%-- 페이지바 --%>
+        <div id="pagingArea">
+          <ul class="pagination">
+            <c:choose>
+              <c:when test="${ pi.currentPage eq 1 }">
+                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empAdminList.erp?epage=${pi.currentPage - 1}">이전</a></li>
+              </c:otherwise>
+            </c:choose>
+
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+              <li class="page-item"><a class="page-link" href="empAdminList.erp?epage=${p}">${p}</a></li>
+            </c:forEach>
+
+            <c:choose>
+              <c:when test="${ pi.currentPage eq pi.maxPage }">
+                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empAdminList.erp?epage=${pi.currentPage + 1}">다음</a></li>
+              </c:otherwise>
+            </c:choose>
+          </ul>
+        </div>
+
     </div>
   </div>
 </div>

@@ -39,6 +39,24 @@
         ORDER BY POST_ID DESC
     </select>
 
+<!--  게시판 추가  -->
+    <insert id="insertBoard">
+        INSERT INTO BOARD(
+        POST_ID,
+        USER_ID,
+        TYPE,
+        TITLE,
+        CONTENT
+        ) VALUES(
+        SEQ_BNO.NEXTVAL,
+        #{userId},
+        #{type},
+        #{title},
+        #{content}
+        )
+    </insert>
+
+
     <select id="selectDetailView" resultMap="BoardResult">
         SELECT POST_ID, TITLE, CONTENT, USER_ID, TYPE
         FROM BOARD
@@ -83,4 +101,31 @@
                 UPDATE_DATE = SYSDATE
         WHERE POST_ID = #{postId}
     </update>
+
+    <update id="deleteBoard">
+        UPDATE BOARD
+            SET BOARD_DELETED = 'Y'
+        WHERE POST_ID = #{postId}
+    </update>
+
+    <select id="selectBoard" resultMap="BoardResult">
+    SELECT POST_ID,
+            TYPE,
+            TITLE,
+            USER_ID,
+            TO_CHAR(CREATED_DATE, 'YYYY-MM-DD') CREATED_DATE
+    FROM BOARD
+        WHERE BOARD_DELETED = 'N'
+            <if test="type != null and type != 0">
+                AND TYPE = #{type}
+            </if>
+            <if test="title != null and title != ''">
+                AND TITLE LIKE '%' || #{title} || '%'
+            </if>
+            <if test="userId != null and userId != ''">
+                AND USER_ID LIKE '%' || #{userId} || '%'
+            </if>
+    ORDER BY POST_ID DESC
+    </select>
+
 </mapper>

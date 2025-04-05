@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/employeePageStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/employeePageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -52,10 +52,6 @@
           <div class="searchBtndiv">
             <button class="searchBtn"  onclick="location.href='empAdminList.erp'">
               인사 관리자 페이지
-              <div><svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="5.92462" cy="5.48047" r="5" fill="#FE5E5E"/>
-              </svg>
-              </div>
             </button>
           </div>
         </div>
@@ -103,103 +99,38 @@
             </c:forEach>
 
 
-
-<%--              <td>5</td>--%>
-<%--              <td>황윤창</td>--%>
-<%--              <td>대표</td>--%>
-<%--              <td>010-1111-1111</td>--%>
-<%--              <td>--%>
-<%--                1111@naver.com--%>
-<%--              </td>--%>
-<%--              <td>25-01-01</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr>--%>
-
-<%--              <td>4</td>--%>
-<%--              <td>양동민</td>--%>
-<%--              <td>사원</td>--%>
-<%--              <td>010-2222-2222</td>--%>
-<%--              <td>2222@naver.com--%>
-<%--              </td>--%>
-<%--              <td>25-01-02</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-
-<%--              <td>3</td>--%>
-<%--              <td>홍승민</td>--%>
-<%--              <td>사원</td>--%>
-<%--              <td>010-3333-3333</td>--%>
-<%--              <td>3333@naver.com--%>
-<%--              </td>--%>
-<%--              <td>25-01-03</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--              <td>2</td>--%>
-<%--              <td>김진석</td>--%>
-<%--              <td>사원</td>--%>
-<%--              <td>010-4444-4444</td>--%>
-<%--              <td>4444@naver.com--%>
-<%--              </td>--%>
-<%--              <td>25-01-04</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--              <td>1</td>--%>
-<%--              <td>이지묵</td>--%>
-<%--              <td>사원</td>--%>
-<%--              <td>010-5555-5555</td>--%>
-<%--              <td>5555@naver.com--%>
-<%--              </td>--%>
-<%--              <td>25-01-05</td>--%>
-<%--            </tr>--%>
-
             </tbody>
           </table>
         </div>
       </div>
-        <div id="page-body-page-div">
-          <div>
-            <div class="page-body-page-div-start">
-              <p>이전</p>
-            </div>
-            <div>
-              <p>1</p>
-            </div>
-            <div>
-              <p>2</p>
-            </div>
-            <div>
-              <p>3</p>
-            </div>
-            <div>
-              <p>4</p>
-            </div>
-            <div>
-              <p>5</p>
-            </div>
-            <div>
-              <p>6</p>
-            </div>
-            <div>
-              <p>7</p>
-            </div>
-            <div>
-              <p>8</p>
-            </div>
-            <div>
-              <p>9</p>
-            </div>
-            <div>
-              <p>10</p>
-            </div>
-            <div class="page-body-page-div-end">
-              <p>다음</p>
-            </div>
-          </div>
+<%--   페이지 바     --%>
+        <div id="pagingArea">
+          <ul class="pagination">
+            <c:choose>
+              <c:when test="${ pi.currentPage eq 1 }">
+                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage - 1}">이전</a></li>
+              </c:otherwise>
+            </c:choose>
 
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+              <li class="page-item"><a class="page-link" href="empList.erp?epage=${p}">${p}</a></li>
+            </c:forEach>
 
+            <c:choose>
+              <c:when test="${ pi.currentPage eq pi.maxPage }">
+                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage + 1}">다음</a></li>
+              </c:otherwise>
+            </c:choose>
+          </ul>
         </div>
+
+
     </div>
   </div>
 </div>

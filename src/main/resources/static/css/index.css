@@ -1,0 +1,193 @@
+
+/*myPage 와 updatemyPage의 css*/
+
+.div-area{ /* 로그인 전체 영역 설정 */
+    height: 100%;
+    width: 100%;
+    background: #F8F8F8F8;
+    display: flex;
+}
+
+/* 로그인 폼 왼쪽 영역 */
+.div-loginarea{
+    height: 100%;
+    width: 50%;
+}
+/* 로그인 영역 전체 여백 설정 */
+.div-area1{
+    gap: 100px;
+    align-items: center;
+    height: 100%;
+    padding-right: 15%;
+    padding-left: 15%;
+}
+
+
+/* 오른쪽 배경 이미지 영역 */
+.div-imgarea{
+    height: 100%;
+    width: 50%;
+    background-image: url(/image/etc/dyxm.PNG);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    outline: 0;
+}
+
+/* 로고 이미지 div 설정 */
+#imgdiv1{
+    height: 30%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+}
+
+/* 로고 이미지 포함된 div */
+#imgdiv{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* 폼 전체 크기 및 가운테 정렬 */
+#form1{
+    height: 40%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+/* 로그인폼 내부 레이아웃(세로 정렬) */
+#form1>div{
+    align-content: center;
+}
+
+#loginFormdiv{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-content: center;
+    justify-content: center;
+}
+
+/* 로그인 입력 필드 스타일 */
+#thId{
+    border: 1.5px solid green;
+    height: 50px;
+    width: 100%;
+    padding-right: 5%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    padding-left: 5%;
+    border-radius: 15px;
+    gap: 5%;
+    background: white;
+}
+
+#thId:hover{
+    border: 1.5px solid #7AC38F;
+}
+
+/* 아이디 입력 input 스타일 */
+#thId input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: white;
+    font-size: 16px;
+}
+
+
+/* 비밀번호 입력 필드 스타일 */
+#thPwd{
+    border: 1.5px solid green;
+    height: 50px;
+    width: 100%;
+    padding-right: 5%;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    padding-left: 5%;
+    border-radius: 15px;
+    gap: 5%;
+    background: white;
+}
+
+#thPwd:hover{
+    border: 1.5px solid #7AC38F;
+}
+
+/* 비밀번호 입력 input 스타일 */
+#thPwd input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+    font-size: 16px;
+    outline: none;
+}
+
+
+/* 로그인 버튼 박스 여백 설정 */
+.div-loginarea>.loginForm{
+    padding-right: 5%;
+    padding-left: 5%;
+    margin: 0 auto;
+}
+
+
+/* 로그인 버튼 스타일 */
+.loginForm{
+    text-align: center;
+    align-items: center;
+    background: #529471;
+    height: 50px;
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* 아이디/비번 찾기/ 회원가입 링크 영역 */
+#thdiv {
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 100%;
+    display: flex;
+    gap: 2%;
+}
+/* thdiv 내부 텍스트 색상 */
+#thdiv *{
+    color: #A9A9A9;
+}
+
+/* 링크 스타일 */
+a{
+    text-decoration: none;
+    color: black;
+}
+
+/*------------------------버튼들 호버------------------------*/
+
+/* 기본 버튼 스타일 */
+.loginForm{
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+}
+
+/* 일반 버튼 호버 효과 */
+.loginForm:hover {
+    background-color: #7AC38F;
+}
+

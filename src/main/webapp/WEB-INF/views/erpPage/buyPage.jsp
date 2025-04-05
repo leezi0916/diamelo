@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/erp/buyPageStyle.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/buyPageStyle.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 </head>
 <body  style="background: #f8f8f8">
 <div class="layout-wrapper">
@@ -68,90 +68,99 @@
             </thead>
             <tbody>
             <%-- 반복 가능한 판매 내역 행 --%>
-            <tr onclick="goToDetail()">
+            <c:forEach var="b" items="${list}">
+              <tr onclick="location.href='buyDetail.erp?sNo=${b.salNo}">
+                <td>${b.salNo}</td>
+                <td>${b.userName}</td>
+                <td>A공장</td>
+                <td>${b.salesDate}</td>
+              </tr>
+            </c:forEach>
 
-              <td>10</td>
-              <td>이지묵</td>
-              <td>A공장</td>
-              <td>2024-01-20</td>
+<%--            <tr onclick="goToDetail()">--%>
 
-
-            </tr>
-            <tr onclick="goToDetail()">
-
-              <td>9</td>
-              <td>황윤창</td>
-              <td>A공장</td>
-              <td>2024-03-19</td>
-
-
-            </tr>
-            <tr onclick="goToDetail()">
-
-              <td>8</td>
-              <td>김진석</td>
-              <td>A공장</td>
-              <td>2024-05-20</td>
+<%--              <td>10</td>--%>
+<%--              <td>이지묵</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2024-01-20</td>--%>
 
 
-            </tr>
-            <tr onclick="goToDetail()">
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
 
-              <td>7</td>
-              <td>양동민</td>
-              <td>A공장</td>
-              <td>2024-06-18</td>
-
-            </tr>
-            <tr onclick="goToDetail()">
-
-              <td>6</td>
-              <td>홍승민</td>
-              <td>A공장</td>
-              <td>2024-10-10</td>
-
-            </tr>
-            <tr onclick="goToDetail()">
-
-              <td>5</td>
-              <td>이지묵</td>
-              <td>A공장</td>
-              <td>2024-11-11</td>
-
-            </tr>
-            <tr onclick="goToDetail()">
-
-              <td>4</td>
-              <td>김진석</td>
-              <td>A공장</td>
-              <td>2025-01-25</td>
-
-            </tr>
-            <tr onclick="goToDetail()">
-
-              <td>3</td>
-              <td>양동민</td>
-              <td>A공장</td>
-              <td>2025-02-28</td>
+<%--              <td>9</td>--%>
+<%--              <td>황윤창</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2024-03-19</td>--%>
 
 
-            </tr>
-            <tr onclick="goToDetail()">
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
 
-              <td>2</td>
-              <td>황윤창</td>
-              <td>A공장</td>
-              <td>2025-03-05</td>
+<%--              <td>8</td>--%>
+<%--              <td>김진석</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2024-05-20</td>--%>
 
-            </tr>
-            <tr onclick="goToDetail()">
 
-              <td>1</td>
-              <td>홍승민</td>
-              <td>A공장</td>
-              <td>2025-03-31</td>
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
 
-            </tr>
+<%--              <td>7</td>--%>
+<%--              <td>양동민</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2024-06-18</td>--%>
+
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
+
+<%--              <td>6</td>--%>
+<%--              <td>홍승민</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2024-10-10</td>--%>
+
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
+
+<%--              <td>5</td>--%>
+<%--              <td>이지묵</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2024-11-11</td>--%>
+
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
+
+<%--              <td>4</td>--%>
+<%--              <td>김진석</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2025-01-25</td>--%>
+
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
+
+<%--              <td>3</td>--%>
+<%--              <td>양동민</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2025-02-28</td>--%>
+
+
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
+
+<%--              <td>2</td>--%>
+<%--              <td>황윤창</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2025-03-05</td>--%>
+
+<%--            </tr>--%>
+<%--            <tr onclick="goToDetail()">--%>
+
+<%--              <td>1</td>--%>
+<%--              <td>홍승민</td>--%>
+<%--              <td>A공장</td>--%>
+<%--              <td>2025-03-31</td>--%>
+
+<%--            </tr>--%>
 
             </tbody>
           </table>
