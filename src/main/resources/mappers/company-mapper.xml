@@ -14,7 +14,7 @@
         <result column="ENROLL_DATE" property="enrollDate"/>
         <result column="MODIFY_DATE" property="modifyDate"/>
         <result column="STATUS" property="status"/>
-        <result column="USER_DELETED" property="userProfile"/>
+        <result column="USER_DELETED" property="userDeleted"/>
     </resultMap>
 
     <!--  거래관리 페이징을 위한 거래처 상태가 Y인 총 회사 수  -->
@@ -40,11 +40,73 @@
         WHERE JOB_CODE = 'J0'
     </select>
 
-
+    <!--  거래관리 관리자용 페이지에서 모든 거래처를 찾아옴  -->
     <select id="selectAllList" resultMap="User_InfoResult">
         SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS
         FROM USER_INFO
         WHERE JOB_CODE = 'J0'
+        ORDER BY ENROLL_DATE DESC
+    </select>
+
+    <!--  거래처 조건 검색 후 거래처 수 -->
+    <select id="selectCompanyDetailCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+            AND STATUS = 'Y'
+        <if test="companyName != null and companyName != ''">
+            AND COMPANY_NAME LIKE '%' || #{companyName} || '%'
+        </if>
+        <if test="userName != null and userName != ''">
+            AND USER_NAME LIKE '%' || #{userName} || '%'
+        </if>
+    </select>
+
+    <!-- 거래처 조건 검색 -->
+    <select id="selectCompanyDetailList" resultMap="User_InfoResult">
+        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+        AND STATUS = 'Y'
+        <if test="companyName != null and companyName != ''">
+            AND COMPANY_NAME LIKE '%' || #{companyName} || '%'
+        </if>
+        <if test="userName != null and userName != ''">
+            AND USER_NAME LIKE '%' || #{userName} || '%'
+        </if>
+        ORDER BY ENROLL_DATE DESC
+    </select>
+
+    <!-- 어드민 거래처 관리 페이지 거래처 수 -->
+    <select id="selectAdminPageCompanyCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+        <if test='type != null and type != "" and type != "A" '>
+            AND STATUS = #{type}
+        </if>
+        <if test="companyName != null and companyName != ''">
+            AND COMPANY_NAME LIKE '%' || #{companyName} || '%'
+        </if>
+        <if test="userName != null and userName != ''">
+            AND USER_NAME LIKE '%' || #{userName} || '%'
+        </if>
+    </select>
+
+    <!-- 어드민 거래처 관리 페이지 조건 검색 -->
+    <select id="selectAdminPageDetailList" resultMap="User_InfoResult">
+        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS
+        FROM USER_INFO
+        WHERE JOB_CODE = 'J0'
+        <if test='type != null and type != "" and type != "A" '>
+            AND STATUS = #{type}
+        </if>
+        <if test="companyName != null and companyName != ''">
+            AND COMPANY_NAME LIKE '%' || #{companyName} || '%'
+        </if>
+        <if test="userName != null and userName != ''">
+            AND USER_NAME LIKE '%' || #{userName} || '%'
+        </if>
         ORDER BY ENROLL_DATE DESC
     </select>
 </mapper>

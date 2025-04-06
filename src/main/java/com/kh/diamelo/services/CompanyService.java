@@ -17,4 +17,17 @@ public interface CompanyService {
 
     //거래관리 관리자용 페이지에서 모든 거래처를 찾아옴
     ArrayList<UserInfo> selectAllList(PageInfo pi);
+
+    //거래처 조건 검색 후 거래처 수
+    int selectCompanyDetailCount(String companyName, String userName);
+
+    //거래처 조건 검색
+    ArrayList<UserInfo> selectCompanyDetailList(String companyName, String userName, PageInfo pi);
+
+    //어드민 거래처 관리 페이지 거래처 수
+    int selectAdminPageCompanyCount(String type, String companyName, String userName);
+
+    //어드민 거래처 관리 페이지 조건 검색
+    ArrayList<UserInfo> selectAdminPageDetailList(String type, String companyName, String userName, PageInfo pi);
+
 }
