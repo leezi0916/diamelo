@@ -23,7 +23,7 @@ public class CompanyController {
     public String company(@RequestParam(defaultValue = "1")int apage, Model model) {
         int boardCount = companyService.selectCompanySuccessCount();
 
-        PageInfo pi = new PageInfo(boardCount,  apage, 10 ,2);
+        PageInfo pi = new PageInfo(boardCount,  apage, 10 ,10);
         ArrayList<UserInfo> list = companyService.selectCompanyList(pi);
 
         model.addAttribute("list", list);
@@ -45,4 +45,39 @@ public class CompanyController {
 
         return "erpPage/companyAdminPage";}
 
+    //거래처 조건 검색
+    @GetMapping("select.com")
+    public String selectCompany(@RequestParam(defaultValue = "1")int apage, @RequestParam(value = "companyName") String companyName,
+                                @RequestParam(value = "userName")String userName, Model model) {
+        int boardCount = companyService.selectCompanyDetailCount(companyName, userName);
+
+        PageInfo pi = new PageInfo(boardCount,  apage, 10 ,10);
+        ArrayList<UserInfo> list = companyService.selectCompanyDetailList(companyName, userName, pi);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi",pi);
+
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("userName", userName);
+        return "erpPage/companyMainPage";
+    }
+
+    //어드민 거래처 관리 페이지 조건 검색
+    @GetMapping("select.ad")
+    public String selectAdminPage(@RequestParam(defaultValue = "1")int cpage, @RequestParam(value = "type")String type,
+                                  @RequestParam(value = "companyName") String companyName,
+                                @RequestParam(value = "userName")String userName,  Model model) {
+        int boardCount = companyService.selectAdminPageCompanyCount(type, companyName, userName);
+
+        PageInfo pi = new PageInfo(boardCount,  cpage, 10 ,10);
+        ArrayList<UserInfo> list = companyService.selectAdminPageDetailList(type, companyName, userName, pi);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi",pi);
+
+        model.addAttribute("type", type);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("userName", userName);
+        return "erpPage/companyAdminPage";
+    }
 }

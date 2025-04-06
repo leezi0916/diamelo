@@ -38,6 +38,14 @@ select{
     margin-top: 10px;
 }
 
+#search-category{
+    width: 10%;
+    height: 50px;
+    border-radius: 15px;
+    text-align: center;
+    border-color: #d0d5dd;
+}
+
 .page-body-header-text button{
     border : none;
     background-color: #f8f8f8;
@@ -46,6 +54,9 @@ select{
     outline: none;
 }
 /*테이블 css 입니다*/
+.table{
+    border-bottom: 1px solid #D0D5DD;
+}
 .table thead th{
     text-align: center;
 }
