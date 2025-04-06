@@ -83,18 +83,23 @@
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.userId}</td>
                                     <td onclick="location.href='detail.bo?bno=${c.postId}'">${c.createdDate}</td>
                                     <td>
-                                        <button class="icon-button" type="button" onclick="location.href='updateForm.bo?bno=${c.postId}'">
-                                            <img  src="/image/update_icon.png" alt="수정" width="20">
-                                        </button>
+                                    <c:if test="${c.userId == loginUser.userId}">
+                                            <button class="icon-button" type="button" onclick="location.href='updateForm.bo?bno=${c.postId}'">
+                                                <img  src="/image/update_icon.png" alt="수정" width="20">
+                                            </button>
+                                    </c:if>
                                     </td>
                                     <td>
-                                        <form action="delete.bo" method="get" name="deleteBoard">
-                                            <input type="hidden" name="postId" value="${c.postId}">
-                                            <button class="icon-button" type="submit" onclick="return confirm('정말 삭제하시겠습니까??')">
-                                                <img src="/image/delete_icon.png" alt="삭제" width="20">
-                                            </button>
-                                        </form>
+                                        <c:if test="${c.userId == loginUser.userId}">
+                                            <form action="delete.bo" method="get" name="deleteBoard">
+                                                <input type="hidden" name="postId" value="${c.postId}">
+                                                <button class="icon-button" type="submit" onclick="return confirm('정말 삭제하시겠습니까??')">
+                                                    <img src="/image/delete_icon.png" alt="삭제" width="20">
+                                                </button>
+                                            </form>
+                                        </c:if>
                                     </td>
+
                                 </tr>
                             </c:forEach>
                         </c:when>
@@ -106,37 +111,75 @@
                 </table>
             </div>
 
+            <c:set var="isSearch" value="false" />
+            <c:if test="${not empty type and type ne 0}">
+                <c:set var="isSearch" value="true" />
+            </c:if>
+            <c:if test="${not empty title}">
+                <c:set var="isSearch" value="true" />
+            </c:if>
+            <c:if test="${not empty userId}">
+                <c:set var="isSearch" value="true" />
+            </c:if>
 
+            <c:choose>
+                <c:when test="${isSearch}">
+                    <div id="pagingArea">
+                        <ul class="pagination">
+                            <c:choose>
+                                <c:when test="${ pi.currentPage eq 1 }">
+                                    <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a class="page-link" href="select.bo?bpage=${pi.currentPage - 1}&type=${type}&title=${title}&userId=${userId}">이전</a></li>
+                                </c:otherwise>
+                            </c:choose>
 
-            <div id="pagingArea">
-                <ul class="pagination">
-                    <c:choose>
-                        <c:when test="${ pi.currentPage eq 1 }">
-                            <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="select.bo?bpage=${pi.currentPage - 1}&type=${type}&title=${title}&userId=${userId}">이전</a></li>
-                        </c:otherwise>
-                    </c:choose>
+                            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                                <li class="page-item"><a class="page-link" href="select.bo?bpage=${p}&type=${type}&title=${title}&userId=${userId}">${p}</a></li>
+                            </c:forEach>
 
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                        <li class="page-item"><a class="page-link" href="select.bo?bpage=${p}&type=${type}&title=${title}&userId=${userId}">${p}</a></li>
-                    </c:forEach>
+                            <c:choose>
+                                <c:when test="${ pi.currentPage eq pi.maxPage }">
+                                    <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a class="page-link" href="select.bo?bpage=${pi.currentPage + 1}&type=${type}&title=${title}&userId=${userId}">다음</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div id="pagingArea">
+                        <ul class="pagination">
+                            <c:choose>
+                                <c:when test="${ pi.currentPage eq 1 }">
+                                    <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a class="page-link" href="board.erp?bpage=${pi.currentPage - 1}">이전</a></li>
+                                </c:otherwise>
+                            </c:choose>
 
-                    <c:choose>
-                        <c:when test="${ pi.currentPage eq pi.maxPage }">
-                            <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="select.bo?bpage=${pi.currentPage + 1}&type=${type}&title=${title}&userId=${userId}">다음</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
+                            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                                <li class="page-item"><a class="page-link" href="board.erp?bpage=${p}">${p}</a></li>
+                            </c:forEach>
 
+                            <c:choose>
+                                <c:when test="${ pi.currentPage eq pi.maxPage }">
+                                    <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a class="page-link" href="board.erp?bpage=${pi.currentPage + 1}">다음</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
             </div>
         </div>
     </div>
-
 </body>
 </html>
