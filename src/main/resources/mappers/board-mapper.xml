@@ -22,12 +22,14 @@
         <result column="REPLY_DELETED" property="replyDeleted"/>
     </resultMap>
 
-    <select id="selectBoardCount" resultType="_int">
+    <!-- //모든 게시판 수 -->
+    <select id="selectBoardAllCount" resultType="_int">
         SELECT COUNT(*)
         FROM BOARD
         WHERE BOARD_DELETED = 'N'
     </select>
 
+    <!-- //모든 게시판 검색 -->
     <select id="selectBoardAllList" resultMap="BoardResult">
         SELECT POST_ID,
                 TYPE,
@@ -39,7 +41,7 @@
         ORDER BY POST_ID DESC
     </select>
 
-<!--  게시판 추가  -->
+    <!--  게시판 추가  -->
     <insert id="insertBoard">
         INSERT INTO BOARD(
         POST_ID,
@@ -56,14 +58,14 @@
         )
     </insert>
 
-
+    <!-- //게시판 보기  -->
     <select id="selectDetailView" resultMap="BoardResult">
         SELECT POST_ID, TITLE, CONTENT, USER_ID, TYPE
         FROM BOARD
         WHERE BOARD_DELETED = 'N' AND POST_ID = #{bno}
     </select>
 
-<!--  댓글 추가  -->
+    <!--  댓글 추가  -->
     <insert id="insertReply">
         INSERT
         INTO REPLY(
@@ -79,7 +81,7 @@
         )
     </insert>
 
-<!--  해당 게시판 번호의 댓글 가져오기  -->
+    <!--  해당 게시판 번호의 댓글 가져오기  -->
     <select id="selectReplyList" resultMap="ReplyResult">
         SELECT REP_NO,
             CONTENT,
@@ -91,6 +93,7 @@
             ORDER BY REP_NO DESC
     </select>
 
+    <!--  게시판 수정  -->
     <update id="updateBoard">
         UPDATE BOARD
                 SET POST_ID = #{postId},
@@ -102,12 +105,30 @@
         WHERE POST_ID = #{postId}
     </update>
 
+    <!--  게시판 삭제  -->
     <update id="deleteBoard">
         UPDATE BOARD
             SET BOARD_DELETED = 'Y'
         WHERE POST_ID = #{postId}
     </update>
 
+    <!--  조건으로 게시판 검색 시 게시판 수  -->
+    <select id="selectBoardCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM BOARD
+        WHERE BOARD_DELETED = 'N'
+        <if test="type != null and type != 0">
+            AND TYPE = #{type}
+        </if>
+        <if test="title != null and title != ''">
+            AND TITLE LIKE '%' || #{title} || '%'
+        </if>
+        <if test="userId != null and userId != ''">
+            AND USER_ID LIKE '%' || #{userId} || '%'
+        </if>
+    </select>
+
+    <!--  조건으로 게시판 검색  -->
     <select id="selectBoard" resultMap="BoardResult">
     SELECT POST_ID,
             TYPE,
@@ -119,13 +140,11 @@
             <if test="type != null and type != 0">
                 AND TYPE = #{type}
             </if>
-
             <if test="title != null and title != ''">
-                AND TITLE LIKE CONCAT('%', #{title}, '%')
+                AND TITLE LIKE '%' || #{title} || '%'
             </if>
-
             <if test="userId != null and userId != ''">
-                AND USER_ID LIKE CONCAT('%', #{userId}, '%')
+                AND USER_ID LIKE '%' || #{userId} || '%'
             </if>
     ORDER BY POST_ID DESC
     </select>

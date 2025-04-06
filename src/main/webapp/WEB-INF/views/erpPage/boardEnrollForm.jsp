@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Diamelo</title>
-  <link rel="stylesheet" href="/resources/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="/resources/css/default.css" />
-  <link rel="stylesheet" href="/resources/css/erp/boardEnrollStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/boardEnrollStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -28,14 +28,14 @@
           <div id="header">
             <div id="userId">
               <div id="userId0"><p>*</p>작성자</div>
-              <div><input type="text" readonly value="user10" style="color:#757575" name="userId"></div>
+              <div><input type="text" readonly value="${loginUser.userId}" style="color:#757575" name="userId"></div>
             </div>
-<%--${loginUser.uesrId}--%>
+
             <div id="category">
               <div id="category0"><p>*</p>게시글 분류</div>
               <div id="category1">
-                <select name="type">
-                  <option selected disabled>분류</option>
+                <select id="selectOption" name="type">
+                  <option selected disabled value="0">분류</option>
                   <option value="1">공지</option>
                   <option value="2">문의</option>
                 </select>
@@ -59,15 +59,23 @@
 
         <div id="footer">
           <div id="footer-wrap">
-            <button id="addBtn" type="submit">게시글 등록</button>
+            <button id="addBtn" type="submit" onclick="return insertBoard()">게시글 등록</button>
             <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로가기</button>
           </div>
         </div>
       </form>
-
     </div>
   </div>
 </div>
 
+<script>
+    function insertBoard(){
+        const select = document.getElementById("selectOption").value;
+        if(select === "0"){
+            alert('분류를 선택하지 않았습니다.');
+            return false;
+        }
+    }
+</script>
 </body>
 </html>
