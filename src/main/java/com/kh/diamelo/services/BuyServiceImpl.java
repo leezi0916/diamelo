@@ -30,5 +30,18 @@ public class BuyServiceImpl implements BuyService {
         return buyMapper.selectProduceBuyList();
     }
 
+    @Override
+    public int insertOrderDetails(ArrayList<Product> product) {
+//        int proName =  buyMapper.selectMetNum(product);
+
+
+        return buyMapper.insertOrderDetails(product);
+    }
+
+    @Override
+    public int selectHistoryNo(int rNum) {
+        return buyMapper.selectHistoryNo(rNum);
+    }
+
 
 }
