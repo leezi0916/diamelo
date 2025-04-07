@@ -1,7 +1,9 @@
 package com.kh.diamelo.mappers;
 
 
+import com.kh.diamelo.domain.vo.Attachment;
 import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.domain.vo.Recipe;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,7 +25,17 @@ public interface InventoryMapper {
 
     ArrayList<Product> selectMaterialList(RowBounds rowBounds);
 
-    int insertIngrediant(Product product);
+
+    int insertProduct(Product product);
+
+    int insertProductAttachment(Attachment attachment);
+
+    int insertRecipeList(@Param("recipeList") ArrayList<Recipe> recipeList);
+
+
+    int insertMaterial(Product product);
+
+    int insertMaterialAttachment(Attachment attachment);
 
 
 

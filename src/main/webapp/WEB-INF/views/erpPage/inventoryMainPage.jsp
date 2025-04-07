@@ -128,12 +128,12 @@
                                 <td>${p.proDetail}</td>
                                 <td>
                                     <button class="icon-button" type="button" onclick="location.href='update.pro'">
-                                        <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                                        <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
                                     <button class="icon-button" type="button" onclick="location.href='delete.pro'">
-                                        <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                        <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
                                 </td>
                             </tr>
@@ -196,12 +196,12 @@
                                 <td>${p.proDetail}</td>
                                 <td>
                                     <button class="icon-button" type="button" onclick="location.href='update.ing'">
-                                        <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                                        <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
                                     <button class="icon-button" type="button" onclick="location.href='delete.ing'">
-                                        <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                        <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
                                 </td>
                             </tr>

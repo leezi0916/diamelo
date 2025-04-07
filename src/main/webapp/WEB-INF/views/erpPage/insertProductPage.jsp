@@ -54,7 +54,7 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="date" name="proDate" placeholder="DATE">
+                                    <input class="input-box" type="date" name="ProEnrollDate" placeholder="DATE">
                                 </div>
                             </div>
                         </div>
@@ -94,6 +94,7 @@
                                 <table id="dynamicTable" border="1">
                                     <thead>
                                     <tr>
+                                        <th style="width: 15%;">NO.</th>
                                         <th>재료명</th>
                                         <th id="amount_th">수량(단위:g)</th>
                                         <th>가격</th>
@@ -108,18 +109,12 @@
                         </div>
 
                         <div id="ingre_lower_right">
-
-                            <div id="ingre_image">
-                                <div id="insert_image">
-                                    <input type="file" name="upfile" accept="image/*" onchange="changeImage(this)"></input>
-                                    <div id="image_preview"></div> <!-- ✅ 미리보기 이미지 영역 추가 -->
-                                </div>
-                                재료 이미지
+                            <div style="position: relative; width: 150px; height: 180px;">
+                                <input id="insert_image" type="file" name="upfile" accept="image/*" onchange="changeImage(this)">
+                                <div id="image_preview"></div> <!-- ✅ 미리보기 이미지 영역 -->
                             </div>
-
+                            <p>재료 이미지</p>
                         </div>
-
-
                     </div>
 
 
@@ -144,7 +139,7 @@
             img.src = URL.createObjectURL(file);
             img.style.width = "100%";
             img.style.height = "100%";
-            img.style.objectFit = "cover";
+            img.style.objectfit = "cover";
 
             let container = document.getElementById("image_preview"); // ✅ 미리보기 영역으로 변경
             container.innerHTML = ""; // 기존 이미지 삭제
@@ -162,7 +157,7 @@
             console.log("📌 [선택한 파일]", formData.get("imageUpload"));
 
             // 실제 제출하려면 아래 코드 주석 해제
-            // event.target.submit();
+             event.target.submit();
 
     });
 
@@ -172,8 +167,9 @@
 
         const newRow = table.insertRow();
         newRow.innerHTML = `
+        <td style="width: 15%;"><input type="text" name="matNo[]" placeholder="NO." class="table-input"></td>
         <td><input type="text" name="proName[]" placeholder="재료명" class="table-input"></td>
-        <td><input type="number" name="proInventStock[]" placeholder="수량" class="table-input"></td>
+        <td><input type="number" name="amount[]" placeholder="수량" class="table-input"></td>
         <td><input type="text" name="proPrice[]" placeholder="가격" class="table-input"></td>
         <td><button type="button" id="delete-btn" onclick="removeRow(this)">삭제</button></td>
     `;

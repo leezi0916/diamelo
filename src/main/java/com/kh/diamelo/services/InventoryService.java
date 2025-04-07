@@ -1,7 +1,6 @@
 package com.kh.diamelo.services;
 
-import com.kh.diamelo.domain.vo.PageInfo;
-import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.domain.vo.*;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
@@ -24,7 +23,21 @@ public interface InventoryService {
         ArrayList<Product> selectProductList(PageInfo pi);
         ArrayList<Product> selectMaterialList(PageInfo pi);
 
-        int insertIngrediant(Product product);
+        int insertProduct(Product product);
+
+        int insertProductAttachment(Attachment attachment);
+
+        int insertRecipeList(ArrayList<Recipe> recipeList);
+
+
+
+
+
+        int insertMaterial(Product product);
+
+        int insertMaterialAttachment(Attachment attachment);
+
+
 
 
 
