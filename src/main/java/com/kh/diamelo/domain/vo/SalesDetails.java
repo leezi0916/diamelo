@@ -13,7 +13,7 @@ public class SalesDetails {
     private String userId; //작성자 ID
     private int groupNo; // 그룹번호
     private String proName; //제품 이름
-    private String filePath; //제품이미지
+    private String changeName; //제품이미지
     private int salesStock; //제품수량
     private int salesAmount; //금액
     private String type; //분류 지출(O), 소득(I)

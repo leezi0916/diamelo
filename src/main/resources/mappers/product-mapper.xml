@@ -9,6 +9,7 @@
         <result column="PRO_PRICE" property="proPrice"/>
         <result column="PRO_DELETED" property="proDeleted"/>
         <result column="IS_PRODUCT" property="isProduct"/>
+        <result column="CHANGE_NAME" property="changeName"/>
     </resultMap>
 
     <resultMap id="ProductWithAmountResultMap" type="com.kh.diamelo.domain.vo.Product">
@@ -32,7 +33,7 @@
 
     <!-- 제품 이미지 조회 -->
     <select id="getProductImage" resultType="string">
-        SELECT FILE_PATH FROM ATTACHMENT WHERE PRO_NO = #{productNo}
+        SELECT CHANGE_NAME FROM ATTACHMENT WHERE PRO_NO = #{productNo}
     </select>
 
     <!-- 특정 제품의 재료 목록 조회 -->

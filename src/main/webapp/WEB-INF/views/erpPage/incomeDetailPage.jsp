@@ -57,7 +57,7 @@
                         <%-- 각 제품 항목(이미지, 이름, 수량) --%>
                         <c:forEach var="item" items="${list}">
                             <tr>
-                                <td><div id="product-img"><img src="${item.filePath}" alt="제품 이미지"></div></td>
+                                <td><div id="product-img"><img src="${item.changeName}" alt="제품 이미지"></div></td>
                                 <td>${item.proName}</td>
                                 <td>${item.salesStock}</td>
                                 <td><fmt:formatNumber value="${item.salesAmount}" type="number"/> 원</td>

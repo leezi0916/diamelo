@@ -7,7 +7,7 @@
         <result column="USER_ID" property="userId"/>
         <result column="GROUP_NO" property="groupNo"/>
         <result column="PRO_NAME" property="proName"/>
-        <result column="FILE_PATH" property="filePath"/>
+        <result column="CHANGE_NAME" property="changeName"/>
         <result column="SALES_STOCK" property="salesStock"/>
         <result column="SALES_AMOUNT" property="salesAmount"/>
         <result column="TYPE" property="type"/>
@@ -136,7 +136,7 @@
 
     <select id="incomeDetail" resultMap="SalesDetailsResult">
             SELECT
-            s.FILE_PATH,
+            s.CHANGE_NAME,
             s.PRO_NAME,
             u.COMPANY_NAME,
             s.TYPE,
