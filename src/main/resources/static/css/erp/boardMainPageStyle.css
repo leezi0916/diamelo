@@ -8,7 +8,9 @@
 /*테이블 css 입니다*/
 .table{
     border-bottom:1px solid #D0D5DD;
+    table-layout: fixed;
 }
+
 .table thead th{
     text-align: center;
 }

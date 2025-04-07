@@ -20,25 +20,27 @@ import java.util.HashMap;
 public class ProductController {
 
     private final ProductService productService;
+
+    //제작 페이지
     @GetMapping("prdc.erp")
     public String production(Model model) {
         ArrayList<Product> productList = productService.getProductList();
 
         // productList가 null인지 확인
         if (productList == null) {
-
+            model.addAttribute("message", "등록된 제품이 없습니다.");
         } else {
             for (Product p : productList) {
-
+                System.out.println("상품명: " + p.getProName());
             }
         }
 
+        //jsp에 있는 select박스의 옵션들
         model.addAttribute("productList", productList);
         return "erpPage/productionPage";
     }
 
-
-
+    //제작 기능
     @PostMapping("/create.pro")
     public String createProduct(@RequestParam("productNo") int productNo, @RequestParam("quantity") int quantity,
                                 RedirectAttributes redirectAttributes) {

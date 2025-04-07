@@ -146,20 +146,18 @@
                     <div id="page-body-content">
                         <div id="week-sales">
                             <div id="week-sales1">
-                                <p>주간 매출표</p>
-                                <p style="color: #A9A9A9">주간 매출 300,000원</p>
+                                <p>월간 매출표</p>
+                                <p style="color: #A9A9A9">3개월간 매출 300,000원</p>
                             </div>
                             <div id="week-sales2">
                                 <div style="background: red"></div>
                                 <div style="background: green"></div>
                                 <div style="background: blue"></div>
-                                <div style="background: yellow"></div>
                             </div>
                             <div id="week-sales3">
-                                <div>1주차</div>
-                                <div>2주차</div>
-                                <div>3주차</div>
-                                <div>4주차</div>
+                                <div>저저번달</div>
+                                <div>저번달</div>
+                                <div>이번달</div>
                             </div>
                         </div>
                     </div>
