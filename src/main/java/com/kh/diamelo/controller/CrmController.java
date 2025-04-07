@@ -17,4 +17,9 @@ public class CrmController {
     public String signUpEnrollForm() {
         return "crmPage/signUpEnrollForm";
     }
+
+    @GetMapping("a")
+    public String a() {
+        return "crmPage/productList";
+    }
 }

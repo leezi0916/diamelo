@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div id="button">
-                    <a href=""><button>전체 상품</button></a>
+                    <a href="a"><button>전체 상품</button></a>
                 </div>
             </div>
         </div>
