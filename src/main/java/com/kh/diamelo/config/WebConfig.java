@@ -10,14 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
+        // api 로그
         registry.addInterceptor(new LoggingInterceptor())
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/static/**", "/error/**");
 
-//        registry.addInterceptor(new LoginInterceptor())
-//                .addPathPatterns("/","/myPage.me")
-//                .excludePathPatterns("/static/**", "/error/**");
-
+        // 로그인 정보 Interceptor
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns(
@@ -29,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/login.me",
                         "/logoutSuccess.me",
                         "/signUpEnrollForm.me",
-                        "/signUp.me"
-                );
+                        "/signUp.me");
+
     }
 }
