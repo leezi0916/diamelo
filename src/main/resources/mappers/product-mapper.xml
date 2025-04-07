@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.diamelo.mappers.ProductMapper">
     <resultMap id="ProductResultMap" type="com.kh.diamelo.domain.vo.Product">
-        <result column="pro_no" property="proNo"/>
-        <result column="procategory_no" property="proCategoryNo"/>
-        <result column="pro_name" property="proName"/>
-        <result column="pro_detail" property="proDetail"/>
-        <result column="pro_price" property="proPrice"/>
-        <result column="pro_deleted" property="proDeleted"/>
-        <result column="is_product" property="isProduct"/>
+        <result column="PRO_NO" property="proNo"/>
+        <result column="PROCATEGORY_NO" property="proCategoryNo"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="PRO_DETAIL" property="proDetail"/>
+        <result column="PRO_PRICE" property="proPrice"/>
+        <result column="PRO_DELETED" property="proDeleted"/>
+        <result column="IS_PRODUCT" property="isProduct"/>
     </resultMap>
 
     <resultMap id="ProductWithAmountResultMap" type="com.kh.diamelo.domain.vo.Product">
