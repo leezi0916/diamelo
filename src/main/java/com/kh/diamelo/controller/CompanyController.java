@@ -3,6 +3,7 @@ package com.kh.diamelo.controller;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.UserInfo;
 import com.kh.diamelo.services.CompanyService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +63,7 @@ public class CompanyController {
         return "erpPage/companyMainPage";
     }
 
-    //어드민 거래처 관리 페이지 조건 검색
+    // 거래처 관리자 페이지 조건 검색
     @GetMapping("select.ad")
     public String selectAdminPage(@RequestParam(defaultValue = "1")int cpage, @RequestParam(value = "type")String type,
                                   @RequestParam(value = "companyName") String companyName,
@@ -79,5 +80,19 @@ public class CompanyController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("userName", userName);
         return "erpPage/companyAdminPage";
+    }
+
+    //거래처 관리자 페이지 거래처 삭제
+    @GetMapping("delete.com")
+    public String companyDelete(UserInfo userInfo, Model model, HttpSession session) {
+        int companyDelete = companyService.deleteCompany(userInfo);
+
+        if(companyDelete > 0) {
+            session.setAttribute("alertMsg", "거래처 삭제 성공");
+            return "redirect:/compAdmin.erp";
+        }else{
+            model.addAttribute("errorMsg", "거래처 삭제 실패");
+            return "common/erp/erpErrorPage";
+        }
     }
 }
