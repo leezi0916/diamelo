@@ -28,9 +28,9 @@
           <div id="header">
             <div id="userId">
               <div id="userId0"><p>*</p>작성자</div>
-              <div><input type="text" readonly value="user10" style="color:#757575" name="userId"></div>
+              <div><input type="text" readonly value="${loginUser.userId}" style="color:#757575" name="userId"></div>
             </div>
-<%--${loginUser.uesrId}--%>
+
             <div id="category">
               <div id="category0"><p>*</p>게시글 분류</div>
               <div id="category1">
@@ -59,7 +59,7 @@
 
         <div id="footer">
           <div id="footer-wrap">
-            <button id="addBtn" type="submit" onclick="insertBoard()">게시글 등록</button>
+            <button id="addBtn" type="submit" onclick="return insertBoard()">게시글 등록</button>
             <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로가기</button>
           </div>
         </div>
@@ -69,13 +69,13 @@
 </div>
 
 <script>
-    const select = document.getElementById("selectOption").value;
-
-
     function insertBoard(){
-
+        const select = document.getElementById("selectOption").value;
+        if(select === "0"){
+            alert('분류를 선택하지 않았습니다.');
+            return false;
+        }
     }
-console.log(value);
 </script>
 </body>
 </html>

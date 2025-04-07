@@ -2,6 +2,7 @@ package com.kh.diamelo.mappers;
 
 import com.kh.diamelo.domain.vo.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
@@ -19,4 +20,20 @@ public interface CompanyMapper {
 
     //거래관리 관리자용 페이지에서 모든 거래처를 찾아옴
     ArrayList<UserInfo> selectAllList(RowBounds rowBounds);
+
+    //거래처 조건 검색 후 거래처 수
+    int selectCompanyDetailCount(@Param("companyName") String companyName,
+                                 @Param("userName") String userName);
+
+    //거래처 조건 검색
+    ArrayList<UserInfo> selectCompanyDetailList(@Param("companyName") String companyName,
+                                                @Param("userName") String userName, RowBounds rowBounds);
+
+    //어드민 거래처 관리 페이지 거래처 수
+    int selectAdminPageCompanyCount(@Param("type")String type, @Param("companyName") String companyName,
+                                    @Param("userName") String userName);
+
+    //어드민 거래처 관리 페이지 조건 검색
+    ArrayList<UserInfo> selectAdminPageDetailList(@Param("type")String type, @Param("companyName") String companyName,
+                                                  @Param("userName") String userName, RowBounds rowBounds);
 }

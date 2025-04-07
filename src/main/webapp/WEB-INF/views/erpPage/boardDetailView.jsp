@@ -44,7 +44,7 @@
                         </div>
                         <div id="userId">
                             <div id="userId0">작성자</div>
-                            <div><input type="text" readonly placeholder="admin"></div>
+                            <div><input type="text" readonly placeholder="${b.userId}"></div>
                             <%--${loginUser.user_Id}--%>
                         </div>
                     </div>
