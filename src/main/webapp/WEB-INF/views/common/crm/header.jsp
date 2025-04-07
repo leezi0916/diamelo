@@ -52,7 +52,7 @@
                             viewBox="0 0 40 40"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            onclick="location.href='myPageForm.me'"
+                            onclick="location.href='myPageDetail.me'"
                         >
                             <g clip-path="url(#clip0_38_5769)">
                                 <path

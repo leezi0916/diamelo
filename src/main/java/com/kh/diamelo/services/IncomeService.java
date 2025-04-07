@@ -20,4 +20,7 @@ public interface IncomeService {
 
     //조건에 맞는 매출 리스트 보여주기
     int searchIncomeSum(String type, String startDate, String endDate, String company);
+
+    //gno에 해당하는 상세보여주기
+    ArrayList<SalesDetails> incomeDetail(int gno);
 }

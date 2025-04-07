@@ -5,36 +5,54 @@
     <resultMap id="SalesDetailsResult" type="SalesDetails">
         <result column="SAL_NO" property="salNo"/>
         <result column="USER_ID" property="userId"/>
-        <result column="SALES_DATE" property="salesDate"/>
+        <result column="GROUP_NO" property="groupNo"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="SALES_STOCK" property="salesStock"/>
         <result column="SALES_AMOUNT" property="salesAmount"/>
         <result column="TYPE" property="type"/>
+        <result column="SALES_DATE" property="salesDate"/>
         <result column="STATUS" property="status"/>
-        <result column="SALES_NAME" property="salesName"/>
         <result column="COMPANY_NAME" property="companyName"/>
+        <result column="TOTAL_SALES" property="totalSales"/>
     </resultMap>
 
     <select id="selectIncomeCount" resultType="_int">
-        SELECT COUNT(*)
+        SELECT COUNT(DISTINCT GROUP_NO)
         FROM SALES_DETAILS
         WHERE STATUS = 'Y'
+
     </select>
 
     <select id="selectIncomeList" resultMap="SalesDetailsResult">
-        SELECT s.SAL_NO, u.COMPANY_NAME, s.TYPE, TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE, s.SALES_AMOUNT
+        SELECT
+        GROUP_NO,
+        COMPANY_NAME,
+        TYPE,
+        TO_CHAR(SALES_DATE, 'YY/MM/DD') AS SALES_DATE,
+        TOTAL_SALES
+        FROM (
+        SELECT
+        s.GROUP_NO,
+        u.COMPANY_NAME,
+        s.TYPE,
+        s.SALES_DATE,
+        SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO) AS TOTAL_SALES,
+        ROW_NUMBER() OVER (PARTITION BY s.GROUP_NO ORDER BY s.SALES_DATE DESC) AS RN
         FROM SALES_DETAILS s
         JOIN USER_INFO u ON s.USER_ID = u.USER_ID
         WHERE s.STATUS = 'Y'
-        ORDER BY SALES_DATE DESC, s.SAL_NO DESC
+        )
+        WHERE RN = 1
+        ORDER BY SALES_DATE DESC, GROUP_NO DESC
     </select>
 
-<!--    <select id="selectDetailView" resultMap="BoardResult">-->
-<!--        SELECT POST_ID, TITLE, CONTENT, USER_ID-->
-<!--        FROM BOARD-->
-<!--        WHERE BOARD_DELETED = 'N' AND POST_ID = #{bno}-->
-<!--    </select>-->
+
 
     <select id="selectSerachIncomeCount" resultType="_int">
         SELECT COUNT(*)
+        FROM (
+        SELECT DISTINCT s.GROUP_NO
         FROM SALES_DETAILS s
         JOIN USER_INFO u ON s.USER_ID = u.USER_ID
         WHERE 1=1
@@ -51,12 +69,26 @@
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
         </if>
         AND s.STATUS = 'Y'
+        )
     </select>
 
     <select id="selectSearchIncomeList" resultMap="SalesDetailsResult">
-        SELECT s.SAL_NO, u.COMPANY_NAME, s.TYPE, TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE, s.SALES_AMOUNT
+        SELECT
+        GROUP_NO,
+        COMPANY_NAME,
+        TYPE,
+        TO_CHAR(SALES_DATE, 'YY/MM/DD') AS SALES_DATE,
+        TOTAL_SALES
+        FROM (
+        SELECT
+        s.GROUP_NO,
+        u.COMPANY_NAME,
+        s.TYPE,
+        s.SALES_DATE,
+        SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO) AS TOTAL_SALES,
+        ROW_NUMBER() OVER (PARTITION BY s.GROUP_NO ORDER BY s.SALES_DATE DESC) AS RN
         FROM SALES_DETAILS s
-        LEFT JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        JOIN USER_INFO u ON s.USER_ID = u.USER_ID
         WHERE 1=1
         <if test="type != null and type != ''">
             AND s.TYPE = #{type}
@@ -71,18 +103,19 @@
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
         </if>
         AND s.STATUS = 'Y'
-        ORDER BY SALES_DATE DESC, s.SAL_NO DESC
+        )
+        WHERE RN = 1
+        ORDER BY SALES_DATE DESC, GROUP_NO DESC
     </select>
 
 
     <select id="searchIncomeSum" resultType="_int">
-        SELECT SUM(SALES_AMOUNT)
+        SELECT SUM(TOTAL_SALES)
+        FROM (
+        SELECT s.GROUP_NO, SUM(s.SALES_AMOUNT) AS TOTAL_SALES
         FROM SALES_DETAILS s
         JOIN USER_INFO u ON s.USER_ID = u.USER_ID
         WHERE 1=1
-        <if test="type != null and type != ''">
-            AND s.TYPE = #{type}
-        </if>
         <if test="type != null and type != ''">
             AND s.TYPE = #{type}
         </if>
@@ -96,6 +129,26 @@
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
         </if>
         AND s.STATUS = 'Y'
+        GROUP BY s.GROUP_NO
+        )
     </select>
 
+
+    <select id="incomeDetail" resultMap="SalesDetailsResult">
+            SELECT
+            s.CHANGE_NAME,
+            s.PRO_NAME,
+            u.COMPANY_NAME,
+            s.TYPE,
+            s.SALES_STOCK,
+            s.SALES_AMOUNT,
+            SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO) AS TOTAL_SALES
+            FROM
+            SALES_DETAILS s
+            JOIN
+            USER_INFO u ON s.USER_ID = u.USER_ID
+            WHERE
+            s.STATUS = 'Y'
+            AND s.GROUP_NO = #{gno}
+    </select>
 </mapper>
