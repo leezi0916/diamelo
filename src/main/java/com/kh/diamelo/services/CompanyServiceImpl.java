@@ -42,4 +42,32 @@ public class CompanyServiceImpl implements CompanyService {
         RowBounds rowBounds = new RowBounds (offset, pi.getPageLimit());
         return companyMapper.selectAllList(rowBounds);
     }
+
+    //거래처 조건 검색 후 거래처 수
+    @Override
+    public int selectCompanyDetailCount(String companyName, String userName) {
+        return companyMapper.selectCompanyDetailCount(companyName, userName);
+    }
+
+    //거래처 조건 검색
+    @Override
+    public ArrayList<UserInfo> selectCompanyDetailList(String companyName, String userName, PageInfo pi) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return companyMapper.selectCompanyDetailList(companyName, userName, rowBounds);
+    }
+
+    //어드민 거래처 관리 페이지 거래처 수
+    @Override
+    public int selectAdminPageCompanyCount(String type, String companyName, String userName) {
+        return companyMapper.selectAdminPageCompanyCount(type, companyName, userName);
+    }
+
+    //어드민 거래처 관리 페이지 조건 검색
+    @Override
+    public ArrayList<UserInfo> selectAdminPageDetailList(String type, String companyName, String userName, PageInfo pi) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return companyMapper.selectAdminPageDetailList(type, companyName, userName, rowBounds);
+    }
 }

@@ -21,9 +21,6 @@ body{
     background: #f8f8f8 !important;
 }
 
-input[type='text']{
-    cursor: pointer;
-}
 
 .table-click:hover{
     cursor: pointer;

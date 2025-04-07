@@ -62,6 +62,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </style>
     </head>
     <body>
+        <c:if test="${ not empty alertMsg}">
+            <script>
+                alert("${alertMsg}");
+            </script>
+            <c:remove var="alertMsg" scope="session"/>
+        </c:if>
+
         <div class="header-container">
             <!-- 왼쪽: HOME 아이콘 + 텍스트 -->
             <div class="header-left">

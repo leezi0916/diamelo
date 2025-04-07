@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Diamelo</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/boardEnrollStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/boardEnrollStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -23,48 +23,59 @@
         </div>
       </div>
 
-      <div id="page-body-content">
-        <div id="header">
+      <form action="insertBoard.bo" method="post" id="board-insert">
+        <div id="page-body-content">
+          <div id="header">
+            <div id="userId">
+              <div id="userId0"><p>*</p>작성자</div>
+              <div><input type="text" readonly value="${loginUser.userId}" style="color:#757575" name="userId"></div>
+            </div>
 
-          <div id="userId">
-            <div id="userId0"><p>*</p>작성자</div>
-            <div><input type="text" readonly placeholder="admin"></div>
-          </div>
-
-          <div id="category">
-            <div id="category0"><p>*</p>게시글 분류</div>
-            <div id="category1">
-              <select>
-               <option>분류</option>
-                <option>공지</option>
-                <option>문의</option>
-              </select>
+            <div id="category">
+              <div id="category0"><p>*</p>게시글 분류</div>
+              <div id="category1">
+                <select id="selectOption" name="type">
+                  <option selected disabled value="0">분류</option>
+                  <option value="1">공지</option>
+                  <option value="2">문의</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="header1">
-          <div id="title">
-            <div id="title0"><p>*</p>제목</div>
-            <div id="title1"><input type="text"  placeholder="제목을 입력해주세요."></div>
+          <div id="header1">
+            <div id="title">
+              <div id="title0"><p>*</p>제목</div>
+              <div id="title1"><input type="text"  placeholder="제목을 입력해주세요." name="title"></div>
+            </div>
           </div>
-        </div>
 
-        <div id="content">
-          <div id="content-name">내용</div>
-          <div id="content-input">
-            <textarea placeholder="내용을 입력해주세요."></textarea>
+          <div id="content">
+            <div id="content-name">내용</div>
+            <div id="content-input">
+              <textarea placeholder="내용을 입력해주세요." name="content"></textarea>
+            </div>
           </div>
         </div>
 
         <div id="footer">
           <div id="footer-wrap">
-            <button id="addBtn">게시글 등록</button>
+            <button id="addBtn" type="submit" onclick="return insertBoard()">게시글 등록</button>
             <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로가기</button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script>
+    function insertBoard(){
+        const select = document.getElementById("selectOption").value;
+        if(select === "0"){
+            alert('분류를 선택하지 않았습니다.');
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

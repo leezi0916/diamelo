@@ -69,7 +69,7 @@
             <tbody>
             <%-- 반복 가능한 판매 내역 행 --%>
             <c:forEach var="b" items="${list}">
-              <tr onclick="location.href='buyDetail.erp?sNo=${b.salNo}">
+              <tr onclick="location.href='buyDetail.erp?sNo=${b.salNo}'">
                 <td>${b.salNo}</td>
                 <td>${b.userName}</td>
                 <td>A공장</td>

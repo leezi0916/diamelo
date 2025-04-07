@@ -3,9 +3,9 @@
 <html>
 <head>
   <title>Diamelo</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/boardEnrollStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/boardEnrollStyle.css" />
 </head>
 <body>
 <div class="layout-wrapper">
@@ -30,7 +30,10 @@
         <div id="header">
           <div id="userId">
             <div id="userId0"><p>*</p>작성자</div>
-            <div><input type="text" readonly value="${b1.userId}" name="userId"></div>
+            <div>
+              <input type="hidden" value="${b1.userId}" name="userId">
+              <input type="text" readonly placeholder="${b1.userId}">
+            </div>
           </div>
 
           <div id="category">
@@ -67,8 +70,8 @@
 
         <div id="footer">
           <div id="footer-wrap">
-            <button id="addBtn" type="submit">게시글 수정</button>
-            <button id="backBtn">뒤로가기</button>
+            <button id="addBtn" type="submit" >게시글 수정</button>
+            <button id="backBtn" type="button" onclick="location.href='board.erp'">뒤로가기</button>
           </div>
         </div>
         </form>
@@ -76,5 +79,6 @@
     </div>
   </div>
 </div>
+
 </body>
 </html>

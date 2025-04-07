@@ -30,5 +30,10 @@ public class Product {
     private int amount;
     private int stock;
 
+    private int historyNo;
+
+    private int qty;
+    private int itemTotal;
+
 
 }

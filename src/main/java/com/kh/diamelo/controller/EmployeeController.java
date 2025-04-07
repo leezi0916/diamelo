@@ -102,10 +102,10 @@ public class EmployeeController {
             if(userInfo.getOriginName() != null && !userInfo.getOriginName().equals("")){
                 new File(session.getServletContext().getRealPath(userInfo.getOriginName())).delete();
             }
-            String changeName = Template.saveFile(refile, session, "/image/employeeImage/");
-            userInfo.setChangeName("/image/employeeImage/" + changeName);
+            String changeName = Template.saveFile(refile, session, "/resources/uploadFile/");
+            userInfo.setChangeName("/resources/uploadFile/" + changeName);
             userInfo.setOriginName(refile.getOriginalFilename());
-            userInfo.setFilePath("/image/employeeImage/");
+            userInfo.setFilePath("/resources/uploadFile/");
 
             if(imgSearch==0){
                 employeeService.employeeDetailImageInsert(userInfo);
