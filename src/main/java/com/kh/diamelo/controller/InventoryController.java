@@ -3,7 +3,7 @@ package com.kh.diamelo.controller;
 import com.kh.diamelo.domain.vo.Board;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
-import com.kh.diamelo.domain.vo.User_Info;
+import com.kh.diamelo.domain.vo.UserInfo;
 import com.kh.diamelo.services.InventoryService;
 import com.kh.diamelo.services.ProductService;
 import com.kh.diamelo.utils.Template;
