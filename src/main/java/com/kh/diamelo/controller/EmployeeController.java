@@ -105,7 +105,7 @@ public class EmployeeController {
             String changeName = Template.saveFile(refile, session, "/resources/uploadFile/");
             userInfo.setChangeName("/resources/uploadFile/" + changeName);
             userInfo.setOriginName(refile.getOriginalFilename());
-            userInfo.setFilePath("/resources/uploadFile/");
+
 
             if(imgSearch==0){
                 employeeService.employeeDetailImageInsert(userInfo);

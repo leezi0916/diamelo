@@ -166,48 +166,33 @@
           </table>
         </div>
       </div>
-      <div id="page-body-page-div">
-        <div>
-          <div class="page-body-page-div-start">
-            <p>이전</p>
-          </div>
-          <div>
-            <p>1</p>
-          </div>
-          <div>
-            <p>2</p>
-          </div>
-          <div>
-            <p>3</p>
-          </div>
-          <div>
-            <p>4</p>
-          </div>
-          <div>
-            <p>5</p>
-          </div>
-          <div>
-            <p>6</p>
-          </div>
-          <div>
-            <p>7</p>
-          </div>
-          <div>
-            <p>8</p>
-          </div>
-          <div>
-            <p>9</p>
-          </div>
-          <div>
-            <p>10</p>
-          </div>
-          <div class="page-body-page-div-end">
-            <p>다음</p>
-          </div>
+        <%--   페이지 바     --%>
+        <div id="pagingArea">
+          <ul class="pagination">
+            <c:choose>
+              <c:when test="${ pi.currentPage eq 1 }">
+                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage - 1}">이전</a></li>
+              </c:otherwise>
+            </c:choose>
+
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+              <li class="page-item"><a class="page-link" href="empList.erp?epage=${p}">${p}</a></li>
+            </c:forEach>
+
+            <c:choose>
+              <c:when test="${ pi.currentPage eq pi.maxPage }">
+                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage + 1}">다음</a></li>
+              </c:otherwise>
+            </c:choose>
+          </ul>
         </div>
 
-
-      </div>
     </div>
   </div>
 </div>

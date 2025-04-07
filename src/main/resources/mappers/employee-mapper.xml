@@ -33,7 +33,7 @@
         WHERE STATUS = 'Y' AND
         USER_DELETED = 'N'
     </select>
-    <select id="selectUserInfoList" parameterType="UserInfo" resultMap="UserResult">
+    <select id="selectUserInfoList" parameterType="UserInfo"   resultMap="UserResult">
         SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
