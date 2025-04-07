@@ -13,6 +13,8 @@
         <result column="IS_PRODUCT" property="isProduct"/>
         <result column="ORIGIN_NAME" property="originName"/>
         <result column="CHANGE_NAME" property="changeName"/>
+        <result column="HISTORY_STOCK" property="historyStock"/>
+        <result column="HISTORY_NO" property="historyNo"/>
     </resultMap>
 
     <resultMap id="SalesDetailsResult" type="SalesDetails">
@@ -25,7 +27,14 @@
         <result column="SALES_NAME" property="salesName"/>
         <result column="USER_NAME" property="userName"/>
     </resultMap>
-
+    <resultMap id="InputHistoryResult" type="Product">
+        <result column="HISTORY_NO" property="historyNo"/>
+        <result column="PRO_NO" property="proNo"/>
+        <result column="HISTORY_TYPE" property="historyType"/>
+        <result column="HISTORY_STOCK" property="historyStock"/>
+        <result column="HISTORY_DATE" property="historyDate"/>
+        <result column="HISTORY_STATUS" property="historyStatus"/>
+    </resultMap>
     <select id="selectBuyCount" resultType="_int">
         SELECT COUNT(*) FROM SALES_DETAILS
         WHERE TYPE = 'O'
@@ -49,6 +58,30 @@
         WHERE PRO_DELETED = 'N' AND
         IS_PRODUCT = 'N'
     </select>
+
+
+    <select id="selectHistoryNo" resultType="_int">
+        SELECT COUNT(*)
+        FROM INOUT_HISTORY
+        WHERE HISTORY_NO = #{rNum}
+    </select>
+
+    <insert id="insertOrderDetails">
+        INSERT ALL
+        <foreach collection="list" item="product">
+            INTO INOUT_HISTORY (HISTORY_NO, PRO_NO, HISTORY_TYPE, HISTORY_STOCK, HISTORY_DATE, HISTORY_STATUS)
+            VALUES (
+            #{product.historyNo},
+            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{product.proName} AND ROWNUM = 1),
+            'O',
+            #{product.qty},
+            SYSDATE,
+            'W'
+            )
+        </foreach>
+        SELECT * FROM dual
+    </insert>
+
 
 
 

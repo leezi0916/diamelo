@@ -14,5 +14,7 @@ public interface BuyService {
 
     ArrayList<Product> selectProduceBuyList();
 
+    int insertOrderDetails(ArrayList<Product> product);
 
+    int selectHistoryNo(int rNum);
 }
