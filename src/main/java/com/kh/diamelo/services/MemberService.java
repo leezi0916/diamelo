@@ -13,5 +13,11 @@ public interface MemberService {
     UserInfo loginMember(String userId);
 
     // 개인정보 변경
-    int upDateMember(UserInfo userInfo);
+    int updateMember(UserInfo userInfo);
+
+    // 비밀번호 변경
+    int updatePwd(String newPwd, String userId);
+
+    // 회원 탈퇴
+    int deleteMember(String userId);
 }

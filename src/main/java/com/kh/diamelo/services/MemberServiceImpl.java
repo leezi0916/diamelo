@@ -31,7 +31,19 @@ public class MemberServiceImpl implements MemberService {
 
     // 개인정보 변경
     @Override
-    public int upDateMember(UserInfo userInfo) {
-        return memberMapper.upDateMember(userInfo);
+    public int updateMember(UserInfo userInfo) {
+        return memberMapper.updateMember(userInfo);
+    }
+
+    // 비밀번호 변경
+    @Override
+    public int updatePwd(String newPwd, String userId) {
+        return memberMapper.upDatePwd(newPwd, userId);
+    }
+
+    // 회원 탈퇴
+    @Override
+    public int deleteMember(String userId) {
+        return memberMapper.deleteMember(userId);
     }
 }
