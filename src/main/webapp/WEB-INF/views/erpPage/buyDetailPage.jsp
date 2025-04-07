@@ -29,11 +29,11 @@
             <%-- 검색 필터 + 테이블 리스트 영역 --%>
             <div id="page-body-content-information">
                 <p>구매 번호 :</p>
-                <p>186584</p>
+                <p>${product.groupNo}</p>
                 <p>구매처 :</p>
                 <p>A공장</p>
                 <p>구매일자 :</p>
-                <p>2024-12-30</p>
+                <p>${product.groupDate}</p>
             </div>
 
             <div class="page-body-content1">
@@ -42,7 +42,7 @@
                     <tr class="page-body-content-th">
 
                         <th></th>
-                        <th>0품목</th>
+                        <th>품목</th>
                         <th>총 수량</th>
 
                         <th>합계 금액 0원</th>
@@ -50,26 +50,14 @@
                     </thead>
                     <tbody>
                     <%-- 각 제품 항목(이미지, 이름, 수량) 5  15% 15% 30% 15% 15%--%>
+                    <c:forEach var="p" items="${productList}">
                     <tr>
-                        <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                        <td class="page-body-content-material-list-name">히알루론산</td>
-                        <td class="page-body-content-material-list-description">수량 5개</td>
-                        <td class="page-body-content-material-list-capacity">9,330원</td>
+                        <td class="page-body-content-material-list-img" style="background-image: url(${p.changeName})"></td>
+                        <td class="page-body-content-material-list-name">${p.proName}</td>
+                        <td class="page-body-content-material-list-description">수량 <span>${p.historyStock}</span>개</td>
+                        <td class="page-body-content-material-list-capacity"><span>${p.amount}</span>원</td>
                     </tr>
-                    <tr>
-
-                        <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                        <td class="page-body-content-material-list-name">히알루론산</td>
-                        <td class="page-body-content-material-list-description">수량 5개</td>
-                        <td class="page-body-content-material-list-capacity">9,330원</td>
-                    </tr>
-                    <tr>
-
-                        <td class="page-body-content-material-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                        <td class="page-body-content-material-list-name">히알루론산</td>
-                        <td class="page-body-content-material-list-description">수량 5개</td>
-                        <td class="page-body-content-material-list-capacity">9,330원</td>
-                    </tr>
+                    </c:forEach>
 
 
                     </tbody>
@@ -83,13 +71,13 @@
                     <div id="page-body-content-div">
                         <div class="page-body-content-div-input-div">
                             <p>구매자</p>
-                            <input type="text" class="input-box" readonly value="admin">
+                            <input type="text" class="input-box" readonly value="${product.userName}">
                             <p>담당자명</p>
                             <input type="text" class="input-box" readonly value="최지원">
                         </div>
                         <div class="page-body-content-div-input-div">
                             <p>구매일자</p>
-                            <input type="text" class="input-box" readonly value="2025/03/01">
+                            <input type="text" class="input-box" readonly value="${product.groupDate}">
                             <p>담당자 연락처</p>
                             <input type="text" class="input-box" readonly value="010-5252-5252">
                         </div>
@@ -105,7 +93,7 @@
             </div>
                 <div id="page-body-content-button-div">
 
-                    <input type="button" class="submitBtn" value="구매  페이지 돌아가기" onclick="location.href='buy.erp'">
+                    <input type="button" class="submitBtn" value="구매  페이지 돌아가기" onclick="location.href='buyList.erp'">
 
                 </div>
         </div>
