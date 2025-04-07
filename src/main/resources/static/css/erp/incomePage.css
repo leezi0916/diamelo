@@ -8,6 +8,7 @@
     background: #f8f8f8;
 }
 
+
 /*검색창 & 조회버튼 입력 필드 공통 스타일*/
 .input-box {
     width: 150px;
@@ -23,6 +24,7 @@
     margin: 20px 0px 0px 0px;
     text-align: center;
     cursor: pointer;
+    outline: none !important;
 }
 
 /*페이지 상단 타이틀 영역*/

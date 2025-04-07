@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,7 +24,11 @@
             <%-- 본문 상단 제목 영역 --%>
             <div class="page-body-header">
                 <div id="page-body-header-text">
-                    매출 내역 상세보기
+                    <c:choose>
+                        <c:when test="${list[0].type eq 'I'}">소득</c:when>
+                        <c:otherwise>지출</c:otherwise>
+                    </c:choose>
+                    내역 상세보기
                 </div>
             </div>
                 <%-- 테이블 포함 본문 내용 영역 --%>
@@ -33,46 +39,30 @@
                     <table class="content-table table-hover">
                         <thead>
                         <tr class="page-body-content-th">
-                            <th>거래처: 올리브영</th>
+                            <th>거래처: <c:out value="${list[0].companyName}" /></th>
                             <th></th>
-                            <th colspan="2">총 매출금액: 2,900,000 원</th>
+                            <th colspan="2">총 매출금액: <span style="font-weight: 500; color: ${list[0].type eq 'I' ? 'blue' : 'red'};">
+                        <c:choose>
+                            <c:when test="${list[0].type eq 'I'}">
+                                +<fmt:formatNumber value="${list[0].totalSales}" type="number"/>
+                            </c:when>
+                            <c:otherwise>
+                                -<fmt:formatNumber value="${list[0].totalSales}" type="number"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </span> 원</th>
                         </tr>
                         </thead>
                         <tbody>
                         <%-- 각 제품 항목(이미지, 이름, 수량) --%>
-                        <tr class="page-body-content-td">
-                            <td class="page-body-content-sales-list-img" style="background-image: url('/image/productImgae/product1.png')"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-lists">10개</td>
-                            <td class="page-body-content-sales-list" >1,000,000원</td>
-
-                        </tr>
-                        <tr class="page-body-content-td">
-                            <td class="page-body-content-sales-list-img" style="background-image: url('/image/productImgae/product2.png')"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-lists">10개</td>
-                            <td class="page-body-content-sales-list" >1,000,000원</td>
-
-                        </tr>
-                        <tr class="page-body-content-td">
-                            <td class="page-body-content-sales-list-img" style="background-image: url('/image/productImgae/product3.png')"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-lists">10개</td>
-                            <td class="page-body-content-sales-list" >1,000,000원</td>
-
-                        </tr>
-                        <tr class="page-body-content-td">
-                            <td class="page-body-content-sales-list-img" style="background-image: url('/image/productImgae/product4.png')"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-lists">10개</td>
-                            <td class="page-body-content-sales-list" >1,000,000원</td>
-                        </tr>
-                        <tr class="page-body-content-td">
-                            <td class="page-body-content-sales-list-img" style="background-image: url('/image/productImgae/product4.png')"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-lists">10개</td>
-                            <td class="page-body-content-sales-list" >1,000,000원</td>
-                        </tr>
+                        <c:forEach var="item" items="${list}">
+                            <tr>
+                                <td><div id="product-img"><img src="${item.filePath}" alt="제품 이미지"></div></td>
+                                <td>${item.proName}</td>
+                                <td>${item.salesStock}</td>
+                                <td><fmt:formatNumber value="${item.salesAmount}" type="number"/> 원</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
