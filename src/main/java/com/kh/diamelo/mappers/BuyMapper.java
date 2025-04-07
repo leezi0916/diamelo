@@ -4,6 +4,7 @@ import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.domain.vo.SalesDetails;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -14,4 +15,10 @@ public interface BuyMapper {
     ArrayList<SalesDetails> selectBuyList(PageInfo pi);
 
     ArrayList<Product> selectProduceBuyList();
+
+    int insertOrderDetails(ArrayList<Product> product);
+
+//    int selectMetNum(ArrayList<Product> product);
+
+    int selectHistoryNo(@Param("rNum") int rNum);
 }
