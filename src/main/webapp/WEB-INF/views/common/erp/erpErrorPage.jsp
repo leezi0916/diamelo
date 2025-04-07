@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/resources/css/erp/erpLayout.css" />
-        <link rel="stylesheet" href="/resources/css/default.css" />
+        <link rel="stylesheet" href="/css/erp/erpLayout.css"/>
+        <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+        <link rel="stylesheet" href="/css/default.css" />
         <meta charset="UTF-8" />
         <title>ErrorPage</title>
     </head>

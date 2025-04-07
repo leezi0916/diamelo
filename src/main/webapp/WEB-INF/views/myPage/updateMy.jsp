@@ -78,7 +78,6 @@ prefix="c" %>
                                 value="${loginUser.companyName}"
                                 placeholder="개인 / 기업명"
                                 name="companyName"
-                                required
                             />
                         </div>
                     </div>

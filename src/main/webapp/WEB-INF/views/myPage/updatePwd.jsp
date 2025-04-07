@@ -17,9 +17,17 @@ prefix="c" %>
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap"
             rel="stylesheet"
         />
+
     </head>
     <body>
-        <form action="">
+        <c:if test="${ not empty alertMsg}">
+            <script>
+                alert('${alertMsg}');
+            </script>
+            <c:remove var="alertMsg" scope="session" />
+        </c:if>
+
+        <form action="updatePwd.me" id="enroll-form" method="post">
             <div class="container">
                 <div class="logo">
                     <img src="/image/employeeImage/divh.png" alt="로고" />
@@ -30,26 +38,28 @@ prefix="c" %>
                     <div class="input-boxs">
                         <div class="input-name">
                             <p>현재 비밀번호</p>
-                            <input class="input-box" type="text" placeholder="PWD" readonly />
+                            <input class="input-box" type="password" placeholder="현재 비밀번호" name="currentPwd" required/>
                         </div>
 
                         <div class="input-name">
                             <p>새 비밀번호</p>
-                            <input class="input-box box" type="text" placeholder="NEW PWD" />
+                            <input class="input-box box" type="password" placeholder="새로운 비밀번호" name="newPwd" required/>
                         </div>
 
                         <div class="input-name">
                             <p>새 비밀번호 확인</p>
-                            <input class="input-box box" type="text" placeholder="CHECK PWD" />
+                            <input class="input-box box" type="password" placeholder="새 비밀번호 확인" id="newPwdCheck" required/>
                         </div>
                     </div>
 
                     <div id="buttons">
-                        <button class="button" type="submit">변경하기</button>
-                        <button type="button" class="button" onclick="location.href='/'">뒤로가기</button>
+                        <button class="button" type="submit" onclick="return validateForm('${loginUser.userPwd}')">변경하기</button>
+                        <button type="button" class="button" onclick="location.href='myPageDetail.me'">뒤로가기</button>
                     </div>
                 </div>
             </div>
         </form>
+        <%-- html이 다 그려지고 나서 실행되는 updatePwd.js --%>
+        <script src="/js/crm/updatePwd.js"></script>
     </body>
 </html>

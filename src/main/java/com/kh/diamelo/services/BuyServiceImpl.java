@@ -1,6 +1,7 @@
 package com.kh.diamelo.services;
 
 
+import com.kh.diamelo.domain.vo.InoutGroup;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.domain.vo.SalesDetails;
@@ -31,7 +32,7 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public int insertOrderDetails(ArrayList<Product> product) {
+    public int insertOrderDetails(Product product) {
 //        int proName =  buyMapper.selectMetNum(product);
 
 
@@ -39,8 +40,38 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public int selectHistoryNo(int rNum) {
-        return buyMapper.selectHistoryNo(rNum);
+    public String selectGroupNo(int rNum) {
+        return buyMapper.selectGroupNo(rNum);
+    }
+
+    @Override
+    public Product selectInOutHistory(int sNo) {
+        return buyMapper.selectInOutHistory(sNo);
+    }
+
+    @Override
+    public ArrayList<Product> selectMatDetailList(int sNo) {
+        return buyMapper.selectMatDetailList(sNo);
+    }
+
+    @Override
+    public int selectMatPrice(String proName) {
+        return buyMapper.selectMatPrice(proName);
+    }
+
+    @Override
+    public int insertInoutGroup(InoutGroup inoutGroup) {
+        return buyMapper.insertInoutGroup(inoutGroup);
+    }
+
+    @Override
+    public Product selectfilePath(String proName) {
+        return buyMapper.selectfilePath(proName);
+    }
+
+    @Override
+    public int insertSalesDetails(SalesDetails salesDetails) {
+        return buyMapper.insertSalesDetails(salesDetails);
     }
 
 

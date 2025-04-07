@@ -32,14 +32,18 @@ select{
 #page-body-content{
     border-radius: 15px;
     width: 100%;
-    height: 80%;
     background-color: #ffffff;
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     margin-top: 10px;
 }
 
+#page_body{
+    display: flex;
+    justify-content: space-between;
+}
+
 #search-category{
-    width: 10%;
+    width: 20%;
     height: 50px;
     border-radius: 15px;
     text-align: center;
@@ -57,6 +61,9 @@ select{
 .table{
     border-bottom: 1px solid #D0D5DD;
 }
+
+
+
 .table thead th{
     text-align: center;
 }
@@ -70,6 +77,8 @@ th{
     vertical-align: middle;
 }
 
+
+
 #search-company{
 
     height: 100px;
@@ -81,7 +90,7 @@ th{
 }
 
 #search-companyName{
-    width: 10%;
+    width: 20%;
     border: 1px solid #D0D5DD;
     height: 50px;
     border-radius: 15px;
@@ -93,7 +102,7 @@ th{
 
 
 #search-ceoName{
-    width: 10%;
+    width: 20%;
     border: 1px solid #D0D5DD;
     height: 50px;
     border-radius: 15px;
@@ -107,7 +116,7 @@ th{
     gap: 5%;
     background: #ffffff;
     text-align: center;
-    width: 10%;
+    width: 20%;
     border: 1px solid #D0D5DD;
     outline: none;
 }
@@ -118,7 +127,8 @@ th{
 #add-btn-wrap{
     display: flex;
     width: 50%;
-    justify-content: end;
+    justify-content: center;
+    align-items: center;
     gap: 2%;
 }
 #addBtn{

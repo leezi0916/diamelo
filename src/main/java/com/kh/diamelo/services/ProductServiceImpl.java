@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
         // 로그 추가
         if (productList == null) {
-            System.out.println("⚠productList가 null입니다.");
+            System.out.println("productList가 null입니다.");
         } else {
             System.out.println(" productList 크기: " + productList.size());
             for (Product p : productList) {
@@ -40,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
     // 제품 이미지 조회
     @Override
     public String getProductImage(int productNo) {
+
         return productMapper.getProductImage(productNo);
     }
 
@@ -63,10 +64,11 @@ public class ProductServiceImpl implements ProductService {
 
 //    제품 생성 파트
     @Transactional
+    //모두 성공해야만 db에 반영
     @Override
 
     public boolean produceProduct(int productNo, int quantity) {
-        //  필요한 원자재들의 재고가 충분한지 확인
+        //  특정제품의 필요한 재료들의 정보 조회
         ArrayList<Product> materials = productMapper.getMaterialsByProductNo(productNo);
 
         // 원자재들의 현재 재고 조회
@@ -81,6 +83,8 @@ public class ProductServiceImpl implements ProductService {
         // 필요한 재료가 충분한지 확인
         for (Product material : materials) {
             int requiredAmount = material.getAmount() * quantity;
+
+         // Map에서 key에 해당하는 값이 있으면 그걸 반환하고, 없으면 기본값(defaultValue)을 반환
             int currentStock = stockMap.getOrDefault(material.getProNo(), 0); // 재고 없으면 0으로 처리
 
             if (currentStock < requiredAmount) {

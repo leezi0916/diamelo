@@ -14,7 +14,9 @@
         <result column="ORIGIN_NAME" property="originName"/>
         <result column="CHANGE_NAME" property="changeName"/>
         <result column="HISTORY_STOCK" property="historyStock"/>
-        <result column="HISTORY_NO" property="historyNo"/>
+        <result column="HIS_NO" property="hisNo"/>
+
+
     </resultMap>
 
     <resultMap id="SalesDetailsResult" type="SalesDetails">
@@ -23,18 +25,23 @@
         <result column="SALES_DATE" property="salesDate"/>
         <result column="SALES_AMOUNT" property="salesAmount"/>
         <result column="TYPE" property="type"/>
-        <result column="TYPE" property="status"/>
+        <result column="STATUS" property="status"/>
         <result column="SALES_NAME" property="salesName"/>
         <result column="USER_NAME" property="userName"/>
     </resultMap>
-    <resultMap id="InputHistoryResult" type="Product">
-        <result column="HISTORY_NO" property="historyNo"/>
+    <resultMap id="InoutHistoryResult" type="Product">
+        <result column="HIS_NO" property="hisNo"/>
         <result column="PRO_NO" property="proNo"/>
-        <result column="HISTORY_TYPE" property="historyType"/>
+        <result column="GROUP_NO" property="groupNo"/>
         <result column="HISTORY_STOCK" property="historyStock"/>
-        <result column="HISTORY_DATE" property="historyDate"/>
-        <result column="HISTORY_STATUS" property="historyStatus"/>
+        <result column="GROUP_TYPE" property="groupType"/>
+        <result column="GROUP_DATE" property="groupDate"/>
+        <result column="GROUP_STATUS" property="groupStatus"/>
+        <result column="USER_NAME" property="userName"/>
     </resultMap>
+
+
+
     <select id="selectBuyCount" resultType="_int">
         SELECT COUNT(*) FROM SALES_DETAILS
         WHERE TYPE = 'O'
@@ -60,27 +67,73 @@
     </select>
 
 
-    <select id="selectHistoryNo" resultType="_int">
-        SELECT COUNT(*)
+    <select id="selectGroupNo" resultType="_int">
+        SELECT GROUP_NO
         FROM INOUT_HISTORY
-        WHERE HISTORY_NO = #{rNum}
+        WHERE GROUP_NO = #{rNum}
+        GROUP BY GROUP_NO
     </select>
 
     <insert id="insertOrderDetails">
-        INSERT ALL
-        <foreach collection="list" item="product">
-            INTO INOUT_HISTORY (HISTORY_NO, PRO_NO, HISTORY_TYPE, HISTORY_STOCK, HISTORY_DATE, HISTORY_STATUS)
+        INSERT INTO INOUT_HISTORY (HIS_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
             VALUES (
-            #{product.historyNo},
-            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{product.proName} AND ROWNUM = 1),
-            'O',
-            #{product.qty},
-            SYSDATE,
-            'W'
-            )
-        </foreach>
-        SELECT * FROM dual
+            SEQ_HNO.NEXTVAL,
+            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{proName} AND ROWNUM = 1),
+            #{groupNo},
+            #{qty},
+            #{proPrice}
+           )
     </insert>
+
+
+    <select id="selectInOutHistory" parameterType="Product" resultMap="InoutHistoryResult">
+        SELECT GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE
+        FROM INOUT_GROUP
+        JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_NO = #{sNo}
+    </select>
+
+    <select id="selectMatDetailList" parameterType="Product" resultMap="ProductResult">
+        SELECT CHANGE_NAME, PRO_NAME, HISTORY_STOCK, PRO_PRICE * HISTORY_STOCK AS AMOUNT
+        FROM INOUT_HISTORY
+        JOIN PRODUCT USING(PRO_NO)
+        LEFT JOIN ATTACHMENT USING(PRO_NO)
+        WHERE GROUP_NO = #{sNo}
+    </select>
+
+    <select id="selectMatPrice" resultType="_int">
+        SELECT PRO_PRICE
+        FROM PRODUCT
+        WHERE PRO_NAME = #{proName}
+    </select>
+
+    <insert id="insertInoutGroup">
+        INSERT INTO INOUT_GROUP(GROUP_NO, USER_ID, GROUP_TYPE, GROUP_DATE, GROUP_STATUS)
+        VALUES(#{groupNo}, #{userId}, 'O', SYSDATE, 'Y')
+    </insert>
+
+    <select id="selectfilePath" resultMap="ProductResult" parameterType="Product">
+        SELECT CHANGE_NAME
+        FROM ATTACHMENT
+        JOIN PRODUCT USING(PRO_NO)
+        WHERE PRO_NAME = #{proName}
+    </select>
+
+    <insert id="insertSalesDetails">
+        INSERT INTO SALES_DETAILS(SAL_NO, SALES_AMOUNT, SALES_STOCK,
+        PRO_NAME, CHANGE_NAME, SALES_DATE, STATUS, TYPE, USER_ID, GROUP_NO)
+        VALUES(
+        SEQ_SNO.NEXTVAL, #{salesAmount}, #{salesStock}, #{proName}, #{changeName}, SYSDATE, 'Y', 'O', #{userId}, #{groupNo})
+    </insert>
+
+
+
+
+
+
+
+
+
 
 
 

@@ -14,6 +14,13 @@
         <title>Title</title>
     </head>
     <body>
+        <c:if test="${ not empty alertMsg}">
+            <script>
+                alert('${alertMsg}');
+            </script>
+            <c:remove var="alertMsg" scope="session" />
+        </c:if>
+
         <div id="fullarea">
             <div class="div-area">
                 <div class="div-loginarea">
@@ -37,7 +44,7 @@
                                     class="loginForm"
                                     type="button"
                                     value="비밀번호 변경"
-                                    onclick="location.href='/'"
+                                    onclick="location.href='updatePwEnrollForm.me'"
                                 />
 
                                 <input class="loginForm" id="userDelete" type="button" value="회원탈퇴" />
@@ -57,22 +64,24 @@
         </div>
 
         <!-- 회원 탈퇴 모달 -->
-        <div id="deleteModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>회원 탈퇴</h3>
-                    <p>계정을 삭제하려면 현재 사용중인 비밀번호를 입력하세요</p>
-                </div>
+        <form action="delete.me" method="post">
+            <div id="deleteModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>회원 탈퇴</h3>
+                        <p>계정을 삭제하려면 현재 사용중인 비밀번호를 입력하세요</p>
+                    </div>
 
-                <input id="thPwd" placeholder="비밀번호 입력해주세요." />
-                <label> <input type="checkbox" id="confirmCheck" /> 동의합니다. </label>
+                    <input type="password" id="thPwd" placeholder="비밀번호 입력해주세요." name="userPwd" required/>
+                    <label> <input type="checkbox" id="confirmCheck" /> 동의합니다. </label>
 
-                <div class="modal-footer">
-                    <button id="confirmDelete" class="modal-button btn-danger" type="submit">탈퇴하기</button>
-                    <button id="cancelDelete" class="modal-button btn-cancel">취소</button>
+                    <div class="modal-footer">
+                        <button id="confirmDelete" class="modal-button btn-danger" type="submit">탈퇴하기</button>
+                        <button id="cancelDelete" type="button" class="modal-button btn-cancel">취소</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         <script>
             // 모달 요소 가져오기
@@ -106,7 +115,6 @@
                     return;
                 }
 
-                alert('회원 탈퇴가 완료되었습니다.'); // 실제 탈퇴 로직으로 대체 가능
                 modal.style.display = 'none';
             };
 

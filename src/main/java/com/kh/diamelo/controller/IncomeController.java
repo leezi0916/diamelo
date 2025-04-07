@@ -50,7 +50,7 @@ public class IncomeController {
         }
 
 
-        int salesAmount = incomeService.searchIncomeSum(type, startDate, endDate, company);
+        int totalSalesSum = incomeService.searchIncomeSum(type, startDate, endDate, company);
 
 
         // 조건에 맞는 매출 수 구하기
@@ -67,7 +67,7 @@ public class IncomeController {
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("pi", pi);
         model.addAttribute("list", list);
-        model.addAttribute("salesAmount", salesAmount);
+        model.addAttribute("totalSalesSum", totalSalesSum);
         // 검색 조건도 모델에 담아야 페이지 이동할 때 유지됨
         model.addAttribute("type", type);
         model.addAttribute("startDate", startDate);
@@ -79,7 +79,11 @@ public class IncomeController {
 
     // 매출 상세보기
     @GetMapping("detail.in")
-    public String detailIncome() {
+    public String detailIncome(int gno, Model model) {
+
+        ArrayList<SalesDetails> list = incomeService.incomeDetail(gno);
+        System.out.println(list);
+        model.addAttribute("list", list);
         return "erpPage/incomeDetailPage";
     }
 

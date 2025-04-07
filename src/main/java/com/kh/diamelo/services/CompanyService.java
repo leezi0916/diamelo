@@ -30,4 +30,9 @@ public interface CompanyService {
     //어드민 거래처 관리 페이지 조건 검색
     ArrayList<UserInfo> selectAdminPageDetailList(String type, String companyName, String userName, PageInfo pi);
 
+    //거래처 관리자 페이지 거래처 승인
+    int updateStatus(UserInfo userInfo);
+    
+    //거래처 관리자 페이지 거래처 삭제
+    int deleteCompany(UserInfo userInfo);
 }

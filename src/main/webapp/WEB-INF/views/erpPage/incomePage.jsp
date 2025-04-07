@@ -59,7 +59,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>매출번호</th>
+                            <th>매출내역번호</th>
                             <th>거래처</th>
                             <th>분류</th>
                             <th>매출 일자</th>
@@ -70,8 +70,8 @@
                         <c:choose>
                             <c:when test="${not empty list}">
                                 <c:forEach var="item" items="${list}">
-                                    <tr onclick="location.href='detail.in?sno=${item.salNo}'">
-                                    <td>${item.salNo}</td>
+                                    <tr onclick="location.href='detail.in?gno=${item.groupNo}'">
+                                    <td>${item.groupNo}</td>
                                         <td>${item.companyName}</td>
                                         <td>
                                             <c:choose>
@@ -82,8 +82,8 @@
                                         <td>${item.salesDate}</td>
                                         <td style="font-weight: 500; color: ${item.type eq 'I' ? 'blue' : 'red'};">
                                             <c:choose>
-                                                <c:when test="${item.type eq 'I'}">+<fmt:formatNumber value="${item.salesAmount}" type="number"/></c:when>
-                                                <c:otherwise> -<fmt:formatNumber value="${item.salesAmount}" type="number"/></c:otherwise>
+                                                <c:when test="${item.type eq 'I'}">+<fmt:formatNumber value="${item.totalSales}" type="number"/></c:when>
+                                                <c:otherwise> -<fmt:formatNumber value="${item.totalSales}" type="number"/></c:otherwise>
                                             </c:choose>
                                         </td>
                                     </tr>
@@ -110,12 +110,12 @@
                             </c:when>
                             <c:when test="${type == 'I'}">
                                 <div id="table-header-price" class="table-header" style="color: blue; font-weight: bold;">
-                                    +<fmt:formatNumber value="${salesAmount}" type="number"/>
+                                    +<fmt:formatNumber value="${totalSalesSum}" type="number"/>
                                 </div>
                             </c:when>
                             <c:when test="${type == 'O'}">
                                 <div id="table-header-price" class="table-header" style="color: red; font-weight: bold;">
-                                    -<fmt:formatNumber value="${salesAmount}" type="number"/>
+                                    -<fmt:formatNumber value="${totalSalesSum}" type="number"/>
                                 </div>
                             </c:when>
                         </c:choose>
@@ -135,7 +135,7 @@
                         </c:url>
                     </c:when>
                     <c:otherwise>
-                        <c:set var="pageUrl" value="income.erp" />
+                        <c:set var="pageUrl" value="income.erp?" />
                     </c:otherwise>
                 </c:choose>
 
