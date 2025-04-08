@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
 
-
+    // erpPage 제품 정보 조회
     @Override
     public ArrayList<Product> getProductList() {
         ArrayList<Product> productList = productMapper.getProductList();
@@ -27,6 +27,24 @@ public class ProductServiceImpl implements ProductService {
         // 로그 추가
         if (productList == null) {
             System.out.println("productList가 null입니다.");
+        } else {
+            System.out.println(" productList 크기: " + productList.size());
+            for (Product p : productList) {
+                System.out.println("제품 정보: " + p);
+            }
+        }
+
+        return productList;
+    }
+
+    // crmPage 제품 정보 조회
+    @Override
+    public ArrayList<Product> getCrmProductList() {
+        ArrayList<Product> productList = productMapper.getCrmProductList();
+
+        // 로그 추가
+        if (productList == null) {
+            System.out.println("⚠productList가 null입니다.");
         } else {
             System.out.println(" productList 크기: " + productList.size());
             for (Product p : productList) {
@@ -100,5 +118,6 @@ public class ProductServiceImpl implements ProductService {
 
         return true;
     }
+
 
 }
