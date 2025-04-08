@@ -322,6 +322,5 @@
         })
     }
 </script>
-<%--location.href='company.ap'--%>
 </body>
 </html>
