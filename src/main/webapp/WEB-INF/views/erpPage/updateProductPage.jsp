@@ -13,7 +13,7 @@
 
 
 
-<%-- Noto Sans KR Font--%>
+    <%-- Noto Sans KR Font--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700;900&display=swap"
@@ -37,7 +37,7 @@
         <div class="page-body">
             <div class="page-body-header">
                 <div id="page-body-header-text">
-                    제품정보 등록
+                    제품정보 수정
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
+                                    <input class="input-box" type="text" name="proName" value="${product.proName}">
                                 </div>
                                 <div class="input-name">
                                     <div class="star">*</div>
@@ -63,19 +63,19 @@
                             <div class="input-boxs">
                                 <div class="input-name">
                                     <p>비고</p>
-                                    <input class="input-box" id="memo" name="proDetail" type="text" placeholder="MEMO">
+                                    <input class="input-box" id="memo" name="proDetail" type="text" ${product.proDetail}>
                                 </div>
                                 <div class="input-name">
                                     <p>가격</p>
-                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
-                                    <div id="category">
+                                    <input class="input-box" type="text" name="proPrice" value="${product.proPrice}">
+                                    <<div id="category">
                                         <select name="proCategoryNo" class="select">
-                                            <option disabled selected>분류</option>
-                                            <option value="1">스킨</option>
-                                            <option value="2">로션</option>
-                                            <option value="3">선크림</option>
-                                            <option value="4">수분크림</option>
-                                            <option value="5">앰플</option>
+                                            <option disabled <c:if test="${empty product}">selected</c:if>>분류</option>
+                                            <option value="1" <c:if test="${product.proCategoryNo == 1}">selected</c:if>>스킨</option>
+                                            <option value="2" <c:if test="${product.proCategoryNo == 2}">selected</c:if>>로션</option>
+                                            <option value="3" <c:if test="${product.proCategoryNo == 3}">selected</c:if>>선크림</option>
+                                            <option value="4" <c:if test="${product.proCategoryNo == 4}">selected</c:if>>수분크림</option>
+                                            <option value="5" <c:if test="${product.proCategoryNo == 5}">selected</c:if>>앰플</option>
                                         </select>
                                     </div>
                                 </div>
@@ -103,7 +103,15 @@
                                         </th>
                                     </tr>
                                     </thead>
-                                    <tbody></tbody>
+
+                                    <tbody>
+                                        <c:forEach var="recipe" items="${recipeList}">
+                                            <input type="hidden" name="matNo[]" value="${recipe.matNo}" />
+                                            <input type="text" name="proName[]" value="${recipe.proName}" />
+                                            <input type="number" name="amount[]" value="${recipe.amount}" />
+                                            <input type="number" name="proPrice[]" value="${recipe.proPrice}" />
+                                        </c:forEach>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -111,7 +119,11 @@
                         <div id="ingre_lower_right">
                             <div style="position: relative; width: 150px; height: 180px;">
                                 <input id="insert_image" type="file" name="upfile" accept="image/*" onchange="changeImage(this)">
-                                <div id="image_preview"></div> <!-- ✅ 미리보기 이미지 영역 -->
+                                <div id="image_preview">
+                                    <c:if test="${not empty attachment}">
+                                            <img src="${attachment.changeName}" alt="제품 이미지" width="150">
+                                    </c:if>
+                                </div> <!-- ✅ 미리보기 이미지 영역 -->
                             </div>
                             <p>재료 이미지</p>
                         </div>
@@ -119,7 +131,7 @@
 
 
                     <div id="ingre_lower_button">
-                        <button class="button" type="submit">+제품등록</button>
+                        <button class="button" type="submit">수정하기</button>
                         <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                     </div>
                 </div>
@@ -147,17 +159,17 @@
         }
     }
 
-        // 폼 제출 시 콘솔에 입력값 확인
-        document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault();  // ✅ 폼 제출 막기
+    // 폼 제출 시 콘솔에 입력값 확인
+    document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault();  // ✅ 폼 제출 막기
 
-            const formData = new FormData(this);
+        const formData = new FormData(this);
 
-            console.log("📌 [폼 데이터 배열 변환]", [...formData.entries()]);
-            console.log("📌 [선택한 파일]", formData.get("imageUpload"));
+        console.log("📌 [폼 데이터 배열 변환]", [...formData.entries()]);
+        console.log("📌 [선택한 파일]", formData.get("imageUpload"));
 
-            // 실제 제출하려면 아래 코드 주석 해제
-             event.target.submit();
+        // 실제 제출하려면 아래 코드 주석 해제
+        event.target.submit();
 
     });
 

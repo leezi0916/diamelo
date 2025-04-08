@@ -21,18 +21,17 @@
         <div class="modal-content-upper">
             <div class="modal-content-left">
                 <h2>상품 상세 정보</h2>
-                <p><strong>번호:</strong> <span class="modal-number"></span></p>
-                <p><strong>품목:</strong> <span class="modal-name"></span></p>
-                <p><strong>분류:</strong> <span class="modal-category"></span></p>
-                <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
-                <p><strong>가격:</strong> <span class="modal-price"></span></p>
-                <p><strong>비고:</strong> <span class="modal-description"></span></p>
+                <br>
+                <p><strong>상품번호 : </strong> <span class="modal-number"></span></p>
+                <p><strong>품목 : </strong> <span class="modal-name"></span></p>
+                <p><strong>분류 : </strong> <span class="modal-category"></span></p>
+                <p><strong>재고 수량 : </strong> <span class="modal-quantity"></span></p>
+                <p><strong>가격 : </strong> <span class="modal-price"></span></p>
+                <p><strong>비고 : </strong> <span class="modal-description"></span></p>
             </div>
-
             <div class="modal-content-right">
-                <div class="image-area">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
-                </div>
+                <img class="modal-image-tag" src="" alt="상품 이미지" style="max-width: 80%; max-height: 500px">
+            </div>
             </div>
         </div>
     </div>
@@ -119,15 +118,16 @@
 
                     <c:forEach var="p" items ="${list}" varStatus="status">
                         <c:if test="${p.isProduct =='Y'}">
-                            <tr onclick="openModal(this)">
+                            <tr class="product-row">
                                 <td>${status.count}</td>
                                 <td>${p.proName}</td>
                                 <td>${p.categoryName}</td>
                                 <td>${p.proInventStock}</td>
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
+                                <td style="display: none" >${p.changeName}</td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='update.pro'">
+                                    <button class="icon-button" type="button" onclick="location.href = 'update.pro?proNo=${p.proNo}';">
                                         <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
@@ -135,6 +135,18 @@
                                     <button class="icon-button" type="button" onclick="location.href='delete.pro'">
                                         <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
+                                </td>
+
+
+                                <!-- 숨겨진 데이터들 -->
+                                <td style="display:none;">
+                                    <span class="modal-proNo">${p.proNo}</span>
+                                    <span class="modal-proName">${p.proName}</span>
+                                    <span class="modal-categoryName">${p.categoryName}</span>
+                                    <span class="modal-proInventStock">${p.proInventStock}EA</span>
+                                    <span class="modal-proPrice">${p.proPrice}원</span>
+                                    <span class="modal-proDetail">${p.proDetail}</span>
+                                    <span class="modal-image">${p.changeName}</span>
                                 </td>
                             </tr>
                         </c:if>
@@ -188,12 +200,13 @@
                     <tbody>
                     <c:forEach var="p" items ="${list}" varStatus="status">
                         <c:if test="${p.isProduct == 'N'}">
-                            <tr onclick="openModal(this)">
+                            <tr class="product-row">
                                 <td>${status.count}</td>
                                 <td>${p.proName}</td>
                                 <td>${p.proInventStock}</td>
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
+                                <td style="display: none" >${p.changeName}</td>
                                 <td>
                                     <button class="icon-button" type="button" onclick="location.href='update.ing'">
                                         <img src="/image/update_icon.png" alt="수정" width="20">
@@ -203,6 +216,18 @@
                                     <button class="icon-button" type="button" onclick="location.href='delete.ing'">
                                         <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
+                                </td>
+
+
+                                <!-- 숨겨진 데이터들 -->
+                                <td style="display:none;">
+                                    <span class="modal-proNo">${p.proNo}</span>
+                                    <span class="modal-proName">${p.proName}</span>
+                                    <span class="modal-categoryName">${p.categoryName}</span>
+                                    <span class="modal-proInventStock">${p.proInventStock}g</span>
+                                    <span class="modal-proPrice">${p.proPrice}원</span>
+                                    <span class="modal-proDetail">${p.proDetail}</span>
+                                    <span class="modal-image">${p.changeName}</span>
                                 </td>
                             </tr>
                         </c:if>
@@ -268,44 +293,73 @@
         document.getElementById("page-body-content").style.display = "none";
     }
 
-
-    <%-- modal --%>
-
+/*
+    // 모달 열기 함수
     function openModal(row) {
-        const modal = document.getElementById("productModal");
-        // const modalNumber = modal.querySelector(".modal-number");
-        const modalName = modal.querySelector(".modal-name");
-        const modalCategory = modal.querySelector(".modal-category");
-        const modalQuantity = modal.querySelector(".modal-quantity");
-        const modalPrice = modal.querySelector(".modal-price");
-        const modalDescription = modal.querySelector(".modal-description");
-
-        // 행의 데이터를 가져오기
         const cells = row.getElementsByTagName("td");
-        // modalNumber.textContent = cells[0].textContent;
-        modalName.textContent = cells[1].textContent;
-        modalCategory.textContent = cells[2].textContent;
-        modalQuantity.textContent = cells[3].textContent;
-        modalPrice.textContent = cells[4].textContent;
-        modalDescription.textContent = cells[5].textContent;
 
-        // 모달 표시
+        // 모달 요소 가져오기
+        const modal = document.getElementById("productModal");
+
+        // 데이터 채우기
+        document.querySelector(".modal-number").textContent = cells[0].textContent;
+        document.querySelector(".modal-name").textContent = cells[1].textContent;
+        document.querySelector(".modal-category").textContent = cells[2].textContent;
+        document.querySelector(".modal-quantity").textContent = cells[3].textContent;
+        document.querySelector(".modal-price").textContent = cells[4].textContent;
+        document.querySelector(".modal-description").textContent = cells[5].textContent;
+
+        // 모달 보이기
         modal.style.display = "block";
-
-        // 닫기 버튼 기능 추가
-        const closeButton = modal.querySelector(".close");
-        closeButton.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
-        // 모달 외부 클릭 시 닫기
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
     }
 
+    // 모달 닫기 이벤트
+    document.querySelector(".close").onclick = function() {
+        document.getElementById("productModal").style.display = "none";
+    }
+
+    // 모달 바깥 클릭 시 닫기
+    window.onclick = function(event) {
+        const modal = document.getElementById("productModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+*/
+
+    $(".product-row").click(function () {
+        const row = $(this);
+        $(".modal-number").text(row.find(".modal-proNo").text());
+        $(".modal-name").text(row.find(".modal-proName").text());
+        $(".modal-category").text(row.find(".modal-categoryName").text());
+        $(".modal-quantity").text(row.find(".modal-proInventStock").text());
+        $(".modal-price").text(row.find(".modal-proPrice").text());
+        $(".modal-description").text(row.find(".modal-proDetail").text());
+
+        // 이미지 처리
+        const imagePath = row.find(".modal-image").text();
+        $(".modal-image-tag").attr("src", imagePath);
+
+        $(".modal").fadeIn();
+    });
+
+    // 모달 닫기 이벤트
+    document.querySelector(".close").onclick = function() {
+        document.getElementById("productModal").style.display = "none";
+    }
+
+    // 모달 바깥 클릭 시 닫기
+    window.onclick = function(event) {
+        const modal = document.getElementById("productModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    $(".icon-button").click(function () {
+        const proNo = $(this).data("pro-no"); // 예시
+        location.href = "/product/update?proNo=" + proNo;
+    });
 
 </script>
 </body>

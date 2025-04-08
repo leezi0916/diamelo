@@ -10,14 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
@@ -61,33 +62,7 @@ public class InventoryController {
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
         model.addAttribute("tab", tab);  // 현재 탭 정보 추가
-    /*
-        int finishedProductCount = inventoryService.countProductsByType("Y"); // 완제품 개수
-        int materialProductCount = inventoryService.countProductsByType("N"); // 재료 개수
 
-
-        List<Product> finishedProducts = inventoryService.getProductsByType("Y"); // 완제품 목록
-        List<Product> materialProducts = inventoryService.getProductsByType("N"); // 재료 목록
-
-
-        model.addAttribute("finishedCount", finishedProductCount);
-        model.addAttribute("materialCount", materialProductCount);
-        model.addAttribute("finishedProducts", finishedProducts);
-        model.addAttribute("materialProducts", materialProducts);
-
-        System.out.println("완제품 목록: " + finishedProducts);
-        System.out.println("재료 목록: " + materialProducts);
-       */
-        /*
-        PageInfo pi = new PageInfo((productCount+materialCount), cpage, 10, 5);
-        System.out.println("pi: " + pi);
-        ArrayList<Product> list = inventoryService.selectProductList(pi);
-
-        System.out.println("list: " + list);
-
-        model.addAttribute("list", list);
-        model.addAttribute("pi", pi);
-        */
 
 
         return "erpPage/inventoryMainPage";
@@ -109,10 +84,28 @@ public class InventoryController {
         return "erpPage/insertProductPage";
     }
 
-    // 재료 수정버튼 클릭시
+    // 제품 수정버튼 클릭시
     @GetMapping("update.pro")
-    public String proUpdatePage() {
+    public String updateProductPage(@RequestParam(value = "proNo") int proNo, Model model) {
+
+        System.out.println("proNo: " + proNo);
+        // 1. 제품 정보
+        Product product = inventoryService.selectProduct(proNo);
+
+        // 2. 이미지 정보
+        Attachment attachment = inventoryService.selectProductAttachment(proNo);
+
+        // 3. Recipe (재료 리스트)
+        ArrayList<Recipe> recipeList = inventoryService.selectRecipeList(proNo);
+
+        // model 에 담아서 JSP 로 보내기
+        model.addAttribute("product", product);
+        model.addAttribute("attachment", attachment);
+        model.addAttribute("recipeList", recipeList);
+
+
         return "erpPage/updateProductPage";
+
     }
 
     // 제품 삭제버튼 클릭시
@@ -126,70 +119,57 @@ public class InventoryController {
     public String insertProduct(@ModelAttribute Product product,
                                 @ModelAttribute Attachment attachment,
                                 @RequestParam("upfile") MultipartFile upfile,
-                                HttpServletRequest request,
+                                @RequestParam("matNo[]") ArrayList<Integer> matNoList,
+                                @RequestParam("proName[]") ArrayList<String> matNameList,
+                                @RequestParam("amount[]") ArrayList<Integer> amountList,
+                                @RequestParam("proPrice[]") ArrayList<Integer> matPriceList,
                                 HttpSession session,
                                 Model model) {
 
-        // 🖼️ 첨부파일 처리
+        // 1. Product Insert
+        int result1 = inventoryService.insertProduct(product);
+
+        // 2. Get Product No
+        int proNo = product.getProNo();
+
+        // 3. File Upload (Attachment Insert)
+        int result2 = 1;
         if (!upfile.getOriginalFilename().equals("")) {
             String changeName = Template.saveProductlFile(upfile, session, "/resources/uploadFile/product/");
+
             attachment.setOriginName(upfile.getOriginalFilename());
             attachment.setChangeName("/resources/uploadFile/product/" + changeName);
         }
 
-        // 🧩 상품 등록
-        int result = inventoryService.insertProduct(product);
 
-        if (result > 0) {
-            int proNo = product.getProNo(); // 생성된 상품 번호
+        if (result1 > 0 && attachment.getOriginName() != null) {
+            // Product insert 성공 후 Product의 proNo를 가져와서 attachment에 넣기
+            attachment.setProNo((product.getProNo()));
 
-            // 🖼️ 첨부파일 저장
-            if (attachment.getOriginName() != null) {
-                attachment.setProNo(proNo);
-                int attachmentResult = inventoryService.insertProductAttachment(attachment);
-                if (attachmentResult <= 0) {
-                    model.addAttribute("errorMsg", "제품 이미지 등록 실패");
-                    return "common/errorPage";
-                }
-            }
-
-            // 🧩 재료 배열 처리
-            String[] matNos = request.getParameterValues("matNo");
-            String[] amounts = request.getParameterValues("amount");
-
-            ArrayList<Recipe> recipeList = new ArrayList<>();
-
-            if (matNos != null && amounts != null) {
-                for (int i = 0; i < matNos.length; i++) {
-                    Recipe recipe = new Recipe();
-                    recipe.setProNo(proNo); // ✅ 상품 번호 포함
-                    recipe.setMatNo(Integer.parseInt(matNos[i]));
-                    recipe.setAmount(Integer.parseInt(amounts[i]));
-                    recipeList.add(recipe);
-                }
-            }
-
-            System.out.println("recipeList: " + recipeList); // 디버깅 출력
-
-            // 🧩 레시피 등록
-            if (!recipeList.isEmpty()) {
-                int recipeResult = inventoryService.insertRecipeList(recipeList);
-                if (recipeResult <= 0) {
-                    model.addAttribute("errorMsg", "레시피 등록 실패");
-                    return "common/errorPage";
-                }
-            }
-
-            session.setAttribute("alertMsg", "제품 등록 성공");
-            return "redirect:/inv.erp";
-
-        } else {
-            model.addAttribute("errorMsg", "제품 등록 실패");
-            return "common/errorPage";
+            result2 = inventoryService.insertProductAttachment(attachment);
         }
-    }
 
+            // 4. Recipe Insert
+        int result3 = 1;
+        for (int i = 0; i < matNoList.size(); i++) {
+            int res = inventoryService.insertRecipe(
+                    proNo,
+                    matNoList.get(i),
+                    matNameList.get(i),
+                    amountList.get(i),
+                    matPriceList.get(i)
+            );
+            result3 *= res;
+        }
 
+            if (result1 > 0 && result2 > 0 && result3 > 0) {
+                session.setAttribute("alertMsg", "제품 등록 성공");
+                return "redirect:/inv.erp";
+            } else {
+                session.setAttribute("alertMsg", "제품 등록 실패");
+                return "redirect:/insertProductPage.erp";
+            }
+        }
 
 
 
@@ -257,6 +237,8 @@ public class InventoryController {
             return "common/errorPage";
         }
     }
+
+
 
 
 }

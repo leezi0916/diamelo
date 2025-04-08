@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -30,12 +31,24 @@ public interface InventoryMapper {
 
     int insertProductAttachment(Attachment attachment);
 
-    int insertRecipeList(@Param("recipeList") ArrayList<Recipe> recipeList);
+    int insertRecipe(int proNo, int matNo, String matName, int amount, int price);
+
+
 
 
     int insertMaterial(Product product);
 
     int insertMaterialAttachment(Attachment attachment);
+
+
+
+    Product selectProduct(int proNo);
+
+    Attachment selectProductAttachment(int proNo);
+
+    ArrayList<Recipe> selectRecipeList(int proNo);
+
+
 
 
 
