@@ -2,6 +2,8 @@ package com.kh.diamelo.domain.vo;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
