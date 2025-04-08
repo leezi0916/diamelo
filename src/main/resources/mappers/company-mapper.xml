@@ -112,12 +112,27 @@
     </select>
 
     <!--  거래처 관리자 페이지 거래처 승인  -->
-    <update id="updateStatus">
+    <update id="updateStatusCommit">
         UPDATE USER_INFO
             SET STATUS = 'Y',
             MODIFY_DATE = SYSDATE
         WHERE USER_ID = #{userId}
     </update>
+
+    <!--  거래처 관리자 페이지 거래처 반려  -->
+    <update id="updateStatusReturn">
+        UPDATE USER_INFO
+        SET STATUS = 'N',
+        MODIFY_DATE = SYSDATE
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <!--  거래처 관리자 페이지 거래처 상태 검색  -->
+    <select id="selectCompanyStatus" resultMap="User_InfoResult">
+        SELECT STATUS
+        FROM USER_INFO
+        WHERE USER_ID = #{userId}
+    </select>
 
     <!--  거래처 관리자 페이지 거래처 삭제  -->
     <update id="deleteCompany">

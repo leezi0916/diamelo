@@ -58,7 +58,7 @@
         )
     </insert>
 
-    <!-- //게시판 보기  -->
+    <!-- 게시판 보기  -->
     <select id="selectDetailView" resultMap="BoardResult">
         SELECT POST_ID, TITLE, CONTENT, USER_ID, TYPE
         FROM BOARD
@@ -149,4 +149,25 @@
     ORDER BY POST_ID DESC
     </select>
 
+    <!-- 게시판 댓글 검색  -->
+    <select id="selectReply" resultMap="ReplyResult">
+        SELECT REP_NO,
+        POST_ID,
+        CONTENT,
+        WRITER,
+        CREATED_DATE
+        FROM REPLY
+        WHERE POST_ID = #{postId} AND REPLY_DELETED = 'N'
+    </select>
+
+    <!--  게시판 댓글 삭제  -->
+    <update id="deleteReply">
+        UPDATE REPLY
+        SET
+        REPLY_DELETED = 'Y',
+        UPDATE_DATE = SYSDATE
+        WHERE POST_ID = #{postId}
+        AND REP_NO = #{repNo}
+        AND WRITER = #{writer}
+    </update>
 </mapper>

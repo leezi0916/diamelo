@@ -1,5 +1,3 @@
-
-
 #pagingArea {width:fit-content; margin:auto;}
 
 #list{
@@ -231,3 +229,62 @@
     cursor: pointer;
 }
 
+
+/* 모달 */
+ul{
+    margin: 0;
+}
+
+/* modal */
+
+.modal{
+
+}
+
+.modal-dialog{
+    margin-top: 200px;
+}
+
+#sort{
+    display: flex;
+    justify-content: center;
+}
+
+#sort img{
+    border-radius: 10px;
+}
+
+.modal-footer{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#modal-footer-title span{
+    font-size: 28px;
+    font-weight: 700;
+
+}
+
+#modal-footer-note{
+    padding: 0 70px;
+}
+
+.modal-footer-font{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#modal-footer-both button{
+    width: 100%;
+}
+
+#modal-footer-both div{
+    padding: 10px;
+}
+
+#modal-footer-price{
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: black;
+}

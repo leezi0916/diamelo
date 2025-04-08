@@ -15,4 +15,5 @@ public class Sales {
     private String type; //지출 (O), 소득 (I)
     private String status; //승인상태
     private String salesName; //내역명
+
 }

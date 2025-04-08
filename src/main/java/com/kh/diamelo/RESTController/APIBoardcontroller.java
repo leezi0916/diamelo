@@ -24,4 +24,14 @@ public class APIBoardcontroller {
         return boardService.selectReplyList(postId);
     }
 
+    @GetMapping("/delete")
+    public ArrayList<Reply> getReply(@RequestParam int postId) {
+        return boardService.selectReply(postId);
+    }
+
+    @PostMapping("/delete")
+    public String deleteReply(Reply r) {
+        return boardService.deleteReply(r) > 0 ? "success" : "fail";
+    }
+
 }
