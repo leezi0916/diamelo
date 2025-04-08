@@ -16,18 +16,44 @@ public class APICompanycontroller {
 
     private final CompanyService companyService;
 
-    @PostMapping("/status")
-    public String updateCompanyStatus(@RequestBody Map<String, ArrayList<String>> data) {
+    @PostMapping("/commit")
+    public String updateCompanyStatus(@RequestBody Map<String, ArrayList<String>> data, HttpSession session) {
         ArrayList<String> list = data.get("userId");
 
         int result = 0;
         for(String id : list){
             UserInfo userInfo = new UserInfo();
             userInfo.setUserId(id);
-            result = companyService.updateStatus(userInfo);
+
+            UserInfo user = companyService.selectCompanyStatus(userInfo);
+            if(user.getStatus().equals("Y") || user.getStatus().equals("N")){
+                return "redirect:/compAdmin.erp";
+            }else {
+                result = companyService.updateStatusCommit(userInfo);
+            }
         }
+
         return result > 0 ? "success" : "fail";
     }
 
+    @PostMapping("/return")
+    public String returnCompanyStatus(@RequestBody Map<String, ArrayList<String>> data) {
+        ArrayList<String> list = data.get("userId");
+
+        int result = 0;
+        for(String id : list){
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUserId(id);
+
+            UserInfo user = companyService.selectCompanyStatus(userInfo);
+            if(user.getStatus().equals("Y") || user.getStatus().equals("N")){
+                return "redirect:/compAdmin.erp";
+            }else {
+                result = companyService.updateStatusReturn(userInfo);
+            }
+        }
+
+        return result > 0 ? "success" : "fail";
+    }
 
 }

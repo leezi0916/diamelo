@@ -13,7 +13,6 @@ import lombok.*;
 public class Reply {
 
     @JsonProperty("reply_no")
-
     private int repNo; //댓글 번호
     @JsonIgnore
     private int postId; //게시글 번호

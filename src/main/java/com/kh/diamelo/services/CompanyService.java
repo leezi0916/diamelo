@@ -2,6 +2,7 @@ package com.kh.diamelo.services;
 
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.UserInfo;
+import org.apache.catalina.User;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,13 @@ public interface CompanyService {
     ArrayList<UserInfo> selectAdminPageDetailList(String type, String companyName, String userName, PageInfo pi);
 
     //거래처 관리자 페이지 거래처 승인
-    int updateStatus(UserInfo userInfo);
+    int updateStatusCommit(UserInfo userInfo);
+
+    //거래처 관리자 페이지 거래처 반려
+    int updateStatusReturn(UserInfo userInfo);
+
+    //거래처 관리자 페이지 거래처 상태 검색
+    UserInfo selectCompanyStatus(UserInfo userInfo);
     
     //거래처 관리자 페이지 거래처 삭제
     int deleteCompany(UserInfo userInfo);
