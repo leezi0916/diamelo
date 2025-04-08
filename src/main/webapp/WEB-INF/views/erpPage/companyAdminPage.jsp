@@ -64,7 +64,7 @@
                         </button>
 
 
-                        <button id="deleteBtn" type="button" onclick="location.href='company.rt'">
+                        <button id="deleteBtn" type="button" onclick="return returnCompany()">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 10H16" stroke="white" stroke-width="1.60586" stroke-linecap="round"
@@ -98,7 +98,9 @@
                         <c:when test="${not empty list}">
                             <c:forEach var="c" items="${list}">
                                 <tr>
-                                    <td style="vertical-align: middle;"><input type="checkbox" id="checking" class="checking" name="userId" value="${c.userId}"></td>
+                                    <td style="vertical-align: middle;">
+                                        <input type="checkbox" id="checking" class="checking" name="userId" value="${c.userId}">
+                                    </td>
                                     <td>${c.companyName}</td>
                                     <td>${c.userName}</td>
                                     <td>${c.phone}</td>
@@ -229,12 +231,13 @@
 
 <script>
 
+    <%--  체크박스  --%>
     function allCheck(_allCheckBox){
         //전체선택 체크여부
         let checked = _allCheckBox.checked;
 
-        let status = document.getElementsByName("status");
-        for(let box of status){
+        let userId = document.getElementsByName("userId");
+        for(let box of userId){
             box.checked = checked;
         }
     }
@@ -251,19 +254,20 @@
 
     function addstatusEvent(){
         const allcheck = document.getElementById('allcheck');
-        let status = document.getElementsByName("status");
+        let userId = document.getElementsByName("userId");
 
-        for(let box of status){
+        for(let box of userId){
             //모든 체크박스의 체크여부를 확인해서 결과에따라
             //all체크박스의 체크여부를 변경한다.
             box.onclick = function(){
-                let isChecked = isAllchecked('input[name="status"]');
+                let isChecked = isAllchecked('input[name="userId"][type="checkbox"]');
                 allcheck.checked = isChecked;
             }
         }
     }
     addstatusEvent();
 
+    // 삭제 여부
     function onalert(){
         if(confirm("정말 삭제하시겠습니까?")){
         }else{
@@ -271,48 +275,47 @@
         }
     }
 
+    // userId 값 가져와서 status = 'Y'
     function commitCompany(){
         //checkBox전체 가져와서
         //선택된 녀석들의 value만 모아서
         //ajax요청
 
-        const query = 'input[class="checking"]:checked'
         //체크박스
-        const checkBox = document.querySelectorAll(query);
-        //체크확인
-        const isChecked = checkBox.checked;
+        const checkBox = document.querySelectorAll('.checking:checked');
         //체크박스 값
-        let value;
+        const selectedValues = [];
 
         checkBox.forEach((el)=>{
-            value = el.value;
+            selectedValues.push(el.value);
         })
 
-        updateCompanyStatus({
-            userId : value
-        },drawCompanyList)
-
-    }
-
-    function drawCompanyList(data){
         if(confirm("거래처를 승인하시겠습니까?")){
-            alert("승인 완료되었습니다.");
-            location.href='compAdmin.erp';
+            updateCompanyStatusY({
+                userId : selectedValues
+            },drawCompanyListY)
         }else{
-            alert("취소하셨습니다.");
+            alert('취소하였습니니다.');
             return false;
         }
     }
 
-    function updateCompanyStatus(data, callback){
+    function drawCompanyListY(data){
+        alert("승인 완료되었습니다.");
+        location.href='compAdmin.erp';
+    }
+
+    function updateCompanyStatusY(data, callback){
         $.ajax({
-            url: '/api/company/status',
+            url: '/api/company/commit',
             type: 'post',
-            data : data,
+            data : JSON.stringify(data),
+            contentType: 'application/json',
             success:function (res){
                 if(res === "success"){
                     callback(data);
                 }else{
+                    alert("이미 처리된 거래처가 있거나 선택하지 않았습니다.");
                     console.log("status update 실패");
                 }
             },
@@ -321,7 +324,54 @@
             }
         })
     }
+
+    //userId 값 가져와서 status = 'N'
+    function returnCompany(){
+        //체크박스 값
+        const checkbox = document.querySelectorAll('.checking:checked');
+        //체크박스 값을 배열에 저장
+        const selectValues = [];
+
+        checkbox.forEach((checkbox)=>{
+            selectValues.push(checkbox.value);
+        })
+
+        console.log(checkbox);
+
+        if(confirm("거래처를 반려하시겠습니까?")){
+            updateCompanyStatusN({
+                userId : selectValues
+            },drawCompanyListN)
+        }else{
+            alert("취소하셨습니다.");
+            return false;
+        }
+    }
+
+    function drawCompanyListN(data){
+        alert("반려되었습니다.");
+        location.href="compAdmin.erp";
+    }
+
+    function updateCompanyStatusN(data, callback){
+        $.ajax({
+            url: "/api/company/return",
+            type: "post",
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success : function (res){
+                if(res === "success"){
+                    callback(data);
+                }else {
+                    alert("이미 처리된 거래처가 있거나 선택하지 않았습니다.");
+                    console.log("status update 실패");
+                }
+            },
+            error: function (){
+                console.log("ajax status update 실패");
+            }
+        })
+    }
 </script>
-<%--location.href='company.ap'--%>
 </body>
 </html>

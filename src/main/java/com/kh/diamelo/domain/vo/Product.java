@@ -21,10 +21,12 @@ public class Product {
 
 
     private String categoryName;
-    private String proInventStock;
 
     private String changeName;
     private String originName;
+    //private int rNum;
+    private String filePath;
+    private String productProfile;
 
     private Date proEnrollDate;
 

@@ -3,6 +3,7 @@ package com.kh.diamelo.services;
 import com.kh.diamelo.domain.vo.Attachment;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.domain.vo.Recipe;
 import com.kh.diamelo.mappers.InventoryMapper;
 import com.kh.diamelo.mappers.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +21,6 @@ public class InventoryServiceImpl implements InventoryService {
 
     private final InventoryMapper inventoryMapper;
 
-    /*
-    @Override
-    public int countProductsByType(String isProduct) {
-        return productMapper.countByIsProduct(isProduct);
-    }
-
-    @Override
-    public List<Product> getProductsByType(String isProduct) {
-        return productMapper.findByIsProduct(isProduct);
-    }
-    */
 
 
     //제품 갯수
@@ -55,8 +45,39 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public int insertIngrediant(Product product) {
-        return inventoryMapper.insertIngrediant(product);
+    public ArrayList<Product> selectMaterialList(PageInfo pi) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+        return inventoryMapper.selectMaterialList(rowBounds);
+    }
+
+    @Override
+    public int insertProduct(Product product) {
+        return inventoryMapper.insertProduct(product);
+    }
+
+    @Override
+    public int insertProductAttachment(Attachment attachment) {
+        return inventoryMapper.insertProductAttachment(attachment);
+    }
+
+    @Override
+    public int insertRecipeList(ArrayList<Recipe> recipeList) {
+        return inventoryMapper.insertRecipeList(recipeList);
+    }
+
+
+
+
+    @Override
+    public int insertMaterial(Product product) {
+        return inventoryMapper.insertMaterial(product);
+    }
+
+    @Override
+    public int insertMaterialAttachment(Attachment attachment) {
+        return inventoryMapper.insertMaterialAttachment(attachment);
     }
 
 

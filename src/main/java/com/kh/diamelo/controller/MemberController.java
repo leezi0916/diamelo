@@ -22,6 +22,18 @@ public class MemberController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    // 로그인 폼
+    @GetMapping("loginForm.me")
+    public String loginForm() {
+        return "crmPage/loginPage";
+    }
+
+    // 회원가입 폼
+    @GetMapping("signUpEnrollForm.me")
+    public String signUpEnrollForm() {
+        return "crmPage/signUpEnrollForm";
+    }
+
     // 로그아웃시 logoutSuccess로 리다이렉트
     @GetMapping("logout.me")
     public String logout(HttpSession session) {
