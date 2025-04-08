@@ -70,4 +70,28 @@ public class CompanyServiceImpl implements CompanyService {
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
         return companyMapper.selectAdminPageDetailList(type, companyName, userName, rowBounds);
     }
+
+    //거래처 관리자 페이지 거래처 승인
+    @Override
+    public int updateStatusCommit(UserInfo userInfo) {
+        return companyMapper.updateStatusCommit(userInfo);
+    }
+
+    //거래처 관리자 페이지 거래처 반려
+    @Override
+    public int updateStatusReturn(UserInfo userInfo) {
+        return companyMapper.updateStatusReturn(userInfo);
+    }
+
+    //거래처 관리자 페이지 거래처 상태 검색
+    @Override
+    public UserInfo selectCompanyStatus(UserInfo userInfo) {
+        return companyMapper.selectCompanyStatus(userInfo);
+    }
+
+    //거래처 관리자 페이지 거래처 삭제
+    @Override
+    public int deleteCompany(UserInfo userInfo) {
+        return companyMapper.deleteCompany(userInfo);
+    }
 }

@@ -36,4 +36,15 @@ public interface CompanyMapper {
     //어드민 거래처 관리 페이지 조건 검색
     ArrayList<UserInfo> selectAdminPageDetailList(@Param("type")String type, @Param("companyName") String companyName,
                                                   @Param("userName") String userName, RowBounds rowBounds);
+
+    //거래처 관리자 페이지 거래처 승인
+    int updateStatusCommit(UserInfo userInfo);
+
+    //거래처 관리자 페이지 거래처 반려
+    int updateStatusReturn(UserInfo userInfo);
+    //거래처 관리자 페이지 거래처 상태 검색
+    UserInfo selectCompanyStatus(UserInfo userInfo);
+    
+    //거래처 관리자 페이지 거래처 삭제
+    int deleteCompany(UserInfo userInfo);
 }

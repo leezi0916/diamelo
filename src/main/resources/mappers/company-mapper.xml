@@ -23,13 +23,14 @@
         FROM USER_INFO
         WHERE JOB_CODE = 'J0'
         AND STATUS = 'Y'
+        AND USER_DELETED = 'N'
     </select>
 
     <!--  거래관리 페이지에 기업명, 대표자명, 연락처, 이메일을 테이블에서 찾아옴  -->
     <select id="selectCompanyList" resultMap="User_InfoResult">
         SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL
         FROM USER_INFO
-        WHERE JOB_CODE = 'J0' AND STATUS = 'Y'
+        WHERE JOB_CODE = 'J0' AND STATUS = 'Y' AND USER_DELETED = 'N'
         ORDER BY ENROLL_DATE DESC
     </select>
 
@@ -37,14 +38,14 @@
     <select id="selectCompanyReadyCount" resultType="_int">
         SELECT COUNT(*)
         FROM USER_INFO
-        WHERE JOB_CODE = 'J0'
+        WHERE JOB_CODE = 'J0' AND USER_DELETED = 'N'
     </select>
 
     <!--  거래관리 관리자용 페이지에서 모든 거래처를 찾아옴  -->
     <select id="selectAllList" resultMap="User_InfoResult">
-        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS
+        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS, USER_ID
         FROM USER_INFO
-        WHERE JOB_CODE = 'J0'
+        WHERE JOB_CODE = 'J0' AND USER_DELETED = 'N'
         ORDER BY ENROLL_DATE DESC
     </select>
 
@@ -53,7 +54,7 @@
         SELECT COUNT(*)
         FROM USER_INFO
         WHERE JOB_CODE = 'J0'
-            AND STATUS = 'Y'
+            AND STATUS = 'Y' AND USER_DELETED = 'N'
         <if test="companyName != null and companyName != ''">
             AND COMPANY_NAME LIKE '%' || #{companyName} || '%'
         </if>
@@ -67,7 +68,7 @@
         SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL
         FROM USER_INFO
         WHERE JOB_CODE = 'J0'
-        AND STATUS = 'Y'
+        AND STATUS = 'Y' AND USER_DELETED = 'N'
         <if test="companyName != null and companyName != ''">
             AND COMPANY_NAME LIKE '%' || #{companyName} || '%'
         </if>
@@ -81,7 +82,7 @@
     <select id="selectAdminPageCompanyCount" resultType="_int">
         SELECT COUNT(*)
         FROM USER_INFO
-        WHERE JOB_CODE = 'J0'
+        WHERE JOB_CODE = 'J0' AND USER_DELETED = 'N'
         <if test='type != null and type != "" and type != "A" '>
             AND STATUS = #{type}
         </if>
@@ -95,9 +96,9 @@
 
     <!-- 어드민 거래처 관리 페이지 조건 검색 -->
     <select id="selectAdminPageDetailList" resultMap="User_InfoResult">
-        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS
+        SELECT COMPANY_NAME, USER_NAME, PHONE, EMAIL, STATUS, USER_ID
         FROM USER_INFO
-        WHERE JOB_CODE = 'J0'
+        WHERE JOB_CODE = 'J0' AND USER_DELETED = 'N'
         <if test='type != null and type != "" and type != "A" '>
             AND STATUS = #{type}
         </if>
@@ -109,4 +110,35 @@
         </if>
         ORDER BY ENROLL_DATE DESC
     </select>
+
+    <!--  거래처 관리자 페이지 거래처 승인  -->
+    <update id="updateStatusCommit">
+        UPDATE USER_INFO
+            SET STATUS = 'Y',
+            MODIFY_DATE = SYSDATE
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <!--  거래처 관리자 페이지 거래처 반려  -->
+    <update id="updateStatusReturn">
+        UPDATE USER_INFO
+        SET STATUS = 'N',
+        MODIFY_DATE = SYSDATE
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <!--  거래처 관리자 페이지 거래처 상태 검색  -->
+    <select id="selectCompanyStatus" resultMap="User_InfoResult">
+        SELECT STATUS
+        FROM USER_INFO
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <!--  거래처 관리자 페이지 거래처 삭제  -->
+    <update id="deleteCompany">
+        UPDATE USER_INFO
+            SET USER_DELETED = 'Y',
+            MODIFY_DATE = SYSDATE
+        WHERE USER_ID = #{userId}
+    </update>
 </mapper>

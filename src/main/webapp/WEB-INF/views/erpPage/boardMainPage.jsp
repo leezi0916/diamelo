@@ -51,16 +51,16 @@
                         </button>
                     </div>
                 </div>
-                <table class="table table-hover">
+                <table class="table table-hover" style="table-layout: fixed">
                     <thead>
                     <tr>
-                        <th>번호</th>
-                        <th>분류</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일시</th>
-                        <th>수정</th>
-                        <th>삭제</th>
+                        <th style="width: 10%">번호</th>
+                        <th style="width: 18%">분류</th>
+                        <th style="width: 21%">제목</th>
+                        <th style="width: 12%">작성자</th>
+                        <th style="width: 13%">작성일시</th>
+                        <th style="width: 8%">수정</th>
+                        <th style="width: 8%">삭제</th>
                     </tr>
                     </thead>
                     <tbody>

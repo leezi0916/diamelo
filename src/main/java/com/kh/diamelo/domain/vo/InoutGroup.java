@@ -1,0 +1,18 @@
+package com.kh.diamelo.domain.vo;
+
+import lombok.*;
+
+import java.sql.Date;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
+@NoArgsConstructor
+public class InoutGroup {
+    private int groupNo;
+    private String userId;
+    private String groupType;
+    private Date groupDate;
+    private String groupStatus;
+}
