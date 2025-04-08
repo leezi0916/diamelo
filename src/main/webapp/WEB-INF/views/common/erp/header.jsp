@@ -143,7 +143,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 const checkLogout = confirm('정말 로그아웃 하시겠습니까?');
 
                 if (checkLogout) {
-                    location.href = '/';
+                    location.href = 'logout.me';
                 }
             }
         </script>

@@ -28,4 +28,6 @@ public interface ProductMapper {
     void increaseProductStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
     void decreaseMaterialStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
 
+    // crmPage 제품 목록 조회
+    ArrayList<Product> getCrmProductList();
 }

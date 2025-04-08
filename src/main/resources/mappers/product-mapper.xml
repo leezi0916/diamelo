@@ -24,11 +24,26 @@
         <result column="PRO_NAME" property="proName"/>
     </resultMap>
 
-    <!-- 제품 목록 조회 -->
+    <!-- erpPage 제품 목록 조회 -->
     <select id="getProductList" resultMap="ProductResultMap">
         SELECT PRO_NO, PROCATEGORY_NO, PRO_NAME, PRO_DETAIL, PRO_PRICE, PRO_DELETED, IS_PRODUCT
         FROM PRODUCT
         WHERE PRO_DELETED = 'N' AND IS_PRODUCT ='Y'
+    </select>
+
+    <!-- crmPage 제품 목록 조회 -->
+    <select id="getCrmProductList" resultMap="ProductResultMap">
+        SELECT pro_no,
+        procategory_no,
+        pro_name,
+        pro_detail,
+        pro_price,
+        pro_deleted,
+        is_product,
+        CHANGE_NAME
+        FROM product
+        JOIN ATTACHMENT USING(PRO_NO)
+        WHERE pro_deleted = 'N' AND IS_PRODUCT ='Y'
     </select>
 
     <!-- 제품 이미지 조회 -->
