@@ -276,39 +276,39 @@
         //선택된 녀석들의 value만 모아서
         //ajax요청
 
-        const query = 'input[class="checking"]:checked'
         //체크박스
-        const checkBox = document.querySelectorAll(query);
-        //체크확인
-        const isChecked = checkBox.checked;
+        const checkBox = document.querySelectorAll('.checking:checked');
         //체크박스 값
-        let value;
+        const selectedValues = [];
 
         checkBox.forEach((el)=>{
-            value = el.value;
+            selectedValues.push(el.value);
         })
 
+        if(confirm("거래처를 승인하시겠습니까?")){
+
+        }else{
+            alert('취소하였습니니다.');
+            return;
+        }
+
         updateCompanyStatus({
-            userId : value
+            userId : selectedValues
         },drawCompanyList)
 
     }
 
     function drawCompanyList(data){
-        if(confirm("거래처를 승인하시겠습니까?")){
-            alert("승인 완료되었습니다.");
-            location.href='compAdmin.erp';
-        }else{
-            alert("취소하셨습니다.");
-            return false;
-        }
+        alert("승인 완료되었습니다.");
+        location.href='compAdmin.erp';
     }
 
     function updateCompanyStatus(data, callback){
         $.ajax({
             url: '/api/company/status',
             type: 'post',
-            data : data,
+            data : JSON.stringify(data),
+            contentType: 'application/json',
             success:function (res){
                 if(res === "success"){
                     callback(data);
