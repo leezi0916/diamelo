@@ -21,7 +21,7 @@
         <div class="modal-content-upper">
             <div class="modal-content-left">
                 <h2>상품 상세 정보</h2>
-                <%--                <p><strong>번호:</strong> <span class="modal-number"></span></p>--%>
+                <p><strong>번호:</strong> <span class="modal-number"></span></p>
                 <p><strong>품목:</strong> <span class="modal-name"></span></p>
                 <p><strong>분류:</strong> <span class="modal-category"></span></p>
                 <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
@@ -47,23 +47,25 @@
         <jsp:include page="../common/erp/header.jsp"/>
 
 
-        <!-- 페이지 본문 -->
-        <div class="page-body">
-            <div class="page-body-header">
-                <div class="page-body-header-text">
-                    <button id="proBtn" onclick="location.href=''">
-                        제품 (${ProductCount})
-                    </button>
-                </div>
-                <div class="page-body-header-text">
-                    <button id="mtBtn">
-                        재료 (${ProductCount})
-                    </button>
-                </div>
-            </div>
+
+    <!-- 페이지 본문 -->
+    <div class="page-body">
+      <div class="page-body-header">
+        <div class="page-body-header-text">
+          <button id="proBtn">
+              제품 (${pCount})
+          </button>
+        </div>
+        <div class="page-body-header-text">
+          <button id="mtBtn" >
+              재료 (${mCount})
+          </button>
+        </div>
+      </div>
 
 
-            <form id="page-body-content" action="select.pro" method="get">
+
+            <form id="page-body-content" action="search.pro" method="get">
                 <div id="search-inventory">
 
                     <select name="searchCategory" id="search-category" class="select">
@@ -89,7 +91,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap">
-                        <button id="addBtn" type="button" onclick="location.href='proAdd.erp'">
+                        <button id="addBtn" type="button" onclick="location.href='add.pro'">
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white"
@@ -115,7 +117,7 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="p" items ="finishedProducts" varStatus="status">
+                    <c:forEach var="p" items ="${list}" varStatus="status">
                         <c:if test="${p.isProduct =='Y'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>
@@ -125,97 +127,23 @@
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
                                 <td>
-                                    <button class="icon-button">
-                                        <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                                    <button class="icon-button" type="button" onclick="location.href='update.pro'">
+                                        <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="icon-button">
-                                        <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                    <button class="icon-button" type="button" onclick="location.href='delete.pro'">
+                                        <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
                                 </td>
                             </tr>
                         </c:if>
                     </c:forEach>
-                    <%--
-                    <tr onclick="openModal(this)">
-                      <td>4</td>
-                      <td>D제품</td>
-                      <td>썬크림</td>
-                      <td>200</td>
-                      <td>23,000</td>
-                      <td>SPA+50 자외선 차단</td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                        </button>
-                      </td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                        </button>
-                      </td>
-                    </tr>
-                    <tr onclick="openModal(this)">
-                      <td>3</td>
-                      <td>C제품</td>
-                      <td>로션</td>
-                      <td>150</td>
-                      <td>15,000</td>
-                      <td>피부보습 올인원 로션</td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                        </button>
-                      </td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                        </button>
-                      </td>
-                    </tr>
-                    <tr onclick="openModal(this)">
-                      <td>2</td>
-                      <td>B제품</td>
-                      <td>스킨</td>
-                      <td>400</td>
-                      <td>20,000</td>
-                      <td>밤에 케어하는 스킨</td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                        </button>
-                      </td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                        </button>
-                      </td>
-                    </tr>
-                    <tr onclick="openModal(this)">
-                      <td>1</td>
-                      <td>A제품</td>
-                      <td>스킨</td>
-                      <td>300</td>
-                      <td>50,000</td>
-                      <td>차은우 스킨</td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                        </button>
-                      </td>
-                      <td>
-                        <button class="icon-button">
-                          <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                        </button>
-                      </td>
-                    </tr>
-                    --%>
                     </tbody>
                 </table>
             </form>
 
-            <form id="page-body-content1" style="display: none" action="select.ing" method="get">
+            <form id="page-body-content1" style="display: none" action="search.ing" method="get">
 
                 <div id="search-inventory1">
 
@@ -234,7 +162,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap1">
-                        <button id="addBtn1" type="button" onclick="location.href='ingAdd.erp'">
+                        <button id="addBtn1" type="button" onclick="location.href='add.ing'">
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white"
@@ -258,7 +186,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="p" items ="materialProducts" varStatus="status">
+                    <c:forEach var="p" items ="${list}" varStatus="status">
                         <c:if test="${p.isProduct == 'N'}">
                             <tr onclick="openModal(this)">
                                 <td>${status.count}</td>
@@ -267,152 +195,78 @@
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
                                 <td>
-                                    <button class="icon-button">
-                                        <img src="/resources/image/update_icon.png" alt="수정" width="20">
+                                    <button class="icon-button" type="button" onclick="location.href='update.ing'">
+                                        <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="icon-button">
-                                        <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
+                                    <button class="icon-button" type="button" onclick="location.href='delete.ing'">
+                                        <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
                                 </td>
                             </tr>
                         </c:if>
-
-                        <%--
-                        <tr onclick="openModal(this)">
-                          <td>4</td>
-                          <td>재료4</td>
-                          <td>200</td>
-                          <td>23,000</td>
-                          <td>~ 성분</td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                          </td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                          </td>
-                        </tr>
-                        <tr onclick="openModal(this)">
-                          <td>3</td>
-                          <td>재료3</td>
-                          <td>150</td>
-                          <td>15,000</td>
-                          <td>~ 성분</td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                          </td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                          </td>
-                        </tr>
-                        <tr onclick="openModal(this)">
-                          <td>2</td>
-                          <td>재료2</td>
-                          <td>400</td>
-                          <td>20,000</td>
-                          <td>~ 성분</td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                          </td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                          </td>
-                        </tr>
-                        <tr onclick="openModal(this)">
-                          <td>1</td>
-                          <td>재료1</td>
-                          <td>300</td>
-                          <td>50,000</td>
-                          <td>~ 성분</td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/update_icon.png" alt="수정" width="20">
-                            </button>
-                          </td>
-                          <td>
-                            <button class="icon-button">
-                              <img src="/resources/image/delete_icon.png" alt="삭제" width="20">
-                            </button>
-                          </td>
-                        </tr>
-                        --%>
                     </c:forEach>
                     </tbody>
                 </table>
             </form>
-            <div id="page-body-page-div">
-                <div>
-                    <div class="page-body-page-div-start">
-                        <p>이전</p>
-                    </div>
-                    <div>
-                        <p>1</p>
-                    </div>
-                    <div>
-                        <p>2</p>
-                    </div>
-                    <div>
-                        <p>3</p>
-                    </div>
-                    <div>
-                        <p>4</p>
-                    </div>
-                    <div>
-                        <p>5</p>
-                    </div>
-                    <div>
-                        <p>6</p>
-                    </div>
-                    <div>
-                        <p>7</p>
-                    </div>
-                    <div>
-                        <p>8</p>
-                    </div>
-                    <div>
-                        <p>9</p>
-                    </div>
-                    <div>
-                        <p>10</p>
-                    </div>
-                    <div class="page-body-page-div-end">
-                        <p>다음</p>
-                    </div>
-                </div>
+        <div id="pagingArea">
+            <ul class="pagination">
+                <c:choose>
+                    <c:when test="${ pi.currentPage eq 1 }">
+                        <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link" href="inv.erp?cpage=${pi.currentPage - 1}&tab=${param.tab}">이전</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
 
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <li class="page-item">
+                        <a class="page-link" href="inv.erp?cpage=${p}&tab=${param.tab}">${p}</a>
+                    </li>
+                </c:forEach>
 
-            </div>
-
+                <c:choose>
+                    <c:when test="${ pi.currentPage eq pi.maxPage }">
+                        <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link" href="inv.erp?cpage=${pi.currentPage + 1}&tab=${param.tab}">다음</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </div>
         </div>
     </div>
 </div>
 <script>
     document.getElementById("proBtn").addEventListener("click", function () {
-        this.style.color = "#A9A9A9";
-        document.getElementById("mtBtn").style.color = "black";
-        document.getElementById("page-body-content").style.display = "block";
-        document.getElementById("page-body-content1").style.display = "none";
+        location.href = "inv.erp?cpage=1&tab=product"; // 제품 탭 클릭 시
     });
 
     document.getElementById("mtBtn").addEventListener("click", function () {
-        this.style.color = "#A9A9A9";
+        location.href = "inv.erp?cpage=1&tab=material"; // 재료 탭 클릭 시
+    });
+    // URL에서 tab 값 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab') || 'product';  // 기본값: 제품
+
+    if (tab === 'product') {
+        document.getElementById("proBtn").style.color = "#A9A9A9";
+        document.getElementById("mtBtn").style.color = "black";
+        document.getElementById("page-body-content").style.display = "block";
+        document.getElementById("page-body-content1").style.display = "none";
+    } else {
+        document.getElementById("mtBtn").style.color = "#A9A9A9";
         document.getElementById("proBtn").style.color = "black";
         document.getElementById("page-body-content1").style.display = "block";
         document.getElementById("page-body-content").style.display = "none";
-    });
+    }
 
 
     <%-- modal --%>

@@ -32,4 +32,7 @@ public interface IncomeMapper {
                           @Param("startDate") String startDate,
                           @Param("endDate") String endDate,
                           @Param("company") String company);
+
+    //gno의 담긴 매출 상세보기
+    ArrayList<SalesDetails> incomeDetail(int gno);
 }

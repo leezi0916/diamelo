@@ -31,4 +31,9 @@ public class CrmController {
             return "common/errorPage";
         }
     }
+
+    @GetMapping("a")
+    public String a() {
+        return "crmPage/productList";
+    }
 }

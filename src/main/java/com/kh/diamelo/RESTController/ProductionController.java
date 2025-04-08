@@ -19,36 +19,23 @@ public class ProductionController {
 
     private final ProductService productService;
 
+    //ResponseEntity는 안정성을 위해 사용 404,400
     @GetMapping("/details")
     public ResponseEntity<HashMap<String, Object>> getProductDetails(@RequestParam("productNo") int productNo) {
+
+        //제품 이미지와 레시피를 동시에 갖고오기 위해 맵을 사용하여 키와 값으로 저장함
         HashMap<String, Object> response = new HashMap<>();
 
-        // ✅ 제품 이미지 가져오기
+        //  제품 이미지 가져오기
         String imagePath = productService.getProductImage(productNo);
         response.put("imagePath", imagePath);
 
-        // ✅ 제품 레시피(재료 목록) 가져오기
+        //  제품 레시피(재료 목록) 가져오기
         ArrayList<Product> materials = productService.getMaterialsByProductNo(productNo);
         response.put("materials", materials);
 
+        //리턴
         return ResponseEntity.ok(response);
     }
-
-//    @PostMapping("/create")
-//    public ResponseEntity<HashMap<String, String>> createProduct(@RequestBody HashMap<String, Integer> request) {
-//        int productNo = request.get("productNo");
-//        int quantity = request.get("quantity");
-//
-//        boolean success = productService.produceProduct(productNo, quantity);
-//
-//        HashMap<String, String> response = new HashMap<>();
-//        if (success) {
-//            response.put("message", "제품 제작 완료!");
-//            return ResponseEntity.ok(response);
-//        } else {
-//            response.put("message", "재료 부족으로 제작 실패!");
-//            return ResponseEntity.badRequest().body(response);
-//        }
-//    }
 
 }

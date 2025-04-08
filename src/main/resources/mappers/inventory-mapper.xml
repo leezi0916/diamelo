@@ -28,11 +28,25 @@
     </select>
 
     <select id="selectProductList" resultMap="productResult">
-        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE, B.PRO_INVENT_STOCK, C.PRO_CATEGORY ,A.IS_PRODUCT
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT
         FROM PRODUCT A
-        INNER JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
         INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
         WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'Y'
+    </select>
+
+    <select id="selectMaterialList" resultMap="productResult">
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT
+        FROM PRODUCT A
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'N'
     </select>
 
     <!--        <select id="countByIsProduct" resultType="int">-->
@@ -53,9 +67,35 @@
     <!--            AND A.PRO_DELETED = 'N'-->
     <!--        </select>-->
 
-    <insert id="insertIngrediant">
-        INSERT
-        INTO PRODUCT(
+<!--    <insert id="insertMaterial">-->
+<!--        INSERT-->
+<!--        INTO PRODUCT(-->
+<!--        PRO_NO,-->
+<!--        PROCATEGORY_NO,-->
+<!--        PRO_NAME,-->
+<!--        PRO_DETAIL,-->
+<!--        PRO_PRICE,-->
+<!--        PRO_ENROLL_DATE,-->
+<!--        PRO_DELETED,-->
+<!--        IS_PRODUCT-->
+
+<!--        ) VALUES (-->
+<!--        SEQ_PNO.NEXTVAL,-->
+<!--        6,-->
+<!--        #{proName},-->
+<!--        #{proDetail},-->
+<!--        #{proPrice},-->
+<!--        SYSDATE,-->
+<!--        'N',-->
+<!--        'N'-->
+<!--        )-->
+<!--    </insert>-->
+
+    <insert id="insertProduct" parameterType="Product">
+        <selectKey keyProperty="proNo" resultType="_int" order="BEFORE">
+            SELECT SEQ_PNO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO PRODUCT (
         PRO_NO,
         PROCATEGORY_NO,
         PRO_NAME,
@@ -64,9 +104,62 @@
         PRO_ENROLL_DATE,
         PRO_DELETED,
         IS_PRODUCT
-
         ) VALUES (
-        SEQ_PNO.NEXTVAL,
+        #{proNo},
+        #{proCategoryNo},
+        #{proName},
+        #{proDetail},
+        #{proPrice},
+        SYSDATE,
+        'N',
+        'Y'
+        )
+    </insert>
+
+    <!-- 첨부파일 등록 -->
+    <insert id="insertProductAttachment" parameterType="Attachment">
+        INSERT INTO ATTACHMENT (
+        PRO_NO,
+        ORIGIN_NAME,
+        CHANGE_NAME,
+        UPDATE_DATE
+        ) VALUES (
+        #{proNo},
+        #{originName},
+        #{changeName},
+        SYSDATE
+        )
+    </insert>
+
+    <!-- 레시피 등록 -->
+    <insert id="insertRecipeList" parameterType="java.util.ArrayList">
+        INSERT INTO RECIPE (PRO_NO, MAT_NO, AMOUNT)
+        VALUES
+        <foreach collection="recipeList" item="recipe" separator=",">
+            (#{recipe.proNo}, #{recipe.matNo}, #{recipe.amount})
+        </foreach>
+    </insert>
+
+
+
+
+
+
+    <insert id="insertMaterial" parameterType="product">
+        <selectKey keyProperty="proNo" order="BEFORE" resultType="int">
+            SELECT SEQ_PNO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO PRODUCT (
+        PRO_NO,
+        PROCATEGORY_NO,
+        PRO_NAME,
+        PRO_DETAIL,
+        PRO_PRICE,
+        PRO_ENROLL_DATE,
+        PRO_DELETED,
+        IS_PRODUCT
+        ) VALUES (
+        #{proNo},
         6,
         #{proName},
         #{proDetail},
@@ -76,5 +169,29 @@
         'N'
         )
     </insert>
+
+
+    <insert id="insertMaterialAttachment" parameterType="attachment">
+        INSERT INTO ATTACHMENT (
+        PRO_NO,
+        ORIGIN_NAME,
+        CHANGE_NAME,
+        UPDATE_DATE
+        ) VALUES (
+        #{proNo},
+        #{originName},
+        #{changeName},
+        SYSDATE
+        )
+    </insert>
+
+
+
+
+
+
+
+
+
 
 </mapper>

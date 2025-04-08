@@ -28,53 +28,62 @@
             </div>
 
             <div id="page-body-content">
-                <form method="get" action="select.ad">
-                    <div id="search-company">
-                        <select id="search-category" name="type">
-                            <option value="A">전체</option>
-                            <option value="W">대기</option>
-                            <option value="Y">승인</option>
-                            <option value="N">반려</option>
-                        </select>
-                        <input type="text" placeholder="기업명" id="search-companyName" name="companyName">
-                        <input type="text" placeholder="대표자명" id="search-ceoName" name="userName">
-                        <button id="searchBtn" type="submit">
-                            <svg width="20" height="20" viewBox="0 0 25 25" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M4.14111 11.0614C4.14111 7.18044 7.29911 4.02344 11.1801 4.02344C15.0601 4.02344 18.2181 7.18044 18.2181 11.0614C18.2181 14.9424 15.0601 18.1004 11.1801 18.1004C7.29911 18.1004 4.14111 14.9424 4.14111 11.0614ZM22.6361 21.5204L18.0371 16.9334C19.3931 15.3524 20.2181 13.3034 20.2181 11.0614C20.2181 6.07844 16.1631 2.02344 11.1801 2.02344C6.19611 2.02344 2.14111 6.07844 2.14111 11.0614C2.14111 16.0454 6.19611 20.1004 11.1801 20.1004C13.2021 20.1004 15.0651 19.4244 16.5721 18.2974L21.2241 22.9364L22.6361 21.5204Z"
-                                      fill="black"/>
-                            </svg>
-                            조회
-                        </button>
-                        <div id="add-btn-wrap">
-                            <button id="addBtn" type="button" onclick="location.href='company.erp'">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                <div id="page_body">
+                    <form method="get" action="select.ad">
+                        <div id="search-company">
+                            <select id="search-category" name="type">
+                                <option value="A">전체</option>
+                                <option value="W">대기</option>
+                                <option value="Y">승인</option>
+                                <option value="N">반려</option>
+                            </select>
+                            <input type="text" placeholder="기업명" id="search-companyName" name="companyName">
+                            <input type="text" placeholder="대표자명" id="search-ceoName" name="userName">
+                            <button id="searchBtn" type="submit">
+                                <svg width="20" height="20" viewBox="0 0 25 25" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.1535 4.00586V15.2245M4.54419 9.61516H15.7628" stroke="white"
-                                          stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M4.14111 11.0614C4.14111 7.18044 7.29911 4.02344 11.1801 4.02344C15.0601 4.02344 18.2181 7.18044 18.2181 11.0614C18.2181 14.9424 15.0601 18.1004 11.1801 18.1004C7.29911 18.1004 4.14111 14.9424 4.14111 11.0614ZM22.6361 21.5204L18.0371 16.9334C19.3931 15.3524 20.2181 13.3034 20.2181 11.0614C20.2181 6.07844 16.1631 2.02344 11.1801 2.02344C6.19611 2.02344 2.14111 6.07844 2.14111 11.0614C2.14111 16.0454 6.19611 20.1004 11.1801 20.1004C13.2021 20.1004 15.0651 19.4244 16.5721 18.2974L21.2241 22.9364L22.6361 21.5204Z"
+                                          fill="black"/>
                                 </svg>
-                                거래처 승인
-                            </button>
-                            <button id="deleteBtn" type="button" onclick="location.href='company.erp'">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 10H16" stroke="white" stroke-width="1.60586" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                </svg>
-                                거래처 반려
-                            </button>
-                            <button id="backBtn" type="button" onclick="location.href='company.erp'">
-                                돌아가기
+                                조회
                             </button>
                         </div>
+                    </form>
+
+
+                    <div id="add-btn-wrap">
+
+                        <button id="addBtn" onclick="return commitCompany()" >
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.1535 4.00586V15.2245M4.54419 9.61516H15.7628" stroke="white"
+                                      stroke-width="1.60586" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            거래처 승인
+                        </button>
+
+
+                        <button id="deleteBtn" type="button" onclick="location.href='company.rt'">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 10H16" stroke="white" stroke-width="1.60586" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                            거래처 반려
+                        </button>
+
+                        <button id="backBtn" type="button" onclick="location.href='company.erp'">
+                            돌아가기
+                        </button>
+
                     </div>
-                </form>
+                </div>
 
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" name="check"></th>
+                        <th style="vertical-align: middle;"><input type="checkbox" id="allcheck" onclick="allCheck(this)"></th>
                         <th>기업명</th>
                         <th>대표자명</th>
                         <th>연락처</th>
@@ -89,7 +98,7 @@
                         <c:when test="${not empty list}">
                             <c:forEach var="c" items="${list}">
                                 <tr>
-                                    <td><input type="checkbox" name="check"></td>
+                                    <td style="vertical-align: middle;"><input type="checkbox" id="checking" class="checking" name="userId" value="${c.userId}"></td>
                                     <td>${c.companyName}</td>
                                     <td>${c.userName}</td>
                                     <td>${c.phone}</td>
@@ -122,9 +131,13 @@
                                         </c:choose>
                                     </td>
                                     <td>
-                                        <button style="outline: none" class="icon-button" type="button" onclick="">
-                                            <img src="/image/delete_icon.png" alt="삭제" width="20">
-                                        </button>
+                                        <form action="delete.com" method="get">
+                                            <input type="hidden" name="userId" value="${c.userId}">
+                                            <button style="outline: none" class="icon-button" type="submit" onclick="return onalert()">
+                                                <img src="/image/delete_icon.png" alt="삭제" width="20">
+                                            </button>
+                                        </form>
+
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -214,5 +227,101 @@
     </div>
 </div>
 
+<script>
+
+    function allCheck(_allCheckBox){
+        //전체선택 체크여부
+        let checked = _allCheckBox.checked;
+
+        let status = document.getElementsByName("status");
+        for(let box of status){
+            box.checked = checked;
+        }
+    }
+
+    function isAllchecked(selector){
+        const checkBoxList = document.querySelectorAll(selector);
+        for(let box of checkBoxList){
+            if(!box.checked){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function addstatusEvent(){
+        const allcheck = document.getElementById('allcheck');
+        let status = document.getElementsByName("status");
+
+        for(let box of status){
+            //모든 체크박스의 체크여부를 확인해서 결과에따라
+            //all체크박스의 체크여부를 변경한다.
+            box.onclick = function(){
+                let isChecked = isAllchecked('input[name="status"]');
+                allcheck.checked = isChecked;
+            }
+        }
+    }
+    addstatusEvent();
+
+    function onalert(){
+        if(confirm("정말 삭제하시겠습니까?")){
+        }else{
+            return false;
+        }
+    }
+
+    function commitCompany(){
+        //checkBox전체 가져와서
+        //선택된 녀석들의 value만 모아서
+        //ajax요청
+
+        //체크박스
+        const checkBox = document.querySelectorAll('.checking:checked');
+        //체크박스 값
+        const selectedValues = [];
+
+        checkBox.forEach((el)=>{
+            selectedValues.push(el.value);
+        })
+
+        if(confirm("거래처를 승인하시겠습니까?")){
+
+        }else{
+            alert('취소하였습니니다.');
+            return;
+        }
+
+        updateCompanyStatus({
+            userId : selectedValues
+        },drawCompanyList)
+
+    }
+
+    function drawCompanyList(data){
+        alert("승인 완료되었습니다.");
+        location.href='compAdmin.erp';
+    }
+
+    function updateCompanyStatus(data, callback){
+        $.ajax({
+            url: '/api/company/status',
+            type: 'post',
+            data : JSON.stringify(data),
+            contentType: 'application/json',
+            success:function (res){
+                if(res === "success"){
+                    callback(data);
+                }else{
+                    console.log("status update 실패");
+                }
+            },
+            error: function (){
+                console.log("status update ajax 요청 실패");
+            }
+        })
+    }
+</script>
+<%--location.href='company.ap'--%>
 </body>
 </html>
