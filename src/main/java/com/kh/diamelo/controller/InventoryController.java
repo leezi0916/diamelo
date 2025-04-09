@@ -32,8 +32,29 @@ public class InventoryController {
 
     public String inventory(@RequestParam(value = "cpage", defaultValue = "1") int cpage,
                             @RequestParam(value = "tab", defaultValue = "product") String tab,
-                            Model model) {
+                            Model model,HttpSession session) {
 
+        String svg = "<svg width=\"25\"\n" +
+                "                                height=\"25\"\n" +
+                "                                viewBox=\"0 0 25 25\"\n" +
+                "                                fill=\"none\"\n" +
+                "                                xmlns=\"http://www.w3.org/2000/svg\"\n" +
+                "                                xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n" +
+                "                            <rect width=\"25\" height=\"25\" fill=\"url(#pattern0_240_5965)\" />\n" +
+                "                            <defs>\n" +
+                "                                <pattern id=\"pattern0_240_5965\"\n" +
+                "                                        patternContentUnits=\"objectBoundingBox\"\n" +
+                "                                        width=\"1\"\n" +
+                "                                        height=\"1\">\n" +
+                "                                    <use xlink:href=\"#image0_240_5965\" transform=\"scale(0.0104167)\" />\n" +
+                "                                </pattern>\n" +
+                "                                <image id=\"image0_240_5965\"\n" +
+                "                                        width=\"96\"\n" +
+                "                                        height=\"96\"\n" +
+                "                                        preserveAspectRatio=\"none\"\n" +
+                "                                        xlink:href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAACIElEQVR4nO2bTU4CURCEa6FnEa8qIKdB76FcRGAlizKTjIkbfgbes7ua+pJeGqq6hpF0vwcYY4wxxhhjjDHGGNOOZwCvADYA9gCYvPYAPgEsAcyUH4RHACsAhwRN5ZV1GIN4gGDz3xM0kI3qTS2EVYKmsXEN3wSZd77ya4dHavD0BAEqPv0cawEBNgkaxU41/DpKzy5Bo9ipthDgnInsUFy/vAGK65c3QHH98gYorl/eAMX1yxuguH55AxTXL2+A4vqbG+CNFa3/33EAwTiAYBxAMA4gGAcQjAMIxgEEo/47muL65Q1QXL+8AYrrlzdAcf3yBiiuX94AxfXLG6C4fnkDzK5f7bw/q9wnqHDen6r3Caqd96fafYLKJ56Z/T5B1fP+VLlP4KcfsfcJKp/3p8J9gsrn/alwn+Dch9w77N0fB3AaBxCMAwgmXQDqryxm85tOUGfS+U0nqDPp/KYT1Jl0fqd+wPaCv1GtL4UAKo8uPhQCWCZoFDvVi0IAs6Lj6+8j4+V0AVT9Fswb9qd7AMM6bp2gaWxU6xMrxpQB/IawFH8dHcYn/9R+N20Af/8nLMblhMJuYTdqnV+4UkwfQHXoAGJxAME4gGAcQDAOIBgHEIwDqB5A5fk+A/YHk6k832fA/mAyFSebDNwfTKbqfJ9B+4Or8LcAzfYHV1Ftvs/A/cFNIajP95lgf3AzavN9JtsfGGOMMcYYY4wxxhjcJz9cFcM0z0soGwAAAABJRU5ErkJggg==\"/>\n" +
+                "                            </defs>\n" +
+                "                        </svg>";
 
         int productCount = inventoryService.selectProductCount();
         model.addAttribute("pCount", productCount);
@@ -89,7 +110,9 @@ public class InventoryController {
         model.addAttribute("pi", pi);
         */
 
-
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "재고 관리");
+        
         return "erpPage/inventoryMainPage";
     }
 
@@ -190,18 +213,13 @@ public class InventoryController {
     }
 
 
-
-
-
-
     // ------------ 재료 -----------------
-
 
 
     //재료조회
     @GetMapping("search.ing")
     public String searchIngrediant(@RequestParam(defaultValue = "1") int cpage, String proName, Product proNo, Model model) {
-       return null;
+        return null;
     }
 
     // 재료등록 페이지로 가기
