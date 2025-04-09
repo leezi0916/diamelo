@@ -156,6 +156,11 @@ public class BuyController {
         PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
 
         ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, Date, tDate, searchId);
+
+        model.addAttribute("startDate", Date);
+        model.addAttribute("endDate", tDate);
+        model.addAttribute("user", user);
+
         model.addAttribute("blist", blist);
         model.addAttribute("bpi", bpi);
 

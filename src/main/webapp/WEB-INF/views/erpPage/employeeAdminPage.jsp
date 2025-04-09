@@ -167,13 +167,13 @@
 
         <c:choose>
           <c:when test="${not empty userId or not empty userName}">
-            <c:url var="pageUrl" value="empSearch.erp">
+            <c:url var="pageUrl" value="empAdminSearch.erp">
               <c:param name="userName" value="${userName}" />
               <c:param name="userId" value="${userId}" />
             </c:url>
           </c:when>
           <c:otherwise>
-            <c:set var="pageUrl" value="empList.erp?" />
+            <c:set var="pageUrl" value="empAdminList.erp?" />
           </c:otherwise>
         </c:choose>
             <%-- 페이지바 --%>
@@ -184,12 +184,12 @@
                 <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${pi.currentPage - 1}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}">이전</a></li>
               </c:otherwise>
             </c:choose>
 
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-              <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${p}">${p}</a></li>
+              <li class="page-item"><a class="page-link" href="${pageUrl}&cpage=${p}">${p}</a></li>
             </c:forEach>
 
             <c:choose>
@@ -197,7 +197,7 @@
                 <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${pi.currentPage + 1}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}">다음</a></li>
               </c:otherwise>
             </c:choose>
           </ul>

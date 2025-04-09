@@ -68,6 +68,7 @@ public class EmployeeController {
         UserInfo empDetail = employeeService.selectEmployeeDetail(userId);
 
 
+
         model.addAttribute("e", empDetail);
         return "erpPage/employeeDetailPage";
     }
@@ -113,7 +114,7 @@ public class EmployeeController {
             userInfo.setChangeName("/resources/uploadFile/" + changeName);
             userInfo.setOriginName(refile.getOriginalFilename());
 
-
+            System.out.println(userInfo);
             if(imgSearch==0){
                 employeeService.employeeDetailImageInsert(userInfo);
             }else{

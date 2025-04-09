@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Mapper
 public interface SaleMapper {
@@ -31,4 +32,8 @@ public interface SaleMapper {
     String selectUserId(@Param("sNo") int sNo);
 
     int insertSalesDetails(SalesDetails salesDetails);
+
+    int selectSearchCount(@Param("company") String company,String startDate, String endDate);
+
+    ArrayList<InoutGroup> selectSearchList(RowBounds rowBounds,@Param("company") String company, String startDate, String endDate);
 }

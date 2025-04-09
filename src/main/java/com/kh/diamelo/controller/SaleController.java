@@ -1,7 +1,10 @@
 package com.kh.diamelo.controller;
 
 import com.kh.diamelo.domain.vo.*;
+import java.text.SimpleDateFormat;
 import jakarta.servlet.http.HttpSession;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import com.kh.diamelo.services.BuyService;
 import com.kh.diamelo.services.SaleService;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
@@ -44,7 +48,7 @@ public class SaleController {
         InoutGroup inoutGroup = new InoutGroup();
         ArrayList<Product> list = saleService.selectSaleDetailList(sNo);
         String companyName = saleService.selectInoutGroup(sNo);
-
+        System.out.println("list: " + list);
         System.out.println("companyName: " + companyName);
 
         for (Product product : list) {
@@ -139,7 +143,40 @@ public class SaleController {
             session.setAttribute("alertMsg", "반려는 변경하실 수 없습니다.");
             return "redirect:/saleList.erp";
         }
-
     }
+
+
+    @GetMapping("salSearList.erp")
+    public String searSale(@RequestParam(defaultValue = "1") int spage,String startDate, String endDate, String company, Model model, HttpSession session) {
+        System.out.println("spage: " + spage);
+        System.out.println("startDate: " + startDate);
+        System.out.println("endDate: " + endDate);
+        System.out.println("company: " + company);
+
+        int selCount = saleService.selectSearchCount(company, startDate, endDate);
+
+        System.out.println("selCount: " + selCount);
+        PageInfo pi = new PageInfo(selCount, spage, 10, 10);
+        ArrayList<InoutGroup> list = saleService.selectSearchList(pi, company, startDate, endDate);
+
+
+        System.out.println("list: " + list);
+
+
+
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("company", company);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+
+
+
+        return "erpPage/salePage";
+    }
+
+
+
 
 }
