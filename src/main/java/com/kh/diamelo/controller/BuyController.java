@@ -128,7 +128,12 @@ public class BuyController {
 
     //구매관리 페이지로 가기
     @GetMapping("buyList.erp")
-    public String buyList(@RequestParam(defaultValue = "1") int bpage, Model model){
+    public String buyList(@RequestParam(defaultValue = "1") int bpage, Model model, HttpSession session) {
+        String svg = "<svg width=\"25\" height=\"25\" viewBox=\"0 0 25 25\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                "                            <path d=\"M18.1807 13.75C19.1179 13.75 19.9426 13.2375 20.3674 12.4625L24.8408 4.35C25.3031 3.525 24.7033 2.5 23.7537 2.5H5.26055L4.08598 0H0V2.5H2.49907L6.9974 11.9875L5.31053 15.0375C4.39837 16.7125 5.59792 18.75 7.49722 18.75H22.4916V16.25H7.49722L8.87171 13.75H18.1807ZM6.44761 5H21.6295L18.1807 11.25H9.40901L6.44761 5ZM7.49722 20C6.12273 20 5.01064 21.125 5.01064 22.5C5.01064 23.875 6.12273 25 7.49722 25C8.87171 25 9.99629 23.875 9.99629 22.5C9.99629 21.125 8.87171 20 7.49722 20ZM19.9926 20C18.6181 20 17.506 21.125 17.506 22.5C17.506 23.875 18.6181 25 19.9926 25C21.3671 25 22.4916 23.875 22.4916 22.5C22.4916 21.125 21.3671 20 19.9926 20Z\"\n" +
+                "                                    fill=\"black\"/>\n" +
+                "                        </svg>";
+
         int buyCount = buyService.selectBuyCount();
         System.out.println("buyCount = " + buyCount);
 
@@ -138,6 +143,9 @@ public class BuyController {
         model.addAttribute("buyCount", buyCount);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "구매 관리");
 
         return "erpPage/buyPage";
     }

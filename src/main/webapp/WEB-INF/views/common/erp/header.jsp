@@ -72,16 +72,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="header-container">
             <!-- 왼쪽: HOME 아이콘 + 텍스트 -->
             <div class="header-left">
-                <!-- 홈 아이콘 -->
-                <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12.5 3.48118L18.75 9.30471V19.4118H16.25V11.6471H8.75V19.4118H6.25V9.30471L12.5 3.48118ZM12.5 0L0 11.6471H3.75V22H11.25V14.2353H13.75V22H21.25V11.6471H25L12.5 0Z"
-                        fill="black"
-                    />
-                </svg>
+                
+                ${selectIcon}
+
                 <div class="home-labels">
-                    <span class="home-sub">HOME</span>
-                    <span class="home-main">HOME</span>
+                    <span class="home-sub">${seletTitle}</span>
+                    <span class="home-main">${seletTitle}</span>
                 </div>
             </div>
 
