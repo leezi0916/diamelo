@@ -83,28 +83,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
             <!-- 오른쪽: 사람 아이콘 + 로그아웃 아이콘 + 텍스트 -->
             <div class="header-right">
-                <!-- 사람 아이콘 -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="myPage()">
-                    <g clip-path="url(#clip0_57_3647)">
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M32.5322 32.3193C30.8388 26.9643 26.2888 23.896 20.0438 23.896H19.9988C13.7372 23.861 9.16384 26.951 7.46717 32.3193L7.27051 32.9427L7.82717 33.2827C11.0905 35.2727 15.1605 36.281 19.9205 36.281C19.9738 36.281 20.0272 36.281 20.0788 36.281C24.9055 36.281 28.8622 35.2993 32.1722 33.2827L32.7288 32.9427L32.5322 32.3193Z"
-                            fill="#7AC38F"
-                        />
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M19.9997 20.1824C24.538 20.1824 28.2314 16.4907 28.2314 11.9524C28.2314 7.41237 24.538 3.7207 19.9997 3.7207C15.4614 3.7207 11.7697 7.41237 11.7697 11.9524C11.7697 16.4907 15.4614 20.1824 19.9997 20.1824Z"
-                            fill="#7AC38F"
-                        />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_57_3647">
-                            <rect width="40" height="40" fill="white" />
-                        </clipPath>
-                    </defs>
-                </svg>
 
                 <%-- 구매창으로 돌아가기 --%>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="backCrmPage()">
@@ -141,12 +119,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
 
         <script>
-            function myPage(){
-                if(confirm('마이페이지로 가시겠습니까?')){
-                    location.href = 'myPageDetail.me';
-                }
-            }
-
             function backCrmPage(){
                 if(confirm('상품 구매 페이지로 돌아가기겠습니까?')){
                     location.href = '/';

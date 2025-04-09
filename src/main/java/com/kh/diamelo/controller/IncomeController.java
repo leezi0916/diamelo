@@ -32,9 +32,12 @@ public class IncomeController {
         PageInfo pi = new PageInfo(incomeCount, inpage,10,10);
         ArrayList<SalesDetails> list = incomeService.selectIncomeList(pi);
 
+        int details = incomeService.selectIncomeAllSales();
+
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
+        model.addAttribute("details", details);
 
         session.setAttribute("selectIcon", svg);
         session.setAttribute("seletTitle", "매출 관리");
