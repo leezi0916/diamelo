@@ -103,23 +103,29 @@
                 <div class="page-body-content2">
                     <%-- 매출 합계 조회 영역 --%>
                     <div id="table-header">
-                        <div id="table-header-title" class="table-header">총 매출</div>
                         <c:choose>
                             <c:when test="${empty param.type}">
-                                <div id="table-header-price" class="table-header"></div>
+                                <div id="table-header-title" class="table-header">매출 총이익</div>
+                                    <div id="table-header-price" class="table-header" style="font-weight: bold;">
+                                        <fmt:formatNumber value="${details}" type="number"/>
+                                    </div>
+                                <div id="table-header-unit" class="table-header">(단위:만원)</div>
                             </c:when>
                             <c:when test="${type == 'I'}">
-                                <div id="table-header-price" class="table-header" style="color: blue; font-weight: bold;">
-                                    +<fmt:formatNumber value="${totalSalesSum}" type="number"/>
-                                </div>
+                                <div id="table-header-title" class="table-header">총 매출</div>
+                                    <div id="table-header-price" class="table-header" style="color: blue; font-weight: bold;">
+                                        +<fmt:formatNumber value="${totalSalesSum}" type="number"/>
+                                    </div>
+                                <div id="table-header-unit" class="table-header">(단위:만원)</div>
                             </c:when>
                             <c:when test="${type == 'O'}">
-                                <div id="table-header-price" class="table-header" style="color: red; font-weight: bold;">
-                                    -<fmt:formatNumber value="${totalSalesSum}" type="number"/>
-                                </div>
+                                <div id="table-header-title" class="table-header">총 지출</div>
+                                    <div id="table-header-price" class="table-header" style="color: red; font-weight: bold;">
+                                        -<fmt:formatNumber value="${totalSalesSum}" type="number"/>
+                                    </div>
+                                <div id="table-header-unit" class="table-header">(단위:만원)</div>
                             </c:when>
                         </c:choose>
-                        <div id="table-header-unit" class="table-header">(단위:만원)</div>
                     </div>
                 </div>
 

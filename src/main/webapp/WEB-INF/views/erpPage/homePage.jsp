@@ -121,7 +121,7 @@
                                         ${product.proName}
                                     </div>
                                     <div style="color: red">
-                                        ${product.stock}
+                                        ${product.proInventStock}
                                     </div>
                                 </div>
 
