@@ -31,7 +31,7 @@ public class Product {
     private Date proEnrollDate;
 
     private int amount;
-    private int proInventStock;
+
 
     private int historyNo;
     private int groupNo;
