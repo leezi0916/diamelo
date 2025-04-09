@@ -140,7 +140,6 @@
                                                 <img src="/image/delete_icon.png" alt="삭제" width="20">
                                             </button>
                                         </form>
-
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -229,6 +228,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
