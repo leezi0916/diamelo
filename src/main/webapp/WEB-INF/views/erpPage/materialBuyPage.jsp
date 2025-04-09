@@ -82,7 +82,7 @@
                 </div>
                 <!-- 하단 버튼 영역(승인, 반려, 돌아가기) -->
                 <div id="page-body-button-div">
-                    <button class="searchBtn">
+                    <button class="searchBtn" onclick="location.href='buyList.erp'">
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.15422 1.00586V12.2245M1.54492 6.61516H12.7635" stroke="white"
@@ -90,7 +90,7 @@
                         </svg>
                         구매 신청
                     </button>
-                    <button class="searchBtn" type="button" onclick="location.href='buy.erp'">
+                    <button class="searchBtn" type="button" onclick="location.href='buyList.erp'">
                         돌아가기
                     </button>
                 </div>

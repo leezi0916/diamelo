@@ -19,9 +19,9 @@ public interface BuyService {
 
     String selectGroupNo(int rNum);
 
-    Product selectInOutHistory(int sNo);
+    Product selectInOutHistory(int gNo);
 
-    ArrayList<Product> selectMatDetailList(int sNo);
+    ArrayList<Product> selectMatDetailList(int gNo);
 
     int selectMatPrice(String proName);
 
@@ -30,4 +30,14 @@ public interface BuyService {
     Product selectfilePath(String proName);
 
     int insertSalesDetails(SalesDetails salesDetails);
+
+    int selectProNo(String proName);
+
+    int updateProductInventory(Product product);
+
+    int selectSearchCount(String Date, String tDate, String user);
+
+    String selectUserId(String user);
+
+    ArrayList<SalesDetails> selectSearchList(PageInfo pi,String Date, String tDate, String user);
 }
