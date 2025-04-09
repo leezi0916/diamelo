@@ -58,7 +58,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 color: black;
                 border: 1px solid #A9A9A9;
             }
-
         </style>
     </head>
     <body>
@@ -72,9 +71,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="header-container">
             <!-- 왼쪽: HOME 아이콘 + 텍스트 -->
             <div class="header-left">
-                
+                <%-- 타이틀마다의 아이콘 --%>
                 ${selectIcon}
 
+                <%-- 타이틀 명 --%>
                 <div class="home-labels">
                     <span class="home-sub">${seletTitle}</span>
                     <span class="home-main">${seletTitle}</span>
@@ -84,7 +84,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <!-- 오른쪽: 사람 아이콘 + 로그아웃 아이콘 + 텍스트 -->
             <div class="header-right">
                 <!-- 사람 아이콘 -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="myPage()">
                     <g clip-path="url(#clip0_57_3647)">
                         <path
                             fill-rule="evenodd"
@@ -105,6 +105,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         </clipPath>
                     </defs>
                 </svg>
+
+                <%-- 구매창으로 돌아가기 --%>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="backCrmPage()">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.8281 3.65625L5.09481 14.2463V36.3446H16.5931V27.8796H23.4631V36.3446H34.9048V14.2413L19.8281 3.65625Z" fill="#7AC38F"/>
+                </svg>
+
 
                 <!-- 로그아웃 아이콘 -->
                 <svg
@@ -130,11 +136,23 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </svg>
 
                 <!-- 텍스트 -->
-                <span class="welcome-text">디아멜로 님 어서오세요!</span>
+                <span class="welcome-text">${loginUser.userName} 님 어서오세요!</span>
             </div>
         </div>
 
         <script>
+            function myPage(){
+                if(confirm('마이페이지로 가시겠습니까?')){
+                    location.href = 'myPageDetail.me';
+                }
+            }
+
+            function backCrmPage(){
+                if(confirm('상품 구매 페이지로 돌아가기겠습니까?')){
+                    location.href = '/';
+                }
+            }
+
             function logout() {
                 const checkLogout = confirm('정말 로그아웃 하시겠습니까?');
 
