@@ -1,34 +1,145 @@
 package com.kh.diamelo.controller;
 
+import com.kh.diamelo.domain.vo.*;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import com.kh.diamelo.services.BuyService;
+import com.kh.diamelo.services.SaleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+
+@RequiredArgsConstructor
 @Controller
 public class SaleController {
+    private final SaleService saleService;
 
     // 판매관리 페이지로 가기
-    @GetMapping("sale.erp")
-    public String sale() {
+    @GetMapping("saleList.erp")
+    public String sale(@RequestParam(defaultValue = "1") int spage, Model model) {
+        int salesListCount =  saleService.salesListCount();
+
+
+        PageInfo pi = new PageInfo(salesListCount, spage, 10, 10);
+        ArrayList<InoutGroup> list = saleService.selectSalesList(pi);
+
+
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+
+
         return "erpPage/salePage";
     }
 
     // 판매 상세보기
-    @GetMapping("detail.sale")
-    public String detailSale() {
+    @GetMapping("saleDList.erp")
+    public String detailSale(@RequestParam("sNo")int sNo, Model model) {
+        System.out.println("sNo: " + sNo);
+        int resSum = 0;
+        InoutGroup inoutGroup = new InoutGroup();
+        ArrayList<Product> list = saleService.selectSaleDetailList(sNo);
+        String companyName = saleService.selectInoutGroup(sNo);
+
+        System.out.println("companyName: " + companyName);
+
+        for (Product product : list) {
+            resSum += product.getHistoryStock();
+        }
+        System.out.println("resSum: " + resSum);
+
+        System.out.println("inoutGroup: " + inoutGroup);
+        inoutGroup.setSalesAmount(resSum);
+        System.out.println("list: " + list);
+
+
+        System.out.println("inoutGroup2 :: " + inoutGroup);
+
+        model.addAttribute("sNo", sNo);
+        model.addAttribute("resSum", resSum);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("list", list);
+
+
         return "erpPage/saleDetailPage";
     }
 
     // 판매 승인
-    @PostMapping("acc.sale")
-    public String acceptSale() {
-        return null;
+    @GetMapping("buyAcc.erp")
+    public String acceptSale(@RequestParam("sNo")int sNo, Model model, HttpSession session) {
+        SalesDetails salesDetails = new SalesDetails();
+        String groupStatus = saleService.selectGroupStatus(sNo);
+        System.out.println("groupStatus: " + groupStatus);
+
+        if(groupStatus.equals("Y")) {
+            session.setAttribute("alertMsg", "이미 승인상태입니다.");
+            return "redirect:/saleList.erp";
+        } else if(groupStatus.equals("W")) {
+            int updateStatus = saleService.updateStatus(sNo);
+
+
+            ArrayList<Product> list = saleService.selectSaleDetailList(sNo);
+            System.out.println("Statuslist: " + list);
+            for (Product product : list) {
+
+                int updateProduct = saleService.updateProduct(product);
+                String userId = saleService.selectUserId(sNo);
+                System.out.println("userId: " + userId);
+                salesDetails.setUserId(userId);
+                salesDetails.setSalesAmount(product.getProPrice());
+                salesDetails.setSalesStock(product.getHistoryStock());
+                salesDetails.setChangeName(product.getChangeName());
+                salesDetails.setGroupNo(product.getGroupNo());
+                salesDetails.setProName(product.getProName());
+
+                System.out.println("salesDetails: " + salesDetails);
+
+                int resIn = saleService.insertSalesDetails(salesDetails);
+            }
+
+
+
+            //여기 들어가야함
+
+            if(updateStatus == 1) {
+                session.setAttribute("alertMsg", "수정 되었습니다.");
+            }else{
+                session.setAttribute("alertMsg", "실패하였습니다.");
+            }
+            return "redirect:/saleList.erp";
+        }else{
+            session.setAttribute("alertMsg", "반려는 변경하실 수 없습니다.");
+            return "redirect:/saleList.erp";
+        }
     }
 
     // 판매 반려
-    @PostMapping("ref.sale")
-    public String refusalSale() {
-        return null;
+    @GetMapping("buyRef.erp")
+    public String refusalSale(@RequestParam("sNo")int sNo, Model model, HttpSession session) {
+        String groupStatus = saleService.selectGroupStatus(sNo);
+        System.out.println("groupStatus: " + groupStatus);
+
+        if(groupStatus.equals("Y")) {
+            session.setAttribute("alertMsg", "이미 승인상태입니다.");
+            return "redirect:/saleList.erp";
+        } else if(groupStatus.equals("W")) {
+            int updateStatus = saleService.updateStatusN(sNo);
+            if(updateStatus == 1) {
+                session.setAttribute("alertMsg", "수정 되었습니다.");
+            }else{
+                session.setAttribute("alertMsg", "실패하였습니다.");
+            }
+            System.out.println("updateStatus: " + updateStatus);
+            return "redirect:/saleList.erp";
+        }else{
+            session.setAttribute("alertMsg", "반려는 변경하실 수 없습니다.");
+            return "redirect:/saleList.erp";
+        }
+
     }
 
 }

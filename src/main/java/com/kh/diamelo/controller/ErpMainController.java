@@ -31,7 +31,9 @@ public class ErpMainController {
 
         //오늘의 매출 갖고오기
         int todaySales = erpMainService.selectTodaySales();
+
         model.addAttribute("todaySales", todaySales);
+
 
         //판매 현황 조회 W
         int salesStatus1 = erpMainService.countSalesStatus1();

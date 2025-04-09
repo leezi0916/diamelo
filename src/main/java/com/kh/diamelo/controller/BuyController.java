@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -23,11 +24,7 @@ public class BuyController {
     private final BuyService buyService;
     private final LoginInterceptor loginInterceptor;
 
-    // 구매조회
-    @GetMapping("search.buy")
-    public String searchBuy() {
-        return null;
-    }
+
 
     // 구매서 등록
 //    @GetMapping("buyAdd.erp")
@@ -37,17 +34,17 @@ public class BuyController {
 
     //구매 상세보기
     @GetMapping("buyDetail.erp")
-    public String detailBuy(@RequestParam("sNo")int sNo, Model model) {
-        System.out.println("sNo = " + sNo);
+    public String detailBuy(@RequestParam("gNo")int gNo, Model model) {
+        System.out.println("gNo = " + gNo);
 
         Product product = new Product();
-        product = buyService.selectInOutHistory(sNo);
+        product = buyService.selectInOutHistory(gNo);
 
 
         System.out.println("product = " + product);
 
         ArrayList<Product> productList = new ArrayList<>();
-        productList = buyService.selectMatDetailList(sNo);
+        productList = buyService.selectMatDetailList(gNo);
 
         System.out.println("productList = " + productList);
 
@@ -75,7 +72,7 @@ public class BuyController {
         InoutGroup inoutGroup = new InoutGroup();
         SalesDetails salesDetails = new SalesDetails();
         UserInfo loginUser = (UserInfo) session.getAttribute("loginUser");
-        System.out.println("loginUser = " + loginUser);
+
         try {
             // JSON 문자열을 List<OrderDetail>로 변환
             orderDetails = mapper.readValue(orderDetail, new TypeReference<ArrayList<Product>>() {});
@@ -87,7 +84,6 @@ public class BuyController {
         do {
             rNum = random.nextInt(999999) + 10000;
             String selectNum = buyService.selectGroupNo(rNum); //0 또는 1 // 0이면 없는것 1이면 있는것
-            System.out.println("selectNum = " + selectNum);
 
             if(selectNum == null) {
                 resultNum = 0;
@@ -97,49 +93,37 @@ public class BuyController {
         }
         while(resultNum ==1);
 
-
-        System.out.println("rNum"+rNum);
         inoutGroup.setGroupNo(rNum);
         inoutGroup.setUserId(loginUser.getUserId());
-        System.out.println("inoutGroup = " + inoutGroup);
+
         int groupresult = buyService.insertInoutGroup(inoutGroup);
-        System.out.println("productList"+orderDetails);
 
 
         for(Product product : orderDetails) {
             String proName =product.getProName();
-            System.out.println("proName = " + proName);
+
+            int proNo = buyService.selectProNo(proName);
             int proPrice = buyService.selectMatPrice(proName);
+
+            product.setProNo(proNo);
             product.setProPrice(proPrice);
-            System.out.println("product.getProPrice() = " + product.getProPrice());
             product.setGroupNo((rNum));
-            System.out.println(product);
+
             int result = buyService.insertOrderDetails(product);
+
+            Product changeName = buyService.selectfilePath(proName);
             salesDetails.setSalesAmount(product.getProPrice());
             salesDetails.setSalesStock(product.getQty());
             salesDetails.setProName(proName);
-            Product changeName = buyService.selectfilePath(proName);
-            System.out.println("changeName = " + changeName);
             salesDetails.setChangeName(changeName.getChangeName());
             salesDetails.setUserId(loginUser.getUserId());
             salesDetails.setGroupNo(rNum);
 
-            System.out.println("salesDetails = " + salesDetails);
-
             int insertresult = buyService.insertSalesDetails(salesDetails);
-
+            int updateProResult = buyService.updateProductInventory(product);
         }
-//        for(SalesDetails salesDetails1 : orderDetails) {}
 
-//
-//        System.out.println("orderDetails"+orderDetails);
-//        int result = buyService.insertOrderDetails(orderDetails);
-
-//        System.out.println(orderDetails);
-
-        System.out.println("orderDetail"+orderDetail);
-        System.out.println("orderDetail.list"+orderDetail);
-        return "erpPage/buyPage";
+        return "redirect:/buyList.erp";
     }
 
     //구매관리 페이지로 가기
@@ -151,10 +135,12 @@ public class BuyController {
                 "                        </svg>";
 
         int buyCount = buyService.selectBuyCount();
+        System.out.println("buyCount = " + buyCount);
 
         PageInfo pi = new PageInfo(buyCount, bpage, 10, 10);
         ArrayList<SalesDetails> list = buyService.selectBuyList(pi);
 
+        model.addAttribute("buyCount", buyCount);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
 
@@ -163,22 +149,35 @@ public class BuyController {
 
         return "erpPage/buyPage";
     }
+    //구매 검색 조회
+    @GetMapping("search.buy")
+    public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String Date, String tDate, String user, Model model) {
+        System.out.println("user :"+user);
+        System.out.println("Date :"+Date);
+        System.out.println("tDate :"+tDate);
+
+        if (Date != null && Date.trim().isEmpty()) Date = null;
+        if (tDate != null && tDate.trim().isEmpty()) tDate = null;
+        String searchId = buyService.selectUserId(user);
+        int buyCount = buyService.selectSearchCount(Date, tDate, searchId);
+        System.out.println("buyCount = " + buyCount);
+        PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
+
+        ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, Date, tDate, searchId);
+        model.addAttribute("blist", blist);
+        model.addAttribute("bpi", bpi);
+
+        return "erpPage/buyPage";
+    }
 
     // 구매서 등록
     @GetMapping("buyAdd.erp")
     public String buyDetail( Model model){
 
-
         ArrayList<Product> list = buyService.selectProduceBuyList();
-
-
 
         model.addAttribute("list", list);
         return "erpPage/materialBuyPage";
     }
-
-
-
-
 
 }

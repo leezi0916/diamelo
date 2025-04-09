@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -33,49 +34,35 @@
                     <table class="content-table table-hover">
                         <thead>
                         <tr class="page-body-content-th">
-                            <th>구매 기업: 올리브영</th>
+                            <th>구매 기업: ${companyName}</th>
                             <th></th>
-                            <th colspan="2">총 물품 개수: 290개</th>
+                            <th colspan="2">총 물품 개수: <span>${resSum}</span>개</th>
                         </tr>
                         </thead>
                         <tbody>
                         <%-- 각 제품 항목(이미지, 이름, 수량) --%>
+                        <c:forEach var="s" items="${list}">
                         <tr class="page-body-content-td table-click" >
-                            <td class="page-body-content-sales-list-img"><img src="/image/productImgae/product1.png" alt="상품1"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list" colspan="2">100개</td>
+                            <td class="page-body-content-sales-list-img"><img src="${s.changeName}" alt="${s.changeName}"></td>
+                            <td class="page-body-content-sales-lists">${s.proName}</td>
+                            <td class="page-body-content-sales-list" colspan="2">${s.historyStock}</td>
 
                         </tr>
-                        <tr class="page-body-content-td table-click">
-                            <td class="page-body-content-sales-list-img" ><img src="/image/productImgae/product1.png" alt="상품1"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
+                        </c:forEach>
 
-                        </tr>
-                        <tr class="page-body-content-td table-click">
-                            <td class="page-body-content-sales-list-img" ><img src="/image/productImgae/product1.png" alt="상품1"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
-
-                        </tr>
-                        <tr class="page-body-content-td table-click">
-                            <td class="page-body-content-sales-list-img" ><img src="/image/productImgae/product1.png" alt="상품1"></td>
-                            <td class="page-body-content-sales-lists">A제품</td>
-                            <td class="page-body-content-sales-list"  colspan="2">100개</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
                 <%-- 하단 버튼 영역(승인, 반려, 돌아가기) --%>
                 <div id="page-body-button-div">
-                <button class="searchBtn" onclick="location.href='acc.sale'" >
+                <button class="searchBtn" onclick="location.href='buyAcc.erp?sNo=${sNo}'" >
                     승인
                 </button>
-                <button class="searchBtn" onclick="location.href='ref.sale'">
+                <button class="searchBtn" onclick="location.href='buyRef.erp?sNo=${sNo}'">
                     반려
                 </button>
-                <button class="searchBtn" onclick="location.href='sale.erp'">
+                <button class="searchBtn" onclick="location.href='saleList.erp'">
                     돌아가기
                 </button>
             </div>

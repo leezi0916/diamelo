@@ -15,4 +15,11 @@ public class InoutGroup {
     private String groupType;
     private Date groupDate;
     private String groupStatus;
+
+    private int salesAmount; //금액
+
+
+    private String companyName;
+    private String userName;
+    private String proName;
 }
