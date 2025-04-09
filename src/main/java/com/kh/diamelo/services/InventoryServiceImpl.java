@@ -107,4 +107,31 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
 
+
+    @Override
+    public int updateProduct(Product product) {
+        return inventoryMapper.updateProduct(product);
+    }
+
+    @Override
+    public int updateProductAttachment(Attachment attachment) {
+        return inventoryMapper.updateProductAttachment(attachment);
+    }
+
+    @Override
+    public int deleteRecipeByProNo(int proNo) {
+        return inventoryMapper.deleteRecipeByProNo(proNo);
+    }
+
+    @Override
+    public int deleteProduct(int proNo) {
+        return inventoryMapper.deleteProduct(proNo);
+    }
+
+
+
+    @Override
+    public Product getProductInfo(Integer proNo) {
+        return inventoryMapper.getProductInfo(proNo);
+    }
 }

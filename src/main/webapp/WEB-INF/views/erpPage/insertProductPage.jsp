@@ -167,25 +167,35 @@
 
         const newRow = table.insertRow();
         newRow.innerHTML = `
-        <td style="width: 15%;"><input type="text" name="matNo[]" placeholder="NO." class="table-input" onblur="fetchProductName(this)"></td>
-        <td><input type="text" name="proName[]" placeholder="재료명" class="table-input"></td>
-        <td><input type="number" name="amount[]" placeholder="수량" class="table-input"></td>
-        <td><input type="text" name="proPrice[]" placeholder="가격" class="table-input"></td>
-        <td><button type="button" id="delete-btn" onclick="removeRow(this)">삭제</button></td>
+        <td style="width: 15%;">
+    <input type="text" name="matNo[]" placeholder="NO." class="table-input" onblur="fetchProductName(this)">
+</td>
+<td>
+    <input type="text" name="proName[]" placeholder="재료명" class="table-input" readonly>
+</td>
+<td>
+    <input type="number" name="amount[]" placeholder="수량" class="table-input"  min="1" oninput="updatePrice(this)">
+</td>
+<td>
+    <input type="text" name="proPrice[]" placeholder="가격" class="table-input" readonly>
+</td>
+<td>
+    <button type="button" id="delete-btn" onclick="removeRow(this)">삭제</button>
+</td>
     `;
 
         updateScroll();
     }
 
-    // Ajax 함수
-
-
+    // 재료 삭제버튼 클릭 시
     function removeRow(button) {
         const row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
         updateScroll();
     }
 
+
+    // 재료목록 스크롤 기능
     function updateScroll() {
         const tableContainer = document.getElementById("table-container");
         const rows = document.querySelectorAll("#dynamicTable tbody tr");
@@ -198,6 +208,65 @@
             tableContainer.style.maxHeight = "none";
         }
     }
+
+    function fetchProductName(inputElement) {
+        const proNo = inputElement.value.trim();
+        if (!proNo) {
+            console.log('proNo가 비어있습니다.');
+            return;
+        }
+
+        fetch("/getProductInfo?proNo=" + proNo)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("서버 응답 오류: " + response.status);
+                }
+                return response.json(); // ⭐ 서버 응답을 JSON 으로 파싱
+            })
+            .then(data => {
+                console.log('서버에서 받은 데이터:', data);
+
+                const row = inputElement.closest('tr');
+
+                // 재료명 입력 칸 찾기
+                const proNameInput = row.querySelector('input[name="proName[]"]');
+                if (proNameInput) {
+                    proNameInput.value = data.proName; // 서버에서 받은 proName
+                }
+
+                // 가격 입력 칸 찾기
+                const amountInput = row.querySelector('input[name="amount[]"]');
+                const proPriceInput = row.querySelector('input[name="proPrice[]"]');
+                if (proPriceInput) {
+                    proPriceInput.value = data.proPrice;// 서버에서 받은 proPrice
+                    amountInput.value = 1;
+
+                    // 💡 단가 저장 (수량 변경 시 사용!)
+                    row.dataset.unitPrice = data.proPrice;
+
+                    // 기본 가격: 단가 * 1
+                    proPriceInput.value = data.proPrice;
+
+
+                }
+
+
+            })
+            .catch(error => {
+                console.error('에러 발생:', error);
+            });
+    }
+
+    function updatePrice(amountInput) {
+        const row = amountInput.closest('tr');
+        const unitPrice = parseInt(row.dataset.unitPrice || "0");
+        const quantity = parseInt(amountInput.value || "1");
+
+        const proPriceInput = row.querySelector('input[name="proPrice[]"]');
+        proPriceInput.value = unitPrice * quantity;
+    }
+
+
 </script>
 
 

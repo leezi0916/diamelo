@@ -43,5 +43,6 @@ public class Product {
     private String groupDate;
     private String groupStatus;
 
+    private int proInventStock;
 
 }

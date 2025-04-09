@@ -125,14 +125,14 @@
                                 <td>${p.proInventStock}</td>
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
-                                <td style="display: none" >${p.changeName}</td>
+                                <td style="display: none">${p.changeName}</td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href = 'update.pro?proNo=${p.proNo}';">
+                                    <button class="icon-button" type="button" onclick="location.href = '/updateView.pro?proNo=${p.proNo}';">
                                         <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='delete.pro'">
+                                    <button class="icon-button" type="button" onclick="confirmDelete(${p.proNo}, '/delete.pro')">
                                         <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
                                 </td>
@@ -208,12 +208,12 @@
                                 <td>${p.proDetail}</td>
                                 <td style="display: none" >${p.changeName}</td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='update.ing'">
+                                    <button class="icon-button" type="button" onclick="location.href = '/updateView.ing?proNo=${p.proNo}';">
                                         <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='delete.ing'">
+                                    <button class="icon-button" type="button" onclick="confirmDelete(${p.proNo}, '/delete.ing')">
                                         <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
                                 </td>
@@ -270,6 +270,7 @@
     </div>
 </div>
 <script>
+    // 제품 탭, 재료 탭 기능
     document.getElementById("proBtn").addEventListener("click", function () {
         location.href = "inv.erp?cpage=1&tab=product"; // 제품 탭 클릭 시
     });
@@ -293,40 +294,8 @@
         document.getElementById("page-body-content").style.display = "none";
     }
 
-/*
-    // 모달 열기 함수
-    function openModal(row) {
-        const cells = row.getElementsByTagName("td");
 
-        // 모달 요소 가져오기
-        const modal = document.getElementById("productModal");
-
-        // 데이터 채우기
-        document.querySelector(".modal-number").textContent = cells[0].textContent;
-        document.querySelector(".modal-name").textContent = cells[1].textContent;
-        document.querySelector(".modal-category").textContent = cells[2].textContent;
-        document.querySelector(".modal-quantity").textContent = cells[3].textContent;
-        document.querySelector(".modal-price").textContent = cells[4].textContent;
-        document.querySelector(".modal-description").textContent = cells[5].textContent;
-
-        // 모달 보이기
-        modal.style.display = "block";
-    }
-
-    // 모달 닫기 이벤트
-    document.querySelector(".close").onclick = function() {
-        document.getElementById("productModal").style.display = "none";
-    }
-
-    // 모달 바깥 클릭 시 닫기
-    window.onclick = function(event) {
-        const modal = document.getElementById("productModal");
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-*/
-
+    // 제품,재료 리스트 행 클릭 시 모달로 상세 내용 및 이미지 보여주기
     $(".product-row").click(function () {
         const row = $(this);
         $(".modal-number").text(row.find(".modal-proNo").text());
@@ -356,10 +325,24 @@
         }
     }
 
-    $(".icon-button").click(function () {
-        const proNo = $(this).data("pro-no"); // 예시
-        location.href = "/product/update?proNo=" + proNo;
-    });
+
+    // 제품, 재료 삭제할 시
+    function confirmDelete(proNo, actionUrl) {
+        if (confirm('정말로 삭제하시겠습니까?')) {
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = actionUrl;
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'proNo';
+            input.value = proNo;
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
 
 </script>
 </body>

@@ -50,13 +50,20 @@ public interface InventoryMapper {
 
 
 
+    int updateProduct(Product product);
+
+    int updateProductAttachment(Attachment attachment);
+
+    int deleteRecipeByProNo(int proNo);
 
 
 
-    /*
-    int countByIsProduct(@Param("isProduct") String isProduct);
+    int deleteProduct(int proNo);
 
-    List<Product> findByIsProduct(@Param("isProduct") String isProduct);
-    */
+
+    Product getProductInfo(Integer proNo);
+
+
+
 
 }

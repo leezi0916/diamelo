@@ -85,19 +85,19 @@ public class InventoryController {
     }
 
     // 제품 수정버튼 클릭시
-    @GetMapping("update.pro")
+    @GetMapping("updateView.pro")
     public String updateProductPage(@RequestParam(value = "proNo") int proNo, Model model) {
 
         System.out.println("proNo: " + proNo);
         // 1. 제품 정보
         Product product = inventoryService.selectProduct(proNo);
-
+        System.out.println("product: " + product);
         // 2. 이미지 정보
         Attachment attachment = inventoryService.selectProductAttachment(proNo);
-
+        System.out.println("attachment: " + attachment);
         // 3. Recipe (재료 리스트)
         ArrayList<Recipe> recipeList = inventoryService.selectRecipeList(proNo);
-
+        System.out.println("recipeList: " + recipeList);
         // model 에 담아서 JSP 로 보내기
         model.addAttribute("product", product);
         model.addAttribute("attachment", attachment);
@@ -108,10 +108,74 @@ public class InventoryController {
 
     }
 
+    @PostMapping("update.pro")
+    public String updateProduct(
+                                Product product,
+                                Attachment attachment,
+                                @RequestParam("upfile") MultipartFile upfile,
+                                @RequestParam("matNo[]") ArrayList<Integer> matNoList,
+                                @RequestParam("proName[]") ArrayList<String> matNameList,
+                                @RequestParam("amount[]") ArrayList<Integer> amountList,
+                                @RequestParam("proPrice[]") ArrayList<Integer> matPriceList,
+                                HttpSession session,
+                                Model model) {
+
+        int proNo = product.getProNo();
+        System.out.println("proNo: " + proNo);
+
+        // 1. 상품 정보 수정
+        int result1 = inventoryService.updateProduct(product);
+
+        // 2. 이미지 정보 수정
+        int result2 = 1;
+        if (!upfile.isEmpty()) { // 새로운 파일이 있는 경우
+            // 파일 이름 변경 및 저장
+            String changeName = Template.saveProductlFile(upfile, session, "/resources/uploadFile/product/");
+
+            attachment.setOriginName(upfile.getOriginalFilename());
+            attachment.setChangeName("/resources/uploadFile/product/" + changeName);
+
+            // DB 업데이트
+            result2 = inventoryService.updateProductAttachment(attachment);
+        }
+            // 새로운 파일이 없는 경우 → 기존 attachment 정보 유지
+
+
+
+        // 3. 기존 레시피 삭제
+        int result3 = inventoryService.deleteRecipeByProNo(product.getProNo());
+
+        // 4. 새로운 레시피 삽입
+        int result4 = 1;
+        for (int i = 0; i < matNoList.size(); i++) {
+            int res = inventoryService.insertRecipe(
+                    proNo,
+                    matNoList.get(i),
+                    matNameList.get(i),
+                    amountList.get(i),
+                    matPriceList.get(i)
+            );
+            result4 *= res;
+        }
+
+        // 5. 성공 여부 판단
+        if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
+            session.setAttribute("alertMsg", "제품 수정 성공");
+            return "redirect:inv.erp";
+        } else {
+            model.addAttribute("errorMsg", "제품 수정 실패");
+            return "common/errorPage";
+        }
+    }
+
+
+
+
     // 제품 삭제버튼 클릭시
-    @GetMapping("delete.pro")
-    public String deleteProduct() {
-        return null;
+    @PostMapping("delete.pro")
+    public String deleteProduct(@RequestParam(value = "proNo") int proNo, Model model) {
+        inventoryService.deleteProduct(proNo);
+        return "redirect:inv.erp";
     }
 
     // 제품등록 버튼 클릭시 (* redirect 해야함)
@@ -171,6 +235,16 @@ public class InventoryController {
             }
         }
 
+    @RequestMapping("/getProductInfo")
+    @ResponseBody
+    public Product getProductInfo(@RequestParam(value = "proNo", required = false) Integer proNo) {
+        System.out.println("받은 proNo: " + proNo);
+        if (proNo == null) {
+            throw new IllegalArgumentException("proNo가 null입니다");
+        }
+        return inventoryService.getProductInfo(proNo);
+    }
+
 
 
 
@@ -191,15 +265,70 @@ public class InventoryController {
     }
 
     // 재료 수정버튼 클릭시
-    @GetMapping("update.ing")
-    public String ingUpdatePage() {
+    @GetMapping("updateView.ing")
+    public String UpdateIngredientPage(@RequestParam(value = "proNo") int proNo, Model model) {
+        System.out.println("proNo: " + proNo);
+        // 1. 제품 정보
+        Product product = inventoryService.selectProduct(proNo);
+        System.out.println("product: " + product);
+        // 2. 이미지 정보
+        Attachment attachment = inventoryService.selectProductAttachment(proNo);
+        System.out.println("attachment: " + attachment);
+
+        // model 에 담아서 JSP 로 보내기
+        model.addAttribute("product", product);
+        model.addAttribute("attachment", attachment);
+
         return "erpPage/updateIngredientPage";
     }
 
+    @PostMapping("update.ing")
+    public String UpdateIngredien(
+            Product product,
+            Attachment attachment,
+            @RequestParam("upfile") MultipartFile upfile,
+            HttpSession session,
+            Model model) {
+
+        int proNo = product.getProNo();
+        System.out.println("proNo: " + proNo);
+
+        // 1. 상품 정보 수정
+        int result1 = inventoryService.updateProduct(product);
+
+        // 2. 이미지 정보 수정
+        int result2 = 1;
+        if (!upfile.isEmpty()) { // 새로운 파일이 있는 경우
+            // 파일 이름 변경 및 저장
+            String changeName = Template.saveProductlFile(upfile, session, "/resources/uploadFile/product/material/");
+
+            attachment.setOriginName(upfile.getOriginalFilename());
+            attachment.setChangeName("/resources/uploadFile/product/material/" + changeName);
+
+            // DB 업데이트
+            result2 = inventoryService.updateProductAttachment(attachment);
+        }
+            // 새로운 파일이 없는 경우 → 기존 attachment 정보 유지
+
+
+
+        // 5. 성공 여부 판단
+        if (result1 > 0 && result2 > 0) {
+            session.setAttribute("alertMsg", "제품 수정 성공");
+            return "redirect:inv.erp";
+        } else {
+            model.addAttribute("errorMsg", "제품 수정 실패");
+            return "common/errorPage";
+        }
+    }
+
+
+
     // 재료 삭제버튼 클릭시
-    @GetMapping("delete.ing")
-    public String ingDeletePage() {
-        return null;
+    @PostMapping("delete.ing")
+    public String deleteIngredient(@RequestParam(value = "proNo") int proNo, Model model) {
+        inventoryService.deleteProduct(proNo);
+        return "redirect:inv.erp";
     }
 
     // 재료등록 버튼 클릭시 (* redirect 해야함)

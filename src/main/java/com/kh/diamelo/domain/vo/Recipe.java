@@ -15,6 +15,6 @@ public class Recipe {
     private int amount; //제품 조합시 필요 단위(g)
 
     private String proName; // 재료 이름
-    private int proPrice; // 재료 가격
+    private int proPriceTotal; // 재료 가격
     private ArrayList<Recipe> recipeList;
 }

@@ -28,7 +28,7 @@
 
     <!-- 오늘 매출   -->
     <select id="selectTodaySales" resultType="_int">
-        SELECT SUM(SALES_AMOUNT) AS TOTAL_SALES
+        SELECT NVL(SUM(SALES_AMOUNT), 0) AS TOTAL_SALES
         FROM SALES_DETAILS
         WHERE STATUS = 'Y'
         AND TYPE = 'I'
@@ -81,7 +81,7 @@
 
     <!-- 최근 3개월간 매출 합 -->
     <select id="recentSalesSum" resultType="_int">
-        SELECT SUM(TOTAL_SALES) AS TOTAL_SUM
+        SELECT NVL(SUM(TOTAL_SALES), 0) AS TOTAL_SUM
         FROM (
         SELECT TO_CHAR(SALES_DATE, 'YYYY-MM') AS MONTH,
         SUM(SALES_AMOUNT) AS TOTAL_SALES

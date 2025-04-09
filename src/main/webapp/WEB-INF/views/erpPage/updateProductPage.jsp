@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <form class="page-body-content" action="insert.pro" method="post" enctype="multipart/form-data">
+            <form class="page-body-content" action="update.pro" method="post" enctype="multipart/form-data">
                 <div id="ingrediant_area">
                     <div id="ingre_upper">
                         <div id="ingre_upper_left">
@@ -49,12 +49,13 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
+                                    <input type="hidden" name="proNo" value="${product.proNo}" />
                                     <input class="input-box" type="text" name="proName" value="${product.proName}">
                                 </div>
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="date" name="ProEnrollDate" placeholder="DATE">
+                                    <input class="input-box" type="date" name="ProEnrollDate" value="${product.proEnrollDate}">
                                 </div>
                             </div>
                         </div>
@@ -63,12 +64,12 @@
                             <div class="input-boxs">
                                 <div class="input-name">
                                     <p>비고</p>
-                                    <input class="input-box" id="memo" name="proDetail" type="text" ${product.proDetail}>
+                                    <input class="input-box" id="memo" name="proDetail" type="text" value="${product.proDetail}">
                                 </div>
                                 <div class="input-name">
                                     <p>가격</p>
                                     <input class="input-box" type="text" name="proPrice" value="${product.proPrice}">
-                                    <<div id="category">
+                                    <div id="category">
                                         <select name="proCategoryNo" class="select">
                                             <option disabled <c:if test="${empty product}">selected</c:if>>분류</option>
                                             <option value="1" <c:if test="${product.proCategoryNo == 1}">selected</c:if>>스킨</option>
@@ -105,11 +106,24 @@
                                     </thead>
 
                                     <tbody>
-                                        <c:forEach var="recipe" items="${recipeList}">
-                                            <input type="hidden" name="matNo[]" value="${recipe.matNo}" />
-                                            <input type="text" name="proName[]" value="${recipe.proName}" />
-                                            <input type="number" name="amount[]" value="${recipe.amount}" />
-                                            <input type="number" name="proPrice[]" value="${recipe.proPrice}" />
+                                        <c:forEach var="r" items="${recipeList}">
+                                            <tr>
+                                                <td style="width: 15%;">
+                                                    <input type="text" name="matNo[]" value="${r.matNo}" placeholder="NO." class="table-input" onblur="fetchProductName(this)">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="proName[]" value="${r.proName}" placeholder="재료명" class="table-input">
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="amount[]" value="${r.amount}" placeholder="수량" class="table-input">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="proPrice[]" value="${r.proPriceTotal}" placeholder="가격" class="table-input">
+                                                </td>
+                                                <td>
+                                                    <button type="button" id="delete-btn" onclick="removeRow(this)">삭제</button>
+                                                </td>
+                                            </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
@@ -121,7 +135,7 @@
                                 <input id="insert_image" type="file" name="upfile" accept="image/*" onchange="changeImage(this)">
                                 <div id="image_preview">
                                     <c:if test="${not empty attachment}">
-                                            <img src="${attachment.changeName}" alt="제품 이미지" width="150">
+                                            <img src="${attachment.changeName}" alt="제품 이미지" width="148px" height="178px">
                                     </c:if>
                                 </div> <!-- ✅ 미리보기 이미지 영역 -->
                             </div>
@@ -188,16 +202,14 @@
 
         updateScroll();
     }
-
-    // Ajax 함수
-
-
+    // 재료 삭제버튼 클릭 시
     function removeRow(button) {
         const row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
         updateScroll();
     }
 
+    // 재료목록 스크롤 기능
     function updateScroll() {
         const tableContainer = document.getElementById("table-container");
         const rows = document.querySelectorAll("#dynamicTable tbody tr");
