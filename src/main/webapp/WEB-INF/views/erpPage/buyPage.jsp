@@ -30,8 +30,8 @@
         <%-- 검색 필터 영역 --%>
         <div id="page-body-content-search-button">
           <form action="search.buy" method="get" class="search-form">
-            <input type="date" name="Date" id="" class="input-box" >
-            <input type="date" name="tDate" class="input-box" >
+            <input type="date" name="startDate" id="startDate" class="input-box">
+            <input type="date" name="endDate" id="endDate" class="input-box">
             <input type="text" name="user" class="input-box" placeholder="구매자" >
             <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
             <button type="submit" class="input-box">
@@ -91,17 +91,18 @@
         </div>
       </div>
 
-<%--        <c:choose>--%>
-<%--          <c:when test="${not empty userId or not empty userName}">--%>
-<%--            <c:url var="pageUrl" value="empSearch.erp">--%>
-<%--              <c:param name="userName" value="${userId}" />--%>
-<%--              <c:param name="jobCode" value="${userName}" />--%>
-<%--            </c:url>--%>
-<%--          </c:when>--%>
-<%--          <c:otherwise>--%>
-<%--            <c:set var="pageUrl" value="empList.erp?" />--%>
-<%--          </c:otherwise>--%>
-<%--        </c:choose>--%>
+        <c:choose>
+          <c:when test="${not empty startDate or not empty endDate or not empty user}">
+            <c:url var="pageUrl" value="search.buy">
+              <c:param name="startDate" value="${startDate}" />
+              <c:param name="endDate" value="${endDate}" />
+              <c:param name="user" value="${user}" />
+            </c:url>
+          </c:when>
+          <c:otherwise>
+            <c:set var="pageUrl" value="buyList.erp?" />
+          </c:otherwise>
+        </c:choose>
         <%--   페이지 바     --%>
         <div id="pagingArea">
           <ul class="pagination">
@@ -110,12 +111,12 @@
                 <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="buyList.erp?bpage=${pi.currentPage - 1}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&bpage=${pi.currentPage - 1}">이전</a></li>
               </c:otherwise>
             </c:choose>
 
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-              <li class="page-item"><a class="page-link" href="buyList.erp?bpage=${p}">${p}</a></li>
+              <li class="page-item"><a class="page-link" href="${pageUrl}&bpage=${p}">${p}</a></li>
             </c:forEach>
 
             <c:choose>
@@ -123,7 +124,7 @@
                 <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="buyList.erp?bpage=${pi.currentPage + 1}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&bpage=${pi.currentPage + 1}">다음</a></li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -137,6 +138,20 @@
 <script>
   function goToDetail() {
     location.href = 'detail.buy';
+  }
+  function checkDate() {
+    const startDate = new Date(document.getElementById('startDate').value);
+    const endDate = new Date(document.getElementById('endDate').value);
+    const today = new Date();
+    console.log("sDate" + startDate);
+    console.log("eDate" + endDate);
+
+    const sDate = startDate ? new Date(startDate) : null;
+    const eDate = endDate ? new Date(endDate) : null;
+    if (sDate && eDate && sDate > eDate) {
+      alert("시작일은 종료일보다 빠르거나 같아야 합니다.");
+      return false;
+    }
   }
 </script>
 </body>
