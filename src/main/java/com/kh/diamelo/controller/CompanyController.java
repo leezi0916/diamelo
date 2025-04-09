@@ -31,6 +31,7 @@ public class CompanyController {
         PageInfo pi = new PageInfo(boardCount,  apage, 10 ,10);
         ArrayList<UserInfo> list = companyService.selectCompanyList(pi);
 
+        model.addAttribute("boardCount", boardCount);
         model.addAttribute("list", list);
         model.addAttribute("pi",pi);
 

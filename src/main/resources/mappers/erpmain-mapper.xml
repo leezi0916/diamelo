@@ -111,9 +111,9 @@
     <select id="selectUserInfo" resultMap="UserInfoResult">
         SELECT a.CHANGE_NAME, d.DEPT_NAME, j.JOB_NAME
         FROM USER_INFO u
-        JOIN ATTACHMENT a ON (u.USER_ID = a.USER_ID)
-        JOIN DEPARTMENT d ON (u.DEPT_CODE = d.DEPT_CODE)
-        JOIN JOB j ON (u.JOB_CODE = j.JOB_CODE)
+        LEFT JOIN ATTACHMENT a ON (u.USER_ID = a.USER_ID)
+        LEFT JOIN DEPARTMENT d ON (u.DEPT_CODE = d.DEPT_CODE)
+        LEFT JOIN JOB j ON (u.JOB_CODE = j.JOB_CODE)
         WHERE u.USER_ID = #{userId}
     </select>
 
