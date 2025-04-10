@@ -187,6 +187,7 @@
 
 /* 모달 스타일 */
 .modal {
+
     display: none; /* 기본적으로 숨김 */
     position: fixed;
     z-index: 1000;
@@ -197,11 +198,37 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+#thPwd{
+    width: 15%;
+    min-width: 300px;
+    max-width: 400px;
+    height: 45px;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #D0D5DD;
+    align-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    text-align: center;
+    justify-content: start;
+    outline: none;
+}
+
+.modal-header{
+    flex-direction: column;
+    border-bottom: none;!important;
+}
+.modal-header>p, .modal-header>h3{
+    width: 100%;
+}
+
 /* 모달 내부 컨텐츠 */
 .modal-content {
+
     background-color: white;
     width: 25%;
-    height: 300px;
+    height: auto;
     padding: 20px;
     border-radius: 8px;
     position: absolute;
@@ -218,6 +245,7 @@
     margin-bottom: 10px;
 }
 
+
 /* 버튼 스타일 */
 .modal-content button {
     margin: 10px;
@@ -226,6 +254,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
 
 /* 확인 버튼 */
 #confirmDelete {

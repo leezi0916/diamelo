@@ -152,22 +152,26 @@ public class BuyController {
     }
     //구매 검색 조회
     @GetMapping("search.buy")
-    public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String Date, String tDate, String user, Model model) {
+    public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String startDate, String endDate, String user, Model model) {
         System.out.println("user :"+user);
-        System.out.println("Date :"+Date);
-        System.out.println("tDate :"+tDate);
+        System.out.println("Date :"+startDate);
+        System.out.println("tDate :"+endDate);
 
-        if (Date != null && Date.trim().isEmpty()) Date = null;
-        if (tDate != null && tDate.trim().isEmpty()) tDate = null;
+        if (startDate != null && startDate.trim().isEmpty()){
+            startDate = null;
+        }
+        if (endDate != null && endDate.trim().isEmpty()){
+            endDate = null;
+        }
         String searchId = buyService.selectUserId(user);
-        int buyCount = buyService.selectSearchCount(Date, tDate, searchId);
+        int buyCount = buyService.selectSearchCount(startDate, endDate, searchId);
         System.out.println("buyCount = " + buyCount);
         PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
 
-        ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, Date, tDate, searchId);
+        ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, startDate, endDate, searchId);
 
-        model.addAttribute("startDate", Date);
-        model.addAttribute("endDate", tDate);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
         model.addAttribute("user", user);
 
         model.addAttribute("blist", blist);

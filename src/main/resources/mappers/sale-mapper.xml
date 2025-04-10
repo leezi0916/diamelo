@@ -123,11 +123,14 @@
     <select id="selectSearchCount" resultType="_int">
         SELECT COUNT(*) FROM INOUT_GROUP
         WHERE GROUP_TYPE = 'I'
-            <if test="startDate != null and startDate != ''">
-                AND GROUP_DATE &gt;= TO_DATE(#{startDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        <if test="startDate != null and endDate == null">
+                AND GROUP_DATE &gt;= #{startDate}
             </if>
-            <if test="endDate != null and endDate != ''">
+        <if test="startDate == null and endDate != null">
                 AND GROUP_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+            </if>
+        <if test="startDate != null and endDate != null">
+                AND GROUP_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
             </if>
             <if test="company != null and company !=''">
                 AND USER_ID = (SELECT USER_ID
@@ -143,11 +146,14 @@
         FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
         WHERE GROUP_TYPE = 'I'
-        <if test="startDate != null and startDate != ''">
-            AND GROUP_DATE &gt;= TO_DATE(#{startDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        <if test="startDate != null and endDate == null">
+            AND GROUP_DATE &gt;= #{startDate}
         </if>
-        <if test="endDate != null and endDate != ''">
+        <if test="startDate == null and endDate != null">
             AND GROUP_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND GROUP_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company !=''">
             AND USER_ID = (SELECT USER_ID
