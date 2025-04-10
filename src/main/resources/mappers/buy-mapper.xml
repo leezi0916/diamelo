@@ -14,7 +14,7 @@
         <result column="ORIGIN_NAME" property="originName"/>
         <result column="CHANGE_NAME" property="changeName"/>
         <result column="HISTORY_STOCK" property="historyStock"/>
-        <result column="HIS_NO" property="hisNo"/>
+        <result column="HISTORY_NO" property="hisNo"/>
 
 
     </resultMap>
@@ -73,7 +73,7 @@
     </select>
 
     <insert id="insertOrderDetails">
-        INSERT INTO INOUT_HISTORY (HIS_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
+        INSERT INTO INOUT_HISTORY (HISTORY_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
             VALUES (
             SEQ_HNO.NEXTVAL,
             (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{proName} AND ROWNUM = 1),
