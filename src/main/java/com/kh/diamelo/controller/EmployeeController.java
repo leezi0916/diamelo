@@ -35,11 +35,7 @@ public class EmployeeController {
         return "erpPage/employeeAdminPage";
     }
 
-    //인사 상세 페이지에서 수정하기 눌렀을 때의 redirect
-    @PostMapping("empAdmin.erp")
-    public String empAdminPost() {
-        return null;
-    }
+
 
     @GetMapping("empList.erp")
     public String selectUserInfoList(@RequestParam(defaultValue = "1") int epage, Model model,HttpSession session) {
@@ -93,6 +89,7 @@ public class EmployeeController {
         UserInfo empDetail = employeeService.selectEmployeeDetail(userId);
 
 
+
         model.addAttribute("e", empDetail);
         return "erpPage/employeeDetailPage";
     }
@@ -138,7 +135,7 @@ public class EmployeeController {
             userInfo.setChangeName("/resources/uploadFile/" + changeName);
             userInfo.setOriginName(refile.getOriginalFilename());
 
-
+            System.out.println(userInfo);
             if(imgSearch==0){
                 employeeService.employeeDetailImageInsert(userInfo);
             }else{

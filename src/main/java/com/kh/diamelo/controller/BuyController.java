@@ -64,9 +64,9 @@ public class BuyController {
 
     @PostMapping("mat.buy")
     public String materialBuy(@RequestParam("orderDetails")String orderDetail, HttpSession session,  Model model) {
-        Random random = new Random();
-        int resultNum;
-        int rNum;
+//        Random random = new Random();
+//        int resultNum;
+//        int rNum;
         ObjectMapper mapper = new ObjectMapper();
         ArrayList<Product> orderDetails = null;
         InoutGroup inoutGroup = new InoutGroup();
@@ -81,22 +81,25 @@ public class BuyController {
             e.printStackTrace();
             // 적절한 예외 처리
         }
-        do {
-            rNum = random.nextInt(999999) + 10000;
-            String selectNum = buyService.selectGroupNo(rNum); //0 또는 1 // 0이면 없는것 1이면 있는것
+//        do {
+//            rNum = random.nextInt(999999) + 10000;
+//            String selectNum = buyService.selectGroupNo(rNum); //0 또는 1 // 0이면 없는것 1이면 있는것
 
-            if(selectNum == null) {
-                resultNum = 0;
-            }else{
-                resultNum = 1;
-            }
-        }
-        while(resultNum ==1);
+//            if(selectNum == null) {
+//                resultNum = 0;
+//            }else{
+//                resultNum = 1;
+//            }
+//        }
+//        while(resultNum ==1);
 
-        inoutGroup.setGroupNo(rNum);
+//        inoutGroup.setGroupNo(rNum);
         inoutGroup.setUserId(loginUser.getUserId());
 
         int groupresult = buyService.insertInoutGroup(inoutGroup);
+
+        int resGNo = buyService.selectGroupNo();
+//        inoutGroup.setGroupNo();
 
 
         for(Product product : orderDetails) {
@@ -107,7 +110,7 @@ public class BuyController {
 
             product.setProNo(proNo);
             product.setProPrice(proPrice);
-            product.setGroupNo((rNum));
+            product.setGroupNo((resGNo));
 
             int result = buyService.insertOrderDetails(product);
 
@@ -117,7 +120,7 @@ public class BuyController {
             salesDetails.setProName(proName);
             salesDetails.setChangeName(changeName.getChangeName());
             salesDetails.setUserId(loginUser.getUserId());
-            salesDetails.setGroupNo(rNum);
+            salesDetails.setGroupNo(resGNo);
 
             int insertresult = buyService.insertSalesDetails(salesDetails);
             int updateProResult = buyService.updateProductInventory(product);
@@ -125,6 +128,7 @@ public class BuyController {
 
         return "redirect:/buyList.erp";
     }
+
 
     //구매관리 페이지로 가기
     @GetMapping("buyList.erp")
@@ -164,6 +168,11 @@ public class BuyController {
         PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
 
         ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, Date, tDate, searchId);
+
+        model.addAttribute("startDate", Date);
+        model.addAttribute("endDate", tDate);
+        model.addAttribute("user", user);
+
         model.addAttribute("blist", blist);
         model.addAttribute("bpi", bpi);
 

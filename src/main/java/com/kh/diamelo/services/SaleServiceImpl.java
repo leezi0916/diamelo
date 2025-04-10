@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @RequiredArgsConstructor
 @Service
@@ -63,5 +64,17 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public int insertSalesDetails(SalesDetails salesDetails) {
         return saleMapper.insertSalesDetails(salesDetails);
+    }
+
+    @Override
+    public int selectSearchCount(String company, String startDate, String endDate) {
+        return saleMapper.selectSearchCount(company, startDate, endDate);
+    }
+
+    @Override
+    public ArrayList<InoutGroup> selectSearchList(PageInfo pi,String company, String startDate, String endDate) {
+        int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return saleMapper.selectSearchList(rowBounds, company, startDate, endDate);
     }
 }
