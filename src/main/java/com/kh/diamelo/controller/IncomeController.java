@@ -60,8 +60,10 @@ public class IncomeController {
                 (company == null || company.isEmpty())) {
             return "redirect:/income.erp";
         }
-
-
+        
+        //조건에 맞는 매출 총이익 구하기
+        int details = incomeService.selectIncomeAllSalesDetails(type, startDate, endDate, company);
+        
         int totalSalesSum = incomeService.searchIncomeSum(type, startDate, endDate, company);
 
 
@@ -75,7 +77,6 @@ public class IncomeController {
             model.addAttribute("message", "검색 결과가 없습니다.");
         }
 
-
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("pi", pi);
         model.addAttribute("list", list);
@@ -85,6 +86,7 @@ public class IncomeController {
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("company", company);
+        model.addAttribute("details", details);
 
         return "erpPage/incomePage"; // 결과 페이지
     }
