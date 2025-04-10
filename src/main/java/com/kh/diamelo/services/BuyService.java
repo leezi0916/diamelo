@@ -17,7 +17,7 @@ public interface BuyService {
 
     int insertOrderDetails(Product product);
 
-    String selectGroupNo(int rNum);
+    int selectGroupNo();
 
     Product selectInOutHistory(int gNo);
 
