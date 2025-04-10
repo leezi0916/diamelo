@@ -77,7 +77,8 @@
     cursor: pointer;
 }
 
-.header-left svg {
+.header-left img {
+    vertical-align: top;
     margin-bottom: 44px;
     cursor: pointer;
 }
@@ -94,6 +95,7 @@
     color: #a9a9a9;
     text-align: center;
 }
+
 
 .home-main {
     font-size: 24px;

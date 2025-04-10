@@ -33,11 +33,17 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(new LoginAdminInterceptor())
                 .addPathPatterns("/empAdminList.erp",
-                                   "empAdminSearch.erp",
-                        "empDetailSearch.erp",
-                        "empDetail.erp",
-                        "empAdmin.erp"
+                                   "/empAdminSearch.erp",
+                        "/empDetailSearch.erp",
+                        "/empDetail.erp",
+                        "/empAdmin.erp",
+                        "/compAdmin.erp",
+                        "/select.ad",
+                        "/api/company/commit",
+                        "/api/company/return",
+                        "/delete.com"
                         );
+
 
     }
 
