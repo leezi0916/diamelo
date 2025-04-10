@@ -129,6 +129,7 @@ public class BuyController {
         return "redirect:/buyList.erp";
     }
 
+
     //구매관리 페이지로 가기
     @GetMapping("buyList.erp")
     public String buyList(@RequestParam(defaultValue = "1") int bpage, Model model, HttpSession session) {
