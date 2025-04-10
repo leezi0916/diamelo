@@ -6,13 +6,18 @@ import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.domain.vo.Recipe;
 import com.kh.diamelo.mappers.InventoryMapper;
 import com.kh.diamelo.mappers.ProductMapper;
+import com.kh.diamelo.utils.Template;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -28,6 +33,7 @@ public class InventoryServiceImpl implements InventoryService {
     public int selectProductCount() {
         return inventoryMapper.selectProductCount();
     }
+
 
     //재료 갯수
     @Override
@@ -53,6 +59,17 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
+    public int selectSearchProductCount(int searchCategoryNo, int proNo, String proName) {
+        return inventoryMapper.selectSearchProductCount(searchCategoryNo, proNo , proName);
+    }
+
+    @Override
+    public ArrayList<Product> selectSearchProductList(PageInfo pi, int searchCategoryNo, int proNo, String proName) {
+        return inventoryMapper.selectSearchProductList(pi, searchCategoryNo, proNo, proName);
+    }
+
+
+    @Override
     public int insertProduct(Product product) {
         return inventoryMapper.insertProduct(product);
     }
@@ -63,9 +80,10 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public int insertRecipeList(ArrayList<Recipe> recipeList) {
-        return inventoryMapper.insertRecipeList(recipeList);
+    public int insertRecipe(int proNo, int matNo, String matName, int amount, int matPrice) {
+        return inventoryMapper.insertRecipe(proNo, matNo, matName, amount, matPrice);
     }
+
 
 
 
@@ -81,4 +99,65 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
 
+
+
+    @Override
+    public Product selectProduct(int proNo) {
+        return inventoryMapper.selectProduct(proNo);
+    }
+
+    @Override
+    public Attachment selectProductAttachment(int proNo) {
+        return inventoryMapper.selectProductAttachment(proNo);
+    }
+
+    @Override
+    public ArrayList<Recipe> selectRecipeList(int proNo) {
+        return inventoryMapper.selectRecipeList(proNo);
+    }
+
+
+
+    @Override
+    public int updateProduct(Product product) {
+        return inventoryMapper.updateProduct(product);
+    }
+
+    @Override
+    public int updateProductAttachment(Attachment attachment) {
+        return inventoryMapper.updateProductAttachment(attachment);
+    }
+
+    @Override
+    public int deleteRecipeByProNo(int proNo) {
+        return inventoryMapper.deleteRecipeByProNo(proNo);
+    }
+
+    @Override
+    public int deleteProduct(int proNo) {
+        return inventoryMapper.deleteProduct(proNo);
+    }
+
+
+
+    @Override
+    public Product getProductInfo(Integer proNo) {
+        return inventoryMapper.getProductInfo(proNo);
+    }
+
+    @Override
+    public ArrayList<Product> selectAllMaterials() {
+        return inventoryMapper.selectAllMaterials();
+    }
+
+
+    @Override
+    public int selectSearchMaterialCount(int proNo, String proName) {
+        return inventoryMapper.selectSearchMaterialCount(proNo , proName);
+    }
+
+    @Override
+    public ArrayList<Product> selectSearchMaterialList(PageInfo pi, int mSearchCount, int proNo, String proName) {
+        return inventoryMapper.selectSearchMaterialList(pi, proNo, proName);
+    }
 }

@@ -147,24 +147,26 @@ input::placeholder{
 }
 
 #insert_image {
-    width: 200px;
+    width: 150px;
     height: 180px;
     border: 1px solid black;
     background: #fbfbc8;
     cursor: pointer;
+    opacity: 0; /* ✅ input 숨기기 */
+    position: absolute; /* ✅ 겹치기 */
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 
-
-
-#file{
-    display: none;
+#image_preview {
+    width: 150px;
+    height: 180px;
+    border: 1px solid black;
+    background: #fbfbc8;
+    background-size: cover;
+    background-position: center;
 }
-
-#image-text{
-    font-size: 16px;
-    font-weight: 500;
-}
-
 #input-memo-area{
     display: flex;
     align-items: center;

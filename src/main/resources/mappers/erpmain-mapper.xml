@@ -28,9 +28,7 @@
 
     <!-- 오늘 매출   -->
     <select id="selectTodaySales" resultType="_int">
-
         SELECT NVL(SUM(SALES_AMOUNT),0) AS TOTAL_SALES
-
         FROM SALES_DETAILS
         WHERE STATUS = 'Y'
         AND TYPE = 'I'
