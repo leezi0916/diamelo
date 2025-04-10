@@ -72,11 +72,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <!-- 왼쪽: HOME 아이콘 + 텍스트 -->
             <div class="header-left">
                 <%-- 타이틀마다의 아이콘 --%>
-                ${selectIcon}
-
+                <img src="${selectIcon}">
                 <%-- 타이틀 명 --%>
                 <div class="home-labels">
-                    <span class="home-sub">${seletTitle}</span>
+                    <span class="home-sub">
+                            ${seletTitle}
+                    </span>
                     <span class="home-main">${seletTitle}</span>
                 </div>
             </div>
