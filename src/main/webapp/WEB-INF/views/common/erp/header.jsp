@@ -34,6 +34,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script src="/js/erp/header.js"></script>
         <style>
             #pagingArea{
                 padding: 20px;
@@ -118,21 +120,5 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <span class="welcome-text">${loginUser.userName} 님 어서오세요!</span>
             </div>
         </div>
-
-        <script>
-            function backCrmPage(){
-                if(confirm('상품 구매 페이지로 돌아가기겠습니까?')){
-                    location.href = '/';
-                }
-            }
-
-            function logout() {
-                const checkLogout = confirm('정말 로그아웃 하시겠습니까?');
-
-                if (checkLogout) {
-                    location.href = 'logout.me';
-                }
-            }
-        </script>
     </body>
 </html>
