@@ -25,12 +25,10 @@ import java.util.UUID;
 public class InventoryController {
     private final InventoryService inventoryService;
 
-//    @Autowired
-//    private ProductService productService;
+
 
     // 재고관리 페이지로 가기
     @GetMapping("inv.erp")
-
     public String inventory(@RequestParam(value = "cpage", defaultValue = "1") int cpage,
                             @RequestParam(value = "tab", defaultValue = "product") String tab,
                             Model model) {
@@ -68,19 +66,55 @@ public class InventoryController {
         return "erpPage/inventoryMainPage";
     }
 
+    @GetMapping("materialList")
+    @ResponseBody
+    public ArrayList<Product> getMaterialList() {
+        ArrayList<Product> materialList = inventoryService.selectAllMaterials();
+        System.out.println("materialList: " + materialList);
+        return materialList;
+    }
+
 
     // ------------ 제품 -----------------
 
 
-    //제품조회
-    @GetMapping("search.pro")
-    public String selectProduct() {
-        return null;
+    //제품검색
+    @GetMapping("productSearch.pro")
+    public String searchProduct(@RequestParam(defaultValue = "1") int cpage,
+                                @RequestParam(required = false, defaultValue = "0")int searchCategoryNo,
+                                @RequestParam(required = false, defaultValue = "0")int proNo,
+                                @RequestParam(required = false)String proName,
+                                Model model) {
+        System.out.println("searchCategoryNo: " + searchCategoryNo);
+        System.out.println("proNo: " + proNo);
+        System.out.println("proName: " + proName);
+
+        int productCount = inventoryService.selectProductCount();
+        model.addAttribute("pCount", productCount);
+        System.out.println("productCount: " + productCount);
+
+        int materialCount = inventoryService.selectMaterialCount();
+        model.addAttribute("mCount", materialCount);
+        System.out.println("materialCount: " + materialCount);
+
+
+        int pSearchCount = inventoryService.selectSearchProductCount(searchCategoryNo, proNo, proName);
+        PageInfo pi = new PageInfo(pSearchCount, cpage, 10, 10);
+        ArrayList<Product> list = inventoryService.selectSearchProductList(pi, searchCategoryNo, proNo, proName);
+
+        model.addAttribute("searchCategoryNo", searchCategoryNo);
+        model.addAttribute("proNo", proNo);
+        model.addAttribute("proName", proName);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+
+        return "erpPage/inventoryMainPage";
     }
 
     // 제품등록 페이지로 가기
-    @GetMapping("add.pro")
-    public String proAddPage() {
+    @GetMapping("insertProduct.pro")
+    public String insertProductPage() {
         return "erpPage/insertProductPage";
     }
 
@@ -98,6 +132,7 @@ public class InventoryController {
         // 3. Recipe (재료 리스트)
         ArrayList<Recipe> recipeList = inventoryService.selectRecipeList(proNo);
         System.out.println("recipeList: " + recipeList);
+
         // model 에 담아서 JSP 로 보내기
         model.addAttribute("product", product);
         model.addAttribute("attachment", attachment);
@@ -248,19 +283,49 @@ public class InventoryController {
 
 
 
+
+
+
     // ------------ 재료 -----------------
 
 
 
-    //재료조회
-    @GetMapping("search.ing")
-    public String searchIngrediant(@RequestParam(defaultValue = "1") int cpage, String proName, Product proNo, Model model) {
-       return null;
+    //재료검색
+    @GetMapping("ingredientSearch.ing")
+    public String searchIngredient(@RequestParam(defaultValue = "1") int cpage,
+                                   @RequestParam(required = false, defaultValue = "0")int proNo,
+                                   @RequestParam(required = false)String proName,
+                                   Model model) {
+        System.out.println("proNo: " + proNo);
+        System.out.println("proName: " + proName);
+
+        int productCount = inventoryService.selectProductCount();
+        model.addAttribute("pCount", productCount);
+        System.out.println("productCount: " + productCount);
+
+        int materialCount = inventoryService.selectMaterialCount();
+        model.addAttribute("mCount", materialCount);
+        System.out.println("materialCount: " + materialCount);
+
+
+        int mSearchCount = inventoryService.selectSearchMaterialCount(proNo, proName);
+        System.out.println("mSearchCount: " + mSearchCount);
+        PageInfo pi = new PageInfo(mSearchCount, cpage, 10, 10);
+        ArrayList<Product> list = inventoryService.selectSearchMaterialList(pi, mSearchCount, proNo, proName);
+
+
+        model.addAttribute("proNo", proNo);
+        model.addAttribute("proName", proName);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+
+        return "erpPage/inventoryMainPage";
     }
 
     // 재료등록 페이지로 가기
-    @GetMapping("add.ing")
-    public String ingAddPage() {
+    @GetMapping("insert.ing")
+    public String insertIngredient() {
         return "erpPage/insertIngredientPage";
     }
 

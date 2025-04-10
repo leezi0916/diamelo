@@ -64,21 +64,21 @@
 
 
 
-            <form id="page-body-content" action="search.pro" method="get">
+            <form id="page-body-content" action="productSearch.pro" method="get">
                 <div id="search-inventory">
 
-                    <select name="searchCategory" id="search-category" class="select">
-                        <option disabled selected>분류</option>
-                        <option value="1">스킨</option>
-                        <option value="2">로션</option>
-                        <option value="3">선크림</option>
-                        <option value="4">수분크림</option>
-                        <option value="5">앰플</option>
+                    <select name="searchCategoryNo" id="search-category" class="select">
+                        <option value="0" ${searchCategoryNo == null ? 'selected' : ''}>전체</option>
+                        <option value="1" ${searchCategoryNo == 1 ? 'selected' : ''}>스킨</option>
+                        <option value="2" ${searchCategoryNo == 2 ? 'selected' : ''}>로션</option>
+                        <option value="3" ${searchCategoryNo == 3 ? 'selected' : ''}>선크림</option>
+                        <option value="4" ${searchCategoryNo == 4 ? 'selected' : ''}>수분크림</option>
+                        <option value="5" ${searchCategoryNo == 5 ? 'selected' : ''}>앰플</option>
                     </select>
 
-                    <input type="text" placeholder="번호" id="search-number">
+                    <input type="text" placeholder="번호" id="search-number" name="proNo" value="${proNo != 0 ? proNo : ''}">
 
-                    <input type="text" placeholder="제품명을 입력하세요." id="search-product">
+                    <input type="text" placeholder="제품명을 입력하세요." id="search-product" name="proName" value="${proName != null ? proName : ''}">
 
 
                     <button id="searchBtn" type="submit">
@@ -90,7 +90,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap">
-                        <button id="addBtn" type="button" onclick="location.href='add.pro'">
+                        <button id="addBtn" type="button" onclick="location.href='insertProduct.pro'">
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white"
@@ -155,14 +155,14 @@
                 </table>
             </form>
 
-            <form id="page-body-content1" style="display: none" action="search.ing" method="get">
+            <form id="page-body-content1" style="display: none" action="ingredientSearch.ing" method="get">
 
                 <div id="search-inventory1">
 
 
-                    <input type="text" placeholder="번호" id="search-number1">
+                    <input type="text" placeholder="번호" id="search-number1" name="proNo" value="${proNo != 0 ? proNo : ''}">
 
-                    <input type="text" placeholder="재료명을 입력하세요." id="search-product1">
+                    <input type="text" placeholder="재료명을 입력하세요." id="search-product1" name="proName" value="${proName != null ? proName : ''}">
 
 
                     <button id="searchBtn1" type="submit">
@@ -174,7 +174,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap1">
-                        <button id="addBtn1" type="button" onclick="location.href='add.ing'">
+                        <button id="addBtn1" type="button" onclick="location.href='insert.ing'" >
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white"
@@ -293,6 +293,22 @@
         document.getElementById("page-body-content1").style.display = "block";
         document.getElementById("page-body-content").style.display = "none";
     }
+    document.getElementById('page-body-content1').addEventListener('submit', function (e) {
+        e.preventDefault(); // 기본 제출 막기
+
+        const form = e.target;
+        const url = new URL(form.action, window.location.origin);
+        url.searchParams.set('tab', 'material'); // tab 값 추가
+
+        // 폼 데이터를 붙이기
+        const formData = new FormData(form);
+        for (const [key, value] of formData.entries()) {
+            url.searchParams.set(key, value);
+        }
+
+        // 이동
+        window.location.href = url.toString();
+    });
 
 
     // 제품,재료 리스트 행 클릭 시 모달로 상세 내용 및 이미지 보여주기

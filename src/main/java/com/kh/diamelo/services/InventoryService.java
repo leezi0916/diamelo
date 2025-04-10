@@ -17,6 +17,8 @@ public interface InventoryService {
         ArrayList<Product> selectProductList(PageInfo pi);
         ArrayList<Product> selectMaterialList(PageInfo pi);
 
+        int selectSearchProductCount(int searchCategoryNo, int proNo, String proName);
+        ArrayList<Product> selectSearchProductList(PageInfo pi ,int searchCategoryNo, int proNo, String proName);
 
 
         int insertProduct(Product product);
@@ -47,6 +49,13 @@ public interface InventoryService {
 
 
         Product getProductInfo(Integer proNo);
+
+        ArrayList<Product> selectAllMaterials();
+
+
+        int selectSearchMaterialCount(int proNo, String proName);
+
+        ArrayList<Product> selectSearchMaterialList(PageInfo pi, int mSearchCount, int proNo, String proName);
 
 
 

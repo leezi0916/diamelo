@@ -32,7 +32,7 @@
         <result column="MAT_NO" property="matNo"/>
         <result column="AMOUNT" property="amount"/>
         <result column="PRO_NAME" property="proName"/>
-        <result column="PRO_PRICE_TOTAL" property="proPriceTotal"/>
+        <result column="PRICE_TOTAL" property="priceTotal"/>
     </resultMap>
 
 
@@ -120,8 +120,8 @@
 
     <!-- recipe 저장 !-->
     <insert id="insertRecipe">
-        INSERT INTO RECIPE (PRO_NO, MAT_NO, AMOUNT, PRO_PRICE_TOTAL)
-        VALUES (#{proNo}, #{matNo}, #{amount}, #{price})
+        INSERT INTO RECIPE (PRO_NO, MAT_NO, AMOUNT)
+        VALUES (#{proNo}, #{matNo}, #{amount})
     </insert>
 
 
@@ -177,7 +177,8 @@
     </select>
 
     <select id="selectRecipeList" resultMap="recipeResult" parameterType="Recipe">
-        SELECT * FROM RECIPE A
+        SELECT A.PRO_NO, A.MAT_NO, A.AMOUNT, B.PRO_NAME, (A.AMOUNT * B.PRO_PRICE) AS PRICE_TOTAL
+        FROM RECIPE A
         LEFT JOIN PRODUCT B ON B.PRO_NO = A.MAT_NO
         WHERE A.PRO_NO = #{proNo}
     </select>
@@ -223,5 +224,90 @@
         FROM product
         WHERE pro_no = #{proNo}
     </select>
+
+    <select id="selectAllMaterials" resultMap="productResult" parameterType="Product">
+        SELECT PRO_NO, PRO_NAME
+        FROM PRODUCT
+        WHERE IS_PRODUCT = 'N'
+        AND PRO_DELETED = 'N'
+    </select>
+
+
+    <!-- 검색된 제품 총 개수 -->
+    <select id="selectSearchProductCount" resultType="int">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE IS_PRODUCT = 'Y'
+        <if test="searchCategoryNo != 0">
+            AND PROCATEGORY_NO = #{searchCategoryNo}
+        </if>
+        <if test="proNo != 0">
+            AND PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+    </select>
+
+    <!-- 검색된 제품 리스트 조회 -->
+    <select id="selectSearchProductList" resultMap="productResult">
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT, D.CHANGE_NAME
+        FROM PRODUCT A
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN ATTACHMENT D ON A.PRO_NO = D.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'Y'
+        <if test="searchCategoryNo != 0">
+            AND A.PROCATEGORY_NO = #{searchCategoryNo}
+        </if>
+        <if test="proNo != 0">
+            AND A.PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND A.PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+        ORDER BY A.PRO_NO DESC
+    </select>
+
+
+
+    <!-- 검색된 재료 총 개수 -->
+    <select id="selectSearchMaterialCount" resultType="int">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE IS_PRODUCT = 'N'
+
+        <if test="proNo != 0">
+            AND PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+    </select>
+
+    <!-- 검색된 재료 리스트 조회 -->
+    <select id="selectSearchMaterialList" resultMap="productResult">
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT, D.CHANGE_NAME
+        FROM PRODUCT A
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN ATTACHMENT D ON A.PRO_NO = D.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'N'
+
+        <if test="proNo != 0">
+            AND A.PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND A.PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+        ORDER BY A.PRO_NO DESC
+    </select>
+
 
 </mapper>

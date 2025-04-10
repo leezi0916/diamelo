@@ -34,6 +34,7 @@ public class InventoryServiceImpl implements InventoryService {
         return inventoryMapper.selectProductCount();
     }
 
+
     //재료 갯수
     @Override
     public int selectMaterialCount() {
@@ -57,6 +58,15 @@ public class InventoryServiceImpl implements InventoryService {
         return inventoryMapper.selectMaterialList(rowBounds);
     }
 
+    @Override
+    public int selectSearchProductCount(int searchCategoryNo, int proNo, String proName) {
+        return inventoryMapper.selectSearchProductCount(searchCategoryNo, proNo , proName);
+    }
+
+    @Override
+    public ArrayList<Product> selectSearchProductList(PageInfo pi, int searchCategoryNo, int proNo, String proName) {
+        return inventoryMapper.selectSearchProductList(pi, searchCategoryNo, proNo, proName);
+    }
 
 
     @Override
@@ -133,5 +143,21 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public Product getProductInfo(Integer proNo) {
         return inventoryMapper.getProductInfo(proNo);
+    }
+
+    @Override
+    public ArrayList<Product> selectAllMaterials() {
+        return inventoryMapper.selectAllMaterials();
+    }
+
+
+    @Override
+    public int selectSearchMaterialCount(int proNo, String proName) {
+        return inventoryMapper.selectSearchMaterialCount(proNo , proName);
+    }
+
+    @Override
+    public ArrayList<Product> selectSearchMaterialList(PageInfo pi, int mSearchCount, int proNo, String proName) {
+        return inventoryMapper.selectSearchMaterialList(pi, proNo, proName);
     }
 }
