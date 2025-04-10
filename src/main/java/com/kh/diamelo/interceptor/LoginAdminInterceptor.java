@@ -14,13 +14,12 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
         HttpSession session = request.getSession();
         UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
-        String userId =loginUser.getUserId();
-        System.out.println("userId"+ userId);
+        String userId = loginUser.getUserId();
         if("admin".equals(userId)) {
             return true;
         }else{
             session.setAttribute("alertMsg", "최고관리자만 이용 가능한 서비스입니다.");
-            response.sendRedirect(request.getContextPath() + "/empList.erp");
+            response.sendRedirect("/empList.erp");
             return false;
         }
 

@@ -160,6 +160,13 @@ public class SaleController {
         System.out.println("endDate: " + endDate);
         System.out.println("company: " + company);
 
+
+        if (startDate != null && startDate.trim().isEmpty()){
+            startDate = null;
+        }
+        if (endDate != null && endDate.trim().isEmpty()){
+            endDate = null;
+        }
         int selCount = saleService.selectSearchCount(company, startDate, endDate);
 
         System.out.println("selCount: " + selCount);

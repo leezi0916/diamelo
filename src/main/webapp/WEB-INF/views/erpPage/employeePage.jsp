@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/employeePageStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/employeePageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -87,18 +87,6 @@
                 <td>${u.enrollDate}</td>
               </tr>
             </c:forEach>
-
-<%--            <c:forEach var="e" items="${slist}">--%>
-<%--              <tr>--%>
-<%--                <td>${e.RNum}</td>--%>
-<%--                <td>${e.userName}</td>--%>
-<%--                <td>${e.jobName}</td>--%>
-<%--                <td>${e.phone}</td>--%>
-<%--                <td>${e.email}</td>--%>
-<%--                <td>${e.enrollDate}</td>--%>
-<%--              </tr>--%>
-<%--            </c:forEach>--%>
-
 
             </tbody>
           </table>
