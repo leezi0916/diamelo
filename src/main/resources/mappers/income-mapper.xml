@@ -58,10 +58,10 @@
             AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND s.SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= TO_DATE(#{startDate} || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="endDate != null and endDate != ''">
-            AND s.SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company != ''">
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
@@ -106,10 +106,10 @@
             AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND s.SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= TO_DATE(#{startDate} || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="endDate != null and endDate != ''">
-            AND s.SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company != ''">
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
@@ -122,7 +122,7 @@
 
 
     <select id="searchIncomeSum" resultType="_int">
-        SELECT SUM(TOTAL_SALES)
+        SELECT NVL(SUM(TOTAL_SALES), 0)
         FROM (
         SELECT s.GROUP_NO, NVL(SUM(s.SALES_AMOUNT), 0) AS TOTAL_SALES
         FROM SALES_DETAILS s
@@ -132,10 +132,10 @@
             AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND s.SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= TO_DATE(#{startDate} || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="endDate != null and endDate != ''">
-            AND s.SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company != ''">
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'

@@ -82,7 +82,7 @@ public class ErpMainController {
         model.addAttribute("list2", list2);
 
         session.setAttribute("selectIcon", svg);
-        session.setAttribute("seletTitle", "Home");
+        session.setAttribute("seletTitle", "HOME");
         return "erpPage/homePage";
     }
 
