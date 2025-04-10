@@ -13,6 +13,8 @@ public interface IncomeMapper {
     int selectIncomeCount();
     // 매출 목록 조회
     ArrayList<SalesDetails> selectIncomeList(RowBounds rowBounds);
+    // 총 매출 조회
+    int selectIncomeAllSales();
 
     // 조건에 맞는 매출 개수
     int selectSerachIncomeCount(@Param("type") String type,

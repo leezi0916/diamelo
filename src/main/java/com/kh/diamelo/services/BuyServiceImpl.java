@@ -43,8 +43,8 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public String selectGroupNo(int rNum) {
-        return buyMapper.selectGroupNo(rNum);
+    public int selectGroupNo() {
+        return buyMapper.selectGroupNo();
     }
 
     @Override

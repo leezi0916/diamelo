@@ -21,7 +21,29 @@ public class BoardController {
     private final BoardService boardService;
     // 게시판관리 페이지로 가기
     @GetMapping("board.erp")
-    public String board(@RequestParam(defaultValue = "1")int bpage, Model model) {
+    public String board(@RequestParam(defaultValue = "1")int bpage, Model model,HttpSession session) {
+        String svg = "<svg width=\"25\"\n" +
+                "                                height=\"25\"\n" +
+                "                                viewBox=\"0 0 25 25\"\n" +
+                "                                fill=\"none\"\n" +
+                "                                xmlns=\"http://www.w3.org/2000/svg\"\n" +
+                "                                xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n" +
+                "                            <rect width=\"25\" height=\"25\" fill=\"url(#pattern0_240_5988)\" />\n" +
+                "                            <defs>\n" +
+                "                                <pattern id=\"pattern0_240_5988\"\n" +
+                "                                        patternContentUnits=\"objectBoundingBox\"\n" +
+                "                                        width=\"1\"\n" +
+                "                                        height=\"1\">\n" +
+                "                                    <use xlink:href=\"#image0_240_5988\" transform=\"scale(0.0104167)\" />\n" +
+                "                                </pattern>\n" +
+                "                                <image id=\"image0_240_5988\"\n" +
+                "                                        width=\"96\"\n" +
+                "                                        height=\"96\"\n" +
+                "                                        preserveAspectRatio=\"none\"\n" +
+                "                                        xlink:href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAACwUlEQVR4nO2dPW4UQRCFn8TKl7FDJEuIgEP4IkRONyQyBss3ILB8BrgE4GOAkNchqNBI4wSt6B2Pu7/q6npSxfve+7Z7flY7I6VSqVQqVU9WGFre/YUPaM79hQ9ozv2FD2jO/YUPaM79hQ9ozv2FD2jO/YUPaM79FXUi6VLSd0kPBwTqfR7mrJdzdkxHkq4l/XFQikHzW9LV3EXz8r84KMCczOfWEK4dhDZn87FV+Sfz0qMDm7OZOjluAeCDg7DmdC5aALhzENSczrcWAHYOgprTuW8BoGQiuozOjxuAhefHDcDC8+MGYOH5cQOw8Py4AVh4ftwALDw/bgAWnr9kYPSpLjqgOZ8EoASAfwstVwBfhOUWxJdhwOQxQAkA/xbayCsguozOjxuAhefHDcDC8+MGYOH5cQOw8Py4AVh4ftwALDw/bgAWnn+tAXM+JSUAJYBcAcotSLkF5TFAeRBWHoTzLEh5Gqo8Dc0LMXVzIda7jM6PG4CF58cNwMLz4wZglf6kWF2jA3g1/xsyATiFUF2jr4AShOqqfT/dVs7az3+3EkJ1RQdgKyFU1wgAbAWE6hoFgD0RQnWNBMAkbRd081oNNBoAW7gSqmtEAOYJwqgAzAuEtQXQOu8dQu8AuocQAUDXEKIA6BZCJABdQogGoDsIEQF0BSEqgG4g/O/nOK/P+38TCUKPjy7eLbxRtl35eUtu4C3WeweF2sgr4bjjx9fvoqyEKwdlWicQzmoAOJpf20GXac4h3Eja1ADwCGF6bUduR2pf/r/HhIv55QW9vVtgV2kl7Ct/U2s7Gk3nhfJv95T/QtInL78nRIZwWyj/cRJCBQiHlp8QnlHbwp5/U9iu3j6nmVF19sTyp/kBeQ6tzYHlT/OVNjty+b8kvaQNR9yODi3/lDY76nVClg9CyPJBCFm+2ms6z/85n+3sPeD+BSUkkzIaUnjdAAAAAElFTkSuQmCC\"/>\n" +
+                "                            </defs>\n" +
+                "                        </svg>";
+        
         int boardCount = boardService.selectBoardAllCount();
 
         PageInfo pi = new PageInfo(boardCount, bpage, 10, 10);
@@ -29,6 +51,9 @@ public class BoardController {
 
         model.addAttribute("list1", list1);
         model.addAttribute("pi", pi);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "게시판");
 
         return "erpPage/boardMainPage";
     }

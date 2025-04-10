@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="/css/default.css" />
   <link rel="stylesheet" href="/css/erp/boardEnrollStyle.css" />
+  <script src="/js/erp/boardEnrollForm.js"></script>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -67,15 +68,5 @@
     </div>
   </div>
 </div>
-
-<script>
-    function insertBoard(){
-        const select = document.getElementById("selectOption").value;
-        if(select === "0"){
-            alert('분류를 선택하지 않았습니다.');
-            return false;
-        }
-    }
-</script>
 </body>
 </html>
