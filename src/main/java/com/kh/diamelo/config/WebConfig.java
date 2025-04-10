@@ -36,8 +36,14 @@ public class WebConfig implements WebMvcConfigurer {
                                    "/empAdminSearch.erp",
                         "/empDetailSearch.erp",
                         "/empDetail.erp",
-                        "/empAdmin.erp"
+                        "/empAdmin.erp",
+                        "/compAdmin.erp",
+                        "/select.ad",
+                        "/api/company/commit",
+                        "/api/company/return",
+                        "/delete.com"
                         );
+
 
     }
 
