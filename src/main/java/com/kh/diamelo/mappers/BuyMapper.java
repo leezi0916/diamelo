@@ -22,7 +22,7 @@ public interface BuyMapper {
 
 //    int selectMetNum(ArrayList<Product> product);
 
-    String selectGroupNo(@Param("rNum") int rNum);
+    int selectGroupNo();
 
     Product selectInOutHistory(@Param("gNo") int gNo);
 

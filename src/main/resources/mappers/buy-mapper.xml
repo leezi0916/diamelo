@@ -69,10 +69,7 @@
 
 
     <select id="selectGroupNo" resultType="_int">
-        SELECT GROUP_NO
-        FROM INOUT_HISTORY
-        WHERE GROUP_NO = #{rNum}
-        GROUP BY GROUP_NO
+        SELECT SEQ_GNO.CURRVAL FROM dual
     </select>
 
     <insert id="insertOrderDetails">
@@ -110,7 +107,7 @@
 
     <insert id="insertInoutGroup">
         INSERT INTO INOUT_GROUP(GROUP_NO, USER_ID, GROUP_TYPE, GROUP_DATE, GROUP_STATUS)
-        VALUES(#{groupNo}, #{userId}, 'O', SYSDATE, 'Y')
+        VALUES(SEQ_GNO.NEXTVAL, #{userId}, 'O', SYSDATE, 'Y')
     </insert>
 
     <select id="selectfilePath" resultMap="ProductResult" parameterType="Product">
