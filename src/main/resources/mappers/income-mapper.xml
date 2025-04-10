@@ -83,6 +83,41 @@
         GROUP BY STATUS
     </select>
 
+    <select id="selectIncomeAllSalesDetails" resultType="_int">
+        SELECT NVL(NVL((SELECT SUM(SALES_AMOUNT) AS SALES_AMOUNT
+        FROM SALES_DETAILS e
+        JOIN USER_INFO q ON e.USER_ID = q.USER_ID
+        WHERE e.TYPE = 'I' AND e.STATUS = 'Y'
+        <if test='startDate != null and startDate != ""'>
+            AND e.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test='endDate != null and endDate != ""'>
+            AND e.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test='company != null and company != ""'>
+            AND q.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>), 0)
+        -
+        NVL((SELECT SUM(SALES_AMOUNT) AS SALES_AMOUNT
+        FROM SALES_DETAILS p
+        JOIN USER_INFO r ON p.USER_ID = r.USER_ID
+        WHERE p.TYPE = 'O' AND p.STATUS = 'Y'
+        <if test='startDate != null and startDate != ""'>
+            AND p.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test='endDate != null and endDate != ""'>
+            AND p.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test='company != null and company != ""'>
+            AND r.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+        ),0),0)
+        FROM SALES_DETAILS s
+        WHERE s.STATUS = 'Y'
+        GROUP BY s.STATUS
+    </select>
+
+
 
     <select id="selectSearchIncomeList" resultMap="SalesDetailsResult">
         SELECT

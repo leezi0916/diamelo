@@ -38,12 +38,9 @@
             조회
           </button>
           <div id="add-btn-wrap">
-            <c:if test="${loginUser.jobCode == 'J5'}">
               <button id="addBtn" type="button" onclick="location.href='compAdmin.erp'">
                 거래처 관리자 페이지
               </button>
-            </c:if>
-
           </div>
         </form>
 
