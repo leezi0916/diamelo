@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.diamelo.mappers.SaleMapper">
+    <resultMap id="ProductResult" type="Product">
+        <result column="PRO_NO" property="proNo"/>
+        <result column="PROCATEGORY_NO" property="proCategoryNo"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="PRO_DETAIL" property="proDetail"/>
+        <result column="PRO_PRICE" property="proPrice"/>
+        <result column="PRO_DELETED" property="proDeleted"/>
+        <result column="IS_PRODUCT" property="isProduct"/>
+        <result column="ORIGIN_NAME" property="originName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="HISTORY_STOCK" property="historyStock"/>
+        <result column="HIS_NO" property="hisNo"/>
+        <result column="GROUP_NO" property="groupNo" />
+    </resultMap>
+
+    <resultMap id="SalesDetailsResult" type="SalesDetails">
+        <result column="SAL_NO" property="salNo"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="SALES_DATE" property="salesDate"/>
+        <result column="SALES_AMOUNT" property="salesAmount"/>
+        <result column="TYPE" property="type"/>
+        <result column="STATUS" property="status"/>
+        <result column="SALES_NAME" property="salesName"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="GROUP_NO" property="groupNo" />
+    </resultMap>
+    <resultMap id="InoutHistoryResult" type="InoutGroup">
+        <result column="GROUP_NO" property="groupNo"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="GROUP_TYPE" property="groupType"/>
+        <result column="GROUP_DATE" property="groupDate"/>
+        <result column="GROUP_STATUS" property="groupStatus"/>
+        <result column="USER_NAME" property="userName" />
+        <result column="COMPANY_NAME" property="companyName" />
+        <result column="PRO_NAME" property="proName" />
+
+
+<!--        <result column="HIS_NO" property="hisNo"/>-->
+<!--        <result column="PRO_NO" property="proNo"/>-->
+<!--        <result column="GROUP_NO" property="groupNo"/>-->
+<!--        <result column="HISTORY_STOCK" property="historyStock"/>-->
+<!--        <result column="GROUP_TYPE" property="groupType"/>-->
+<!--        <result column="GROUP_DATE" property="groupDate"/>-->
+<!--        <result column="GROUP_STATUS" property="groupStatus"/>-->
+<!--        <result column="USER_NAME" property="userName"/>-->
+    </resultMap>
+
+    <select id="salesListCount" resultType="_int">
+        SELECT COUNT(*) FROM INOUT_GROUP
+        WHERE GROUP_TYPE = 'I'
+    </select>
+
+    <select id="selectSalesList" parameterType="InoutGroup" resultMap="InoutHistoryResult">
+        SELECT RNUM, GROUP_NO, USER_NAME, COMPANY_NAME, GROUP_DATE, GROUP_STATUS
+        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, COMPANY_NAME, GROUP_DATE, GROUP_STATUS
+        FROM (SELECT GROUP_NO, USER_NAME, COMPANY_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE, GROUP_STATUS
+        FROM INOUT_GROUP
+        JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_TYPE = 'I'
+        ORDER BY GROUP_NO DESC))
+    </select>
+
+    <select id="selectSaleDetailList" parameterType="Product" resultMap="ProductResult">
+        SELECT CHANGE_NAME,PRO_NAME, PRO_NO, HISTORY_STOCK, GROUP_NO, PRO_PRICE
+        FROM INOUT_GROUP
+        JOIN INOUT_HISTORY USING(GROUP_NO)
+        JOIN PRODUCT USING(PRO_NO)
+        JOIN ATTACHMENT USING(PRO_NO)
+        WHERE GROUP_NO =  #{sNo}
+    </select>
+
+
+    <select id="selectInoutGroup" resultType="String">
+        SELECT COMPANY_NAME
+        FROM INOUT_GROUP
+        JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_NO = #{sNo}
+    </select>
+
+    <select id="selectGroupStatus" resultType="String">
+        SELECT GROUP_STATUS
+        FROM INOUT_GROUP
+        WHERE GROUP_NO = #{sNo}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE INOUT_GROUP SET
+        GROUP_STATUS ='Y'
+        WHERE GROUP_NO = #{sNo}
+    </update>
+
+    <update id="updateStatusN">
+        UPDATE INOUT_GROUP SET
+        GROUP_STATUS ='N'
+        WHERE GROUP_NO = #{sNo}
+    </update>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE PRODUCT_INVENTORY
+        SET PRO_INVENT_STOCK = PRO_INVENT_STOCK + #{historyStock}
+        WHERE PRO_NO = #{proNo}
+    </update>
+
+    <select id="selectUserId" resultType="String">
+        SELECT USER_ID
+        FROM INOUT_GROUP
+        WHERE GROUP_NO = #{sNo}
+    </select>
+
+    <insert id="insertSalesDetails" parameterType="SalesDetails">
+        INSERT INTO SALES_DETAILS(SAL_NO, SALES_AMOUNT, SALES_STOCK,
+                PRO_NAME, CHANGE_NAME, SALES_DATE, STATUS, TYPE, USER_ID, GROUP_NO)
+                VALUES(
+                SEQ_SNO.NEXTVAL, #{salesAmount}, #{salesStock}, #{proName}, #{changeName}, SYSDATE, 'Y', 'O', #{userId}, #{groupNo})
+    </insert>
+
+
+    <select id="selectSearchCount" resultType="_int">
+        SELECT COUNT(*) FROM INOUT_GROUP
+        WHERE GROUP_TYPE = 'I'
+            <if test="startDate != null and startDate != ''">
+                AND GROUP_DATE &gt;= TO_DATE(#{startDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+            </if>
+            <if test="endDate != null and endDate != ''">
+                AND GROUP_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+            </if>
+            <if test="company != null and company !=''">
+                AND USER_ID = (SELECT USER_ID
+                FROM USER_INFO WHERE
+                COMPANY_NAME = #{company})
+            </if>
+    </select>
+
+    <select id="selectSearchList" parameterType="InoutGroup" resultMap="InoutHistoryResult">
+        SELECT RNUM, GROUP_NO, USER_NAME, COMPANY_NAME, TO_CHAR(GROUP_DATE,'YYYY/MM/DD')  AS GROUP_DATE, GROUP_STATUS
+        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, COMPANY_NAME, GROUP_DATE, GROUP_STATUS
+        FROM (SELECT GROUP_NO, USER_NAME, COMPANY_NAME, GROUP_DATE, GROUP_STATUS
+        FROM INOUT_GROUP
+        JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_TYPE = 'I'
+        <if test="startDate != null and startDate != ''">
+            AND GROUP_DATE &gt;= TO_DATE(#{startDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        <if test="endDate != null and endDate != ''">
+            AND GROUP_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        <if test="company != null and company !=''">
+            AND USER_ID = (SELECT USER_ID
+            FROM USER_INFO WHERE
+            COMPANY_NAME = #{company})
+        </if>
+        ORDER BY GROUP_NO DESC))
+    </select>
+
+<!--    <select id="selectProduceBuyList" parameterType="Product" resultMap="ProductResult">-->
+<!--        SELECT PRO_NO,PRO_NAME, PRO_DETAIL, PRO_PRICE, ORIGIN_NAME, CHANGE_NAME-->
+<!--        FROM PRODUCT-->
+<!--        LEFT JOIN ATTACHMENT USING(PRO_NO)-->
+<!--        WHERE PRO_DELETED = 'N' AND-->
+<!--        IS_PRODUCT = 'N'-->
+<!--    </select>-->
+
+
+<!--    <select id="selectGroupNo" resultType="_int">-->
+<!--        SELECT GROUP_NO-->
+<!--        FROM INOUT_HISTORY-->
+<!--        WHERE GROUP_NO = #{rNum}-->
+<!--        GROUP BY GROUP_NO-->
+<!--    </select>-->
+
+<!--    <insert id="insertOrderDetails">-->
+<!--        INSERT INTO INOUT_HISTORY (HIS_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)-->
+<!--            VALUES (-->
+<!--            SEQ_HNO.NEXTVAL,-->
+<!--            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{proName} AND ROWNUM = 1),-->
+<!--            #{groupNo},-->
+<!--            #{qty},-->
+<!--            #{proPrice}-->
+<!--           )-->
+<!--    </insert>-->
+
+
+<!--    <select id="selectInOutHistory" parameterType="Product" resultMap="InoutHistoryResult">-->
+<!--        SELECT GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE-->
+<!--        FROM INOUT_GROUP-->
+<!--        JOIN USER_INFO USING(USER_ID)-->
+<!--        WHERE GROUP_NO = #{gNo}-->
+<!--    </select>-->
+
+<!--    <select id="selectMatDetailList" parameterType="Product" resultMap="ProductResult">-->
+<!--        SELECT CHANGE_NAME, PRO_NAME, HISTORY_STOCK, PRO_PRICE * HISTORY_STOCK AS AMOUNT-->
+<!--        FROM INOUT_HISTORY-->
+<!--        JOIN PRODUCT USING(PRO_NO)-->
+<!--        LEFT JOIN ATTACHMENT USING(PRO_NO)-->
+<!--        WHERE GROUP_NO = #{sNo}-->
+<!--    </select>-->
+
+<!--    <select id="selectMatPrice" resultType="_int">-->
+<!--        SELECT PRO_PRICE-->
+<!--        FROM PRODUCT-->
+<!--        WHERE PRO_NAME = #{proName}-->
+<!--    </select>-->
+
+<!--    <insert id="insertInoutGroup">-->
+<!--        INSERT INTO INOUT_GROUP(GROUP_NO, USER_ID, GROUP_TYPE, GROUP_DATE, GROUP_STATUS)-->
+<!--        VALUES(#{groupNo}, #{userId}, 'O', SYSDATE, 'Y')-->
+<!--    </insert>-->
+
+<!--    <select id="selectfilePath" resultMap="ProductResult" parameterType="Product">-->
+<!--        SELECT CHANGE_NAME-->
+<!--        FROM ATTACHMENT-->
+<!--        JOIN PRODUCT USING(PRO_NO)-->
+<!--        WHERE PRO_NAME = #{proName}-->
+<!--    </select>-->
+
+<!--    <insert id="insertSalesDetails">-->
+<!--        INSERT INTO SALES_DETAILS(SAL_NO, SALES_AMOUNT, SALES_STOCK,-->
+<!--        PRO_NAME, CHANGE_NAME, SALES_DATE, STATUS, TYPE, USER_ID, GROUP_NO)-->
+<!--        VALUES(-->
+<!--        SEQ_SNO.NEXTVAL, #{salesAmount}, #{salesStock}, #{proName}, #{changeName}, SYSDATE, 'Y', 'O', #{userId}, #{groupNo})-->
+<!--    </insert>-->
+
+<!--    <update id="updateProductInventory" parameterType="Product">-->
+<!--        UPDATE PRODUCT_INVENTORY-->
+<!--        SET PRO_INVENT_STOCK = PRO_INVENT_STOCK + #{qty}-->
+<!--        WHERE PRO_NO = #{proNo}-->
+<!--    </update>-->
+
+<!--    <select id="selectProNo" resultType="_int">-->
+<!--        SELECT PRO_NO-->
+<!--        FROM PRODUCT-->
+<!--        WHERE PRO_NAME = #{proName}-->
+<!--    </select>-->
+<!--    <select id="selectUserId" resultType="String">-->
+<!--        SELECT USER_ID-->
+<!--        FROM USER_INFO-->
+<!--        WHERE USER_NAME = #{user}-->
+<!--    </select>-->
+
+<!--    <select id="selectSearchCount" resultType="_int">-->
+<!--        SELECT COUNT(*)-->
+<!--        FROM SALES_DETAILS-->
+<!--        WHERE TYPE = 'O'-->
+<!--        <if test="Date != null and tDate == null">-->
+<!--            AND SALES_DATE BETWEEN #{Date} AND SYSDATE-->
+<!--        </if>-->
+<!--        <if test="Date == null and tDate != null">-->
+<!--            AND SALES_DATE BETWEEN #{tDate} AND SYSDATE-->
+<!--        </if>-->
+<!--        <if test="Date != null and tDate != null">-->
+<!--            AND SALES_DATE BETWEEN #{Date} AND TO_DATE(#{tDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')-->
+<!--        </if>-->
+<!--        <if test="user != null and user != ''">-->
+<!--            AND USER_ID = #{user}-->
+<!--        </if>-->
+<!--    </select>-->
+
+
+
+<!--    <select id="selectSearchList" resultMap="SalesDetailsResult" parameterType="SalesDetails">-->
+<!--        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(SALES_DATE, 'YYYY/MM/DD') AS SALES_DATE-->
+<!--        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, SALES_DATE-->
+<!--        FROM (SELECT  GROUP_NO, USER_NAME, SALES_DATE-->
+<!--        FROM SALES_DETAILS-->
+<!--        JOIN USER_INFO USING(USER_ID)-->
+<!--        WHERE TYPE = 'O'-->
+<!--        <if test="Date != null and tDate == null">-->
+<!--            AND SALES_DATE BETWEEN #{Date} AND SYSDATE-->
+<!--        </if>-->
+<!--        <if test="Date == null and tDate != null">-->
+<!--            AND SALES_DATE BETWEEN #{tDate} AND SYSDATE-->
+<!--        </if>-->
+<!--        <if test="Date != null and tDate != null">-->
+<!--            AND SALES_DATE BETWEEN #{Date} AND TO_DATE(#{tDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')-->
+<!--        </if>-->
+<!--        <if test="user != null and user != ''">-->
+<!--            AND USER_ID = #{user}-->
+<!--        </if>-->
+<!--        ORDER BY GROUP_NO DESC))-->
+
+<!--    </select>-->
+
+
+
+
+
+
+
+
+
+</mapper>

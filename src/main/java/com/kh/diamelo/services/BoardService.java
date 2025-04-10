@@ -37,4 +37,10 @@ public interface BoardService {
 
     //게시판 조건으로 검색
     ArrayList<Board> selectBoard(int type, String title, String userId,Board board ,PageInfo pi);
+
+    //게시판 댓글 검색
+    ArrayList<Reply> selectReply(int postId);
+
+    //게시판 댓글 삭제
+    int deleteReply(Reply r);
 }

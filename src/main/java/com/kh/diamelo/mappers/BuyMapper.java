@@ -6,6 +6,7 @@ import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.domain.vo.SalesDetails;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public interface BuyMapper {
     int selectBuyCount();
 
-    ArrayList<SalesDetails> selectBuyList(PageInfo pi);
+    ArrayList<SalesDetails> selectBuyList(RowBounds rowBounds);
 
     ArrayList<Product> selectProduceBuyList();
 
@@ -21,9 +22,9 @@ public interface BuyMapper {
 
 //    int selectMetNum(ArrayList<Product> product);
 
-    String selectGroupNo(@Param("rNum") int rNum);
+    int selectGroupNo();
 
-    Product selectInOutHistory(@Param("sNo") int sNo);
+    Product selectInOutHistory(@Param("gNo") int gNo);
 
     ArrayList<Product> selectMatDetailList(@Param("sNo") int sNo);
 
@@ -34,4 +35,14 @@ public interface BuyMapper {
     Product selectfilePath(@Param("proName") String proName);
 
     int insertSalesDetails(SalesDetails salesDetails);
+
+    int selectProNo(@Param("proName") String proName);
+
+    int updateProductInventory(Product product);
+
+    int selectSearchCount(@Param("Date") String Date,@Param("tDate") String tDate,@Param("user") String user);
+
+    ArrayList<SalesDetails> selectSearchList(RowBounds rowBounds,@Param("Date") String Date,@Param("tDate") String tDate,@Param("user") String user);
+
+    String selectUserId(@Param("user") String user);
 }

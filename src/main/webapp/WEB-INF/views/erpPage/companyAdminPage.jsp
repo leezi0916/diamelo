@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="/css/erp/companyAdminPageStyle.css"/>
     <link rel="stylesheet" href="/css/default.css"/>
+    <script src="/js/erp/companyAdminPage.js"></script>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -64,7 +65,7 @@
                         </button>
 
 
-                        <button id="deleteBtn" type="button" onclick="location.href='company.rt'">
+                        <button id="deleteBtn" type="button" onclick="return returnCompany()">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 10H16" stroke="white" stroke-width="1.60586" stroke-linecap="round"
@@ -98,7 +99,9 @@
                         <c:when test="${not empty list}">
                             <c:forEach var="c" items="${list}">
                                 <tr>
-                                    <td style="vertical-align: middle;"><input type="checkbox" id="checking" class="checking" name="userId" value="${c.userId}"></td>
+                                    <td style="vertical-align: middle;">
+                                        <input type="checkbox" class="checking" name="userId" value="${c.userId}">
+                                    </td>
                                     <td>${c.companyName}</td>
                                     <td>${c.userName}</td>
                                     <td>${c.phone}</td>
@@ -137,7 +140,6 @@
                                                 <img src="/image/delete_icon.png" alt="삭제" width="20">
                                             </button>
                                         </form>
-
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -226,102 +228,5 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    function allCheck(_allCheckBox){
-        //전체선택 체크여부
-        let checked = _allCheckBox.checked;
-
-        let status = document.getElementsByName("status");
-        for(let box of status){
-            box.checked = checked;
-        }
-    }
-
-    function isAllchecked(selector){
-        const checkBoxList = document.querySelectorAll(selector);
-        for(let box of checkBoxList){
-            if(!box.checked){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function addstatusEvent(){
-        const allcheck = document.getElementById('allcheck');
-        let status = document.getElementsByName("status");
-
-        for(let box of status){
-            //모든 체크박스의 체크여부를 확인해서 결과에따라
-            //all체크박스의 체크여부를 변경한다.
-            box.onclick = function(){
-                let isChecked = isAllchecked('input[name="status"]');
-                allcheck.checked = isChecked;
-            }
-        }
-    }
-    addstatusEvent();
-
-    function onalert(){
-        if(confirm("정말 삭제하시겠습니까?")){
-        }else{
-            return false;
-        }
-    }
-
-    function commitCompany(){
-        //checkBox전체 가져와서
-        //선택된 녀석들의 value만 모아서
-        //ajax요청
-
-        //체크박스
-        const checkBox = document.querySelectorAll('.checking:checked');
-        //체크박스 값
-        const selectedValues = [];
-
-        checkBox.forEach((el)=>{
-            selectedValues.push(el.value);
-        })
-
-        if(confirm("거래처를 승인하시겠습니까?")){
-
-        }else{
-            alert('취소하였습니니다.');
-            return;
-        }
-
-        updateCompanyStatus({
-            userId : selectedValues
-        },drawCompanyList)
-
-    }
-
-    function drawCompanyList(data){
-        alert("승인 완료되었습니다.");
-        location.href='compAdmin.erp';
-    }
-
-    function updateCompanyStatus(data, callback){
-        $.ajax({
-            url: '/api/company/status',
-            type: 'post',
-            data : JSON.stringify(data),
-            contentType: 'application/json',
-            success:function (res){
-                if(res === "success"){
-                    callback(data);
-                }else{
-                    console.log("status update 실패");
-                }
-            },
-            error: function (){
-                console.log("status update ajax 요청 실패");
-            }
-        })
-    }
-</script>
-<%--location.href='company.ap'--%>
 </body>
 </html>

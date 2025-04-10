@@ -22,7 +22,7 @@
       <%-- 페이지 제목 영역 --%>
       <div class="page-body-header">
         <div id="page-body-header-text">
-          전체 (?)
+          전체 (${buyCount})
         </div>
       </div>
       <%-- 검색 필터 + 테이블 리스트 영역 --%>
@@ -30,9 +30,9 @@
         <%-- 검색 필터 영역 --%>
         <div id="page-body-content-search-button">
           <form action="search.buy" method="get" class="search-form">
-            <input type="date" name="" id="" class="input-box" >
-            <input type="date" class="input-box" >
-            <input type="text" class="input-box" placeholder="구매 기업">
+            <input type="date" name="startDate" id="startDate" class="input-box">
+            <input type="date" name="endDate" id="endDate" class="input-box">
+            <input type="text" name="user" class="input-box" placeholder="구매자" >
             <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
             <button type="submit" class="input-box">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,103 +69,40 @@
             <tbody>
             <%-- 반복 가능한 판매 내역 행 --%>
             <c:forEach var="b" items="${list}">
-              <tr onclick="location.href='buyDetail.erp?sNo=${b.salNo}'">
-                <td>${b.salNo}</td>
+              <tr onclick="location.href='buyDetail.erp?gNo=${b.groupNo}'">
+                <td>${b.groupNo}</td>
                 <td>${b.userName}</td>
                 <td>A공장</td>
                 <td>${b.salesDate}</td>
               </tr>
             </c:forEach>
 
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>10</td>--%>
-<%--              <td>이지묵</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2024-01-20</td>--%>
-
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>9</td>--%>
-<%--              <td>황윤창</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2024-03-19</td>--%>
-
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>8</td>--%>
-<%--              <td>김진석</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2024-05-20</td>--%>
-
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>7</td>--%>
-<%--              <td>양동민</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2024-06-18</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>6</td>--%>
-<%--              <td>홍승민</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2024-10-10</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>5</td>--%>
-<%--              <td>이지묵</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2024-11-11</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>4</td>--%>
-<%--              <td>김진석</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2025-01-25</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>3</td>--%>
-<%--              <td>양동민</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2025-02-28</td>--%>
-
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>2</td>--%>
-<%--              <td>황윤창</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2025-03-05</td>--%>
-
-<%--            </tr>--%>
-<%--            <tr onclick="goToDetail()">--%>
-
-<%--              <td>1</td>--%>
-<%--              <td>홍승민</td>--%>
-<%--              <td>A공장</td>--%>
-<%--              <td>2025-03-31</td>--%>
-
-<%--            </tr>--%>
+            <c:forEach var="b" items="${blist}">
+              <tr onclick="location.href='buyDetail.erp?gNo=${b.groupNo}'">
+                <td>${b.groupNo}</td>
+                <td>${b.userName}</td>
+                <td>A공장</td>
+                <td>${b.salesDate}</td>
+              </tr>
+            </c:forEach>
 
             </tbody>
           </table>
         </div>
       </div>
+
+        <c:choose>
+          <c:when test="${not empty startDate or not empty endDate or not empty user}">
+            <c:url var="pageUrl" value="search.buy">
+              <c:param name="startDate" value="${startDate}" />
+              <c:param name="endDate" value="${endDate}" />
+              <c:param name="user" value="${user}" />
+            </c:url>
+          </c:when>
+          <c:otherwise>
+            <c:set var="pageUrl" value="buyList.erp?" />
+          </c:otherwise>
+        </c:choose>
         <%--   페이지 바     --%>
         <div id="pagingArea">
           <ul class="pagination">
@@ -174,12 +111,12 @@
                 <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage - 1}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&bpage=${pi.currentPage - 1}">이전</a></li>
               </c:otherwise>
             </c:choose>
 
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-              <li class="page-item"><a class="page-link" href="empList.erp?epage=${p}">${p}</a></li>
+              <li class="page-item"><a class="page-link" href="${pageUrl}&bpage=${p}">${p}</a></li>
             </c:forEach>
 
             <c:choose>
@@ -187,7 +124,7 @@
                 <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage + 1}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&bpage=${pi.currentPage + 1}">다음</a></li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -201,6 +138,20 @@
 <script>
   function goToDetail() {
     location.href = 'detail.buy';
+  }
+  function checkDate() {
+    const startDate = new Date(document.getElementById('startDate').value);
+    const endDate = new Date(document.getElementById('endDate').value);
+    const today = new Date();
+    console.log("sDate" + startDate);
+    console.log("eDate" + endDate);
+
+    const sDate = startDate ? new Date(startDate) : null;
+    const eDate = endDate ? new Date(endDate) : null;
+    if (sDate && eDate && sDate > eDate) {
+      alert("시작일은 종료일보다 빠르거나 같아야 합니다.");
+      return false;
+    }
   }
 </script>
 </body>

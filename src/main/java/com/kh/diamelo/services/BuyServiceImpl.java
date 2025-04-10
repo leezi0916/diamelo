@@ -7,6 +7,7 @@ import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.domain.vo.SalesDetails;
 import com.kh.diamelo.mappers.BuyMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public class BuyServiceImpl implements BuyService {
 
     @Override
     public ArrayList<SalesDetails> selectBuyList(PageInfo pi) {
-        return buyMapper.selectBuyList(pi);
+        int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return buyMapper.selectBuyList(rowBounds);
     }
 
     @Override
@@ -40,18 +43,18 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public String selectGroupNo(int rNum) {
-        return buyMapper.selectGroupNo(rNum);
+    public int selectGroupNo() {
+        return buyMapper.selectGroupNo();
     }
 
     @Override
-    public Product selectInOutHistory(int sNo) {
-        return buyMapper.selectInOutHistory(sNo);
+    public Product selectInOutHistory(int gNo) {
+        return buyMapper.selectInOutHistory(gNo);
     }
 
     @Override
-    public ArrayList<Product> selectMatDetailList(int sNo) {
-        return buyMapper.selectMatDetailList(sNo);
+    public ArrayList<Product> selectMatDetailList(int gNo) {
+        return buyMapper.selectMatDetailList(gNo);
     }
 
     @Override
@@ -73,6 +76,36 @@ public class BuyServiceImpl implements BuyService {
     public int insertSalesDetails(SalesDetails salesDetails) {
         return buyMapper.insertSalesDetails(salesDetails);
     }
+
+    @Override
+    public int selectProNo(String proName) {
+        return buyMapper.selectProNo(proName);
+    }
+
+    @Override
+    public int updateProductInventory(Product product) {
+        return buyMapper.updateProductInventory(product);
+    }
+
+    @Override
+    public int selectSearchCount(String Date, String tDate, String user) {
+
+        return buyMapper.selectSearchCount(Date, tDate, user);
+    }
+
+    @Override
+    public String selectUserId(String user) {
+        return buyMapper.selectUserId(user);
+    }
+
+    @Override
+    public ArrayList<SalesDetails> selectSearchList(PageInfo pi,String Date, String tDate, String user) {
+        int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return buyMapper.selectSearchList(rowBounds, Date, tDate, user);
+
+    }
+
 
 
 }

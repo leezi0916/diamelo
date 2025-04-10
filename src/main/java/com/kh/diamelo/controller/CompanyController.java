@@ -21,14 +21,20 @@ public class CompanyController {
 
     // 거래관리 페이지로 가기
     @GetMapping("company.erp")
-    public String company(@RequestParam(defaultValue = "1")int apage, Model model) {
+    public String company(@RequestParam(defaultValue = "1")int apage, Model model,HttpSession session) {
+        String svg = "/image/erpIcon/company.png";
+
         int boardCount = companyService.selectCompanySuccessCount();
 
         PageInfo pi = new PageInfo(boardCount,  apage, 10 ,10);
         ArrayList<UserInfo> list = companyService.selectCompanyList(pi);
 
+        model.addAttribute("boardCount", boardCount);
         model.addAttribute("list", list);
         model.addAttribute("pi",pi);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "거래 관리");
 
         return "erpPage/companyMainPage";
     }

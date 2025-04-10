@@ -42,4 +42,10 @@ public interface BoardMapper {
     //게시판 조건으로 검색
     ArrayList<Board> selectBoard(@Param("type")int type, @Param("title")String title,
                                  @Param("userId")String userId, Board board, RowBounds rowBounds);
+
+    //게시판 댓글 검색
+    ArrayList<Reply> selectReply(@Param("postId") int postId);
+    
+    //게시판 댓글 삭제
+    int deleteReply(Reply r);
 }

@@ -32,8 +32,9 @@ public class InventoryController {
 
     public String inventory(@RequestParam(value = "cpage", defaultValue = "1") int cpage,
                             @RequestParam(value = "tab", defaultValue = "product") String tab,
-                            Model model) {
+                            Model model,HttpSession session) {
 
+        String svg = "/image/erpIcon/product.png";
 
         int productCount = inventoryService.selectProductCount();
         model.addAttribute("pCount", productCount);
@@ -89,7 +90,9 @@ public class InventoryController {
         model.addAttribute("pi", pi);
         */
 
-
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "재고 관리");
+        
         return "erpPage/inventoryMainPage";
     }
 
@@ -190,18 +193,13 @@ public class InventoryController {
     }
 
 
-
-
-
-
     // ------------ 재료 -----------------
-
 
 
     //재료조회
     @GetMapping("search.ing")
     public String searchIngrediant(@RequestParam(defaultValue = "1") int cpage, String proName, Product proNo, Model model) {
-       return null;
+        return null;
     }
 
     // 재료등록 페이지로 가기

@@ -122,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
         // 원자재 재고를 Map으로 변환 (키: 원자재 번호, 값: 현재 재고)
         HashMap<Integer, Integer> stockMap = new HashMap<>();
         for (Product stock : materialStocks) {
-            stockMap.put((int) stock.getProNo(), stock.getStock());
+            stockMap.put((int) stock.getProNo(), stock.getProInventStock());
         }
 
         // 필요한 재료가 충분한지 확인

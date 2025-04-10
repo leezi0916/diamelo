@@ -35,19 +35,20 @@ public class EmployeeController {
         return "erpPage/employeeAdminPage";
     }
 
-    //인사 상세 페이지에서 수정하기 눌렀을 때의 redirect
-    @PostMapping("empAdmin.erp")
-    public String empAdminPost() {
-        return null;
-    }
+
 
     @GetMapping("empList.erp")
-    public String selectUserInfoList(@RequestParam(defaultValue = "1") int epage, Model model) {
+    public String selectUserInfoList(@RequestParam(defaultValue = "1") int epage, Model model,HttpSession session) {
+        String svg = "/image/erpIcon/member.png";
+        
         int UserCount = employeeService.selectUserInfoCount();
         PageInfo pi = new PageInfo(UserCount, epage, 10, 10);
         ArrayList<UserInfo> list = employeeService.selectUserInfoList(pi);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "인사 관리");
         return "erpPage/employeePage";
     }
 
@@ -68,6 +69,7 @@ public class EmployeeController {
         UserInfo empDetail = employeeService.selectEmployeeDetail(userId);
 
 
+
         model.addAttribute("e", empDetail);
         return "erpPage/employeeDetailPage";
     }
@@ -78,8 +80,11 @@ public class EmployeeController {
         PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
         ArrayList<UserInfo> list = employeeService.selectSearchUserInfoList(pi, userName, jobCode);
 
-        model.addAttribute("slist", list);
-        model.addAttribute("spi", pi);
+        model.addAttribute("userName", userName);
+        model.addAttribute("jobCode", jobCode);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
         return "erpPage/employeePage";
     }
 
@@ -88,8 +93,12 @@ public class EmployeeController {
         int UserCount = employeeService.selectAdminSearchUserInfoCount(userId, userName);
         PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
         ArrayList<UserInfo> list = employeeService.selectAdminSearchUserInfoList(pi, userId, userName);
-        model.addAttribute("slist", list);
-        model.addAttribute("spi", pi);
+
+        model.addAttribute("userName", userName);
+        model.addAttribute("userId", userId);
+
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
         return "erpPage/employeeAdminPage";
     }
 
@@ -106,7 +115,7 @@ public class EmployeeController {
             userInfo.setChangeName("/resources/uploadFile/" + changeName);
             userInfo.setOriginName(refile.getOriginalFilename());
 
-
+            System.out.println(userInfo);
             if(imgSearch==0){
                 employeeService.employeeDetailImageInsert(userInfo);
             }else{
@@ -114,10 +123,10 @@ public class EmployeeController {
             }
         }
         if (result > 0) {
-            session.setAttribute("alertMsg", "게시글 수정 성공");
+            session.setAttribute("alertMsg", "수정 성공");
             return "redirect:/empAdminList.erp";
         } else {
-            model.addAttribute("errorMsg", "게시글 수정 실패");
+            model.addAttribute("errorMsg", "수정 실패");
             return "common/errorPage";
         }
     }

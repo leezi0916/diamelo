@@ -23,7 +23,10 @@ public class ProductController {
 
     //제작 페이지
     @GetMapping("prdc.erp")
-    public String production(Model model) {
+    public String production(Model model,HttpSession session) {
+        String svg = "/image/erpIcon/plus.png";
+
+
         ArrayList<Product> productList = productService.getProductList();
 
         // productList가 null인지 확인
@@ -37,6 +40,10 @@ public class ProductController {
 
         //jsp에 있는 select박스의 옵션들
         model.addAttribute("productList", productList);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "제작 관리");
+        
         return "erpPage/productionPage";
     }
 

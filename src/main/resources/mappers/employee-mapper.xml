@@ -34,7 +34,7 @@
         USER_DELETED = 'N'
     </select>
     <select id="selectUserInfoList" parameterType="UserInfo"   resultMap="UserResult">
-        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM USER_INFO U
@@ -65,7 +65,7 @@
     </select>
 
     <select id="selectEmployeeDetail" parameterType="UserInfo" resultMap="UserResult">
-        SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE, ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME, FILE_PATH
+        SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE, TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME
         FROM USER_INFO
         LEFT JOIN JOB  USING(JOB_CODE)
         LEFT JOIN ATTACHMENT USING(USER_ID)
@@ -75,12 +75,19 @@
     <select id="selectSearchUserInfoCount" resultType="_int">
         SELECT COUNT(*)
         FROM USER_INFO
-        WHERE USER_NAME = #{userName}
-        AND JOB_CODE = #{jobCode}
+        WHERE USER_DELETED = 'N'
+            <if test="userName != null and userName != ''">
+               AND USER_NAME = #{userName}
+            </if>
+            <if test="jobCode != null and jobCode != ''">
+               AND JOB_CODE = #{jobCode}
+            </if>
+
     </select>
 
+
     <select id="selectSearchUserInfoList"  parameterType="UserInfo" resultMap="UserResult">
-        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM USER_INFO U
@@ -88,8 +95,12 @@
         WHERE STATUS = 'Y' AND
         USER_DELETED = 'N'
         AND JOB_CODE != 'J0'
-        AND USER_NAME = #{userName}
-        AND JOB_CODE = #{jobCode}
+        <if test="userName != null and userName != '' and userName != 'all'">
+            AND USER_NAME = #{userName}
+        </if>
+        <if test="jobCode != null and jobCode != '' and jobCode != 'all'">
+            AND JOB_CODE = #{jobCode}
+        </if>
         ORDER BY JOB_CODE DESC))
     </select>
 
@@ -98,8 +109,12 @@
         SELECT COUNT(*)
         FROM USER_INFO
         WHERE USER_DELETED = 'N'
-        AND USER_ID = #{userId}
-        AND USER_NAME = #{userName}
+        <if test="userId != null and userId != ''">
+            AND USER_ID = #{userId}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND USER_NAME = #{userName}
+        </if>
     </select>
 
     <select id="selectAdminSearchUserInfoList"  parameterType="UserInfo" resultMap="UserResult">
@@ -110,8 +125,12 @@
         JOIN JOB J USING(JOB_CODE)
         WHERE USER_DELETED = 'N'
         AND JOB_CODE != 'J5'
-        AND USER_ID = #{userId}
-        AND USER_NAME = #{userName}
+        <if test="userId != null and userId != ''">
+            AND USER_ID = #{userId}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND USER_NAME = #{userName}
+        </if>
         ORDER BY STATUS ASC))
     </select>
 
@@ -143,17 +162,24 @@
 
     <insert id="employeeDetailImageInsert">
         INSERT INTO ATTACHMENT
-        (USER_ID,
+        (ATC_NO,
+        USER_ID,
         ORIGIN_NAME,
         CHANGE_NAME,
-        FILE_PATH)
+        UPDATE_DATE
+        )
         VALUES
-        (#{userId},
+        (SEQ_ANO.NEXTVAL,
+        #{userId},
         #{originName},
         #{changeName},
-        #{filePath})
+        SYSDATE
+       )
     </insert>
-    
+
+
+
+
     <update id="empStatusDelete">
         UPDATE USER_INFO SET
         USER_DELETED = 'Y'

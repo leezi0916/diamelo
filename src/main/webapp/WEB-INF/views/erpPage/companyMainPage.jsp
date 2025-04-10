@@ -21,7 +21,7 @@
       <div class="page-body-header">
         <div class="page-body-header-text">
           <p>
-            전체(5)
+            전체(${boardCount})
           </p>
         </div>
 
@@ -38,9 +38,9 @@
             조회
           </button>
           <div id="add-btn-wrap">
-            <button id="addBtn" type="button" onclick="location.href='compAdmin.erp'">
-              거래처 관리자 페이지
-            </button>
+              <button id="addBtn" type="button" onclick="location.href='compAdmin.erp'">
+                거래처 관리자 페이지
+              </button>
           </div>
         </form>
 
