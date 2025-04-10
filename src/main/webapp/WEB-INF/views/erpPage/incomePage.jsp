@@ -176,14 +176,5 @@
 
     </div>
 </div>
-<script>
-
-
-    function goToDetail() {
-        location.href = 'detail.in';
-    }
-
-
-</script>
 </body>
 </html>

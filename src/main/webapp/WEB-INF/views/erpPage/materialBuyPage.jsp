@@ -99,8 +99,8 @@
         </form>
     </div>
 </div>
-
 <script>
+
     // 모든 발주 수량 input 요소들을 선택
     const inputs = document.querySelectorAll('.order-input');
 
@@ -172,6 +172,8 @@
     document.getElementById('order-details').innerHTML = "<tr><td colspan='6'>테스트 데이터</td></tr>";
     // 페이지 로딩 시 초기 계산 실행
     updateSummary();
+
 </script>
+
 </body>
 </html>

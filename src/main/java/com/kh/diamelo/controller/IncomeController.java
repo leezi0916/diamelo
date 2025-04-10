@@ -82,7 +82,6 @@ public class IncomeController {
     public String detailIncome(int gno, Model model) {
 
         ArrayList<SalesDetails> list = incomeService.incomeDetail(gno);
-        System.out.println(list);
         model.addAttribute("list", list);
         return "erpPage/incomeDetailPage";
     }

@@ -228,10 +228,10 @@
         </div>
     </div>
 </div>
-
 <script>
 
-    <%--  체크박스  --%>
+
+    // 체크박스
     function allCheck(_allCheckBox){
         //전체선택 체크여부
         let checked = _allCheckBox.checked;
@@ -372,6 +372,8 @@
             }
         })
     }
+
 </script>
+
 </body>
 </html>

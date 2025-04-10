@@ -84,6 +84,7 @@
 </div>
 
 <script>
+
     function init(){
         drawReplyList({postId : ${b.postId}})
     }
@@ -109,12 +110,12 @@
             let info = "";
             for(let reply of replyList){
                 info += "<div id='reply-inner'>"
-                            + "<div id='reply-content1'>"
-                                + "<div id='reply-content-name'>" + "<span>" + reply.user_id + "</span>" + "</div>"
-                                + "<div id='reply-content-createDate'>" + "<span>" + reply.create_date + "<button class='icon-button' type='button' onclick='return deleteReplyClick()'>" + "<img src='/image/delete_icon.png' alt='삭제' width='20'>" +"</button>" +"</span>" + "</div>"
-                            + "</div>"
-                            + "<div id='reply-content-inner'>" + "<textarea readonly>" + reply.reply_content + "</textarea>" + "</div>"
-                        + "</div>";
+                    + "<div id='reply-content1'>"
+                    + "<div id='reply-content-name'>" + "<span>" + reply.user_id + "</span>" + "</div>"
+                    + "<div id='reply-content-createDate'>" + "<span>" + reply.create_date + "<button class='icon-button' type='button' onclick='return deleteReplyClick()'>" + "<img src='/image/delete_icon.png' alt='삭제' width='20'>" +"</button>" +"</span>" + "</div>"
+                    + "</div>"
+                    + "<div id='reply-content-inner'>" + "<textarea readonly>" + reply.reply_content + "</textarea>" + "</div>"
+                    + "</div>";
             }
 
             const contentBody = document.querySelector("#reply-inner");
@@ -150,7 +151,7 @@
                 }
             },
             error: function (){
-                    console.log("reply insert ajax 요청 실패");
+                console.log("reply insert ajax 요청 실패");
             }
         })
     }
@@ -226,6 +227,7 @@
             }
         })
     }
+
 </script>
 </body>
 </html>

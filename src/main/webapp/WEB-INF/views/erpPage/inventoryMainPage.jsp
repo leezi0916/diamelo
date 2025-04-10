@@ -244,6 +244,8 @@
         </div>
     </div>
 </div>
+
+
 <script>
     document.getElementById("proBtn").addEventListener("click", function () {
         location.href = "inv.erp?cpage=1&tab=product"; // 제품 탭 클릭 시
@@ -269,7 +271,7 @@
     }
 
 
-    <%-- modal --%>
+    // modal
 
     function openModal(row) {
         const modal = document.getElementById("productModal");
@@ -305,8 +307,6 @@
             }
         });
     }
-
-
 </script>
 </body>
 </html>

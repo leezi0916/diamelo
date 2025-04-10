@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="/css/default.css" />
   <link rel="stylesheet" href="/css/erp/employeeDetailPageStyle.css" />
-
 </head>
 <body  style="background: #f8f8f8">
 <div class="layout-wrapper">
@@ -111,23 +110,26 @@
     </div>
   </div>
 </div>
+
 <script>
-  <%--  제품 사진 추가 및 삭제 --%>
 
-  function changeImage(input) {
-    let file = input.files[0];
+    //  제품 사진 추가 및 삭제
 
-    let img = document.createElement("img");
+    function changeImage(input) {
+        let file = input.files[0];
 
-    img.src = URL.createObjectURL(file);
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
+        let img = document.createElement("img");
 
-    let container = document.getElementById('image');
-    container.innerHTML = "";
-    container.appendChild(img);
-  }
+        img.src = URL.createObjectURL(file);
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+
+        let container = document.getElementById('image');
+        container.innerHTML = "";
+        container.appendChild(img);
+    }
+
 </script>
 </body>
 </html>

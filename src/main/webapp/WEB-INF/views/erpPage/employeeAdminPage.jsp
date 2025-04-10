@@ -230,6 +230,7 @@
   </div>
 </div>
 <script>
+
   // 모달 요소 가져오기
 
   const modal = document.getElementById("deleteModal");
@@ -306,6 +307,7 @@
       modal.style.display = "none";
     }
   };
+
 
 </script>
 </body>
