@@ -28,7 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/login.me",
                         "/logoutSuccess.me",
                         "/signUpEnrollForm.me",
-                        "/signUp.me");
+                        "/signUp.me",
+                        "/api/**");
 
     }
 }

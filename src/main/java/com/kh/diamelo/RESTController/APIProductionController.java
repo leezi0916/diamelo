@@ -2,20 +2,20 @@ package com.kh.diamelo.RESTController;
 
 
 import com.kh.diamelo.domain.vo.Product;
+import com.kh.diamelo.domain.vo.UserInfo;
 import com.kh.diamelo.services.ProductService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/production")
-public class ProductionController {
+public class APIProductionController {
 
     private final ProductService productService;
 
@@ -36,6 +36,31 @@ public class ProductionController {
 
         //리턴
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/cart")
+    public String addDeleteCart(int proNo, boolean inCart, HttpSession session) {
+        String result = "";
+
+        // 회원 아이디 가져오기 - 장바구니 추가 삭제에 필요
+        UserInfo loginUser = (UserInfo) session.getAttribute("loginUser");
+        String userId = loginUser.getUserId();
+
+
+        if(inCart) { // 장바구니에 상품이 담겨있을시 -> 장바구니 삭제
+            int deleteResult = productService.deleteCart(proNo,userId);
+            System.out.println("deleteResult: " + deleteResult);
+            if (deleteResult > 0) {
+                result = "Del";
+            }
+        }else{ // 장바구니에 상품이 담겨있지 않을시 -> 장바구니 추가
+            int addResult = productService.addCart(proNo, userId);
+            System.out.println("addResult: " + addResult);
+            if (addResult > 0) {
+                result = "Add";
+            }
+        }
+        return result;
     }
 
 }

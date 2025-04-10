@@ -1,8 +1,5 @@
 // Form 내용 검증 함수
-function validateForm(myPwd) {
-    // 현재 비밀번호 확인하는 변수
-    const currentPwd = document.querySelector('#enroll-form input[name=currentPwd]')
-
+function validateForm() {
     // 새로운 비밀번호 , 새 비밀번호 확인 같은지 여부 변수
     const newPwd = document.querySelector('#enroll-form input[name=newPwd]').value;
     const newPwdCheck = document.querySelector('#enroll-form #newPwdCheck').value;
