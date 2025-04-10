@@ -31,8 +31,9 @@ public class InventoryController {
     @GetMapping("inv.erp")
     public String inventory(@RequestParam(value = "cpage", defaultValue = "1") int cpage,
                             @RequestParam(value = "tab", defaultValue = "product") String tab,
-                            Model model) {
+                            Model model,HttpSession session) {
 
+        String svg = "/image/erpIcon/product.png";
 
         int productCount = inventoryService.selectProductCount();
         model.addAttribute("pCount", productCount);
@@ -283,9 +284,6 @@ public class InventoryController {
 
 
 
-
-
-
     // ------------ 재료 -----------------
 
 
@@ -321,6 +319,7 @@ public class InventoryController {
         model.addAttribute("pi", pi);
 
         return "erpPage/inventoryMainPage";
+
     }
 
     // 재료등록 페이지로 가기

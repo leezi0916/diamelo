@@ -64,9 +64,9 @@ public class BuyController {
 
     @PostMapping("mat.buy")
     public String materialBuy(@RequestParam("orderDetails")String orderDetail, HttpSession session,  Model model) {
-        Random random = new Random();
-        int resultNum;
-        int rNum;
+//        Random random = new Random();
+//        int resultNum;
+//        int rNum;
         ObjectMapper mapper = new ObjectMapper();
         ArrayList<Product> orderDetails = null;
         InoutGroup inoutGroup = new InoutGroup();
@@ -81,22 +81,25 @@ public class BuyController {
             e.printStackTrace();
             // 적절한 예외 처리
         }
-        do {
-            rNum = random.nextInt(999999) + 10000;
-            String selectNum = buyService.selectGroupNo(rNum); //0 또는 1 // 0이면 없는것 1이면 있는것
+//        do {
+//            rNum = random.nextInt(999999) + 10000;
+//            String selectNum = buyService.selectGroupNo(rNum); //0 또는 1 // 0이면 없는것 1이면 있는것
 
-            if(selectNum == null) {
-                resultNum = 0;
-            }else{
-                resultNum = 1;
-            }
-        }
-        while(resultNum ==1);
+//            if(selectNum == null) {
+//                resultNum = 0;
+//            }else{
+//                resultNum = 1;
+//            }
+//        }
+//        while(resultNum ==1);
 
-        inoutGroup.setGroupNo(rNum);
+//        inoutGroup.setGroupNo(rNum);
         inoutGroup.setUserId(loginUser.getUserId());
 
         int groupresult = buyService.insertInoutGroup(inoutGroup);
+
+        int resGNo = buyService.selectGroupNo();
+//        inoutGroup.setGroupNo();
 
 
         for(Product product : orderDetails) {
@@ -107,7 +110,7 @@ public class BuyController {
 
             product.setProNo(proNo);
             product.setProPrice(proPrice);
-            product.setGroupNo((rNum));
+            product.setGroupNo((resGNo));
 
             int result = buyService.insertOrderDetails(product);
 
@@ -117,7 +120,7 @@ public class BuyController {
             salesDetails.setProName(proName);
             salesDetails.setChangeName(changeName.getChangeName());
             salesDetails.setUserId(loginUser.getUserId());
-            salesDetails.setGroupNo(rNum);
+            salesDetails.setGroupNo(resGNo);
 
             int insertresult = buyService.insertSalesDetails(salesDetails);
             int updateProResult = buyService.updateProductInventory(product);
@@ -126,9 +129,12 @@ public class BuyController {
         return "redirect:/buyList.erp";
     }
 
+
     //구매관리 페이지로 가기
     @GetMapping("buyList.erp")
-    public String buyList(@RequestParam(defaultValue = "1") int bpage, Model model){
+    public String buyList(@RequestParam(defaultValue = "1") int bpage, Model model, HttpSession session) {
+        String svg = "/image/erpIcon/buy.png";
+
         int buyCount = buyService.selectBuyCount();
         System.out.println("buyCount = " + buyCount);
 
@@ -139,23 +145,35 @@ public class BuyController {
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
 
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "구매 관리");
+
         return "erpPage/buyPage";
     }
     //구매 검색 조회
     @GetMapping("search.buy")
-    public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String Date, String tDate, String user, Model model) {
+    public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String startDate, String endDate, String user, Model model) {
         System.out.println("user :"+user);
-        System.out.println("Date :"+Date);
-        System.out.println("tDate :"+tDate);
+        System.out.println("Date :"+startDate);
+        System.out.println("tDate :"+endDate);
 
-        if (Date != null && Date.trim().isEmpty()) Date = null;
-        if (tDate != null && tDate.trim().isEmpty()) tDate = null;
+        if (startDate != null && startDate.trim().isEmpty()){
+            startDate = null;
+        }
+        if (endDate != null && endDate.trim().isEmpty()){
+            endDate = null;
+        }
         String searchId = buyService.selectUserId(user);
-        int buyCount = buyService.selectSearchCount(Date, tDate, searchId);
+        int buyCount = buyService.selectSearchCount(startDate, endDate, searchId);
         System.out.println("buyCount = " + buyCount);
         PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
 
-        ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, Date, tDate, searchId);
+        ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, startDate, endDate, searchId);
+
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("user", user);
+
         model.addAttribute("blist", blist);
         model.addAttribute("bpi", bpi);
 

@@ -34,6 +34,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script src="/js/erp/header.js"></script>
         <style>
             #pagingArea{
                 padding: 20px;
@@ -58,7 +60,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 color: black;
                 border: 1px solid #A9A9A9;
             }
-
         </style>
     </head>
     <body>
@@ -72,43 +73,25 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="header-container">
             <!-- 왼쪽: HOME 아이콘 + 텍스트 -->
             <div class="header-left">
-                <!-- 홈 아이콘 -->
-                <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12.5 3.48118L18.75 9.30471V19.4118H16.25V11.6471H8.75V19.4118H6.25V9.30471L12.5 3.48118ZM12.5 0L0 11.6471H3.75V22H11.25V14.2353H13.75V22H21.25V11.6471H25L12.5 0Z"
-                        fill="black"
-                    />
-                </svg>
+                <%-- 타이틀마다의 아이콘 --%>
+                <img src="${selectIcon}">
+                <%-- 타이틀 명 --%>
                 <div class="home-labels">
-                    <span class="home-sub">HOME</span>
-                    <span class="home-main">HOME</span>
+                    <span class="home-sub">
+                            ${seletTitle}
+                    </span>
+                    <span class="home-main">${seletTitle}</span>
                 </div>
             </div>
 
             <!-- 오른쪽: 사람 아이콘 + 로그아웃 아이콘 + 텍스트 -->
             <div class="header-right">
-                <!-- 사람 아이콘 -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_57_3647)">
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M32.5322 32.3193C30.8388 26.9643 26.2888 23.896 20.0438 23.896H19.9988C13.7372 23.861 9.16384 26.951 7.46717 32.3193L7.27051 32.9427L7.82717 33.2827C11.0905 35.2727 15.1605 36.281 19.9205 36.281C19.9738 36.281 20.0272 36.281 20.0788 36.281C24.9055 36.281 28.8622 35.2993 32.1722 33.2827L32.7288 32.9427L32.5322 32.3193Z"
-                            fill="#7AC38F"
-                        />
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M19.9997 20.1824C24.538 20.1824 28.2314 16.4907 28.2314 11.9524C28.2314 7.41237 24.538 3.7207 19.9997 3.7207C15.4614 3.7207 11.7697 7.41237 11.7697 11.9524C11.7697 16.4907 15.4614 20.1824 19.9997 20.1824Z"
-                            fill="#7AC38F"
-                        />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_57_3647">
-                            <rect width="40" height="40" fill="white" />
-                        </clipPath>
-                    </defs>
+
+                <%-- 구매창으로 돌아가기 --%>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="backCrmPage()">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.8281 3.65625L5.09481 14.2463V36.3446H16.5931V27.8796H23.4631V36.3446H34.9048V14.2413L19.8281 3.65625Z" fill="#7AC38F"/>
                 </svg>
+
 
                 <!-- 로그아웃 아이콘 -->
                 <svg
@@ -134,18 +117,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </svg>
 
                 <!-- 텍스트 -->
-                <span class="welcome-text">디아멜로 님 어서오세요!</span>
+                <span class="welcome-text">${loginUser.userName} 님 어서오세요!</span>
             </div>
         </div>
-
-        <script>
-            function logout() {
-                const checkLogout = confirm('정말 로그아웃 하시겠습니까?');
-
-                if (checkLogout) {
-                    location.href = 'logout.me';
-                }
-            }
-        </script>
     </body>
 </html>

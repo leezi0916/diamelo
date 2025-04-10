@@ -4,7 +4,7 @@
 
     <resultMap id="ProductResult" type="Product">
         <result column="PRO_NAME" property="proName"/>
-        <result column="PRO_INVENT_STOCK" property="stock"/>
+        <result column="PRO_INVENT_STOCK" property="proInventStock"/>
     </resultMap>
 
     <resultMap id="UserInfoResult" type="UserInfo">
@@ -28,7 +28,7 @@
 
     <!-- 오늘 매출   -->
     <select id="selectTodaySales" resultType="_int">
-        SELECT NVL(SUM(SALES_AMOUNT), 0) AS TOTAL_SALES
+        SELECT NVL(SUM(SALES_AMOUNT),0) AS TOTAL_SALES
         FROM SALES_DETAILS
         WHERE STATUS = 'Y'
         AND TYPE = 'I'
@@ -96,7 +96,7 @@
     <!-- 최근 3개월간 매출 그래프   -->
     <select id="selectMonthlySales" resultType="map">
         SELECT TO_CHAR(SALES_DATE, 'YYYY-MM') AS MONTH,
-        SUM(SALES_AMOUNT) AS TOTAL_SALES
+        NVL(SUM(SALES_AMOUNT), 0) AS TOTAL_SALES
         FROM SALES_DETAILS
         WHERE STATUS = 'Y'
         AND TYPE = 'I'
@@ -111,9 +111,9 @@
     <select id="selectUserInfo" resultMap="UserInfoResult">
         SELECT a.CHANGE_NAME, d.DEPT_NAME, j.JOB_NAME
         FROM USER_INFO u
-        JOIN ATTACHMENT a ON (u.USER_ID = a.USER_ID)
-        JOIN DEPARTMENT d ON (u.DEPT_CODE = d.DEPT_CODE)
-        JOIN JOB j ON (u.JOB_CODE = j.JOB_CODE)
+        LEFT JOIN ATTACHMENT a ON (u.USER_ID = a.USER_ID)
+        LEFT JOIN DEPARTMENT d ON (u.DEPT_CODE = d.DEPT_CODE)
+        LEFT JOIN JOB j ON (u.JOB_CODE = j.JOB_CODE)
         WHERE u.USER_ID = #{userId}
     </select>
 

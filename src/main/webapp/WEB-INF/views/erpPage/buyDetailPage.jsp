@@ -4,19 +4,19 @@
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/buyDetailPageStyle.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/buyDetailPageStyle.css"/>
 
 </head>
-<body  style="background: #f8f8f8">
+<body style="background: #f8f8f8">
 <div class="layout-wrapper">
     <!-- 왼쪽 고정 사이드바 -->
-    <jsp:include page="../common/erp/sidebar.jsp" />
+    <jsp:include page="../common/erp/sidebar.jsp"/>
 
     <!-- 오른쪽 상단바 + 콘텐츠 -->
     <div class="main-area">
-        <jsp:include page="../common/erp/header.jsp" />
+        <jsp:include page="../common/erp/header.jsp"/>
 
         <!-- 페이지 본문 -->
         <div class="page-body">
@@ -51,18 +51,19 @@
                     <tbody>
                     <%-- 각 제품 항목(이미지, 이름, 수량) 5  15% 15% 30% 15% 15%--%>
                     <c:forEach var="p" items="${productList}">
-                    <tr>
-                        <td class="page-body-content-material-list-img" style="background-image: url(${p.changeName})"></td>
-                        <td class="page-body-content-material-list-name">${p.proName}</td>
-                        <td class="page-body-content-material-list-description">수량 <span>${p.historyStock}</span>개</td>
-                        <td class="page-body-content-material-list-capacity"><span>${p.amount}</span>원</td>
-                    </tr>
+                        <tr>
+                            <td class="page-body-content-material-list-img"
+                                style="background-image: url(${p.changeName})"></td>
+                            <td class="page-body-content-material-list-name">${p.proName}</td>
+                            <td class="page-body-content-material-list-description">수량 <span>${p.historyStock}</span>개
+                            </td>
+                            <td class="page-body-content-material-list-capacity"><span>${p.amount}</span>원</td>
+                        </tr>
                     </c:forEach>
 
 
                     </tbody>
                 </table>
-
 
 
             </div>
@@ -91,16 +92,16 @@
                     </div>
                 </form>
             </div>
-                <div id="page-body-content-button-div">
+            <div id="page-body-content-button-div">
 
-                    <input type="button" class="submitBtn" value="구매  페이지 돌아가기" onclick="location.href='buyList.erp'">
+                <input type="button" class="submitBtn" value="구매  페이지 돌아가기" onclick="location.href='buyList.erp'">
 
-                </div>
+            </div>
         </div>
 
-        </div>
     </div>
 </div>
+
 
 </body>
 </html>

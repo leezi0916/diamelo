@@ -77,7 +77,8 @@
     cursor: pointer;
 }
 
-.header-left svg {
+.header-left img {
+    vertical-align: top;
     margin-bottom: 44px;
     cursor: pointer;
 }
@@ -94,6 +95,7 @@
     color: #a9a9a9;
     text-align: center;
 }
+
 
 .home-main {
     font-size: 24px;
@@ -124,27 +126,3 @@
 }
 
 
-/* Paging 처리 */
-#pagingArea{
-    padding: 20px;
-}
-
-#pagingArea ul{
-    margin: 0;
-}
-.page-item.disabled .page-link{
-    background: #f8f8f8;
-    border: 1px solid #A9A9A9;
-}
-
-.page-link{
-    color: black;
-    background: #f8f8f8;
-    border: 1px solid #A9A9A9;
-}
-
-.page-link:hover{
-    background: #E4E4E4;
-    color: black;
-    border: 1px solid #A9A9A9;
-}

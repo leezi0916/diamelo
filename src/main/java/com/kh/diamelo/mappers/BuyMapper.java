@@ -22,7 +22,7 @@ public interface BuyMapper {
 
 //    int selectMetNum(ArrayList<Product> product);
 
-    String selectGroupNo(@Param("rNum") int rNum);
+    int selectGroupNo();
 
     Product selectInOutHistory(@Param("gNo") int gNo);
 
@@ -40,9 +40,9 @@ public interface BuyMapper {
 
     int updateProductInventory(Product product);
 
-    int selectSearchCount(@Param("Date") String Date,@Param("tDate") String tDate,@Param("user") String user);
+    int selectSearchCount(@Param("startDate") String startDate,@Param("endDate") String endDate,@Param("user") String user);
 
-    ArrayList<SalesDetails> selectSearchList(RowBounds rowBounds,@Param("Date") String Date,@Param("tDate") String tDate,@Param("user") String user);
+    ArrayList<SalesDetails> selectSearchList(RowBounds rowBounds,@Param("startDate") String startDate,@Param("endDate") String endDate,@Param("user") String user);
 
     String selectUserId(@Param("user") String user);
 }

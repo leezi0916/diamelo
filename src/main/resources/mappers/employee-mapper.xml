@@ -34,7 +34,7 @@
         USER_DELETED = 'N'
     </select>
     <select id="selectUserInfoList" parameterType="UserInfo"   resultMap="UserResult">
-        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM USER_INFO U
@@ -65,10 +65,11 @@
     </select>
 
     <select id="selectEmployeeDetail" parameterType="UserInfo" resultMap="UserResult">
-        SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE, ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME, FILE_PATH
+        SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE ,TRIM(DEPT_CODE) AS DEPT_CODE,TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME
         FROM USER_INFO
         LEFT JOIN JOB  USING(JOB_CODE)
         LEFT JOIN ATTACHMENT USING(USER_ID)
+        LEFT JOIN DEPARTMENT USING(DEPT_CODE)
         WHERE USER_ID = #{userId}
     </select>
     
@@ -87,7 +88,7 @@
 
 
     <select id="selectSearchUserInfoList"  parameterType="UserInfo" resultMap="UserResult">
-        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
+        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE
         FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE
         FROM USER_INFO U
@@ -141,6 +142,7 @@
         MODIFY_DATE = SYSDATE,
         EMAIL = #{email},
         JOB_CODE = #{jobCode},
+        DEPT_CODE = #{deptCode},
         STATUS = #{status}
         WHERE USER_ID = #{userId}
     </update>
@@ -162,17 +164,24 @@
 
     <insert id="employeeDetailImageInsert">
         INSERT INTO ATTACHMENT
-        (USER_ID,
+        (ATC_NO,
+        USER_ID,
         ORIGIN_NAME,
         CHANGE_NAME,
-        FILE_PATH)
+        UPDATE_DATE
+        )
         VALUES
-        (#{userId},
+        (SEQ_ANO.NEXTVAL,
+        #{userId},
         #{originName},
         #{changeName},
-        #{filePath})
+        SYSDATE
+       )
     </insert>
-    
+
+
+
+
     <update id="empStatusDelete">
         UPDATE USER_INFO SET
         USER_DELETED = 'Y'

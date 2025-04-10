@@ -19,7 +19,7 @@ public class Product {
     private String isProduct; //완제품 여부(제품 : Y, 재료 : N)
     private String userName;
 
-
+    private int proInventStock;
     private String categoryName;
 
     private String changeName;
@@ -31,7 +31,7 @@ public class Product {
     private Date proEnrollDate;
 
     private int amount;
-    private int stock;
+
 
     private int historyNo;
     private int groupNo;
@@ -43,6 +43,5 @@ public class Product {
     private String groupDate;
     private String groupStatus;
 
-    private int proInventStock;
 
 }

@@ -1,12 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/salePageStyle.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
+    <link rel="stylesheet" href="/css/erp/erpLayout.css"/>
+    <link rel="stylesheet" href="/css/erp/salePageStyle.css"/>
+    <link rel="stylesheet" href="/css/default.css">
+    <script src="/js/erp/salePage.js"></script>
 </head>
 <body style="background: #f8f8f8">
 <div class="layout-wrapper">
@@ -29,12 +31,15 @@
             <div class="page-body-content">
                 <%-- 검색 필터 영역 --%>
                 <div id="page-body-content-search-button">
-                    <form action="select.sale" class="search-form">
-                        <input type="date" name="" id="" class="input-box">
-                        <input type="date" class="input-box">
-                        <input type="text" class="input-box" placeholder="구매 기업">
+
+                    <form action="salSearList.erp" class="search-form">
+                        <input type="date" name="startDate" id="startDate" class="input-box">
+                        <input type="date" name="endDate" id="endDate" class="input-box">
+
+
+                        <input type="text" name="company" class="input-box" placeholder="구매 기업" value="${company}">
                         <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
-                        <button type="submit" class="input-box">
+                        <button type="submit" class="input-box" onclick="return checkDate()">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -120,56 +125,50 @@
                     </table>
                 </div>
             </div>
-            <div id="page-body-page-div">
-                <div>
-                    <div class="page-body-page-div-start">
-                        <p>이전</p>
-                    </div>
-                    <div>
-                        <p>1</p>
-                    </div>
-                    <div>
-                        <p>2</p>
-                    </div>
-                    <div>
-                        <p>3</p>
-                    </div>
-                    <div>
-                        <p>4</p>
-                    </div>
-                    <div>
-                        <p>5</p>
-                    </div>
-                    <div>
-                        <p>6</p>
-                    </div>
-                    <div>
-                        <p>7</p>
-                    </div>
-                    <div>
-                        <p>8</p>
-                    </div>
-                    <div>
-                        <p>9</p>
-                    </div>
-                    <div>
-                        <p>10</p>
-                    </div>
-                    <div class="page-body-page-div-end">
-                        <p>다음</p>
-                    </div>
+
+                <c:choose>
+                    <c:when test="${not empty startDate or not empty endDate or not empty company}">
+                        <c:url var="pageUrl" value="salSearList.erp">
+                            <c:param name="startDate" value="${startDate}" />
+                            <c:param name="endDate" value="${endDate}" />
+                            <c:param name="company" value="${company}"/>
+                        </c:url>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="pageUrl" value="saleList.erp?" />
+                    </c:otherwise>
+                </c:choose>
+                <%--   페이지 바     --%>
+                <div id="pagingArea">
+                    <ul class="pagination">
+                        <c:choose>
+                            <c:when test="${ pi.currentPage eq 1 }">
+                                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="${pageUrl}&spage=${pi.currentPage - 1}">이전</a></li>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                            <li class="page-item"><a class="page-link" href="${pageUrl}&spage=${p}">${p}</a></li>
+                        </c:forEach>
+
+                        <c:choose>
+                            <c:when test="${ pi.currentPage eq pi.maxPage }">
+                                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="${pageUrl}&spage=${pi.currentPage + 1}">다음</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
                 </div>
-
-
-            </div>
         </div>
     </div>
 </div>
-</div>
-<script>
-    function goToDetail() {
-        location.href = 'detail.sale';
-    }
-</script>
+
+
+
 </body>
 </html>

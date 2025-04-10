@@ -3,6 +3,7 @@ package com.kh.diamelo.controller;
 import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.SalesDetails;
 import com.kh.diamelo.services.IncomeService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +21,23 @@ public class IncomeController {
 
     // 매출관리 페이지로 가기
     @GetMapping("income.erp")
-    public String income(@RequestParam(defaultValue = "1") int inpage, Model model) {
+    public String income(@RequestParam(defaultValue = "1") int inpage, Model model, HttpSession session) {
+        String svg = "/image/erpIcon/sales.png";
+
         int incomeCount = incomeService.selectIncomeCount();
 
         PageInfo pi = new PageInfo(incomeCount, inpage,10,10);
         ArrayList<SalesDetails> list = incomeService.selectIncomeList(pi);
 
+        int details = incomeService.selectIncomeAllSales();
+
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
+        model.addAttribute("details", details);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "매출 관리");
 
         return "erpPage/incomePage";
     }
@@ -48,8 +57,10 @@ public class IncomeController {
                 (company == null || company.isEmpty())) {
             return "redirect:/income.erp";
         }
-
-
+        
+        //조건에 맞는 매출 총이익 구하기
+        int details = incomeService.selectIncomeAllSalesDetails(type, startDate, endDate, company);
+        
         int totalSalesSum = incomeService.searchIncomeSum(type, startDate, endDate, company);
 
 
@@ -63,7 +74,6 @@ public class IncomeController {
             model.addAttribute("message", "검색 결과가 없습니다.");
         }
 
-
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("pi", pi);
         model.addAttribute("list", list);
@@ -73,6 +83,7 @@ public class IncomeController {
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("company", company);
+        model.addAttribute("details", details);
 
         return "erpPage/incomePage"; // 결과 페이지
     }

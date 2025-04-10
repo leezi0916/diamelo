@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,9 +25,13 @@ public class ErpMainController {
     @GetMapping("home.erp")
     public String home(HttpSession session, Model model) {
 
+        String svg = "/image/erpIcon/home.png";
+
         //오늘의 매출 갖고오기
         int todaySales = erpMainService.selectTodaySales();
+
         model.addAttribute("todaySales", todaySales);
+
 
         //판매 현황 조회 W
         int salesStatus1 = erpMainService.countSalesStatus1();
@@ -78,7 +83,8 @@ public class ErpMainController {
         model.addAttribute("list1", list1);
         model.addAttribute("list2", list2);
 
-
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "Home");
         return "erpPage/homePage";
     }
 

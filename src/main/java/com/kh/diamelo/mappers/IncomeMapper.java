@@ -13,6 +13,8 @@ public interface IncomeMapper {
     int selectIncomeCount();
     // 매출 목록 조회
     ArrayList<SalesDetails> selectIncomeList(RowBounds rowBounds);
+    // 총 매출 조회
+    int selectIncomeAllSales();
 
     // 조건에 맞는 매출 개수
     int selectSerachIncomeCount(@Param("type") String type,
@@ -27,6 +29,13 @@ public interface IncomeMapper {
                                                    @Param("endDate") String endDate,
                                                    @Param("company") String company);
 
+    //조건에 맞는 매출 총이익 구하기
+    int selectIncomeAllSalesDetails(@Param("type") String type,
+                                    @Param("startDate") String startDate,
+                                    @Param("endDate") String endDate,
+                                    @Param("company") String company);
+    
+    
     // 조건에 맞는 매출합 보여주기
     int searchIncomeSum(  @Param("type") String type,
                           @Param("startDate") String startDate,
