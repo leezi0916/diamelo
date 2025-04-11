@@ -29,7 +29,7 @@ public interface BuyService {
 
     Product selectfilePath(int proNo);
 
-    int insertSalesDetails(SalesDetails salesDetails);
+    int insertBuySalesDetails(SalesDetails salesDetails);
 
     int selectProNo(String proName);
 

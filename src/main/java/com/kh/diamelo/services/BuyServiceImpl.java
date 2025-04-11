@@ -73,8 +73,8 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public int insertSalesDetails(SalesDetails salesDetails) {
-        return buyMapper.insertSalesDetails(salesDetails);
+    public int insertBuySalesDetails(SalesDetails salesDetails) {
+        return buyMapper.insertBuySalesDetails(salesDetails);
     }
 
     @Override

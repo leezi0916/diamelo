@@ -82,7 +82,7 @@ public class SaleController {
         SalesDetails salesDetails = new SalesDetails();
         String groupStatus = saleService.selectGroupStatus(sNo);
         System.out.println("groupStatus: " + groupStatus);
-
+        int resSum = 0;
         if(groupStatus.equals("Y")) {
             session.setAttribute("alertMsg", "이미 승인상태입니다.");
             return "redirect:/saleList.erp";
@@ -94,11 +94,13 @@ public class SaleController {
             System.out.println("Statuslist: " + list);
             for (Product product : list) {
 
+                resSum += product.getAmount() * product.getProPrice();
+
                 int updateProduct = saleService.updateProduct(product);
                 String userId = saleService.selectUserId(sNo);
                 System.out.println("userId: " + userId);
                 salesDetails.setUserId(userId);
-                salesDetails.setSalesAmount(product.getProPrice());
+                salesDetails.setSalesAmount(resSum);
                 salesDetails.setSalesStock(product.getHistoryStock());
                 salesDetails.setChangeName(product.getChangeName());
                 salesDetails.setGroupNo(product.getGroupNo());

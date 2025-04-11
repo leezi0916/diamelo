@@ -44,19 +44,21 @@
 
 
     <select id="selectBuyCount" resultType="_int">
-        SELECT COUNT(*) FROM SALES_DETAILS
-        WHERE TYPE = 'O'
+        SELECT COUNT(*) FROM INOUT_GROUP
+        WHERE GROUP_TYPE = 'O'
     </select>
 
 
 
     <select id="selectBuyList" parameterType="SalesDetails" resultMap="SalesDetailsResult">
-        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(SALES_DATE, 'YYYY/MM/DD') AS SALES_DATE
-        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, SALES_DATE
-        FROM (SELECT  GROUP_NO, USER_NAME, SALES_DATE
-        FROM SALES_DETAILS
+        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE
+        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, GROUP_DATE
+        FROM (
+        SELECT GROUP_NO, USER_NAME, GROUP_DATE
+        FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
         ORDER BY GROUP_NO DESC))
+
     </select>
 
     <select id="selectProduceBuyList" parameterType="Product" resultMap="ProductResult">
@@ -117,7 +119,7 @@
         WHERE PRO_NO = #{proNo}
     </select>
 
-    <insert id="insertSalesDetails">
+    <insert id="insertBuySalesDetails">
         INSERT INTO SALES_DETAILS(SAL_NO, SALES_AMOUNT, SALES_STOCK,
         PRO_NAME, CHANGE_NAME, SALES_DATE, STATUS, TYPE, USER_ID, GROUP_NO)
         VALUES(
