@@ -23,7 +23,6 @@
         <result column="SAL_NO" property="salNo"/>
         <result column="ORIGIN_NAME" property="originName"/>
         <result column="CHANGE_NAME" property="changeName"/>
-        <result column="FILE_PATH" property="filePath"/>
         <result column="UPDATE_DATE" property="updateDate"/>
     </resultMap>
 
@@ -203,8 +202,7 @@
     <update id="updateProductAttachment" parameterType="Attachment">
         UPDATE ATTACHMENT
         SET ORIGIN_NAME = #{originName},
-        CHANGE_NAME = #{changeName},
-        FILE_PATH = #{filePath}
+        CHANGE_NAME = #{changeName}
         WHERE PRO_NO = #{proNo}
     </update>
 
@@ -311,6 +309,14 @@
             AND A.PRO_NAME LIKE '%' || #{proName} || '%'
         </if>
     </select>
+
+    <insert id="inventoryInsert">
+        INSERT INTO PRODUCT_INVENTORY (PRO_INVEN_NO,
+        PRO_NO,
+        PRO_INVENT_STOCK)
+        VALUES (
+        SEQ_INO.NEXTVAL, #{proNo}, 0)
+    </insert>
 
 
 </mapper>

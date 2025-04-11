@@ -28,13 +28,13 @@ public interface BuyMapper {
 
     ArrayList<Product> selectMatDetailList(@Param("sNo") int sNo);
 
-    int selectMatPrice(@Param("proName") String proName);
+    int selectMatPrice(@Param("proNo") int proNo);
 
     int insertInoutGroup(InoutGroup inoutGroup);
 
-    Product selectfilePath(@Param("proName") String proName);
+    Product selectfilePath(@Param("proNo") int proNo);
 
-    int insertSalesDetails(SalesDetails salesDetails);
+    int insertBuySalesDetails(SalesDetails salesDetails);
 
     int selectProNo(@Param("proName") String proName);
 

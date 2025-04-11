@@ -58,8 +58,8 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public int selectMatPrice(String proName) {
-        return buyMapper.selectMatPrice(proName);
+    public int selectMatPrice(int proNo) {
+        return buyMapper.selectMatPrice(proNo);
     }
 
     @Override
@@ -68,13 +68,13 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public Product selectfilePath(String proName) {
-        return buyMapper.selectfilePath(proName);
+    public Product selectfilePath(int proNo) {
+        return buyMapper.selectfilePath(proNo);
     }
 
     @Override
-    public int insertSalesDetails(SalesDetails salesDetails) {
-        return buyMapper.insertSalesDetails(salesDetails);
+    public int insertBuySalesDetails(SalesDetails salesDetails) {
+        return buyMapper.insertBuySalesDetails(salesDetails);
     }
 
     @Override

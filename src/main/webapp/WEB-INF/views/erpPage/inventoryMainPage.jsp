@@ -45,8 +45,6 @@
     <div class="main-area">
         <jsp:include page="../common/erp/header.jsp"/>
 
-
-
         <!-- 페이지 본문 -->
         <div class="page-body">
             <div class="page-body-header">
@@ -61,6 +59,7 @@
                     </button>
                 </div>
             </div>
+
 
 
 

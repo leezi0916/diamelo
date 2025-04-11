@@ -60,6 +60,7 @@
                                     <td>
                                         <input type="number"
                                                class="input-box order-input"
+                                               data-proNo="${m.proNo}"
                                                data-name="${m.proName}"
                                                data-price="${m.proPrice}"
                                                min="0"
@@ -125,13 +126,15 @@
 
         inputs.forEach(input => {
             const qty = parseInt(input.value) || 0;
+            const proNo = parseInt(input.getAttribute('data-proNo'));
             const name = input.getAttribute('data-name');
             const price = parseInt(input.getAttribute('data-price'));
 
 
             if (qty > 0) {
                 const itemTotal = qty * price;
-                console.log("이름:", name, "수량:", qty, "단가:", price);
+                console.log("이름:", name, "수량:", qty, "단가:", price,  "제품번호 :", proNo );
+
 
                 totalItems += 1;
                 totalQty += qty;
@@ -144,7 +147,8 @@
                     "<td colspan='2'>" + itemTotal + "<td>" +
                     "</tr>";
 
-                orderDetailsArray.push({ proName: name, qty: qty, itemTotal: itemTotal });
+                orderDetailsArray.push({ proName: name, proNo: proNo, qty: qty, itemTotal: itemTotal});
+
             }
         });
 

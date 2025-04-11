@@ -237,6 +237,8 @@ public class InventoryController {
         // 2. Get Product No
         int proNo = product.getProNo();
 
+        int inveninsert = inventoryService.inventoryInsert(proNo);
+
         // 3. File Upload (Attachment Insert)
         int result2 = 1;
         if (!upfile.getOriginalFilename().equals("")) {
@@ -265,6 +267,8 @@ public class InventoryController {
                     matPriceList.get(i)
             );
             result3 *= res;
+            System.out.println("result3: " + result3);
+
         }
 
             if (result1 > 0 && result2 > 0 && result3 > 0) {
@@ -418,8 +422,14 @@ public class InventoryController {
             attachment.setChangeName("/resources/uploadFile/product/material/" + changeName);
         }
 
+        System.out.println("proNo: " + product.getProNo());
+
+
         int result = inventoryService.insertMaterial(product);
 
+        int proNo = product.getProNo();
+        System.out.println("proNo: " + proNo);
+        int inveninsert = inventoryService.inventoryInsert(proNo);
         if (result > 0 && attachment.getOriginName() != null) {
             // Product insert 성공 후 Product의 proNo를 가져와서 attachment에 넣기
             attachment.setProNo((product.getProNo()));
