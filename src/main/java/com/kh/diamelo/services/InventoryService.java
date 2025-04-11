@@ -30,6 +30,7 @@ public interface InventoryService {
         int insertMaterial(Product product);
         int insertMaterialAttachment(Attachment attachment);
 
+        int inventoryInsert(int proNo);
 
 
         Product selectProduct(int proNo);
@@ -54,7 +55,6 @@ public interface InventoryService {
 
 
         int selectSearchMaterialCount(int proNo, String proName);
-
         ArrayList<Product> selectSearchMaterialList(PageInfo pi, int mSearchCount, int proNo, String proName);
 
 

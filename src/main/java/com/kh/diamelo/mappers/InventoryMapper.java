@@ -49,7 +49,7 @@ public interface InventoryMapper {
 
     ArrayList<Recipe> selectRecipeList(int proNo);
 
-
+    int inventoryInsert(int proNo);
 
     int updateProduct(Product product);
 
@@ -73,7 +73,8 @@ public interface InventoryMapper {
     ArrayList<Product> selectSearchProductList(@Param("pi") PageInfo pi,
                                                 @Param("searchCategoryNo") int searchCategoryNo,
                                                 @Param("proNo") int proNo,
-                                                @Param("proName") String proName);
+                                                @Param("proName") String proName,
+                                               RowBounds rowBounds);
 
 
 
@@ -84,5 +85,6 @@ public interface InventoryMapper {
 
     ArrayList<Product> selectSearchMaterialList(@Param("pi") PageInfo pi,
                                                 @Param("proNo") int proNo,
-                                                @Param("proName") String proName);
+                                                @Param("proName") String proName,
+                                                RowBounds rowBounds);
 }

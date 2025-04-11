@@ -144,13 +144,16 @@
     </select>
 
     <!-- 장바구니 추가 -->
+    <!-- 장바구니 CRAT_NO 추가해야 함 -->
     <insert id="addCart">
         INSERT
         INTO CART(
+                CART_NO,
                 PRO_NO,
                 USER_ID,
                 PRO_STOCK
         ) VALUES(
+                SEQ_CTNO.NEXTVAL,
                 #{proNo},
                 #{userId},
                 1
@@ -163,4 +166,40 @@
         WHERE USER_ID = #{userId}
         AND PRO_NO = #{proNo}
     </delete>
+
+    <!-- 제품 입출고 정보 묶음 추가 -->
+    <insert id="insertInoutGroup">
+        INSERT
+            INTO INOUT_GROUP(
+            GROUP_NO,
+            USER_ID,
+            GROUP_TYPE,
+            GROUP_DATE,
+            GROUP_STATUS
+        ) VALUES(
+            SEQ_GNO.NEXTVAL,
+            #{userId},
+            'I',
+            SYSDATE,
+            'W'
+        )
+    </insert>
+
+    <!-- 제품 입출고 내역 추가 -->
+    <insert id="insertInoutHistory">
+        INSERT
+        INTO INOUT_HISTORY(
+            HISTORY_NO,
+            PRO_NO,
+            GROUP_NO,
+            HISTORY_STOCK,
+            HISTORY_PRICE
+        ) VALUES(
+            SEQ_HNO.NEXTVAL,
+            #{proNo},
+            SEQ_GNO.CURRVAL,
+            #{proStock},
+            #{totalPrice}
+        )
+    </insert>
 </mapper>

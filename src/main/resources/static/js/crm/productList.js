@@ -1,3 +1,4 @@
+// Ajax 이용 insert, delete
 function addDeleteCart({ proNo, inCart } , callback) {
     $.ajax({
         url: '/api/production/cart',
@@ -15,18 +16,21 @@ function addDeleteCart({ proNo, inCart } , callback) {
     });
 }
 
+// 장바구니 상태 관리
 function changeCartStatus(result, button) {
     if (result === "Add") {
+        inCart("장바구니 추가하였습니다.");
         button.innerHTML = "장바구니 빼기";
         button.dataset.include = "true";
     } else if (result === "Del") {
+        outCart("장바구니 제거하였습니다.");
         button.innerHTML = "장바구니 담기";
         button.dataset.include = "false";
     }
 }
 
 
-// 장바구니 추가 제거 관리 함수
+// 장바구니 추가 제거 요청 함수
 function CartBtn(button) {
     const proNo = button.dataset.pno;
     const isInCart = button.dataset.include === "true"; // 기존 상태 저장
@@ -35,11 +39,6 @@ function CartBtn(button) {
         inCart: isInCart // 변경 전 상태를 서버로 전송
     }, function (result) {
         changeCartStatus(result, button);
-        if (result === "Add") {
-            inCart("장바구니 추가하였습니다.");
-        } else if (result === "Del") {
-            outCart("장바구니 제거하였습니다.");
-        }
     });
 }
 

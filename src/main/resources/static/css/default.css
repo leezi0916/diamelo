@@ -21,6 +21,13 @@ body{
     background: #f8f8f8 !important;
 }
 
+.table{
+    border-bottom: 1px solid #D0D5DD;
+}
+
+.table tbody tr{
+    cursor: pointer;
+}
 
 .table-click:hover{
     cursor: pointer;

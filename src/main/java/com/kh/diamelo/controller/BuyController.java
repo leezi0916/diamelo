@@ -35,18 +35,26 @@ public class BuyController {
     //구매 상세보기
     @GetMapping("buyDetail.erp")
     public String detailBuy(@RequestParam("gNo")int gNo, Model model) {
-
+        int resSum = 0;
+        int resQty = 0;
 
         Product product = new Product();
         product = buyService.selectInOutHistory(gNo);
+        System.out.println("product"+product);
 
 
 
 
         ArrayList<Product> productList = new ArrayList<>();
         productList = buyService.selectMatDetailList(gNo);
+        System.out.println("productList"+ productList);
+        for (Product p : productList) {
+            resSum += p.getAmount();
+            resQty += 1;
+        }
 
-
+        model.addAttribute("resQty", resQty);
+        model.addAttribute("resSum",resSum);
 
         model.addAttribute("productList", productList);
         model.addAttribute("product", product);
@@ -94,16 +102,17 @@ public class BuyController {
 
         for(Product product : orderDetails) {
             String proName =product.getProName();
+            System.out.println("productproduct"+product);
+            int proNo = product.getProNo();
 
-            int proNo = buyService.selectProNo(proName);
-            int proPrice = buyService.selectMatPrice(proName);
+            int proPrice = buyService.selectMatPrice(proNo);
 
-            product.setProNo(proNo);
+            product.setProNo(product.getProNo());
             product.setProPrice(proPrice);
             product.setGroupNo((resGNo));
             int result = buyService.insertOrderDetails(product);
             int sumPrice = product.getProPrice()*product.getQty();
-            Product changeName = buyService.selectfilePath(proName);
+            Product changeName = buyService.selectfilePath(proNo);
             salesDetails.setSalesAmount(sumPrice);
             salesDetails.setSalesStock(product.getQty());
             salesDetails.setProName(proName);
@@ -139,6 +148,8 @@ public class BuyController {
 
         return "erpPage/buyPage";
     }
+
+
     //구매 검색 조회
     @GetMapping("search.buy")
     public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String startDate, String endDate, String user, Model model) {
@@ -157,6 +168,7 @@ public class BuyController {
 
         ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, startDate, endDate, searchId);
 
+
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("user", user);
@@ -172,6 +184,7 @@ public class BuyController {
     public String buyDetail( Model model){
 
         ArrayList<Product> list = buyService.selectProduceBuyList();
+        System.out.println("list" + list);
 
         model.addAttribute("list", list);
         return "erpPage/materialBuyPage";

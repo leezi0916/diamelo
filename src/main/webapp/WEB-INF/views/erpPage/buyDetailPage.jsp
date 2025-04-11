@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html>
 <head>
     <title>Diamelo</title>
@@ -43,9 +44,9 @@
 
                         <th></th>
                         <th>품목</th>
-                        <th>총 수량</th>
+                        <th>총 ${resQty}수량</th>
 
-                        <th>합계 금액 0원</th>
+                        <th>합계 금액 <fmt:formatNumber value="${resSum}" type="number"/>원</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,7 +58,7 @@
                             <td class="page-body-content-material-list-name">${p.proName}</td>
                             <td class="page-body-content-material-list-description">수량 <span>${p.historyStock}</span>개
                             </td>
-                            <td class="page-body-content-material-list-capacity"><span>${p.amount}</span>원</td>
+                            <td class="page-body-content-material-list-capacity"><fmt:formatNumber value="${p.amount}" type="number"/>원</td>
                         </tr>
                     </c:forEach>
 
