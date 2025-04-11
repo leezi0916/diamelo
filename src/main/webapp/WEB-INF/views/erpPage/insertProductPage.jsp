@@ -63,12 +63,12 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
+                                    <input class="input-box" id="input-box" type="text" name="proName" placeholder="NAME">
                                 </div>
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="date" name="ProEnrollDate" placeholder="DATE">
+                                    <input class="input-box" id="calendar" type="date" name="ProEnrollDate" placeholder="DATE">
                                 </div>
                             </div>
                         </div>
@@ -81,9 +81,9 @@
                                 </div>
                                 <div class="input-name">
                                     <p>가격</p>
-                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
+                                    <input class="input-box" id="price" type="text" name="proPrice" placeholder="PRICE">
                                     <div id="category">
-                                        <select name="proCategoryNo" class="select">
+                                        <select name="proCategoryNo" id="select" class="select">
                                             <option disabled selected>분류</option>
                                             <option value="1">스킨</option>
                                             <option value="2">로션</option>
@@ -134,7 +134,7 @@
 
 
                     <div id="ingre_lower_button">
-                        <button class="button" type="submit">+제품등록</button>
+                        <button class="button" type="submit" onclick="return checkInput()">+제품등록</button>
                         <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                     </div>
                 </div>
@@ -145,6 +145,19 @@
 
 
 <script>
+    //제품 정보 넣지 않을 경우 오류
+    function checkInput(){
+        const name = document.querySelector("#input-box").value;
+        const calendar = document.querySelector("#calendar").value;
+        const price = document.querySelector("#price").value;
+        const select = document.querySelector("#select").value;
+        const image = document.querySelector("#insert_image").value;
+
+        if(name === "" || calendar === "" || price === "" || select === "" || image === ""){
+            alert("추가하지않은 정보가 있습니다.");
+            return false;
+        }
+    }
 
     // 제품 사진 추가 및 삭제
     function changeImage(input) {
