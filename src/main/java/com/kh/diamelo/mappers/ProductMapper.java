@@ -53,4 +53,10 @@ public interface ProductMapper {
 
     // 장바구니 페이지 제품 정보 조회 - 오버로딩
     ArrayList<Product> getCrmProductList();
+
+    // 제품 입출고 정보 묶음
+    int insertInoutGroup(@Param("userId") String userId);
+
+    // 제품 입출고 내역 추가
+    int insertInoutHistory(@Param("proNo") int proNo,@Param("proStock") int proStock, @Param("totalPrice") int totalPrice);
 }

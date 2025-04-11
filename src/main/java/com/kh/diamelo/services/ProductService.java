@@ -43,4 +43,10 @@ public interface ProductService {
 
     // 장바구니 삭제
     int deleteCart(int proNo, String userId);
+
+    // 제품 입출고 정보 묶음 추가
+    int insertInoutGroup(String userId);
+
+    // 제품 입출고 내역 추가
+    int insertInoutHistory(int proNo, int proStock, int proPrice);
 }

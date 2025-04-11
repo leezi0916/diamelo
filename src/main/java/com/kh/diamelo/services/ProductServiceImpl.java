@@ -206,4 +206,23 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.deleteCart(proNo,userId);
     }
 
+
+    // 제품 입출고 정보 묶음추가
+    @Override
+    public int insertInoutGroup(String userId) {
+        return productMapper.insertInoutGroup(userId);
+    }
+
+
+    // 제품 입출고 내역 추가
+    @Override
+    public int insertInoutHistory(int proNo, int proStock, int proPrice) {
+        if (proStock != 0) {
+            // 제품별 총 가격이기때문에 합 구하기
+            int totalPrice = proStock * proPrice;
+            return productMapper.insertInoutHistory(proNo,proStock,totalPrice);
+        }
+        return 0;
+    }
+
 }
