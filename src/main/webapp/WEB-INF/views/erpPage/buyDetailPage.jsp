@@ -32,7 +32,7 @@
                 <p>구매 번호 :</p>
                 <p>${product.groupNo}</p>
                 <p>구매처 :</p>
-                <p>A공장</p>
+                <p>그린코스</p>
                 <p>구매일자 :</p>
                 <p>${product.groupDate}</p>
             </div>

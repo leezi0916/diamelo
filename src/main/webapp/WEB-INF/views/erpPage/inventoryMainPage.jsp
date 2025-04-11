@@ -279,6 +279,7 @@
                 </c:otherwise>
             </c:choose>
 
+
             <div id="pagingArea">
                 <ul class="pagination">
                     <c:choose>
