@@ -7,6 +7,7 @@
         <title>Title</title>
     </head>
     <body>
+
         <jsp:include page="common/crm/header.jsp" />
 
         <div id="content">

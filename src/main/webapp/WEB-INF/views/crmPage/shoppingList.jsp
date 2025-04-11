@@ -12,6 +12,12 @@
     <title>Title</title>
 </head>
 <body>
+<c:if test="${ not empty alertMsg}">
+    <script>
+        alert('${alertMsg}');
+    </script>
+    <c:remove var="alertMsg" scope="session"/>
+</c:if>
 <jsp:include page="../common/crm/header.jsp"/>
 
 <div id="list">
@@ -19,7 +25,7 @@
         <div><span>결제 페이지</span></div>
     </div>
 
-    <form>
+    <form action="insert.io" method="post">
         <div id="list_content">
             <table>
                 <tr id="table_header" class="table_header">
@@ -41,18 +47,23 @@
                                     </td>
                                     <td>
                                         <span>${product.proName}</span>
-                                        <input type="hidden" name="proName" value="${product.proName}"/>
+                                        <input type="hidden" name="proNo" value="${product.proNo}"/>
                                     </td>
-                                    <td><span>${product.proPrice} 원(개당)</span></td>
+                                    <td>
+                                        <span>${product.proPrice} 원(개당)</span>
+                                        <input type="hidden" name="proPrice" value="${product.proPrice}"/>
+                                    </td>
                                     <td>
                                         <span>
-                                            <input type="number" placeholder="수량을 입력하세요" required name="proStock" min="0"
+                                            <input type="number" placeholder="수량을 입력하세요" required name="proStock"
+                                                   min="0"
                                                    onchange="updateStock(${product.proPrice},this)" data-old="0">
                                         </span>
                                     </td>
                                     <td>
-                                        <button>
-                                            <img src="/image/delete_icon.png"/>
+                                        <button type="button">
+                                            <img data-pno="${product.proNo}" data-include="true" onclick="CartBtn(this)"
+                                                 src="/image/delete_icon.png"/>
                                         </button>
                                     </td>
                                 </tr>
@@ -68,8 +79,11 @@
 </div>
 
 
-<%-- html이 다 그려지고 나서 실행되는 updatePwd.js --%>
+<%-- html이 다 그려지고 나서 실행되는 shoppingList.js --%>
 <script src="/js/crm/shoppingList.js"></script>
+
+<!-- 페이지 최하단이나 body 마지막에 위치 -->
+<div id="toast-container"></div>
 
 <jsp:include page="../common/crm/footer.jsp"/>
 </body>
