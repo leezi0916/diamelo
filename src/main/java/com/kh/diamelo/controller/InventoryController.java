@@ -85,6 +85,7 @@ public class InventoryController {
                                 @RequestParam(required = false, defaultValue = "0")int searchCategoryNo,
                                 @RequestParam(required = false, defaultValue = "0")int proNo,
                                 @RequestParam(required = false)String proName,
+                                @RequestParam(value = "tab", defaultValue = "product") String tab,
                                 Model model) {
         System.out.println("searchCategoryNo: " + searchCategoryNo);
         System.out.println("proNo: " + proNo);
@@ -103,6 +104,7 @@ public class InventoryController {
         PageInfo pi = new PageInfo(pSearchCount, cpage, 10, 10);
         ArrayList<Product> list = inventoryService.selectSearchProductList(pi, searchCategoryNo, proNo, proName);
 
+        model.addAttribute("tab", tab);
         model.addAttribute("searchCategoryNo", searchCategoryNo);
         model.addAttribute("proNo", proNo);
         model.addAttribute("proName", proName);
@@ -293,6 +295,7 @@ public class InventoryController {
     public String searchIngredient(@RequestParam(defaultValue = "1") int cpage,
                                    @RequestParam(required = false, defaultValue = "0")int proNo,
                                    @RequestParam(required = false)String proName,
+                                   @RequestParam(value = "tab", defaultValue = "material") String tab,
                                    Model model) {
         System.out.println("proNo: " + proNo);
         System.out.println("proName: " + proName);
@@ -312,6 +315,7 @@ public class InventoryController {
         ArrayList<Product> list = inventoryService.selectSearchMaterialList(pi, mSearchCount, proNo, proName);
 
 
+        model.addAttribute("tab", tab);
         model.addAttribute("proNo", proNo);
         model.addAttribute("proName", proName);
 

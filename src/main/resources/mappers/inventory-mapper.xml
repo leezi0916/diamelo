@@ -106,11 +106,13 @@
     <!-- 이미지 저장 !-->
     <insert id="insertProductAttachment">
         INSERT INTO ATTACHMENT (
+        ATC_NO,
         PRO_NO,
         ORIGIN_NAME,
         CHANGE_NAME,
         UPDATE_DATE
         ) VALUES (
+        SEQ_ANO.NEXTVAL,
         #{proNo},
         #{originName},
         #{changeName},
@@ -153,13 +155,16 @@
     </insert>
 
 
+
     <insert id="insertMaterialAttachment" parameterType="attachment">
         INSERT INTO ATTACHMENT (
+        ATC_NO,
         PRO_NO,
         ORIGIN_NAME,
         CHANGE_NAME,
         UPDATE_DATE
         ) VALUES (
+        SEQ_ANO.NEXTVAL,
         #{proNo},
         #{originName},
         #{changeName},
