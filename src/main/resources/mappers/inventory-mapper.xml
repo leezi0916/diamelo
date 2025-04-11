@@ -122,11 +122,9 @@
 
     <!-- recipe 저장 !-->
     <insert id="insertRecipe">
-        INSERT INTO RECIPE (PRO_NO, MAT_NO, AMOUNT)
-        VALUES (#{proNo}, #{matNo}, #{amount})
+        INSERT INTO RECIPE (REC_NO,PRO_NO, MAT_NO, AMOUNT)
+        VALUES (SEQ_RCNO.NEXTVAL, #{proNo}, #{matNo}, #{amount})
     </insert>
-
-
 
 
     <insert id="insertMaterial" parameterType="product">
