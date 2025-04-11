@@ -49,7 +49,7 @@
         SELECT COUNT(*)
         FROM USER_INFO
         WHERE USER_DELETED = 'N'
-        AND JOB_CODE != 'J5'
+        AND COMPANY_NAME IS NULL
     </select>
 
     <select id="selectAdminList" parameterType="UserInfo" resultMap="UserResult">
@@ -59,8 +59,7 @@
         FROM USER_INFO U
         JOIN JOB J USING(JOB_CODE)
         WHERE USER_DELETED = 'N'
-        AND JOB_CODE != 'J5'
-        AND JOB_CODE != 'J0'
+        AND COMPANY_NAME IS NULL
         ORDER BY STATUS ASC))
     </select>
 
