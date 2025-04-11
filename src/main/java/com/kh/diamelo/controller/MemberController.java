@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MemberController {
@@ -67,7 +68,7 @@ public class MemberController {
 
     // 회원가입 로직
     @PostMapping("signUp.me")
-    public String insertMember(UserInfo userInfo, HttpSession session, Model model) {
+    public String insertMember(UserInfo userInfo, RedirectAttributes redirectAttributes) {
          /*
             비밀번호를 사용자 입력 그대로 저장한다.(평문)
             Bcrypt방식을 이용해서 암호화작업 후 저장함
@@ -81,10 +82,10 @@ public class MemberController {
         int result = memberService.insertMember(userInfo);
 
         if (result > 0) {
-            session.setAttribute("alertMsg", "성공적으로 회원가입을 완료되었습니다. 관리자에게 문의 후 로그인 하세요.");
+            redirectAttributes.addFlashAttribute("alertMsg", "성공적으로 회원가입을 완료되었습니다. 관리자에게 문의 후 로그인 하세요.");
             return "redirect:/loginForm.me";
         } else {
-            model.addAttribute("errorMsg", "회원가입 실패");
+            redirectAttributes.addFlashAttribute("errorMsg", "회원가입 실패");
             return "common/errorPage";
         }
     }
@@ -100,7 +101,7 @@ public class MemberController {
         // bCryptPasswordEncoder.matches(평문,암호문) -> 해당 비밀번호가 암호화된 비밀번호와 일치하면 true 아니면 false반환
 
         if (loginMember == null) {
-            session.setAttribute("errorMsg", "아이디를 찾을 수 없습니다.");
+            model.addAttribute("errorMsg", "아이디를 찾을 수 없습니다.");
             return ("common/errorPage");
         } else if (!bCryptPasswordEncoder.matches(userInfo.getUserPwd(), loginMember.getUserPwd())) {
             model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
@@ -127,14 +128,14 @@ public class MemberController {
 
     // 개인정보 변경시 정보 변경 수행 후 updateSucces.me로 리다이렉트
     @PostMapping("upDate.me")
-    public String upDateMember(UserInfo userInfo, HttpSession session, Model model) {
+    public String upDateMember(UserInfo userInfo, RedirectAttributes redirectAttributes , HttpSession session) {
         int result = memberService.updateMember(userInfo);
 
         if (result > 0) {
             session.setAttribute("alertMsg", "개인정보 변경이 완료되었습니다. 다시 로그인 해주세요.");
             return "redirect:/updateDeleteSuccess.me";
         } else {
-            model.addAttribute("errorMsg", "개인정보 변경에 실패하였습니다.");
+            redirectAttributes.addFlashAttribute("errorMsg", "개인정보 변경에 실패하였습니다.");
             return "common/errorPage";
         }
     }
@@ -142,17 +143,14 @@ public class MemberController {
     // 개인정보 변경시 alertMsg 띄우고 login 화면으로 리다이렉트
     // 이렇게 하지 않으면 뒤로가기 캐시가 없어지지 않음
     @GetMapping("updateDeleteSuccess.me")
-    public String updateSuccess(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+    public String updateSuccess(HttpSession session, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         // 메세지 가져오기
-        String alertMsg = (String) session.getAttribute("alertMsg");
+        String alertMsg = (String)  session.getAttribute("alertMsg");
         // 세션 삭제
         session.invalidate();
 
-        // 세션 생성
-        session = request.getSession(true);
-
         //세션에 메세지 담기
-        session.setAttribute("alertMsg", alertMsg);
+        redirectAttributes.addFlashAttribute("alertMsg", alertMsg);
 
         // 브라우저 캐시 방지
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -170,15 +168,15 @@ public class MemberController {
 
     // 회원 비밀번호 변경
     @PostMapping("updatePwd.me")
-    public String updatePwEnroll(String currentPwd, String newPwd, HttpSession session, Model model) {
+    public String updatePwEnroll(String currentPwd, String newPwd, HttpSession session, Model model,RedirectAttributes redirectAttributes) {
         UserInfo loginMember = (UserInfo) session.getAttribute("loginUser");
 
         // bCryptPasswordEncoder.matches(평문,암호문) -> 해당 비밀번호가 암호화된 비밀번호와 일치하면 true 아니면 false반환
         if (loginMember == null) {
-            session.setAttribute("errorMsg", "회원 정보가 만료되었습니다. 다시 로그인 해주세요");
+            model.addAttribute("errorMsg", "회원 정보가 만료되었습니다. 다시 로그인 해주세요");
             return ("common/errorPage");
         } else if (!bCryptPasswordEncoder.matches(currentPwd, loginMember.getUserPwd())) {
-            session.setAttribute("alertMsg", "현재 비밀번호가 일치하지 않습니다.");
+            redirectAttributes.addFlashAttribute("alertMsg", "현재 비밀번호가 일치하지 않습니다.");
             return "redirect:/updatePwEnrollForm.me";
         } else {
 
@@ -199,15 +197,15 @@ public class MemberController {
     }
 
     @PostMapping("delete.me")
-    public String deleteMember(String userPwd, HttpSession session, Model model) {
+    public String deleteMember(String userPwd, HttpSession session, Model model,RedirectAttributes redirectAttributes) {
         UserInfo loginMember = (UserInfo) session.getAttribute("loginUser");
 
         // bCryptPasswordEncoder.matches(평문,암호문) -> 해당 비밀번호가 암호화된 비밀번호와 일치하면 true 아니면 false반환
         if (loginMember == null) {
-            session.setAttribute("errorMsg", "회원 정보가 만료되었습니다. 다시 로그인 해주세요");
+            model.addAttribute("errorMsg", "회원 정보가 만료되었습니다. 다시 로그인 해주세요");
             return ("common/errorPage");
         } else if (!bCryptPasswordEncoder.matches(userPwd, loginMember.getUserPwd())) {
-            session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+            redirectAttributes.addFlashAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
             return "redirect:/myPageDetail.me";
         } else {
             // 회원탈퇴 변경로직

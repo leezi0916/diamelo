@@ -53,7 +53,7 @@ prefix="c" %>
                     </div>
 
                     <div id="buttons">
-                        <button class="button" type="submit" onclick="return validateForm('${loginUser.userPwd}')">변경하기</button>
+                        <button class="button" type="submit" onclick="return validateForm()">변경하기</button>
                         <button type="button" class="button" onclick="location.href='myPageDetail.me'">뒤로가기</button>
                     </div>
                 </div>
