@@ -18,7 +18,7 @@
           rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/erp/insertIngredient.js"></script>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -93,8 +93,7 @@
         </div>
 
         <script>
-            <%--  제품 사진 추가 및 삭제 --%>
-
+            // 제품 사진 추가 및 삭제
             function changeImage(input) {
                 let file = input.files[0];
 

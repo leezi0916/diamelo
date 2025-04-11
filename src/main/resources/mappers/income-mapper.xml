@@ -37,7 +37,7 @@
         u.COMPANY_NAME,
         s.TYPE,
         s.SALES_DATE,
-        SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO) AS TOTAL_SALES,
+        NVL(SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO), 0) AS TOTAL_SALES,
         ROW_NUMBER() OVER (PARTITION BY s.GROUP_NO ORDER BY s.SALES_DATE DESC) AS RN
         FROM SALES_DETAILS s
         JOIN USER_INFO u ON s.USER_ID = u.USER_ID
@@ -58,10 +58,10 @@
             AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND s.SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= TO_DATE(#{startDate} || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="endDate != null and endDate != ''">
-            AND s.SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company != ''">
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
@@ -69,6 +69,7 @@
         AND s.STATUS = 'Y'
         )
     </select>
+
 
 
     <select id="selectSearchIncomeList" resultMap="SalesDetailsResult">
@@ -84,7 +85,7 @@
         u.COMPANY_NAME,
         s.TYPE,
         s.SALES_DATE,
-        SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO) AS TOTAL_SALES,
+        NVL(SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO), 0) AS TOTAL_SALES,
         ROW_NUMBER() OVER (PARTITION BY s.GROUP_NO ORDER BY s.SALES_DATE DESC) AS RN
         FROM SALES_DETAILS s
         JOIN USER_INFO u ON s.USER_ID = u.USER_ID
@@ -93,10 +94,10 @@
             AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND s.SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= TO_DATE(#{startDate} || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="endDate != null and endDate != ''">
-            AND s.SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company != ''">
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
@@ -111,7 +112,7 @@
     <select id="searchIncomeSum" resultType="_int">
         SELECT NVL(SUM(TOTAL_SALES),0)
         FROM (
-        SELECT s.GROUP_NO, SUM(s.SALES_AMOUNT) AS TOTAL_SALES
+        SELECT s.GROUP_NO, NVL(SUM(s.SALES_AMOUNT), 0) AS TOTAL_SALES
         FROM SALES_DETAILS s
         JOIN USER_INFO u ON s.USER_ID = u.USER_ID
         WHERE 1=1
@@ -119,10 +120,10 @@
             AND s.TYPE = #{type}
         </if>
         <if test="startDate != null and startDate != ''">
-            AND s.SALES_DATE &gt;= #{startDate}
+            AND s.SALES_DATE &gt;= TO_DATE(#{startDate} || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="endDate != null and endDate != ''">
-            AND s.SALES_DATE &lt;= #{endDate}
+            AND s.SALES_DATE &lt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="company != null and company != ''">
             AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
@@ -141,7 +142,7 @@
             s.TYPE,
             s.SALES_STOCK,
             s.SALES_AMOUNT,
-            SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO) AS TOTAL_SALES
+            NVL(SUM(s.SALES_AMOUNT) OVER (PARTITION BY s.GROUP_NO), 0) AS TOTAL_SALES
             FROM
             SALES_DETAILS s
             JOIN
@@ -150,6 +151,7 @@
             s.STATUS = 'Y'
             AND s.GROUP_NO = #{gno}
     </select>
+
 
     <select id="selectIncomeInSales" resultType="_int">
         SELECT NVL(SUM(SALES_AMOUNT),0) AS SALES_AMOUNT

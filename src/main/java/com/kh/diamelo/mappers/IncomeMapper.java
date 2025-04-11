@@ -27,7 +27,7 @@ public interface IncomeMapper {
                                                    @Param("endDate") String endDate,
                                                    @Param("company") String company);
 
-    
+
     // 조건에 맞는 매출합 보여주기
     int searchIncomeSum(  @Param("type") String type,
                           @Param("startDate") String startDate,

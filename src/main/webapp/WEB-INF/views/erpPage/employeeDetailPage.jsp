@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="/css/erp/erpLayout.css" />
   <link rel="stylesheet" href="/css/default.css" />
   <link rel="stylesheet" href="/css/erp/employeeDetailPageStyle.css" />
+
     <script src="/js/erp/employeeDetailPage.js"></script>
+
 
 </head>
 <body  style="background: #f8f8f8">

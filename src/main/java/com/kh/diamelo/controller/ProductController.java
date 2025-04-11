@@ -57,27 +57,9 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("message", "제품 제작 완료!");
             return "redirect:/prdc.erp";
         } else {
-            redirectAttributes.addFlashAttribute("error", "재료 부족으로 제작 실패!");
-            return "common/errorPage";
+            redirectAttributes.addFlashAttribute("message", "재료 부족으로 제작 실패!");
+            return "redirect:/prdc.erp";
         }
     }
 
-
-
-//    @PostMapping("/create.pro")
-//    public ResponseEntity<HashMap<String, String>> createProduct(@RequestParam("productNo") int productNo,
-//                                                                 @RequestParam("quantity") int quantity) {
-//        boolean success = productService.produceProduct(productNo, quantity);
-//
-//        HashMap<String, String> response = new HashMap<>();
-//        if (success) {
-//            response.put("message", "제품 제작 완료!");
-//            return ResponseEntity.ok(response);
-//        } else {
-//            response.put("message", "재료 부족으로 제작 실패!");
-//            return ResponseEntity.badRequest().body(response);
-//        }
-//
-//
-//    }
 }

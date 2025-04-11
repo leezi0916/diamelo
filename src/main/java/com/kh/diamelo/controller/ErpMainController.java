@@ -29,15 +29,11 @@ public class ErpMainController {
 
         //오늘의 매출 갖고오기
         int todaySales = erpMainService.selectTodaySales();
-
         model.addAttribute("todaySales", todaySales);
 
-
-        //판매 현황 조회 W
+        //판매 현황 조회 W Y N
         int salesStatus1 = erpMainService.countSalesStatus1();
-        //판매 현황 조회 Y
         int salesStatus2 = erpMainService.countSalesStatus2();
-        //판매 현황 조회 N
         int salesStatus3 = erpMainService.countSalesStatus3();
 
         model.addAttribute("salesStatus1", salesStatus1);
@@ -84,7 +80,7 @@ public class ErpMainController {
         model.addAttribute("list2", list2);
 
         session.setAttribute("selectIcon", svg);
-        session.setAttribute("seletTitle", "Home");
+        session.setAttribute("seletTitle", "HOME");
         return "erpPage/homePage";
     }
 

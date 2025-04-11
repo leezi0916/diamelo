@@ -14,6 +14,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/erp/graph.js"></script>
+
 
 </head>
 <body>
@@ -147,7 +149,14 @@
                         <div id="myInfoPage">
                             <div id="myInfo">
                                 <div id="myInfo-image">
-                                    <img id="myPhoto" src="${userInfo.changeName}" alt="마이페이지 사진"/>
+                                    <c:choose>
+                                        <c:when test="${not empty userInfo.changeName}">
+                                            <img id="myPhoto" src="${userInfo.changeName}" alt="마이페이지 사진"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img id="myPhoto" src="${pageContext.request.contextPath}/image/etc/myImg.png" alt="마이페이지 사진"/>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
 
@@ -186,12 +195,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="item" items="${list1}">
-                                        <tr>
-                                            <td>${item.userId}</td>
-                                            <td>${item.title}</td>
-                                        </tr>
-                                    </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${not empty list1}">
+                                            <c:forEach var="item" items="${list1}">
+                                                <tr>
+                                                    <td>${item.userId}</td>
+                                                    <td>${item.title}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr><td colspan="2"><h3>게시판이 없습니다.</h3></td></tr>
+                                        </c:otherwise>
+                                    </c:choose>
                                     </tbody>
                                 </table>
                             </div>
@@ -205,12 +221,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="item" items="${list2}">
-                                        <tr>
-                                            <td>${item.userId}</td>
-                                            <td>${item.title}</td>
-                                        </tr>
-                                    </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${not empty list2}">
+                                            <c:forEach var="item" items="${list2}">
+                                                <tr>
+                                                    <td>${item.userId}</td>
+                                                    <td>${item.title}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr><td colspan="2"><h3>게시판이 없습니다.</h3></td></tr>
+                                        </c:otherwise>
+                                    </c:choose>
                                     </tbody>
                                 </table>
                             </div>
@@ -224,55 +247,6 @@
     <script>
         // 서버에서 받아온 데이터
         const monthlySales = <%= new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(request.getAttribute("monthlySales")) %>;
-
-        const labels = monthlySales.map(item => item.MONTH);
-        const data = monthlySales.map(item => item.TOTAL_SALES);
-
-        // 색상 배열 정의 (빨강, 초록, 파랑 반복)
-        const backgroundColors = ['#FF6384', '#4CAF50', '#36A2EB'];
-        const borderColors = ['#FF6384', '#4CAF50', '#36A2EB'];
-
-        const ctx = document.getElementById('monthlySalesChart').getContext('2d');
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: '월별 매출',
-                    data: data,
-                    backgroundColor: data.map((_, i) => backgroundColors[i % backgroundColors.length]),
-                    borderColor: data.map((_, i) => borderColors[i % borderColors.length]),
-                    borderWidth: 1,
-                    borderRadius: 10,
-
-                    // 막대 그래프 폭 조절
-                    categoryPercentage: 0.3,
-                    barPercentage: 0.5
-                }]
-            },
-            options: {
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        onClick: null // 범례 클릭 시 아무 동작도 하지 않음
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y.toLocaleString() + '원';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
     </script>
 
 
