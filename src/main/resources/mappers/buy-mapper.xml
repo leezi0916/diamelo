@@ -14,7 +14,7 @@
         <result column="ORIGIN_NAME" property="originName"/>
         <result column="CHANGE_NAME" property="changeName"/>
         <result column="HISTORY_STOCK" property="historyStock"/>
-        <result column="HIS_NO" property="hisNo"/>
+        <result column="HISTORY_NO" property="hisNo"/>
 
 
     </resultMap>
@@ -73,7 +73,7 @@
     </select>
 
     <insert id="insertOrderDetails">
-        INSERT INTO INOUT_HISTORY (HIS_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
+        INSERT INTO INOUT_HISTORY (HISTORY_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
             VALUES (
             SEQ_HNO.NEXTVAL,
             (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{proName} AND ROWNUM = 1),
@@ -145,14 +145,14 @@
         SELECT COUNT(*)
         FROM SALES_DETAILS
         WHERE TYPE = 'O'
-        <if test="Date != null and tDate == null">
-            AND SALES_DATE BETWEEN #{Date} AND SYSDATE
+        <if test="startDate != null and endDate == null">
+            AND SALES_DATE &lt;= #{startDate}
         </if>
-        <if test="Date == null and tDate != null">
-            AND SALES_DATE BETWEEN #{tDate} AND SYSDATE
+        <if test="startDate == null and endDate != null">
+            AND SALES_DATE &gt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
-        <if test="Date != null and tDate != null">
-            AND SALES_DATE BETWEEN #{Date} AND TO_DATE(#{tDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        <if test="startDate != null and endDate != null">
+            AND SALES_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="user != null and user != ''">
             AND USER_ID = #{user}
@@ -162,20 +162,20 @@
 
 
     <select id="selectSearchList" resultMap="SalesDetailsResult" parameterType="SalesDetails">
-        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(SALES_DATE, 'YYYY/MM/DD') AS SALES_DATE
+        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE
         FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, SALES_DATE
         FROM (SELECT  GROUP_NO, USER_NAME, SALES_DATE
         FROM SALES_DETAILS
         JOIN USER_INFO USING(USER_ID)
         WHERE TYPE = 'O'
-        <if test="Date != null and tDate == null">
-            AND SALES_DATE BETWEEN #{Date} AND SYSDATE
+        <if test="startDate != null and endDate == null">
+            AND SALES_DATE &gt; #{startDate}
         </if>
-        <if test="Date == null and tDate != null">
-            AND SALES_DATE BETWEEN #{tDate} AND SYSDATE
+        <if test="startDate == null and endDate != null">
+            AND SALES_DATE &lt; TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
-        <if test="Date != null and tDate != null">
-            AND SALES_DATE BETWEEN #{Date} AND TO_DATE(#{tDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        <if test="startDate != null and endDate != null">
+            AND SALES_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD, HH24:MI:SS')
         </if>
         <if test="user != null and user != ''">
             AND USER_ID = #{user}

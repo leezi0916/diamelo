@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="/css/default.css" />
   <link rel="stylesheet" href="/css/erp/employeeDetailPageStyle.css" />
 
+    <script src="/js/erp/employeeDetailPage.js"></script>
+
+
 </head>
 <body  style="background: #f8f8f8">
 <div class="layout-wrapper">
@@ -91,9 +94,14 @@
                 <option value="Y" <c:if test="${e.status == 'Y'}">selected</c:if>>승인</option>
                 <option value="N" <c:if test="${e.status == 'N'}">selected</c:if>>대기</option>
               </select>
-              <p></p>
-              <p></p>
-
+              <p>부서</p>
+              <select class="input-box" oninvalid="" name="deptCode">
+                  <option value="D1" <c:if test="${e.deptCode == 'D1'}">selected</c:if>>영업부</option>
+                  <option value="D2" <c:if test="${e.deptCode == 'D2'}">selected</c:if>>마케팅부</option>
+                  <option value="D3" <c:if test="${e.deptCode == 'D3'}">selected</c:if>>생산부</option>
+                  <option value="D4" <c:if test="${e.deptCode == 'D4'}">selected</c:if>>인사부</option>
+                  <option value="D5" <c:if test="${e.deptCode == 'D5'}">selected</c:if>>개발부</option>
+                </select>
             </div>
           </div>
           <div id="page-body-content-button-div">
@@ -111,23 +119,6 @@
     </div>
   </div>
 </div>
-<script>
-  <%--  제품 사진 추가 및 삭제 --%>
 
-  function changeImage(input) {
-    let file = input.files[0];
-
-    let img = document.createElement("img");
-
-    img.src = URL.createObjectURL(file);
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
-
-    let container = document.getElementById('image');
-    container.innerHTML = "";
-    container.appendChild(img);
-  }
-</script>
 </body>
 </html>

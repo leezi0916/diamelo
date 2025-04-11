@@ -18,7 +18,7 @@
           rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/erp/insertIngredient.js"></script>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -64,22 +64,14 @@
                         </div>
 
                         <div id="ingre_upper_right">
-                            <div id="ingre_image">
-                                <div id="insert_image">
-                                    <label for="file" id="image">
-                                        <div></div>
-                                        <div id="image-text">제품 사진 추가</div>
-                                        <div></div>
-                                    </label>
-                                    <input type="file" name="upfile" id="file" accept="image/*"
-                                           onchange="changeImage(this)">
+                            <div style="position: relative; width: 150px; height: 180px;">
+                                <input id="insert_image" type="file" name="upfile" accept="image/*" onchange="changeImage(this)">
+                                <div id="image_preview">
 
-                                </div>
-                                <div id="text">재료 이미지</div>
+                                </div> <!-- ✅ 미리보기 이미지 영역 -->
                             </div>
-
+                            <p>재료 이미지</p>
                         </div>
-
                     </div>
                     <div id="ingre_lower">
                         <div id="ingre_lower_memo">
@@ -101,21 +93,21 @@
         </div>
 
         <script>
-            <%--  제품 사진 추가 및 삭제 --%>
-
+            // 제품 사진 추가 및 삭제
             function changeImage(input) {
                 let file = input.files[0];
 
-                let img = document.createElement("img");
+                if (file) {
+                    let img = document.createElement("img");
+                    img.src = URL.createObjectURL(file);
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                    img.style.objectfit = "cover";
 
-                img.src = URL.createObjectURL(file);
-                img.style.width = "100%";
-                img.style.height = "100%";
-                img.style.objectFit = "cover";
-
-                let container = document.getElementById('image');
-                container.innerHTML = "";
-                container.appendChild(img);
+                    let container = document.getElementById("image_preview"); // ✅ 미리보기 영역으로 변경
+                    container.innerHTML = ""; // 기존 이미지 삭제
+                    container.appendChild(img); // 새 이미지 추가
+                }
             }
         </script>
 </body>

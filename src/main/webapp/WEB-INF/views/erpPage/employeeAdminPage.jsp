@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/employeeadminPageStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/employeeadminPageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -122,43 +122,43 @@
         </div>
       </div>
 
-        <c:choose>
-          <c:when test="${not empty userId or not empty userName}">
-            <c:url var="pageUrl" value="empAdminSearch.erp">
-              <c:param name="userName" value="${userName}" />
-              <c:param name="userId" value="${userId}" />
-            </c:url>
-          </c:when>
-          <c:otherwise>
-            <c:set var="pageUrl" value="empAdminList.erp?" />
-          </c:otherwise>
-        </c:choose>
-            <%-- 페이지바 --%>
-        <div id="pagingArea">
-          <ul class="pagination">
-            <c:choose>
-              <c:when test="${ pi.currentPage eq 1 }">
-                <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
-              </c:when>
-              <c:otherwise>
-                <li class="page-item"><a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}">이전</a></li>
-              </c:otherwise>
-            </c:choose>
+      <c:choose>
+        <c:when test="${not empty userId or not empty userName}">
+          <c:url var="pageUrl" value="empAdminSearch.erp">
+            <c:param name="userName" value="${userName}" />
+            <c:param name="userId" value="${userId}" />
+          </c:url>
+        </c:when>
+        <c:otherwise>
+          <c:set var="pageUrl" value="empAdminList.erp?" />
+        </c:otherwise>
+      </c:choose>
+      <%-- 페이지바 --%>
+      <div id="pagingArea">
+        <ul class="pagination">
+          <c:choose>
+            <c:when test="${ pi.currentPage eq 1 }">
+              <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${pi.currentPage - 1}">이전</a></li>
+            </c:otherwise>
+          </c:choose>
 
-            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-              <li class="page-item"><a class="page-link" href="${pageUrl}&cpage=${p}">${p}</a></li>
-            </c:forEach>
+          <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+            <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${p}">${p}</a></li>
+          </c:forEach>
 
-            <c:choose>
-              <c:when test="${ pi.currentPage eq pi.maxPage }">
-                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-              </c:when>
-              <c:otherwise>
-                <li class="page-item"><a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}">다음</a></li>
-              </c:otherwise>
-            </c:choose>
-          </ul>
-        </div>
+          <c:choose>
+            <c:when test="${ pi.currentPage eq pi.maxPage }">
+              <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${pi.currentPage + 1}">다음</a></li>
+            </c:otherwise>
+          </c:choose>
+        </ul>
+      </div>
 
     </div>
   </div>
@@ -187,6 +187,7 @@
   </div>
 </div>
 <script>
+
   // 모달 요소 가져오기
 
   const modal = document.getElementById("deleteModal");
@@ -263,6 +264,7 @@
       modal.style.display = "none";
     }
   };
+
 
 </script>
 </body>

@@ -18,7 +18,7 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 
         String seletTitle = (String)session.getAttribute("seletTitle");
 
-        if("qwe11".equals(userId)) {
+        if("admin".equals(userId)) {
             return true;
         }else{
             session.setAttribute("alertMsg", "최고관리자만 이용 가능한 서비스입니다.");
