@@ -1,5 +1,3 @@
-// 모든 발주 수량 input 요소들을 선택
-const inputs = document.querySelectorAll('.order-input');
 
 // 계산 결과를 출력할 DOM 요소들
 const detailsEl = document.getElementById('order-details');
@@ -27,8 +25,6 @@ function updateSummary() {
         const price = parseInt(input.getAttribute('data-price'));
 
 
-        // 디버그 로그 (정상 출력 확인용)
-        // console.log("이름:", name, "수량:", qty, "단가:", price);
 
         if (qty > 0) {
             const itemTotal = qty * price;
