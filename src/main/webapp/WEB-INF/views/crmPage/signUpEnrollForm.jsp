@@ -24,6 +24,13 @@
         />
     </head>
     <body>
+        <c:if test="${ not empty alertMsg}">
+            <script>
+                alert('${alertMsg}');
+            </script>
+            <c:remove var="alertMsg" scope="session" />
+        </c:if>
+
         <form action="signUp.me" method="post" id="enroll-form">
             <div class="container">
                 <div class="logo">
@@ -156,6 +163,8 @@
                         url: '/api/member/id',
                         data: data,
                         success: function (res) {
+                            console.log(data);
+                            console.log(res);
                             callback(res);
                         },
                         error: function () {

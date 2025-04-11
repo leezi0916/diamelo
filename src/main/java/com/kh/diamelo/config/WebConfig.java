@@ -29,7 +29,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/login.me",
                         "/logoutSuccess.me",
                         "/signUpEnrollForm.me",
-                        "/signUp.me");
+                        "/signUp.me",
+                        "/api/**");
 
         registry.addInterceptor(new LoginAdminInterceptor())
                 .addPathPatterns("/empAdminList.erp",
