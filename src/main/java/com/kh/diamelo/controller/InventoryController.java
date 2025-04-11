@@ -430,6 +430,7 @@ public class InventoryController {
         int proNo = product.getProNo();
         System.out.println("proNo: " + proNo);
         int inveninsert = inventoryService.inventoryInsert(proNo);
+
         if (result > 0 && attachment.getOriginName() != null) {
             // Product insert 성공 후 Product의 proNo를 가져와서 attachment에 넣기
             attachment.setProNo((product.getProNo()));
