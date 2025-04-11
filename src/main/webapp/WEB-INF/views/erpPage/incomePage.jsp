@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/incomePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
+    <script src="/js/erp/incomePage.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -38,11 +39,11 @@
                             <option value="I" ${type == 'I' ? 'selected' : ''}>소득</option>
                             <option value="O" ${type == 'O' ? 'selected' : ''}>지출</option>
                         </select>
-                        <input type="date" name="date1" value="${startDate}" class="input-box">
-                        <input type="date" name="date2" value="${endDate}" class="input-box">
+                        <input type="date" name="date1" value="${startDate}" class="input-box" id="startDate">
+                        <input type="date" name="date2" value="${endDate}" class="input-box" id="endDate">
                         <input type="text" name="company" value="${company}" class="input-box" placeholder="거래처">
                         <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
-                        <button type="submit" class="input-box">
+                        <button type="submit" class="input-box" onclick="return checkDate()">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -182,14 +183,5 @@
 
     </div>
 </div>
-<script>
-
-
-    function goToDetail() {
-        location.href = 'detail.in';
-    }
-
-
-</script>
 </body>
 </html>
