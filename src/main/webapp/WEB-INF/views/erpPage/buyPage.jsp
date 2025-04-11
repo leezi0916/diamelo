@@ -74,7 +74,7 @@
                 <td>${b.groupNo}</td>
                 <td>${b.userName}</td>
                 <td>A공장</td>
-                <td>${b.salesDate}</td>
+                <td>${b.groupDate}</td>
               </tr>
             </c:forEach>
 
@@ -83,7 +83,7 @@
                 <td>${b.groupNo}</td>
                 <td>${b.userName}</td>
                 <td>A공장</td>
-                <td>${b.salesDate}</td>
+                <td>${b.groupDate}</td>
               </tr>
             </c:forEach>
 
