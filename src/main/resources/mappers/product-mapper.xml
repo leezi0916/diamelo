@@ -148,10 +148,12 @@
     <insert id="addCart">
         INSERT
         INTO CART(
+                CART_NO,
                 PRO_NO,
                 USER_ID,
                 PRO_STOCK
         ) VALUES(
+                SEQ_CTNO.NEXTVAL,
                 #{proNo},
                 #{userId},
                 1
