@@ -49,7 +49,7 @@
         SELECT COUNT(*)
         FROM USER_INFO
         WHERE USER_DELETED = 'N'
-        COMPANY_NAME IS NULL
+        AND COMPANY_NAME IS NULL
     </select>
 
     <select id="selectAdminList" parameterType="UserInfo" resultMap="UserResult">
