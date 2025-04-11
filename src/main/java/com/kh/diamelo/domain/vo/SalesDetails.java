@@ -31,6 +31,8 @@ public class SalesDetails {
     private String companyName;
     private int totalSales;
     private String userName;
+    private String groupDate;
+
 
 
 }
