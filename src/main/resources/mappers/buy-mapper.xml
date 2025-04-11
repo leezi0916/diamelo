@@ -58,6 +58,7 @@
         SELECT GROUP_NO, USER_NAME, GROUP_DATE
         FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_TYPE = 'O'
         ORDER BY GROUP_NO DESC))
 
     </select>
