@@ -139,6 +139,8 @@ public class BuyController {
 
         return "erpPage/buyPage";
     }
+
+
     //구매 검색 조회
     @GetMapping("search.buy")
     public String searchBuy(@RequestParam(defaultValue = "1") int bpage,String startDate, String endDate, String user, Model model) {
