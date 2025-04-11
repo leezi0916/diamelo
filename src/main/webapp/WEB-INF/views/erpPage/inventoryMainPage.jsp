@@ -239,55 +239,62 @@
 
 
             <c:choose>
-                <c:when test="${product == 'product'}">
+                <c:when test="${tab == 'product'}">
                     <c:choose>
-                        <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName or not product}">
+                        <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName}">
                             <c:url var="pageUrl" value="productSearch.pro">
-                                <c:param name="product" value="${product}" />
+                                <c:param name="tab" value="${tab}" />
                                 <c:param name="searchCategoryNo" value="${searchCategoryNo}" />
                                 <c:param name="proNo" value="${proNo}" />
                                 <c:param name="proName" value="${proName}" />
                             </c:url>
                         </c:when>
                         <c:otherwise>
-                            <c:set var="pageUrl" value="inv.erp?" />
+                            <c:url var="pageUrl" value="productSearch.pro">
+                                <c:param name="tab" value="product" />
+                            </c:url>
                         </c:otherwise>
                     </c:choose>
                 </c:when>
-                <c:otherwise>
-                    <c:choose>
 
-                        <c:when test="${not empty proNo or not empty proName or not material}">
+                <c:when test="${tab == 'material'}">
+                    <c:choose>
+                        <c:when test="${not empty proNo or not empty proName}">
                             <c:url var="pageUrl" value="ingredientSearch.ing">
-                                <c:param name="material" value="${material}"/>
+                                <c:param name="tab" value="${tab}" />
                                 <c:param name="proNo" value="${proNo}" />
                                 <c:param name="proName" value="${proName}" />
                             </c:url>
                         </c:when>
                         <c:otherwise>
-                            <c:set var="pageUrl" value="inv.erp?" />
+                            <c:url var="pageUrl" value="ingredientSearch.ing">
+                                <c:param name="tab" value="material" />
+                            </c:url>
                         </c:otherwise>
                     </c:choose>
+                </c:when>
+
+                <c:otherwise>
+                    <c:set var="pageUrl" value="inv.erp?" />
                 </c:otherwise>
             </c:choose>
-
 
             <div id="pagingArea">
                 <ul class="pagination">
                     <c:choose>
                         <c:when test="${ pi.currentPage eq 1 }">
-                            <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}&tab=${param.tab}">이전</a>
+                                <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}">이전</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
 
                     <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                         <li class="page-item">
-                            <a class="page-link" href="${pageUrl}&cpage=${p}&tab=${param.tab}">${p}</a>
+                            <a class="page-link" href="${pageUrl}&cpage=${p}">${p}</a>
                         </li>
                     </c:forEach>
 
@@ -297,7 +304,7 @@
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}&tab=${param.tab}">다음</a>
+                                <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}">다음</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -309,11 +316,11 @@
 <script>
     // 제품 탭, 재료 탭 기능
     document.getElementById("proBtn").addEventListener("click", function () {
-        location.href = "inv.erp?cpage=1&tab=product"; // 제품 탭 클릭 시
+        location.href = "inv.erp?&cpage=1&tab=product"; // 제품 탭 클릭 시
     });
 
     document.getElementById("mtBtn").addEventListener("click", function () {
-        location.href = "inv.erp?cpage=1&tab=material"; // 재료 탭 클릭 시
+        location.href = "inv.erp?&cpage=1&tab=material"; // 재료 탭 클릭 시
     });
     // URL에서 tab 값 가져오기
     const urlParams = new URLSearchParams(window.location.search);

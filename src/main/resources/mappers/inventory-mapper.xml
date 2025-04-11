@@ -226,6 +226,7 @@
         pro_price AS proPrice
         FROM product
         WHERE pro_no = #{proNo}
+        AND IS_PRODUCT = 'N'
     </select>
 
     <select id="selectAllMaterials" resultMap="productResult" parameterType="Product">
@@ -233,6 +234,7 @@
         FROM PRODUCT
         WHERE IS_PRODUCT = 'N'
         AND PRO_DELETED = 'N'
+        ORDER BY PRO_NO ASC
     </select>
 
 
