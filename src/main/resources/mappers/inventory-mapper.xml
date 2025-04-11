@@ -28,6 +28,7 @@
     </resultMap>
 
     <resultMap id="recipeResult" type="Recipe">
+        <result column="REC_NO" property="recNo"/>
         <result column="PRO_NO" property="proNo"/>
         <result column="MAT_NO" property="matNo"/>
         <result column="AMOUNT" property="amount"/>
@@ -122,7 +123,8 @@
 
     <!-- recipe 저장 !-->
     <insert id="insertRecipe">
-        INSERT INTO RECIPE (REC_NO,PRO_NO, MAT_NO, AMOUNT)
+
+        INSERT INTO RECIPE (REC_NO, PRO_NO, MAT_NO, AMOUNT)
         VALUES (SEQ_RCNO.NEXTVAL, #{proNo}, #{matNo}, #{amount})
     </insert>
 

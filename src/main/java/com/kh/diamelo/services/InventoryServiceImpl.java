@@ -65,7 +65,9 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public ArrayList<Product> selectSearchProductList(PageInfo pi, int searchCategoryNo, int proNo, String proName) {
-        return inventoryMapper.selectSearchProductList(pi, searchCategoryNo, proNo, proName);
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return inventoryMapper.selectSearchProductList(pi, searchCategoryNo, proNo, proName,rowBounds);
     }
 
 
@@ -161,6 +163,8 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public ArrayList<Product> selectSearchMaterialList(PageInfo pi, int mSearchCount, int proNo, String proName) {
-        return inventoryMapper.selectSearchMaterialList(pi, proNo, proName);
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return inventoryMapper.selectSearchMaterialList(pi, proNo, proName, rowBounds);
     }
 }

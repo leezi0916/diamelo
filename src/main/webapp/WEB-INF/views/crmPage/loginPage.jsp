@@ -83,6 +83,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                 </div>
                                 <!-- <%-- 로그인 버튼 --%> -->
                                 <input class="loginForm" type="submit" value="로그인" />
+
+                                <!-- <%-- 구글 로그인 버튼 --%> -->
+                                <input class="loginForm" type="button" value="구글 로그인" onclick="googleLoginClick()"/>
                             </div>
 
                             <!-- <%-- 아이디/비밀번호 찾기 및 회원가입 링크 --%> -->
@@ -104,5 +107,28 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <div class="div-imgarea"></div>
             </div>
         </div>
+        <script>
+            function googleLoginClick() {
+                // https://accounts.google.com/o/oauth2/v2/auth로 요청을 보내야한다.
+                // client_id와 같은 필수값이 필요하여 서버로부터 가져와서 요청을 보내겠다.
+                $.ajax({
+                    url: "/api/config/google/login",
+                    success: function (res) {
+                        console.log(res)
+                        const url = 'https://accounts.google.com/o/oauth2/v2/auth?client_id='
+                            + res.clientId
+                            + "&redirect_uri=" + res.redirectUrl
+                            + "&response_type=code"
+                            + "&scope=email profile";
+
+                        location.href = url;
+
+                    }, error: function (err) {
+                        console.log("login config info ajax 실패" + err);
+                    },
+                })
+            }
+        </script>
+
     </body>
 </html>

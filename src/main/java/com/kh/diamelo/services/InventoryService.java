@@ -55,7 +55,6 @@ public interface InventoryService {
 
 
         int selectSearchMaterialCount(int proNo, String proName);
-
         ArrayList<Product> selectSearchMaterialList(PageInfo pi, int mSearchCount, int proNo, String proName);
 
 

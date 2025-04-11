@@ -86,3 +86,38 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
+/* 토스트 메시지 스타일 */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.inCart-toast-message {
+    background: rgba(40, 167, 69, 0.9);
+    color: white;
+    padding: 12px 24px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.outCart-toast-message {
+    background: rgba(253, 19, 19, 0.9);
+    color: white;
+    padding: 12px 24px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.outCart-toast-message.show,
+.inCart-toast-message.show{
+    opacity: 1;
+    transform: translateY(0);
+}
