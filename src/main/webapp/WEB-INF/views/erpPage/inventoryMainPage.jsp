@@ -254,7 +254,7 @@
                     </c:otherwise>
                 </c:choose>
             </c:when>
-            <c:otherwise>
+            <c:when test="${tab == 'material'}">
                 <c:choose>
                     <c:when test="${not empty proNo or not empty proName}">
                         <c:url var="pageUrl" value="productSearch.pro">
@@ -266,7 +266,7 @@
                         <c:set var="pageUrl" value="inv.erp?" />
                     </c:otherwise>
                 </c:choose>
-            </c:otherwise>
+            </c:when>
         </c:choose>
 
 
