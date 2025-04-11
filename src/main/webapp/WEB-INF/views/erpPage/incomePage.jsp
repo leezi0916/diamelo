@@ -6,11 +6,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/incomePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
-<<<<<<< HEAD
+
     <script src="/js/erp/dateSelect.js"></script>
-=======
-    <script src="/js/erp/incomePage.js"></script>
->>>>>>> c77fd4add0851547442aeed591894c16210b80ba
+
     <title>Title</title>
 </head>
 <body>
@@ -43,13 +41,10 @@
                             <option value="I" ${type == 'I' ? 'selected' : ''}>소득</option>
                             <option value="O" ${type == 'O' ? 'selected' : ''}>지출</option>
                         </select>
-<<<<<<< HEAD
+
                         <input type="date" name="date1" value="${startDate}" id="startDate" class="input-box">
                         <input type="date" name="date2" value="${endDate}" id="endDate" class="input-box">
-=======
-                        <input type="date" name="date1" value="${startDate}" class="input-box" id="startDate">
-                        <input type="date" name="date2" value="${endDate}" class="input-box" id="endDate">
->>>>>>> c77fd4add0851547442aeed591894c16210b80ba
+
                         <input type="text" name="company" value="${company}" class="input-box" placeholder="거래처">
                         <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
                         <button type="submit" class="input-box" onclick="return checkDate()">
@@ -192,9 +187,5 @@
 
     </div>
 </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> c77fd4add0851547442aeed591894c16210b80ba
 </body>
 </html>
