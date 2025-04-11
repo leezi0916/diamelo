@@ -76,7 +76,7 @@
         INSERT INTO INOUT_HISTORY (HISTORY_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
             VALUES (
             SEQ_HNO.NEXTVAL,
-            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{proName} AND ROWNUM = 1),
+            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NO = #{proNo} AND ROWNUM = 1),
             #{groupNo},
             #{qty},
             #{proPrice}
@@ -102,7 +102,7 @@
     <select id="selectMatPrice" resultType="_int">
         SELECT PRO_PRICE
         FROM PRODUCT
-        WHERE PRO_NAME = #{proName}
+        WHERE PRO_NO = #{proNo}
     </select>
 
     <insert id="insertInoutGroup">
@@ -114,7 +114,7 @@
         SELECT CHANGE_NAME
         FROM ATTACHMENT
         JOIN PRODUCT USING(PRO_NO)
-        WHERE PRO_NAME = #{proName}
+        WHERE PRO_NO = #{proNo}
     </select>
 
     <insert id="insertSalesDetails">
@@ -133,7 +133,8 @@
     <select id="selectProNo" resultType="_int">
         SELECT PRO_NO
         FROM PRODUCT
-        WHERE PRO_NAME = #{proName}
+        WHERE PRO_NO = #{proNo}
+        AND IS_PRODUCT = 'N'
     </select>
     <select id="selectUserId" resultType="String">
         SELECT USER_ID

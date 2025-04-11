@@ -116,7 +116,7 @@
         INSERT INTO SALES_DETAILS(SAL_NO, SALES_AMOUNT, SALES_STOCK,
                 PRO_NAME, CHANGE_NAME, SALES_DATE, STATUS, TYPE, USER_ID, GROUP_NO)
                 VALUES(
-                SEQ_SNO.NEXTVAL, #{salesAmount}, #{salesStock}, #{proName}, #{changeName}, SYSDATE, 'Y', 'O', #{userId}, #{groupNo})
+                SEQ_SNO.NEXTVAL, #{salesAmount}, #{salesStock}, #{proName}, #{changeName}, SYSDATE, 'Y', 'I', #{userId}, #{groupNo})
     </insert>
 
 

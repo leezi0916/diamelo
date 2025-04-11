@@ -100,7 +100,10 @@ public class InventoryServiceImpl implements InventoryService {
         return inventoryMapper.insertMaterialAttachment(attachment);
     }
 
-
+    @Override
+    public int inventoryInsert(int proNo) {
+        return inventoryMapper.inventoryInsert(proNo);
+    }
 
 
     @Override
