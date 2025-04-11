@@ -34,3 +34,4 @@ build/
 
 # 스프링 oauth 보안 설정 제외
 application-oauth.properties
+src/main/resources/application.properties
