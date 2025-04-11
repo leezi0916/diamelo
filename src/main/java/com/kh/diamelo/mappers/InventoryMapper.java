@@ -49,7 +49,7 @@ public interface InventoryMapper {
 
     ArrayList<Recipe> selectRecipeList(int proNo);
 
-
+    int inventoryInsert(int proNo);
 
     int updateProduct(Product product);
 

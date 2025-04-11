@@ -30,6 +30,7 @@ public interface InventoryService {
         int insertMaterial(Product product);
         int insertMaterialAttachment(Attachment attachment);
 
+        int inventoryInsert(int proNo);
 
 
         Product selectProduct(int proNo);

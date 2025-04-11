@@ -56,7 +56,7 @@
           </button>
         </div>
         <div class="page-body-header-text">
-          <button id="mtBtn" >
+          <button id="mtBtn">
               재료 (${mCount})
           </button>
         </div>

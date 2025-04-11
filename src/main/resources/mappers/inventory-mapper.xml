@@ -310,5 +310,13 @@
         </if>
     </select>
 
+    <insert id="inventoryInsert">
+        INSERT INTO PRODUCT_INVENTORY (PRO_INVEN_NO,
+        PRO_NO,
+        PRO_INVENT_STOCK)
+        VALUES (
+        SEQ_INO.NEXTVAL, #{proNo}, 0)
+    </insert>
+
 
 </mapper>
