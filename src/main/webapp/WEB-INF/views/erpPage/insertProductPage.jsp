@@ -143,9 +143,10 @@
     </div>
 </div>
 
-<script>
-    <%--  제품 사진 추가 및 삭제 --%>
 
+<script>
+
+    // 제품 사진 추가 및 삭제
     function changeImage(input) {
         let file = input.files[0];
 
@@ -162,17 +163,17 @@
         }
     }
 
-        // 폼 제출 시 콘솔에 입력값 확인
-        document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault();  // ✅ 폼 제출 막기
+    // 폼 제출 시 콘솔에 입력값 확인
+    document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault();  // ✅ 폼 제출 막기
 
-            const formData = new FormData(this);
+        const formData = new FormData(this);
 
-            console.log("📌 [폼 데이터 배열 변환]", [...formData.entries()]);
-            console.log("📌 [선택한 파일]", formData.get("imageUpload"));
+        console.log("📌 [폼 데이터 배열 변환]", [...formData.entries()]);
+        console.log("📌 [선택한 파일]", formData.get("imageUpload"));
 
-            // 실제 제출하려면 아래 코드 주석 해제
-             event.target.submit();
+        // 실제 제출하려면 아래 코드 주석 해제
+        event.target.submit();
 
     });
 
@@ -380,7 +381,6 @@
 
 
 </script>
-
 
 </body>
 
