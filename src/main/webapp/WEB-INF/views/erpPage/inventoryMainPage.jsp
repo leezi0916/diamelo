@@ -240,10 +240,11 @@
 
 
         <c:choose>
-            <c:when test="${tab == 'product'}">
+            <c:when test="${product == 'product'}">
                 <c:choose>
-                    <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName}">
+                    <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName or not product}">
                         <c:url var="pageUrl" value="productSearch.pro">
+                            <c:param name="product" value="${product}" />
                             <c:param name="searchCategoryNo" value="${searchCategoryNo}" />
                             <c:param name="proNo" value="${proNo}" />
                             <c:param name="proName" value="${proName}" />
@@ -256,8 +257,10 @@
             </c:when>
             <c:when test="${tab == 'material'}">
                 <c:choose>
-                    <c:when test="${not empty proNo or not empty proName}">
-                        <c:url var="pageUrl" value="productSearch.pro">
+
+                    <c:when test="${not empty proNo or not empty proName or not material}">
+                        <c:url var="pageUrl" value="ingredientSearch.ing">
+                            <c:param name="material" value="${material}"/>
                             <c:param name="proNo" value="${proNo}" />
                             <c:param name="proName" value="${proName}" />
                         </c:url>
@@ -304,8 +307,6 @@
         </div>
     </div>
 </div>
-
-
 <script>
     // 제품 탭, 재료 탭 기능
     document.getElementById("proBtn").addEventListener("click", function () {
@@ -324,30 +325,82 @@
         document.getElementById("mtBtn").style.color = "black";
         document.getElementById("page-body-content").style.display = "block";
         document.getElementById("page-body-content1").style.display = "none";
+
     } else {
         document.getElementById("mtBtn").style.color = "#A9A9A9";
         document.getElementById("proBtn").style.color = "black";
         document.getElementById("page-body-content1").style.display = "block";
         document.getElementById("page-body-content").style.display = "none";
-    }
-    document.getElementById('page-body-content1').addEventListener('submit', function (e) {
-        e.preventDefault(); // 기본 제출 막기
 
-        const form = e.target;
-        const url = new URL(form.action, window.location.origin);
+    }
+    if(tab === 'product'){
+        document.getElementById('page-body-content').addEventListener('submit', function (e) {
+            e.preventDefault(); // 기본 제출 막기
+            console.log(tab);
+            const form = e.target;
+            const url = new URL(form.action, window.location.origin);
+        url.searchParams.set('tab', 'product'); // tab 값 추가
+            const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                url.searchParams.set(key, value);
+            }
+
+            // 이동
+            window.location.href = url.toString();
+        });
+    }else{
+        document.getElementById('page-body-content1').addEventListener('submit', function (e) {
+            e.preventDefault(); // 기본 제출 막기
+            console.log(tab);
+            const form = e.target;
+            const url = new URL(form.action, window.location.origin);
         url.searchParams.set('tab', 'material'); // tab 값 추가
+            const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                url.searchParams.set(key, value);
+            }
+
+            // 이동
+            window.location.href = url.toString();
+        });
+    }
+    // document.getElementById('page-body-content1').addEventListener('submit', function (e) {
+    //     e.preventDefault(); // 기본 제출 막기
+    //     console.log(tab);
+    //     const form = e.target;
+    //     const url = new URL(form.action, window.location.origin);
+    //
+    //     if(tab === 'material'){
+    //         url.searchParams.set('tab', 'product'); // tab 값 추가
+    //     }else{
+    //         url.searchParams.set('tab', 'material'); // tab 값 추가
+    //     }
+
+        //
+        // const form = e.target;
+        // const url = new URL(form.action, window.location.origin);
+        // url.searchParams.set('tab', 'material'); // tab 값 추가
+
+
+        // if(tab === 'product'){
+        //     const form = e.target;
+        //     const url = new URL(form.action, window.location.origin);
+        //     url.searchParams.set('tab', 'product'); // tab 값 추가
+        // }else{
+        //     const form = e.target;
+        //     const url = new URL(form.action, window.location.origin);
+        //     url.searchParams.set('tab', 'material'); // tab 값 추가
+        // }
+
 
         // 폼 데이터를 붙이기
-        const formData = new FormData(form);
-        for (const [key, value] of formData.entries()) {
-            url.searchParams.set(key, value);
-        }
-
-        // 이동
-        window.location.href = url.toString();
-    });
-
-
+    // const formData = new FormData(form);
+    // for (const [key, value] of formData.entries()) {
+    //     url.searchParams.set(key, value);
+    // }
+    //
+    // // 이동
+    // window.location.href = url.toString();
 
     // 제품,재료 리스트 행 클릭 시 모달로 상세 내용 및 이미지 보여주기
     $(".product-row").click(function () {
@@ -358,8 +411,6 @@
         $(".modal-quantity").text(row.find(".modal-proInventStock").text());
         $(".modal-price").text(row.find(".modal-proPrice").text());
         $(".modal-description").text(row.find(".modal-proDetail").text());
-
-
         // 이미지 처리
         const imagePath = row.find(".modal-image").text();
         $(".modal-image-tag").attr("src", imagePath);
@@ -371,8 +422,6 @@
     document.querySelector(".close").onclick = function() {
         document.getElementById("productModal").style.display = "none";
     }
-
-
     // 모달 바깥 클릭 시 닫기
     window.onclick = function(event) {
         const modal = document.getElementById("productModal");
@@ -399,7 +448,6 @@
             form.submit();
         }
     }
-
 
 </script>
 </body>
