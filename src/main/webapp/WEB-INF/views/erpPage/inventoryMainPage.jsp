@@ -256,9 +256,8 @@
             </c:when>
             <c:otherwise>
                 <c:choose>
-                    <c:when test="${not empty proNo or not empty proName or not material}">
+                    <c:when test="${not empty proNo or not empty proName}">
                         <c:url var="pageUrl" value="productSearch.pro">
-                            <c:param name="material" value="${material}"/>
                             <c:param name="proNo" value="${proNo}" />
                             <c:param name="proName" value="${proName}" />
                         </c:url>
@@ -360,6 +359,7 @@
         $(".modal-price").text(row.find(".modal-proPrice").text());
         $(".modal-description").text(row.find(".modal-proDetail").text());
 
+
         // 이미지 처리
         const imagePath = row.find(".modal-image").text();
         $(".modal-image-tag").attr("src", imagePath);
@@ -371,6 +371,7 @@
     document.querySelector(".close").onclick = function() {
         document.getElementById("productModal").style.display = "none";
     }
+
 
     // 모달 바깥 클릭 시 닫기
     window.onclick = function(event) {
@@ -398,6 +399,7 @@
             form.submit();
         }
     }
+
 
 </script>
 </body>
