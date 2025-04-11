@@ -34,7 +34,7 @@ public interface BuyMapper {
 
     Product selectfilePath(@Param("proNo") int proNo);
 
-    int insertSalesDetails(SalesDetails salesDetails);
+    int insertBuySalesDetails(SalesDetails salesDetails);
 
     int selectProNo(@Param("proName") String proName);
 

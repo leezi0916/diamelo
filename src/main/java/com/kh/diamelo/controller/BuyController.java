@@ -120,7 +120,7 @@ public class BuyController {
             salesDetails.setUserId(loginUser.getUserId());
             salesDetails.setGroupNo(resGNo);
 
-            int insertresult = buyService.insertSalesDetails(salesDetails);
+            int insertresult = buyService.insertBuySalesDetails(salesDetails);
             int updateProResult = buyService.updateProductInventory(product);
         }
 
