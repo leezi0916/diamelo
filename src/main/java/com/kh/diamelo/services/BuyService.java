@@ -23,11 +23,11 @@ public interface BuyService {
 
     ArrayList<Product> selectMatDetailList(int gNo);
 
-    int selectMatPrice(String proName);
+    int selectMatPrice(int proNo);
 
     int insertInoutGroup(InoutGroup inoutGroup);
 
-    Product selectfilePath(String proName);
+    Product selectfilePath(int proNo);
 
     int insertSalesDetails(SalesDetails salesDetails);
 
