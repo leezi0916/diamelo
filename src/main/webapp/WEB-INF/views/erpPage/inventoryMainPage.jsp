@@ -235,6 +235,42 @@
                     </tbody>
                 </table>
             </form>
+
+
+
+
+        <c:choose>
+            <c:when test="${tab == 'product'}">
+                <c:choose>
+                    <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName}">
+                        <c:url var="pageUrl" value="productSearch.pro">
+                            <c:param name="searchCategoryNo" value="${searchCategoryNo}" />
+                            <c:param name="proNo" value="${proNo}" />
+                            <c:param name="proName" value="${proName}" />
+                        </c:url>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="pageUrl" value="inv.erp?" />
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${not empty proNo or not empty proName or not material}">
+                        <c:url var="pageUrl" value="productSearch.pro">
+                            <c:param name="material" value="${material}"/>
+                            <c:param name="proNo" value="${proNo}" />
+                            <c:param name="proName" value="${proName}" />
+                        </c:url>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="pageUrl" value="inv.erp?" />
+                    </c:otherwise>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
+
+
         <div id="pagingArea">
             <ul class="pagination">
                 <c:choose>
@@ -243,14 +279,14 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <a class="page-link" href="inv.erp?cpage=${pi.currentPage - 1}&tab=${param.tab}">이전</a>
+                            <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}&tab=${param.tab}">이전</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
 
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                     <li class="page-item">
-                        <a class="page-link" href="inv.erp?cpage=${p}&tab=${param.tab}">${p}</a>
+                        <a class="page-link" href="${pageUrl}&cpage=${p}&tab=${param.tab}">${p}</a>
                     </li>
                 </c:forEach>
 
@@ -260,7 +296,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <a class="page-link" href="inv.erp?cpage=${pi.currentPage + 1}&tab=${param.tab}">다음</a>
+                            <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}&tab=${param.tab}">다음</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
