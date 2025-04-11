@@ -21,18 +21,17 @@
         <div class="modal-content-upper">
             <div class="modal-content-left">
                 <h2>상품 상세 정보</h2>
-                <p><strong>번호:</strong> <span class="modal-number"></span></p>
-                <p><strong>품목:</strong> <span class="modal-name"></span></p>
-                <p><strong>분류:</strong> <span class="modal-category"></span></p>
-                <p><strong>재고 수량:</strong> <span class="modal-quantity"></span></p>
-                <p><strong>가격:</strong> <span class="modal-price"></span></p>
-                <p><strong>비고:</strong> <span class="modal-description"></span></p>
+                <br>
+                <p><strong>상품번호 : </strong> <span class="modal-number"></span></p>
+                <p><strong>품목 : </strong> <span class="modal-name"></span></p>
+                <p><strong>분류 : </strong> <span class="modal-category"></span></p>
+                <p><strong>재고 수량 : </strong> <span class="modal-quantity"></span></p>
+                <p><strong>가격 : </strong> <span class="modal-price"></span></p>
+                <p><strong>비고 : </strong> <span class="modal-description"></span></p>
             </div>
-
             <div class="modal-content-right">
-                <div class="image-area">
-                    <img src="/resources/image/productImgae/product1.png" alt="상품">
-                </div>
+                <img class="modal-image-tag" src="" alt="상품 이미지" style="max-width: 80%; max-height: 500px">
+            </div>
             </div>
         </div>
     </div>
@@ -65,21 +64,21 @@
 
 
 
-            <form id="page-body-content" action="search.pro" method="get">
+            <form id="page-body-content" action="productSearch.pro" method="get">
                 <div id="search-inventory">
 
-                    <select name="searchCategory" id="search-category" class="select">
-                        <option disabled selected>분류</option>
-                        <option value="1">스킨</option>
-                        <option value="2">로션</option>
-                        <option value="3">선크림</option>
-                        <option value="4">수분크림</option>
-                        <option value="5">앰플</option>
+                    <select name="searchCategoryNo" id="search-category" class="select">
+                        <option value="0" ${searchCategoryNo == null ? 'selected' : ''}>전체</option>
+                        <option value="1" ${searchCategoryNo == 1 ? 'selected' : ''}>스킨</option>
+                        <option value="2" ${searchCategoryNo == 2 ? 'selected' : ''}>로션</option>
+                        <option value="3" ${searchCategoryNo == 3 ? 'selected' : ''}>선크림</option>
+                        <option value="4" ${searchCategoryNo == 4 ? 'selected' : ''}>수분크림</option>
+                        <option value="5" ${searchCategoryNo == 5 ? 'selected' : ''}>앰플</option>
                     </select>
 
-                    <input type="text" placeholder="번호" id="search-number">
+                    <input type="text" placeholder="번호" id="search-number" name="proNo" value="${proNo != 0 ? proNo : ''}">
 
-                    <input type="text" placeholder="제품명을 입력하세요." id="search-product">
+                    <input type="text" placeholder="제품명을 입력하세요." id="search-product" name="proName" value="${proName != null ? proName : ''}">
 
 
                     <button id="searchBtn" type="submit">
@@ -91,7 +90,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap">
-                        <button id="addBtn" type="button" onclick="location.href='add.pro'">
+                        <button id="addBtn" type="button" onclick="location.href='insertProduct.pro'">
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white"
@@ -119,22 +118,35 @@
 
                     <c:forEach var="p" items ="${list}" varStatus="status">
                         <c:if test="${p.isProduct =='Y'}">
-                            <tr onclick="openModal(this)">
+                            <tr class="product-row">
                                 <td>${status.count}</td>
                                 <td>${p.proName}</td>
                                 <td>${p.categoryName}</td>
                                 <td>${p.proInventStock}</td>
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
+                                <td style="display: none">${p.changeName}</td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='update.pro'">
+                                    <button class="icon-button" type="button" onclick="location.href = '/updateView.pro?proNo=${p.proNo}';">
                                         <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='delete.pro'">
+                                    <button class="icon-button" type="button" onclick="confirmDelete(${p.proNo}, '/delete.pro')">
                                         <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
+                                </td>
+
+
+                                <!-- 숨겨진 데이터들 -->
+                                <td style="display:none;">
+                                    <span class="modal-proNo">${p.proNo}</span>
+                                    <span class="modal-proName">${p.proName}</span>
+                                    <span class="modal-categoryName">${p.categoryName}</span>
+                                    <span class="modal-proInventStock">${p.proInventStock}EA</span>
+                                    <span class="modal-proPrice">${p.proPrice}원</span>
+                                    <span class="modal-proDetail">${p.proDetail}</span>
+                                    <span class="modal-image">${p.changeName}</span>
                                 </td>
                             </tr>
                         </c:if>
@@ -143,14 +155,14 @@
                 </table>
             </form>
 
-            <form id="page-body-content1" style="display: none" action="search.ing" method="get">
+            <form id="page-body-content1" style="display: none" action="ingredientSearch.ing" method="get">
 
                 <div id="search-inventory1">
 
 
-                    <input type="text" placeholder="번호" id="search-number1">
+                    <input type="text" placeholder="번호" id="search-number1" name="proNo" value="${proNo != 0 ? proNo : ''}">
 
-                    <input type="text" placeholder="재료명을 입력하세요." id="search-product1">
+                    <input type="text" placeholder="재료명을 입력하세요." id="search-product1" name="proName" value="${proName != null ? proName : ''}">
 
 
                     <button id="searchBtn1" type="submit">
@@ -162,7 +174,7 @@
                         조회
                     </button>
                     <div id="add-btn-wrap1">
-                        <button id="addBtn1" type="button" onclick="location.href='add.ing'">
+                        <button id="addBtn1" type="button" onclick="location.href='insert.ing'" >
                             <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.15422 0.869141V12.0877M1.54492 6.47844H12.7635" stroke="white"
@@ -188,21 +200,34 @@
                     <tbody>
                     <c:forEach var="p" items ="${list}" varStatus="status">
                         <c:if test="${p.isProduct == 'N'}">
-                            <tr onclick="openModal(this)">
+                            <tr class="product-row">
                                 <td>${status.count}</td>
                                 <td>${p.proName}</td>
                                 <td>${p.proInventStock}</td>
                                 <td>${p.proPrice}</td>
                                 <td>${p.proDetail}</td>
+                                <td style="display: none" >${p.changeName}</td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='update.ing'">
+                                    <button class="icon-button" type="button" onclick="location.href = '/updateView.ing?proNo=${p.proNo}';">
                                         <img src="/image/update_icon.png" alt="수정" width="20">
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="icon-button" type="button" onclick="location.href='delete.ing'">
+                                    <button class="icon-button" type="button" onclick="confirmDelete(${p.proNo}, '/delete.ing')">
                                         <img src="/image/delete_icon.png" alt="삭제" width="20">
                                     </button>
+                                </td>
+
+
+                                <!-- 숨겨진 데이터들 -->
+                                <td style="display:none;">
+                                    <span class="modal-proNo">${p.proNo}</span>
+                                    <span class="modal-proName">${p.proName}</span>
+                                    <span class="modal-categoryName">${p.categoryName}</span>
+                                    <span class="modal-proInventStock">${p.proInventStock}g</span>
+                                    <span class="modal-proPrice">${p.proPrice}원</span>
+                                    <span class="modal-proDetail">${p.proDetail}</span>
+                                    <span class="modal-image">${p.changeName}</span>
                                 </td>
                             </tr>
                         </c:if>
@@ -247,6 +272,7 @@
 
 
 <script>
+    // 제품 탭, 재료 탭 기능
     document.getElementById("proBtn").addEventListener("click", function () {
         location.href = "inv.erp?cpage=1&tab=product"; // 제품 탭 클릭 시
     });
@@ -269,44 +295,80 @@
         document.getElementById("page-body-content1").style.display = "block";
         document.getElementById("page-body-content").style.display = "none";
     }
+    document.getElementById('page-body-content1').addEventListener('submit', function (e) {
+        e.preventDefault(); // 기본 제출 막기
+
+        const form = e.target;
+        const url = new URL(form.action, window.location.origin);
+        url.searchParams.set('tab', 'material'); // tab 값 추가
+
+        // 폼 데이터를 붙이기
+        const formData = new FormData(form);
+        for (const [key, value] of formData.entries()) {
+            url.searchParams.set(key, value);
+        }
+
+        // 이동
+        window.location.href = url.toString();
+    });
 
 
+<<<<<<< HEAD
     // modal
+=======
+    // 제품,재료 리스트 행 클릭 시 모달로 상세 내용 및 이미지 보여주기
+    $(".product-row").click(function () {
+        const row = $(this);
+        $(".modal-number").text(row.find(".modal-proNo").text());
+        $(".modal-name").text(row.find(".modal-proName").text());
+        $(".modal-category").text(row.find(".modal-categoryName").text());
+        $(".modal-quantity").text(row.find(".modal-proInventStock").text());
+        $(".modal-price").text(row.find(".modal-proPrice").text());
+        $(".modal-description").text(row.find(".modal-proDetail").text());
+>>>>>>> c77fd4add0851547442aeed591894c16210b80ba
 
-    function openModal(row) {
-        const modal = document.getElementById("productModal");
-        // const modalNumber = modal.querySelector(".modal-number");
-        const modalName = modal.querySelector(".modal-name");
-        const modalCategory = modal.querySelector(".modal-category");
-        const modalQuantity = modal.querySelector(".modal-quantity");
-        const modalPrice = modal.querySelector(".modal-price");
-        const modalDescription = modal.querySelector(".modal-description");
+        // 이미지 처리
+        const imagePath = row.find(".modal-image").text();
+        $(".modal-image-tag").attr("src", imagePath);
 
-        // 행의 데이터를 가져오기
-        const cells = row.getElementsByTagName("td");
-        // modalNumber.textContent = cells[0].textContent;
-        modalName.textContent = cells[1].textContent;
-        modalCategory.textContent = cells[2].textContent;
-        modalQuantity.textContent = cells[3].textContent;
-        modalPrice.textContent = cells[4].textContent;
-        modalDescription.textContent = cells[5].textContent;
+        $(".modal").fadeIn();
+    });
 
-        // 모달 표시
-        modal.style.display = "block";
-
-        // 닫기 버튼 기능 추가
-        const closeButton = modal.querySelector(".close");
-        closeButton.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
-        // 모달 외부 클릭 시 닫기
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
+    // 모달 닫기 이벤트
+    document.querySelector(".close").onclick = function() {
+        document.getElementById("productModal").style.display = "none";
     }
+<<<<<<< HEAD
+=======
+
+    // 모달 바깥 클릭 시 닫기
+    window.onclick = function(event) {
+        const modal = document.getElementById("productModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    // 제품, 재료 삭제할 시
+    function confirmDelete(proNo, actionUrl) {
+        if (confirm('정말로 삭제하시겠습니까?')) {
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = actionUrl;
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'proNo';
+            input.value = proNo;
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+
+>>>>>>> c77fd4add0851547442aeed591894c16210b80ba
 </script>
 </body>
 </html>

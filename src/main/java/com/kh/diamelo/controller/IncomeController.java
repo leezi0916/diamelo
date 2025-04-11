@@ -30,11 +30,14 @@ public class IncomeController {
         ArrayList<SalesDetails> list = incomeService.selectIncomeList(pi);
 
 
+        //매출 총이익
+        int details = incomeService.selectIncomeAllSales();
+
 
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
-
+        model.addAttribute("details", details);
 
         session.setAttribute("selectIcon", svg);
         session.setAttribute("seletTitle", "매출 관리");
@@ -57,8 +60,9 @@ public class IncomeController {
                 (company == null || company.isEmpty())) {
             return "redirect:/income.erp";
         }
-        
 
+        //조건에 맞는 매출 총이익 구하기
+        int details = incomeService.selectIncomeAllSalesDetails(type, startDate, endDate, company);
         
         int totalSalesSum = incomeService.searchIncomeSum(type, startDate, endDate, company);
 
@@ -72,7 +76,8 @@ public class IncomeController {
         if (list.isEmpty()) {
             model.addAttribute("message", "검색 결과가 없습니다.");
         }
-
+        
+        model.addAttribute("details", details);
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("pi", pi);
         model.addAttribute("list", list);

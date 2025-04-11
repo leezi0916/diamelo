@@ -110,7 +110,7 @@
 
 
     <select id="searchIncomeSum" resultType="_int">
-        SELECT NVL(SUM(TOTAL_SALES), 0)
+        SELECT NVL(SUM(TOTAL_SALES),0)
         FROM (
         SELECT s.GROUP_NO, NVL(SUM(s.SALES_AMOUNT), 0) AS TOTAL_SALES
         FROM SALES_DETAILS s
@@ -152,5 +152,48 @@
             AND s.GROUP_NO = #{gno}
     </select>
 
-    
+
+    <select id="selectIncomeInSales" resultType="_int">
+        SELECT NVL(SUM(SALES_AMOUNT),0) AS SALES_AMOUNT
+        FROM SALES_DETAILS
+        WHERE TYPE = 'I' AND STATUS = 'Y'
+    </select>
+
+    <select id="selectIncomeOutSales" resultType="_int">
+        SELECT NVL(SUM(SALES_AMOUNT),0) AS SALES_AMOUNT
+        FROM SALES_DETAILS
+        WHERE TYPE = 'O' AND STATUS = 'Y'
+    </select>
+
+    <select id="selectIncomeInSalesDetail" resultType="_int">
+        SELECT NVL(SUM(SALES_AMOUNT),0) AS SALES_AMOUNT
+        FROM SALES_DETAILS s
+        JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        WHERE s.TYPE = 'I' AND s.STATUS = 'Y'
+        <if test='startDate != null and startDate != ""'>
+            AND s.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test='endDate != null and endDate != ""'>
+            AND s.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test='company != null and company != ""'>
+            AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+    </select>
+
+    <select id="selectIncomeOutSalesDetail" resultType="_int">
+        SELECT NVL(SUM(SALES_AMOUNT),0) AS SALES_AMOUNT
+        FROM SALES_DETAILS s
+        LEFT JOIN USER_INFO u ON s.USER_ID = u.USER_ID
+        WHERE s.TYPE = 'O' AND s.STATUS = 'Y'
+        <if test='startDate != null and startDate != ""'>
+            AND s.SALES_DATE &gt;= #{startDate}
+        </if>
+        <if test='endDate != null and endDate != ""'>
+            AND s.SALES_DATE &lt;= #{endDate}
+        </if>
+        <if test='company != null and company != ""'>
+            AND u.COMPANY_NAME LIKE '%' || #{company} || '%'
+        </if>
+    </select>
 </mapper>

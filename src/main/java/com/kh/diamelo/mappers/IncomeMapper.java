@@ -28,8 +28,6 @@ public interface IncomeMapper {
                                                    @Param("company") String company);
 
 
-    
-    
     // 조건에 맞는 매출합 보여주기
     int searchIncomeSum(  @Param("type") String type,
                           @Param("startDate") String startDate,
@@ -38,4 +36,22 @@ public interface IncomeMapper {
 
     //gno의 담긴 매출 상세보기
     ArrayList<SalesDetails> incomeDetail(int gno);
+    
+    //총 소득
+    int selectIncomeInSales();
+    //총 지출
+    int selectIncomeOutSales();
+
+    //검색 조건 총 소득
+    int selectIncomeInSalesDetail(@Param("type") String type,
+                                  @Param("startDate") String startDate,
+                                  @Param("endDate") String endDate,
+                                  @Param("company") String company);
+    //검색 조건 총 지출
+    int selectIncomeOutSalesDetail(@Param("type") String type,
+                                   @Param("startDate") String startDate,
+                                   @Param("endDate") String endDate,
+                                   @Param("company") String company);
+
+
 }
