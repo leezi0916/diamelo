@@ -35,18 +35,26 @@ public class BuyController {
     //구매 상세보기
     @GetMapping("buyDetail.erp")
     public String detailBuy(@RequestParam("gNo")int gNo, Model model) {
-
+        int resSum = 0;
+        int resQty = 0;
 
         Product product = new Product();
         product = buyService.selectInOutHistory(gNo);
+        System.out.println("product"+product);
 
 
 
 
         ArrayList<Product> productList = new ArrayList<>();
         productList = buyService.selectMatDetailList(gNo);
+        System.out.println("productList"+ productList);
+        for (Product p : productList) {
+            resSum += p.getAmount();
+            resQty += 1;
+        }
 
-
+        model.addAttribute("resQty", resQty);
+        model.addAttribute("resSum",resSum);
 
         model.addAttribute("productList", productList);
         model.addAttribute("product", product);
@@ -156,6 +164,7 @@ public class BuyController {
         PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
 
         ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, startDate, endDate, searchId);
+
 
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
