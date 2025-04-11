@@ -349,9 +349,7 @@
     });
 
 
-<<<<<<< HEAD
-    // modal
-=======
+
     // 제품,재료 리스트 행 클릭 시 모달로 상세 내용 및 이미지 보여주기
     $(".product-row").click(function () {
         const row = $(this);
@@ -361,7 +359,6 @@
         $(".modal-quantity").text(row.find(".modal-proInventStock").text());
         $(".modal-price").text(row.find(".modal-proPrice").text());
         $(".modal-description").text(row.find(".modal-proDetail").text());
->>>>>>> c77fd4add0851547442aeed591894c16210b80ba
 
         // 이미지 처리
         const imagePath = row.find(".modal-image").text();
@@ -374,8 +371,6 @@
     document.querySelector(".close").onclick = function() {
         document.getElementById("productModal").style.display = "none";
     }
-<<<<<<< HEAD
-=======
 
     // 모달 바깥 클릭 시 닫기
     window.onclick = function(event) {
@@ -404,7 +399,6 @@
         }
     }
 
->>>>>>> c77fd4add0851547442aeed591894c16210b80ba
 </script>
 </body>
 </html>
