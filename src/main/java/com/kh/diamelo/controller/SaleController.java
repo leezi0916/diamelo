@@ -94,7 +94,7 @@ public class SaleController {
             System.out.println("Statuslist: " + list);
             for (Product product : list) {
 
-                resSum += product.getAmount() * product.getProPrice();
+                resSum += product.getHistoryStock() * product.getProPrice();
 
                 int updateProduct = saleService.updateProduct(product);
                 String userId = saleService.selectUserId(sNo);
