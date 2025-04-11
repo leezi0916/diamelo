@@ -107,7 +107,7 @@ public class InventoryController {
         PageInfo pi = new PageInfo(pSearchCount, cpage, 10, 10);
         ArrayList<Product> list = inventoryService.selectSearchProductList(pi, searchCategoryNo, proNo, proName);
 
-        model.addAttribute("product", tab);
+        model.addAttribute("tab", tab);
         model.addAttribute("searchCategoryNo", searchCategoryNo);
         model.addAttribute("proNo", proNo);
         model.addAttribute("proName", proName);
@@ -323,7 +323,7 @@ public class InventoryController {
         ArrayList<Product> list = inventoryService.selectSearchMaterialList(pi, mSearchCount, proNo, proName);
 
 
-        model.addAttribute("material", tab);
+        model.addAttribute("tab", tab);
         model.addAttribute("proNo", proNo);
         model.addAttribute("proName", proName);
 
