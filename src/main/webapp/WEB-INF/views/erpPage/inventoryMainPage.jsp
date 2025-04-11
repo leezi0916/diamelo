@@ -32,9 +32,9 @@
             <div class="modal-content-right">
                 <img class="modal-image-tag" src="" alt="상품 이미지" style="max-width: 80%; max-height: 500px">
             </div>
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="layout-wrapper">
@@ -47,20 +47,20 @@
 
 
 
-    <!-- 페이지 본문 -->
-    <div class="page-body">
-      <div class="page-body-header">
-        <div class="page-body-header-text">
-          <button id="proBtn">
-              제품 (${pCount})
-          </button>
-        </div>
-        <div class="page-body-header-text">
-          <button id="mtBtn" >
-              재료 (${mCount})
-          </button>
-        </div>
-      </div>
+        <!-- 페이지 본문 -->
+        <div class="page-body">
+            <div class="page-body-header">
+                <div class="page-body-header-text">
+                    <button id="proBtn">
+                        제품 (${pCount})
+                    </button>
+                </div>
+                <div class="page-body-header-text">
+                    <button id="mtBtn" >
+                        재료 (${mCount})
+                    </button>
+                </div>
+            </div>
 
 
 
@@ -239,71 +239,71 @@
 
 
 
-        <c:choose>
-            <c:when test="${product == 'product'}">
-                <c:choose>
-                    <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName or not product}">
-                        <c:url var="pageUrl" value="productSearch.pro">
-                            <c:param name="product" value="${product}" />
-                            <c:param name="searchCategoryNo" value="${searchCategoryNo}" />
-                            <c:param name="proNo" value="${proNo}" />
-                            <c:param name="proName" value="${proName}" />
-                        </c:url>
-                    </c:when>
-                    <c:otherwise>
-                        <c:set var="pageUrl" value="inv.erp?" />
-                    </c:otherwise>
-                </c:choose>
-            </c:when>
-            <c:when test="${tab == 'material'}">
-                <c:choose>
+            <c:choose>
+                <c:when test="${product == 'product'}">
+                    <c:choose>
+                        <c:when test="${not empty searchCategoryNo or not empty proNo or not empty proName or not product}">
+                            <c:url var="pageUrl" value="productSearch.pro">
+                                <c:param name="product" value="${product}" />
+                                <c:param name="searchCategoryNo" value="${searchCategoryNo}" />
+                                <c:param name="proNo" value="${proNo}" />
+                                <c:param name="proName" value="${proName}" />
+                            </c:url>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="pageUrl" value="inv.erp?" />
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
 
-                    <c:when test="${not empty proNo or not empty proName or not material}">
-                        <c:url var="pageUrl" value="ingredientSearch.ing">
-                            <c:param name="material" value="${material}"/>
-                            <c:param name="proNo" value="${proNo}" />
-                            <c:param name="proName" value="${proName}" />
-                        </c:url>
-                    </c:when>
-                    <c:otherwise>
-                        <c:set var="pageUrl" value="inv.erp?" />
-                    </c:otherwise>
-                </c:choose>
-            </c:when>
-        </c:choose>
+                        <c:when test="${not empty proNo or not empty proName or not material}">
+                            <c:url var="pageUrl" value="ingredientSearch.ing">
+                                <c:param name="material" value="${material}"/>
+                                <c:param name="proNo" value="${proNo}" />
+                                <c:param name="proName" value="${proName}" />
+                            </c:url>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="pageUrl" value="inv.erp?" />
+                        </c:otherwise>
+                    </c:choose>
+                </c:otherwise>
+            </c:choose>
 
 
-        <div id="pagingArea">
-            <ul class="pagination">
-                <c:choose>
-                    <c:when test="${ pi.currentPage eq 1 }">
-                        <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
-                    </c:when>
-                    <c:otherwise>
+            <div id="pagingArea">
+                <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${ pi.currentPage eq 1 }">
+                            <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}&tab=${param.tab}">이전</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                         <li class="page-item">
-                            <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage - 1}&tab=${param.tab}">이전</a>
+                            <a class="page-link" href="${pageUrl}&cpage=${p}&tab=${param.tab}">${p}</a>
                         </li>
-                    </c:otherwise>
-                </c:choose>
+                    </c:forEach>
 
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <li class="page-item">
-                        <a class="page-link" href="${pageUrl}&cpage=${p}&tab=${param.tab}">${p}</a>
-                    </li>
-                </c:forEach>
-
-                <c:choose>
-                    <c:when test="${ pi.currentPage eq pi.maxPage }">
-                        <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item">
-                            <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}&tab=${param.tab}">다음</a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-        </div>
+                    <c:choose>
+                        <c:when test="${ pi.currentPage eq pi.maxPage }">
+                            <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="${pageUrl}&cpage=${pi.currentPage + 1}&tab=${param.tab}">다음</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -339,7 +339,7 @@
             console.log(tab);
             const form = e.target;
             const url = new URL(form.action, window.location.origin);
-        url.searchParams.set('tab', 'product'); // tab 값 추가
+            url.searchParams.set('tab', 'product'); // tab 값 추가
             const formData = new FormData(form);
             for (const [key, value] of formData.entries()) {
                 url.searchParams.set(key, value);
@@ -354,7 +354,7 @@
             console.log(tab);
             const form = e.target;
             const url = new URL(form.action, window.location.origin);
-        url.searchParams.set('tab', 'material'); // tab 값 추가
+            url.searchParams.set('tab', 'material'); // tab 값 추가
             const formData = new FormData(form);
             for (const [key, value] of formData.entries()) {
                 url.searchParams.set(key, value);
@@ -376,24 +376,24 @@
     //         url.searchParams.set('tab', 'material'); // tab 값 추가
     //     }
 
-        //
-        // const form = e.target;
-        // const url = new URL(form.action, window.location.origin);
-        // url.searchParams.set('tab', 'material'); // tab 값 추가
+    //
+    // const form = e.target;
+    // const url = new URL(form.action, window.location.origin);
+    // url.searchParams.set('tab', 'material'); // tab 값 추가
 
 
-        // if(tab === 'product'){
-        //     const form = e.target;
-        //     const url = new URL(form.action, window.location.origin);
-        //     url.searchParams.set('tab', 'product'); // tab 값 추가
-        // }else{
-        //     const form = e.target;
-        //     const url = new URL(form.action, window.location.origin);
-        //     url.searchParams.set('tab', 'material'); // tab 값 추가
-        // }
+    // if(tab === 'product'){
+    //     const form = e.target;
+    //     const url = new URL(form.action, window.location.origin);
+    //     url.searchParams.set('tab', 'product'); // tab 값 추가
+    // }else{
+    //     const form = e.target;
+    //     const url = new URL(form.action, window.location.origin);
+    //     url.searchParams.set('tab', 'material'); // tab 값 추가
+    // }
 
 
-        // 폼 데이터를 붙이기
+    // 폼 데이터를 붙이기
     // const formData = new FormData(form);
     // for (const [key, value] of formData.entries()) {
     //     url.searchParams.set(key, value);
