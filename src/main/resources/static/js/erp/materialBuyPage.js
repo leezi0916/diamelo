@@ -21,6 +21,7 @@ function updateSummary() {
 
     inputs.forEach(input => {
         const qty = parseInt(input.value) || 0;
+        const proNo = parseInt(input.getAttribute('data-proNo'));
         const name = input.getAttribute('data-name');
         const price = parseInt(input.getAttribute('data-price'));
 
@@ -28,8 +29,9 @@ function updateSummary() {
 
         if (qty > 0) {
             const itemTotal = qty * price;
-            console.log("이름:", name, "수량:", qty, "단가:", price);
-
+            // console.log("이름:", name, "수량:", qty, "단가:", price,  "제품번호 :", proNo );
+            // console.log("proNo:", proNo, "name:", name, "qty:", qty, "price:", price);
+            // console.log(`🟡 제품명(proName): ${name}, 제품번호(proNo): ${proNo}`);
             totalItems += 1;
             totalQty += qty;
             totalPrice += itemTotal;
@@ -39,9 +41,11 @@ function updateSummary() {
                 "<td colspan='2'>" + name + "</td>" +
                 "<td colspan='2'>" + qty + "</td>" +
                 "<td colspan='2'>" + itemTotal + "<td>" +
+                "<td colspan='2'>" + proNo +"</td>" +
                 "</tr>";
 
-            orderDetailsArray.push({ proName: name, qty: qty, itemTotal: itemTotal });
+            orderDetailsArray.push({ proName: name, proNo: proNo, qty: qty, itemTotal: itemTotal});
+
         }
     });
 

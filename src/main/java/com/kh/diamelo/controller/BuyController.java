@@ -102,16 +102,17 @@ public class BuyController {
 
         for(Product product : orderDetails) {
             String proName =product.getProName();
+            System.out.println("productproduct"+product);
+            int proNo = product.getProNo();
 
-            int proNo = buyService.selectProNo(proName);
-            int proPrice = buyService.selectMatPrice(proName);
+            int proPrice = buyService.selectMatPrice(proNo);
 
-            product.setProNo(proNo);
+            product.setProNo(product.getProNo());
             product.setProPrice(proPrice);
             product.setGroupNo((resGNo));
             int result = buyService.insertOrderDetails(product);
             int sumPrice = product.getProPrice()*product.getQty();
-            Product changeName = buyService.selectfilePath(proName);
+            Product changeName = buyService.selectfilePath(proNo);
             salesDetails.setSalesAmount(sumPrice);
             salesDetails.setSalesStock(product.getQty());
             salesDetails.setProName(proName);
@@ -183,6 +184,7 @@ public class BuyController {
     public String buyDetail( Model model){
 
         ArrayList<Product> list = buyService.selectProduceBuyList();
+        System.out.println("list" + list);
 
         model.addAttribute("list", list);
         return "erpPage/materialBuyPage";
