@@ -29,12 +29,12 @@ public class IncomeController {
         PageInfo pi = new PageInfo(incomeCount, inpage,10,10);
         ArrayList<SalesDetails> list = incomeService.selectIncomeList(pi);
 
-//        int details = incomeService.selectIncomeAllSales();
+
 
         model.addAttribute("incomeCount", incomeCount);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
-//        model.addAttribute("details", details);
+
 
         session.setAttribute("selectIcon", svg);
         session.setAttribute("seletTitle", "매출 관리");
@@ -58,8 +58,7 @@ public class IncomeController {
             return "redirect:/income.erp";
         }
         
-        //조건에 맞는 매출 총이익 구하기
-//        int details = incomeService.selectIncomeAllSalesDetails(type, startDate, endDate, company);
+
         
         int totalSalesSum = incomeService.searchIncomeSum(type, startDate, endDate, company);
 
@@ -83,7 +82,7 @@ public class IncomeController {
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("company", company);
-//        model.addAttribute("details", details);
+
 
         return "erpPage/incomePage"; // 결과 페이지
     }

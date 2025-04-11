@@ -28,15 +28,7 @@ public class IncomeServiceImpl implements IncomeService {
         return incomeMapper.selectIncomeList(rowBounds);
     }
 
-//    @Override
-//    public int selectIncomeAllSales() {
-//        return incomeMapper.selectIncomeAllSales();
-//    }
-//
-//    @Override
-//    public int selectIncomeAllSalesDetails(String type, String startDate, String endDate, String company) {
-//        return incomeMapper.selectIncomeAllSalesDetails(type, startDate,endDate,company);
-//    }
+
 
     @Override
     public int selectSerachIncomeCount(String type, String startDate, String endDate, String company) {
