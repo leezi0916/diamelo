@@ -29,6 +29,7 @@ public class IncomeController {
         PageInfo pi = new PageInfo(incomeCount, inpage,10,10);
         ArrayList<SalesDetails> list = incomeService.selectIncomeList(pi);
 
+        //매출 총이익
         int details = incomeService.selectIncomeAllSales();
 
         model.addAttribute("incomeCount", incomeCount);

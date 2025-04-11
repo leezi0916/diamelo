@@ -62,6 +62,8 @@ public class InventoryController {
         model.addAttribute("pi", pi);
         model.addAttribute("tab", tab);  // 현재 탭 정보 추가
 
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "재고 관리");
 
 
         return "erpPage/inventoryMainPage";
