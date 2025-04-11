@@ -77,7 +77,16 @@
                                 <c:forEach var="item" items="${list}">
                                     <tr onclick="location.href='detail.in?gno=${item.groupNo}'">
                                     <td>${item.groupNo}</td>
-                                        <td>${item.companyName}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${item.companyName == null}">
+                                                    A공장
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${item.companyName}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${item.type eq 'I'}">소득</c:when>
