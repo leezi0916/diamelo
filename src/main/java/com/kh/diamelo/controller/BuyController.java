@@ -138,6 +138,7 @@ public class BuyController {
 
         PageInfo pi = new PageInfo(buyCount, bpage, 10, 10);
         ArrayList<SalesDetails> list = buyService.selectBuyList(pi);
+        System.out.println("listlist" + list);
 
         model.addAttribute("buyCount", buyCount);
         model.addAttribute("list", list);
@@ -169,6 +170,7 @@ public class BuyController {
         ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, startDate, endDate, searchId);
 
 
+        model.addAttribute("buyCount", buyCount);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("user", user);
