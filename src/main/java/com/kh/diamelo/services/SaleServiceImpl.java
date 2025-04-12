@@ -52,8 +52,13 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public int updateProduct(Product product) {
-        return saleMapper.updateProduct(product);
+    public int updateProductPlus(Product product) {
+        return saleMapper.updateProductPlus(product);
+    }
+
+    @Override
+    public int updateProductMinus(Product product) {
+        return saleMapper.updateProductMinus(product);
     }
 
     @Override
@@ -76,5 +81,10 @@ public class SaleServiceImpl implements SaleService {
         int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
         RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
         return saleMapper.selectSearchList(rowBounds, company, startDate, endDate);
+    }
+
+    @Override
+    public String selectGroupNo(int sNo) {
+        return saleMapper.selectGroupNo(sNo);
     }
 }

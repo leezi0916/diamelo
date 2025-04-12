@@ -80,9 +80,11 @@ public class EmployeeController {
     @GetMapping("empSearch.erp")
     public String selectEmployeeSearch(@RequestParam(defaultValue = "1") int cpage, String userName, String jobCode, Model model) {
         int UserCount = employeeService.selectSearchUserInfoCount(userName, jobCode);
+        System.out.println("UserCount"+UserCount);
         PageInfo pi = new PageInfo(UserCount, cpage, 10, 10);
         ArrayList<UserInfo> list = employeeService.selectSearchUserInfoList(pi, userName, jobCode);
 
+        System.out.println("pi"+pi);
         model.addAttribute("userName", userName);
         model.addAttribute("jobCode", jobCode);
 
@@ -109,7 +111,9 @@ public class EmployeeController {
     @PostMapping("empDetailSearch.erp")
     public String updateEmployeeDetailSearch(@ModelAttribute UserInfo userInfo, MultipartFile refile, HttpSession session, Model model) {
         int imgSearch = employeeService.employeeDetailImageSearch(userInfo);
+        System.out.println("userInfo"+userInfo);
         int result = employeeService.updateEmployeeDetailSearch(userInfo);
+
         if (refile != null && !refile.getOriginalFilename().isEmpty()) {
             //기존 첨부파일 삭제
             if(userInfo.getOriginName() != null && !userInfo.getOriginName().equals("")){

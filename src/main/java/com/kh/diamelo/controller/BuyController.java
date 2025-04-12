@@ -164,19 +164,19 @@ public class BuyController {
         }
         String searchId = buyService.selectUserId(user);
         int buyCount = buyService.selectSearchCount(startDate, endDate, searchId);
-
+        System.out.println("buyCount" + buyCount);
         PageInfo bpi = new PageInfo(buyCount, bpage, 10, 10);
 
         ArrayList<SalesDetails> blist = buyService.selectSearchList(bpi, startDate, endDate, searchId);
-
+        System.out.println("bpi"+bpi);
 
         model.addAttribute("buyCount", buyCount);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("user", user);
 
-        model.addAttribute("blist", blist);
-        model.addAttribute("bpi", bpi);
+        model.addAttribute("list", blist);
+        model.addAttribute("pi", bpi);
 
         return "erpPage/buyPage";
     }

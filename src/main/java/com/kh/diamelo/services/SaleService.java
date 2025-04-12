@@ -20,7 +20,9 @@ public interface SaleService {
 
     int updateStatusN(int sNo);
 
-    int updateProduct(Product product);
+    int updateProductPlus(Product product);
+
+    int updateProductMinus(Product product);
 
     String selectUserId(int sNo);
 
@@ -29,4 +31,6 @@ public interface SaleService {
     int selectSearchCount(String company, String startDate, String endDate);
 
     ArrayList<InoutGroup> selectSearchList(PageInfo pi,String company, String startDate, String endDate);
+
+    String selectGroupNo(int sNo);
 }

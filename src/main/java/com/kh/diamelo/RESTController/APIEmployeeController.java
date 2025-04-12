@@ -17,15 +17,18 @@ public class APIEmployeeController {
     public String empDelete(String userId) {
 
         int result;
+        int result1;
         UserInfo list = employeeService.empStatusSearch(userId);
 
 
         String userStatus = list.getStatus();
         System.out.println(list);
-        if(userStatus.equals("Y")) {
+        if(userStatus.equals("W")) {
+
             result = employeeService.empStatusDelete(userId);
+            result1 = employeeService.empStatusUpdate(userId);
         }else{
-            result = employeeService.empUserDelete(userId);
+            result = employeeService.empStatusDelete(userId);
         }
 
             return String.valueOf(result);

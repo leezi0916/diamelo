@@ -30,8 +30,9 @@
 
     <select id="selectUserInfoCount" resultType="int">
         SELECT COUNT(*) FROM USER_INFO
-        WHERE STATUS = 'Y' AND
-        USER_DELETED = 'N'
+        WHERE STATUS = 'Y'
+        AND COMPANY_NAME IS NULL
+        AND USER_DELETED = 'N'
     </select>
     <select id="selectUserInfoList" parameterType="UserInfo"   resultMap="UserResult">
         SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') AS ENROLL_DATE
@@ -41,7 +42,7 @@
         JOIN JOB J USING(JOB_CODE)
         WHERE STATUS = 'Y' AND
         USER_DELETED = 'N'
-        AND JOB_CODE != 'J0'
+        AND COMPANY_NAME IS NULL
         ORDER BY JOB_CODE DESC))
     </select>
 
@@ -76,6 +77,7 @@
         SELECT COUNT(*)
         FROM USER_INFO
         WHERE USER_DELETED = 'N'
+        AND COMPANY_NAME IS NULL
             <if test="userName != null and userName != ''">
                AND USER_NAME = #{userName}
             </if>
@@ -94,7 +96,7 @@
         JOIN JOB J USING(JOB_CODE)
         WHERE STATUS = 'Y' AND
         USER_DELETED = 'N'
-        AND JOB_CODE != 'J0'
+        AND COMPANY_NAME IS NULL
         <if test="userName != null and userName != '' and userName != 'all'">
             AND USER_NAME = #{userName}
         </if>
@@ -109,6 +111,7 @@
         SELECT COUNT(*)
         FROM USER_INFO
         WHERE USER_DELETED = 'N'
+        AND COMPANY_NAME IS NULL
         <if test="userId != null and userId != ''">
             AND USER_ID = #{userId}
         </if>
@@ -125,6 +128,7 @@
         JOIN JOB J USING(JOB_CODE)
         WHERE USER_DELETED = 'N'
         AND JOB_CODE != 'J5'
+        AND COMPANY_NAME IS NULL
         <if test="userId != null and userId != ''">
             AND USER_ID = #{userId}
         </if>
@@ -197,6 +201,12 @@
         DELETE FROM USER_INFO
         WHERE USER_ID = #{userId}
     </delete>
+
+    <update id="empStatusUpdate">
+        UPDATE USER_INFO SET
+        STATUS = 'N'
+        WHERE USER_ID = #{userId}
+    </update>
 
 
 
