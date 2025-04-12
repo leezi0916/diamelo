@@ -107,6 +107,11 @@ public class EmployeeServiceImpl implements   EmployeeService{
         return employeeMapper.empUserDelete(userId);
     }
 
+    @Override
+    public int empStatusUpdate(String userId) {
+        return employeeMapper.empStatusUpdate(userId);
+    }
+
 
 }
 

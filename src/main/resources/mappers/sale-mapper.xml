@@ -16,6 +16,7 @@
         <result column="HISTORY_STOCK" property="historyStock"/>
         <result column="HIS_NO" property="hisNo"/>
         <result column="GROUP_NO" property="groupNo" />
+        <result column="PRO_INVENT_STOCK" property="proInventStock" />
     </resultMap>
 
     <resultMap id="SalesDetailsResult" type="SalesDetails">
@@ -66,11 +67,12 @@
     </select>
 
     <select id="selectSaleDetailList" parameterType="Product" resultMap="ProductResult">
-        SELECT CHANGE_NAME,PRO_NAME, PRO_NO, HISTORY_STOCK, GROUP_NO, PRO_PRICE
+        SELECT CHANGE_NAME,PRO_NAME, PRO_NO, HISTORY_STOCK, GROUP_NO, PRO_PRICE, PRO_INVENT_STOCK
         FROM INOUT_GROUP
         JOIN INOUT_HISTORY USING(GROUP_NO)
         JOIN PRODUCT USING(PRO_NO)
         JOIN ATTACHMENT USING(PRO_NO)
+        JOIN PRODUCT_INVENTORY USING(PRO_NO)
         WHERE GROUP_NO =  #{sNo}
     </select>
 
@@ -82,12 +84,14 @@
         WHERE GROUP_NO = #{sNo}
     </select>
 
+<!-- 현재 제품번호의 승인상태를 나타냄 -->
     <select id="selectGroupStatus" resultType="String">
         SELECT GROUP_STATUS
         FROM INOUT_GROUP
         WHERE GROUP_NO = #{sNo}
     </select>
 
+<!-- 현재 제품번호의 상태를 (승인)'Y' 상태로 변경 -->
     <update id="updateStatus">
         UPDATE INOUT_GROUP SET
         GROUP_STATUS ='Y'
@@ -100,9 +104,16 @@
         WHERE GROUP_NO = #{sNo}
     </update>
 
-    <update id="updateProduct" parameterType="Product">
+<!-- GROUP_TYPE가 'O'일 경우 수량 추가 -->
+    <update id="updateProductPlus" parameterType="Product">
         UPDATE PRODUCT_INVENTORY
         SET PRO_INVENT_STOCK = PRO_INVENT_STOCK + #{historyStock}
+        WHERE PRO_NO = #{proNo}
+    </update>
+
+    <update id="updateProductMinus" parameterType="Product">
+        UPDATE PRODUCT_INVENTORY
+        SET PRO_INVENT_STOCK = PRO_INVENT_STOCK - #{historyStock}
         WHERE PRO_NO = #{proNo}
     </update>
 
@@ -161,5 +172,10 @@
             COMPANY_NAME = #{company})
         </if>
         ORDER BY GROUP_NO DESC))
+    </select>
+
+    <select id="selectGroupNo" resultType="String">
+        SELECT GROUP_TYPE FROM INOUT_GROUP
+        WHERE GROUP_NO = #{sNo}
     </select>
 </mapper>

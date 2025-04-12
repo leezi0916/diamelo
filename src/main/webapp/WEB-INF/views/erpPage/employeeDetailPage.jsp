@@ -90,9 +90,13 @@
             </div>
             <div class="page-body-content-div-input-div">
               <p>상태</p>
-              <select class="input-box" aria-invalid="${e.status}" name="status">
+              <select class="input-box" oninvalid="" name="status">
                 <option value="Y" <c:if test="${e.status == 'Y'}">selected</c:if>>승인</option>
-                <option value="N" <c:if test="${e.status == 'N'}">selected</c:if>>대기</option>
+                <option value="W" <c:if test="${e.status == 'W'}">selected</c:if>>대기</option>
+                  <c:if test="${e.status =='N'}">
+                      <option value="N" <c:if test="${e.status == 'N'}">selected</c:if>>반려</option>
+                  </c:if>
+
               </select>
               <p>부서</p>
               <select class="input-box" oninvalid="" name="deptCode">
