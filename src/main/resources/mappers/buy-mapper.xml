@@ -29,6 +29,7 @@
         <result column="SALES_NAME" property="salesName"/>
         <result column="USER_NAME" property="userName"/>
         <result column="GROUP_NO" property="groupNo" />
+        <result column="GROUP_DATE" property="groupDate"/>
     </resultMap>
     <resultMap id="InoutHistoryResult" type="Product">
         <result column="HIS_NO" property="hisNo"/>
@@ -57,6 +58,7 @@
         SELECT GROUP_NO, USER_NAME, GROUP_DATE
         FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_TYPE = 'O'
         ORDER BY GROUP_NO DESC))
 
     </select>
@@ -146,16 +148,16 @@
 
     <select id="selectSearchCount" resultType="_int">
         SELECT COUNT(*)
-        FROM SALES_DETAILS
-        WHERE TYPE = 'O'
+        FROM INOUT_GROUP
+        WHERE GROUP_TYPE = 'O'
         <if test="startDate != null and endDate == null">
-            AND SALES_DATE &lt;= #{startDate}
+            AND GROUP_DATE &lt;= #{startDate}
         </if>
         <if test="startDate == null and endDate != null">
-            AND SALES_DATE &gt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+            AND GROUP_DATE &gt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="startDate != null and endDate != null">
-            AND SALES_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+            AND GROUP_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="user != null and user != ''">
             AND USER_ID = #{user}
@@ -165,20 +167,20 @@
 
 
     <select id="selectSearchList" resultMap="SalesDetailsResult" parameterType="SalesDetails">
-        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE
-        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, SALES_DATE
-        FROM (SELECT  GROUP_NO, USER_NAME, SALES_DATE
-        FROM SALES_DETAILS
+        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE
+        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, GROUP_DATE
+        FROM (SELECT  GROUP_NO, USER_NAME, GROUP_DATE
+        FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
-        WHERE TYPE = 'O'
+        WHERE GROUP_TYPE = 'O'
         <if test="startDate != null and endDate == null">
-            AND SALES_DATE &gt; #{startDate}
+            AND GROUP_DATE &gt; #{startDate}
         </if>
         <if test="startDate == null and endDate != null">
-            AND SALES_DATE &lt; TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+            AND GROUP_DATE &lt; TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
         </if>
         <if test="startDate != null and endDate != null">
-            AND SALES_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD, HH24:MI:SS')
+            AND GROUP_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD, HH24:MI:SS')
         </if>
         <if test="user != null and user != ''">
             AND USER_ID = #{user}

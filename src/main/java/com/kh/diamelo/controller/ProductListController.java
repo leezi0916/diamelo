@@ -47,8 +47,8 @@ public class ProductListController {
             model.addAttribute("cartList", cartList);
             return "crmPage/productList";
         } else {
-            model.addAttribute("errorMsg", "상품을 가져오는데 실패하였습니다.");
-            return "common/errorPage";
+            // 빈 페이지 출력
+            return "crmPage/productList";
         }
 
     }
@@ -77,7 +77,8 @@ public class ProductListController {
             return "crmPage/productList";
         } else {
             model.addAttribute("errorMsg", "상품을 가져오는데 실패하였습니다.");
-            return "common/errorPage";
+            // 빈 페이지 출력
+            return "crmPage/productList";
         }
     }
 
