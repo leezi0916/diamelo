@@ -114,10 +114,10 @@ public class EmployeeController {
             }
         }
         if (result > 0) {
-            session.setAttribute("alertMsg", "게시글 수정 성공");
+            session.setAttribute("alertMsg", "수정 성공");
             return "redirect:/empAdminList.erp";
         } else {
-            model.addAttribute("errorMsg", "게시글 수정 실패");
+            model.addAttribute("errorMsg", "수정 실패");
             return "common/errorPage";
         }
     }
