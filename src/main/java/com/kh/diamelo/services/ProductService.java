@@ -26,6 +26,9 @@ public interface ProductService {
 
     boolean produceProduct(int productNo, int quantity);
 
+    //제품 최대 몇개 제작 가능인지
+    int getMaxProductionCount(int productNo);
+
     // 제품 개수 조회
     int selectProductCount();
 
