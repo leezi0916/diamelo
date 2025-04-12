@@ -88,20 +88,24 @@ prefix="c" %>
                     </div>
                 </div>
             </div>
-            <script>
-                // Form 내용 검증 함수
-                function validateForm() {
-                    // 전화번호 양식 확인 변수
-                    const phone = document.querySelector('#enroll-form input[name=phone]').value;
 
-                    const phoneRegex = /^010\d{8}$/;
-                    if (!phoneRegex.test(phone)) {
-                        alert("전화번호는 '010'으로 시작하고 '-' 없이 11자리 숫자여야 합니다.");
-                        return false;
-                    }
-                    return true;
-                }
-            </script>
         </form>
+
+        <script>
+
+            // Form 내용 검증 함수
+            function validateForm() {
+                // 전화번호 양식 확인 변수
+                const phone = document.querySelector('#enroll-form input[name=phone]').value;
+
+                const phoneRegex = /^010\d{8}$/;
+                if (!phoneRegex.test(phone)) {
+                    alert("전화번호는 '010'으로 시작하고 '-' 없이 11자리 숫자여야 합니다.");
+                    return false;
+                }
+                return true;
+            }
+
+        </script>
     </body>
 </html>

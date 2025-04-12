@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/incomePage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css"/>
+
+    <script src="/js/erp/dateSelect.js"></script>
+
     <title>Title</title>
 </head>
 <body>
@@ -38,11 +41,13 @@
                             <option value="I" ${type == 'I' ? 'selected' : ''}>소득</option>
                             <option value="O" ${type == 'O' ? 'selected' : ''}>지출</option>
                         </select>
-                        <input type="date" name="date1" value="${startDate}" class="input-box">
-                        <input type="date" name="date2" value="${endDate}" class="input-box">
+
+                        <input type="date" name="date1" value="${startDate}" id="startDate" class="input-box">
+                        <input type="date" name="date2" value="${endDate}" id="endDate" class="input-box">
+
                         <input type="text" name="company" value="${company}" class="input-box" placeholder="거래처">
                         <%-- 검색 버튼(아이콘 + 텍스트포함) --%>
-                        <button type="submit" class="input-box">
+                        <button type="submit" class="input-box" onclick="return checkDate()">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -72,7 +77,16 @@
                                 <c:forEach var="item" items="${list}">
                                     <tr onclick="location.href='detail.in?gno=${item.groupNo}'">
                                     <td>${item.groupNo}</td>
-                                        <td>${item.companyName}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${item.companyName == null}">
+                                                    A공장
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${item.companyName}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${item.type eq 'I'}">소득</c:when>
@@ -103,23 +117,29 @@
                 <div class="page-body-content2">
                     <%-- 매출 합계 조회 영역 --%>
                     <div id="table-header">
-                        <div id="table-header-title" class="table-header">총 매출</div>
                         <c:choose>
                             <c:when test="${empty param.type}">
-                                <div id="table-header-price" class="table-header"></div>
+                                <div id="table-header-title" class="table-header">매출 총이익</div>
+                                    <div id="table-header-price" class="table-header" style="font-weight: bold;">
+                                        <fmt:formatNumber value="${details}" type="number"/>
+                                    </div>
+                                <div id="table-header-unit" class="table-header">(단위:만원)</div>
                             </c:when>
                             <c:when test="${type == 'I'}">
-                                <div id="table-header-price" class="table-header" style="color: blue; font-weight: bold;">
-                                    +<fmt:formatNumber value="${totalSalesSum}" type="number"/>
-                                </div>
+                                <div id="table-header-title" class="table-header">총 매출</div>
+                                    <div id="table-header-price" class="table-header" style="color: blue; font-weight: bold;">
+                                        +<fmt:formatNumber value="${totalSalesSum}" type="number"/>
+                                    </div>
+                                <div id="table-header-unit" class="table-header">(단위:만원)</div>
                             </c:when>
                             <c:when test="${type == 'O'}">
-                                <div id="table-header-price" class="table-header" style="color: red; font-weight: bold;">
-                                    -<fmt:formatNumber value="${totalSalesSum}" type="number"/>
-                                </div>
+                                <div id="table-header-title" class="table-header">총 지출</div>
+                                    <div id="table-header-price" class="table-header" style="color: red; font-weight: bold;">
+                                        -<fmt:formatNumber value="${totalSalesSum}" type="number"/>
+                                    </div>
+                                <div id="table-header-unit" class="table-header">(단위:만원)</div>
                             </c:when>
                         </c:choose>
-                        <div id="table-header-unit" class="table-header">(단위:만원)</div>
                     </div>
                 </div>
 
@@ -176,14 +196,5 @@
 
     </div>
 </div>
-<script>
-
-
-    function goToDetail() {
-        location.href = 'detail.in';
-    }
-
-
-</script>
 </body>
 </html>

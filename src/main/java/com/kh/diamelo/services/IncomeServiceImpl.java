@@ -49,4 +49,28 @@ public class IncomeServiceImpl implements IncomeService {
     public ArrayList<SalesDetails> incomeDetail(int gno) {
         return incomeMapper.incomeDetail(gno);
     }
+
+    @Override
+    public int selectIncomeAllSales() {
+        //총 소득
+        int inTotal = incomeMapper.selectIncomeInSales();
+        //총 지출
+        int outTotal = incomeMapper.selectIncomeOutSales();
+
+        int total = inTotal - outTotal;
+
+        return total;
+    }
+
+    @Override
+    public int selectIncomeAllSalesDetails(String type, String startDate, String endDate, String company) {
+        //검색 조건 총 소득
+        int inTotal = incomeMapper.selectIncomeInSalesDetail(type, startDate,endDate,company);
+        //검색 조건 총 지출
+        int outTotal = incomeMapper.selectIncomeOutSalesDetail(type, startDate,endDate,company);
+
+        int total = inTotal - outTotal;
+        return total;
+    }
+
 }

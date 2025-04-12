@@ -14,6 +14,25 @@
         <result column="PRO_CATEGORY" property="categoryName"/>
         <result column="PRO_INVENT_STOCK" property="proInventStock"/>
         <result column="PRO_ENROLL_DATE" property="proEnrollDate"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+    </resultMap>
+
+    <resultMap id="attachmentResult" type="Attachment">
+        <result column="PRO_NO" property="proNo"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="SAL_NO" property="salNo"/>
+        <result column="ORIGIN_NAME" property="originName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+        <result column="UPDATE_DATE" property="updateDate"/>
+    </resultMap>
+
+    <resultMap id="recipeResult" type="Recipe">
+        <result column="REC_NO" property="recNo"/>
+        <result column="PRO_NO" property="proNo"/>
+        <result column="MAT_NO" property="matNo"/>
+        <result column="AMOUNT" property="amount"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="PRICE_TOTAL" property="priceTotal"/>
     </resultMap>
 
 
@@ -30,9 +49,10 @@
     <select id="selectProductList" resultMap="productResult">
         SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
         NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
-        C.PRO_CATEGORY, A.IS_PRODUCT
+        C.PRO_CATEGORY, A.IS_PRODUCT, D.CHANGE_NAME
         FROM PRODUCT A
         LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN ATTACHMENT D ON A.PRO_NO = D.PRO_NO
         INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
         WHERE A.PRO_DELETED = 'N'
         AND A.IS_PRODUCT = 'Y'
@@ -41,55 +61,15 @@
     <select id="selectMaterialList" resultMap="productResult">
         SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
         NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
-        C.PRO_CATEGORY, A.IS_PRODUCT
+        C.PRO_CATEGORY, A.IS_PRODUCT, D.CHANGE_NAME
         FROM PRODUCT A
         LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN ATTACHMENT D ON A.PRO_NO = D.PRO_NO
         INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
         WHERE A.PRO_DELETED = 'N'
         AND A.IS_PRODUCT = 'N'
     </select>
 
-    <!--        <select id="countByIsProduct" resultType="int">-->
-    <!--            SELECT COUNT(*)-->
-    <!--            FROM PRODUCT-->
-    <!--            WHERE IS_PRODUCT = #{isProduct}-->
-    <!--            AND PRO_DELETED = 'N'-->
-    <!--        </select>-->
-
-    <!--        <select id="findByIsProduct" resultMap="productResult">-->
-    <!--            SELECT A.PRO_NO, A.PROCATEGORY_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,-->
-    <!--            A.PRO_DELETED, A.IS_PRODUCT,-->
-    <!--            C.PRO_CATEGORY AS CATEGORY_NAME, B.PRO_INVENT_STOCK-->
-    <!--            FROM PRODUCT A-->
-    <!--            INNER JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO-->
-    <!--            INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO-->
-    <!--            WHERE A.IS_PRODUCT = #{isProduct}-->
-    <!--            AND A.PRO_DELETED = 'N'-->
-    <!--        </select>-->
-
-<!--    <insert id="insertMaterial">-->
-<!--        INSERT-->
-<!--        INTO PRODUCT(-->
-<!--        PRO_NO,-->
-<!--        PROCATEGORY_NO,-->
-<!--        PRO_NAME,-->
-<!--        PRO_DETAIL,-->
-<!--        PRO_PRICE,-->
-<!--        PRO_ENROLL_DATE,-->
-<!--        PRO_DELETED,-->
-<!--        IS_PRODUCT-->
-
-<!--        ) VALUES (-->
-<!--        SEQ_PNO.NEXTVAL,-->
-<!--        6,-->
-<!--        #{proName},-->
-<!--        #{proDetail},-->
-<!--        #{proPrice},-->
-<!--        SYSDATE,-->
-<!--        'N',-->
-<!--        'N'-->
-<!--        )-->
-<!--    </insert>-->
 
     <insert id="insertProduct" parameterType="Product">
         <selectKey keyProperty="proNo" resultType="_int" order="BEFORE">
@@ -116,14 +96,23 @@
         )
     </insert>
 
-    <!-- 첨부파일 등록 -->
-    <insert id="insertProductAttachment" parameterType="Attachment">
+    <!-- 현재 저장한 pro_no 가져오기 !-->
+    <select id="selectCurrentProductNo" resultType="int">
+        SELECT MAX(PRO_NO) FROM PRODUCT
+    </select>
+
+
+
+    <!-- 이미지 저장 !-->
+    <insert id="insertProductAttachment">
         INSERT INTO ATTACHMENT (
+        ATC_NO,
         PRO_NO,
         ORIGIN_NAME,
         CHANGE_NAME,
         UPDATE_DATE
         ) VALUES (
+        SEQ_ANO.NEXTVAL,
         #{proNo},
         #{originName},
         #{changeName},
@@ -131,18 +120,12 @@
         )
     </insert>
 
-    <!-- 레시피 등록 -->
-    <insert id="insertRecipeList" parameterType="java.util.ArrayList">
-        INSERT INTO RECIPE (PRO_NO, MAT_NO, AMOUNT)
-        VALUES
-        <foreach collection="recipeList" item="recipe" separator=",">
-            (#{recipe.proNo}, #{recipe.matNo}, #{recipe.amount})
-        </foreach>
+    <!-- recipe 저장 !-->
+    <insert id="insertRecipe">
+
+        INSERT INTO RECIPE (REC_NO, PRO_NO, MAT_NO, AMOUNT)
+        VALUES (SEQ_RCNO.NEXTVAL, #{proNo}, #{matNo}, #{amount})
     </insert>
-
-
-
-
 
 
     <insert id="insertMaterial" parameterType="product">
@@ -171,13 +154,16 @@
     </insert>
 
 
+
     <insert id="insertMaterialAttachment" parameterType="attachment">
         INSERT INTO ATTACHMENT (
+        ATC_NO,
         PRO_NO,
         ORIGIN_NAME,
         CHANGE_NAME,
         UPDATE_DATE
         ) VALUES (
+        SEQ_ANO.NEXTVAL,
         #{proNo},
         #{originName},
         #{changeName},
@@ -186,12 +172,153 @@
     </insert>
 
 
+    <select id="selectProduct" resultMap="productResult" parameterType="Product">
+        SELECT * FROM PRODUCT WHERE PRO_NO = #{proNo}
+    </select>
+
+    <select id="selectProductAttachment" resultMap="attachmentResult" parameterType="Attachment">
+        SELECT * FROM ATTACHMENT WHERE PRO_NO = #{proNo}
+    </select>
+
+    <select id="selectRecipeList" resultMap="recipeResult" parameterType="Recipe">
+        SELECT A.PRO_NO, A.MAT_NO, A.AMOUNT, B.PRO_NAME, (A.AMOUNT * B.PRO_PRICE) AS PRICE_TOTAL
+        FROM RECIPE A
+        LEFT JOIN PRODUCT B ON B.PRO_NO = A.MAT_NO
+        WHERE A.PRO_NO = #{proNo}
+    </select>
 
 
 
+    <update id="updateProduct" parameterType="Product">
+        UPDATE PRODUCT
+        SET PRO_NAME = #{proName},
+        PRO_ENROLL_DATE = #{proEnrollDate},
+        PRO_DETAIL = #{proDetail},
+        PRO_PRICE = #{proPrice},
+        PROCATEGORY_NO = #{proCategoryNo}
+        WHERE PRO_NO = #{proNo}
+    </update>
+
+    <update id="updateProductAttachment" parameterType="Attachment">
+        UPDATE ATTACHMENT
+        SET ORIGIN_NAME = #{originName},
+        CHANGE_NAME = #{changeName}
+        WHERE PRO_NO = #{proNo}
+    </update>
+
+    <delete id="deleteRecipeByProNo" parameterType="int">
+        DELETE FROM RECIPE WHERE PRO_NO = #{proNo}
+    </delete>
+
+
+    <update id="deleteProduct" parameterType="Product">
+        UPDATE PRODUCT
+        SET PRO_DELETED = 'Y'
+        WHERE PRO_NO = #{proNo}
+    </update>
 
 
 
+    <select id="getProductInfo" parameterType="int" resultType="Product">
+        SELECT
+        pro_no AS proNo,
+        pro_name AS proName,
+        pro_price AS proPrice
+        FROM product
+        WHERE pro_no = #{proNo}
+        AND IS_PRODUCT = 'N'
+    </select>
+
+    <select id="selectAllMaterials" resultMap="productResult" parameterType="Product">
+        SELECT PRO_NO, PRO_NAME
+        FROM PRODUCT
+        WHERE IS_PRODUCT = 'N'
+        AND PRO_DELETED = 'N'
+        ORDER BY PRO_NO ASC
+    </select>
+
+
+    <!-- 검색된 제품 총 개수 -->
+    <select id="selectSearchProductCount" resultType="int">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE IS_PRODUCT = 'Y'
+        <if test="searchCategoryNo != 0">
+            AND PROCATEGORY_NO = #{searchCategoryNo}
+        </if>
+        <if test="proNo != 0">
+            AND PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+    </select>
+
+    <!-- 검색된 제품 리스트 조회 -->
+    <select id="selectSearchProductList" resultMap="productResult">
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT, D.CHANGE_NAME
+        FROM PRODUCT A
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN ATTACHMENT D ON A.PRO_NO = D.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'Y'
+        <if test="searchCategoryNo != 0">
+            AND A.PROCATEGORY_NO = #{searchCategoryNo}
+        </if>
+        <if test="proNo != 0">
+            AND A.PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND A.PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+    </select>
+
+
+
+    <!-- 검색된 재료 총 개수 -->
+    <select id="selectSearchMaterialCount" resultType="int">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE IS_PRODUCT = 'N'
+
+        <if test="proNo != 0">
+            AND PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+    </select>
+
+    <!-- 검색된 재료 리스트 조회 -->
+    <select id="selectSearchMaterialList" resultMap="productResult">
+        SELECT A.PRO_NO, A.PRO_NAME, A.PRO_DETAIL, A.PRO_PRICE,
+        NVL(B.PRO_INVENT_STOCK, 0) AS PRO_INVENT_STOCK,
+        C.PRO_CATEGORY, A.IS_PRODUCT, D.CHANGE_NAME
+        FROM PRODUCT A
+        LEFT JOIN PRODUCT_INVENTORY B ON A.PRO_NO = B.PRO_NO
+        LEFT JOIN ATTACHMENT D ON A.PRO_NO = D.PRO_NO
+        INNER JOIN PRODUCT_CATEGORY C ON A.PROCATEGORY_NO = C.PROCATEGORY_NO
+        WHERE A.PRO_DELETED = 'N'
+        AND A.IS_PRODUCT = 'N'
+
+        <if test="proNo != 0">
+            AND A.PRO_NO = #{proNo}
+        </if>
+        <if test="proName != null and proName != ''">
+            AND A.PRO_NAME LIKE '%' || #{proName} || '%'
+        </if>
+    </select>
+
+    <insert id="inventoryInsert">
+        INSERT INTO PRODUCT_INVENTORY (PRO_INVEN_NO,
+        PRO_NO,
+        PRO_INVENT_STOCK)
+        VALUES (
+        SEQ_INO.NEXTVAL, #{proNo}, 0)
+    </insert>
 
 
 </mapper>

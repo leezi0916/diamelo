@@ -1,16 +1,17 @@
 package com.kh.diamelo.services;
 
 
+import com.kh.diamelo.domain.vo.Cart;
+import com.kh.diamelo.domain.vo.PageInfo;
 import com.kh.diamelo.domain.vo.Product;
 import com.kh.diamelo.mappers.ProductMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
 
-
+    // erpPage 제품 정보 조회
     @Override
     public ArrayList<Product> getProductList() {
         ArrayList<Product> productList = productMapper.getProductList();
@@ -37,12 +38,57 @@ public class ProductServiceImpl implements ProductService {
         return productList;
     }
 
+
+    // crmPage 제품 정보 조회
+    @Override
+    public ArrayList<Product> getCrmProductList(PageInfo pi) {
+
+        // 5개씩 끊어서 가져오고  5개씩 보이게 설정
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        int limit = pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, limit);
+
+        ArrayList<Product> productList = productMapper.getCrmProductList(rowBounds);
+
+        // 로그 추가
+        if (productList == null) {
+            System.out.println("⚠productList가 null입니다.");
+        } else {
+            System.out.println(" productList 크기: " + productList.size());
+            for (Product p : productList) {
+                System.out.println("제품 정보: " + p);
+            }
+        }
+
+        return productList;
+    }
+
+    // 장바구니 페이지 제품 정보 조회 - 오버로딩
+    @Override
+    public ArrayList<Product> getCrmProductList() {
+        ArrayList<Product> productList = productMapper.getCrmProductList();
+
+        // 로그 추가
+        if (productList == null) {
+            System.out.println("⚠productList가 null입니다.");
+        } else {
+            System.out.println(" productList 크기: " + productList.size());
+            for (Product p : productList) {
+                System.out.println("제품 정보: " + p);
+            }
+        }
+
+        return productList;
+    }
+
+
     // 제품 이미지 조회
     @Override
     public String getProductImage(int productNo) {
 
         return productMapper.getProductImage(productNo);
     }
+
 
     @Override
     public ArrayList<Product> getMaterialsByProductNo(int productNo) {
@@ -66,7 +112,6 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     //모두 성공해야만 db에 반영
     @Override
-
     public boolean produceProduct(int productNo, int quantity) {
         //  특정제품의 필요한 재료들의 정보 조회
         ArrayList<Product> materials = productMapper.getMaterialsByProductNo(productNo);
@@ -77,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
         // 원자재 재고를 Map으로 변환 (키: 원자재 번호, 값: 현재 재고)
         HashMap<Integer, Integer> stockMap = new HashMap<>();
         for (Product stock : materialStocks) {
-            stockMap.put((int) stock.getProNo(), stock.getStock());
+            stockMap.put(stock.getProNo(), stock.getProInventStock());
         }
 
         // 필요한 재료가 충분한지 확인
@@ -99,6 +144,91 @@ public class ProductServiceImpl implements ProductService {
         productMapper.decreaseMaterialStock(productNo, quantity);
 
         return true;
+    }
+
+    //제품 최대 몇개 제작가능한지
+    @Override
+    public int getMaxProductionCount(int productNo) {
+        return productMapper.getMaxProductionCount(productNo);
+    }
+
+
+    // 제품 개수 조회
+    @Override
+    public int selectProductCount() {
+        return productMapper.selectProductCount();
+    }
+
+
+    // 검색된 제품 개수 조회
+    @Override
+    public int selectSearchProductCount(String keyword) {
+        return productMapper.selectSearchProductCount(keyword);
+    }
+
+
+    // 검색된 crmPage 제품 정보 조회
+    @Override
+    public ArrayList<Product> getSearchCrmProductList(PageInfo pi, String keyword) {
+
+        // 5개씩 끊어서 가져오고  5개씩 보이게 설정
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        int limit = pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, limit);
+
+        ArrayList<Product> productList = productMapper.getSearchCrmProductList(rowBounds,keyword);
+
+        // 로그 추가
+        if (productList == null) {
+            System.out.println("⚠searchProductList가 null입니다.");
+        } else {
+            System.out.println(" searchProductList 크기: " + productList.size());
+            for (Product p : productList) {
+                System.out.println("제품 정보: " + p);
+            }
+        }
+
+        return productList;
+    }
+
+
+    // 장바구니 목록 조회
+    @Override
+    public ArrayList<Cart> getCartList(String userId) {
+        return productMapper.getCartList(userId);
+    }
+
+
+    // 장바구니 추가
+    @Override
+    public int addCart(int proNo, String userId) {
+        return productMapper.addCart(proNo,userId);
+    }
+
+
+    // 장바구니 삭제
+    @Override
+    public int deleteCart(int proNo, String userId) {
+        return productMapper.deleteCart(proNo,userId);
+    }
+
+
+    // 제품 입출고 정보 묶음추가
+    @Override
+    public int insertInoutGroup(String userId) {
+        return productMapper.insertInoutGroup(userId);
+    }
+
+
+    // 제품 입출고 내역 추가
+    @Override
+    public int insertInoutHistory(int proNo, int proStock, int proPrice) {
+        if (proStock != 0) {
+            // 제품별 총 가격이기때문에 합 구하기
+            int totalPrice = proStock * proPrice;
+            return productMapper.insertInoutHistory(proNo,proStock,totalPrice);
+        }
+        return 0;
     }
 
 }

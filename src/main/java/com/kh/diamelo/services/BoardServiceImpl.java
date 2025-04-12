@@ -78,4 +78,16 @@ public class BoardServiceImpl implements BoardService {
         RowBounds rowBounds = new RowBounds (offset, pi.getBoardLimit());
         return boardMapper.selectBoard(type, title, userId, board, rowBounds);
     }
+
+    //게시판 댓글 검색
+    @Override
+    public ArrayList<Reply> selectReply(int postId) {
+        return boardMapper.selectReply(postId);
+    }
+
+    //게시판 댓글 삭제
+    @Override
+    public int deleteReply(Reply r) {
+        return boardMapper.deleteReply(r);
+    }
 }

@@ -6,17 +6,8 @@
     margin: 0;
 }
 /*테이블 css 입니다*/
-.table{
-    border-bottom:1px solid #D0D5DD;
-    table-layout: fixed;
-}
 
-.table thead th{
-    text-align: center;
-}
-.table tbody td{
-    text-align: center;
-}
+
 
 input{
     outline: none;
@@ -83,6 +74,9 @@ button{
 }
 
 /*테이블 css 입니다*/
+.table{
+    border-bottom:1px solid #D0D5DD;
+}
 
 .table thead th{
     text-align: center;

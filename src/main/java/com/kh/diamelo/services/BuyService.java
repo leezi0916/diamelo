@@ -17,17 +17,27 @@ public interface BuyService {
 
     int insertOrderDetails(Product product);
 
-    String selectGroupNo(int rNum);
+    int selectGroupNo();
 
-    Product selectInOutHistory(int sNo);
+    Product selectInOutHistory(int gNo);
 
-    ArrayList<Product> selectMatDetailList(int sNo);
+    ArrayList<Product> selectMatDetailList(int gNo);
 
-    int selectMatPrice(String proName);
+    int selectMatPrice(int proNo);
 
     int insertInoutGroup(InoutGroup inoutGroup);
 
-    Product selectfilePath(String proName);
+    Product selectfilePath(int proNo);
 
-    int insertSalesDetails(SalesDetails salesDetails);
+    int insertBuySalesDetails(SalesDetails salesDetails);
+
+    int selectProNo(String proName);
+
+    int updateProductInventory(Product product);
+
+    int selectSearchCount(String Date, String tDate, String user);
+
+    String selectUserId(String user);
+
+    ArrayList<SalesDetails> selectSearchList(PageInfo pi,String Date, String tDate, String user);
 }

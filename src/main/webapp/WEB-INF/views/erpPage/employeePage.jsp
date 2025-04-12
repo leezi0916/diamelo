@@ -4,9 +4,9 @@
 <head>
   <title>Diamelo</title>
   <%-- 공통 레이아웃 및 기본 스타일 적용 --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/employeePageStyle.css" />
+  <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+  <link rel="stylesheet" href="/css/default.css" />
+  <link rel="stylesheet" href="/css/erp/employeePageStyle.css" />
 
 </head>
 <body  style="background: #f8f8f8">
@@ -32,8 +32,9 @@
         <%-- 검색 필터 영역 --%>
         <div id="page-body-content-search-button">
           <form action="empSearch.erp" class="search-form" method="get">
-            <input type="text" class="input-box" placeholder="사용자명" name="userName">
+            <input type="text" class="input-box" placeholder="사용자명" name="userName" value="${userName}">
             <select class="input-box" name="jobCode">
+              <option value="all">전체</option>
               <option value="J1">사원</option>
               <option value="J2">대리</option>
               <option value="J3">과장</option>
@@ -87,22 +88,21 @@
               </tr>
             </c:forEach>
 
-            <c:forEach var="e" items="${slist}">
-              <tr>
-                <td>${e.RNum}</td>
-                <td>${e.userName}</td>
-                <td>${e.jobName}</td>
-                <td>${e.phone}</td>
-                <td>${e.email}</td>
-                <td>${e.enrollDate}</td>
-              </tr>
-            </c:forEach>
-
-
             </tbody>
           </table>
         </div>
       </div>
+        <c:choose>
+          <c:when test="${not empty userName or not empty jobCode}">
+            <c:url var="pageUrl" value="empSearch.erp">
+              <c:param name="userName" value="${userName}" />
+              <c:param name="jobCode" value="${jobCode}" />
+            </c:url>
+          </c:when>
+          <c:otherwise>
+            <c:set var="pageUrl" value="empList.erp?" />
+          </c:otherwise>
+        </c:choose>
 <%--   페이지 바     --%>
         <div id="pagingArea">
           <ul class="pagination">
@@ -111,12 +111,12 @@
                 <li class="page-item disabled" ><a class="page-link" href="#">이전</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage - 1}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${pi.currentPage - 1}">이전</a></li>
               </c:otherwise>
             </c:choose>
 
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-              <li class="page-item"><a class="page-link" href="empList.erp?epage=${p}">${p}</a></li>
+              <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${p}">${p}</a></li>
             </c:forEach>
 
             <c:choose>
@@ -124,7 +124,7 @@
                 <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
               </c:when>
               <c:otherwise>
-                <li class="page-item"><a class="page-link" href="empList.erp?epage=${pi.currentPage + 1}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${pageUrl}&epage=${pi.currentPage + 1}">다음</a></li>
               </c:otherwise>
             </c:choose>
           </ul>

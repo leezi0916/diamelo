@@ -219,25 +219,24 @@ button{
 /* 주간 매출표*/
 #week-sales{
     width: 100%;
-    height: 100px;
+    height: 100%;
     padding: 1%;
 
 }
 
 #week-sales1{
     width: 20%;
+    height: 20%;
     text-align: center;
     font-size: 24px;
 }
 
 
 #week-sales2{
-    height: 300px;
+    width: 100%;
+    height: 80%;
     display: flex;
-    padding: 1%;
-    padding-bottom: 0;
-    justify-content: space-around;
-    border-bottom: 1px solid black;
+    justify-content: center;
 }
 
 #week-sales2 > div{

@@ -18,7 +18,7 @@
           rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/erp/insertIngredient.js"></script>
 </head>
 <body>
 <div class="layout-wrapper">
@@ -46,40 +46,32 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
+                                    <input class="input-box" id="input-box" type="text" name="proName" placeholder="NAME">
                                 </div>
 
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="date" name="proEnrollDate" placeholder="DATE">
+                                    <input class="input-box" type="date" id="calendar" name="proEnrollDate" placeholder="DATE">
                                 </div>
 
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>가격</p>
-                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
+                                    <input class="input-box" type="text" id="price" name="proPrice" placeholder="PRICE">
                                 </div>
                             </div>
                         </div>
 
                         <div id="ingre_upper_right">
-                            <div id="ingre_image">
-                                <div id="insert_image">
-                                    <label for="file" id="image">
-                                        <div></div>
-                                        <div id="image-text">제품 사진 추가</div>
-                                        <div></div>
-                                    </label>
-                                    <input type="file" name="upfile" id="file" accept="image/*"
-                                           onchange="changeImage(this)">
+                            <div style="position: relative; width: 150px; height: 180px;">
+                                <input id="insert_image" type="file" name="upfile" accept="image/*" onchange="changeImage(this)">
+                                <div id="image_preview">
 
-                                </div>
-                                <div id="text">재료 이미지</div>
+                                </div> <!-- ✅ 미리보기 이미지 영역 -->
                             </div>
-
+                            <p>재료 이미지</p>
                         </div>
-
                     </div>
                     <div id="ingre_lower">
                         <div id="ingre_lower_memo">
@@ -92,7 +84,7 @@
                         </div>
 
                         <div id="ingre_lower_button">
-                            <button class="button" type="submit">+재료등록</button>
+                            <button class="button" type="submit" onclick="return checkInput()">+재료등록</button>
                             <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                         </div>
                     </div>
@@ -101,21 +93,34 @@
         </div>
 
         <script>
-            <%--  제품 사진 추가 및 삭제 --%>
+            // 재료 정보를 추가 안했을 경우
+            function checkInput(){
+                const name = document.querySelector("#input-box").value;
+                const calendar = document.querySelector("#calendar").value;
+                const price = document.querySelector("#price").value;
+                const image = document.querySelector("#insert_image").value;
 
+                if(name === "" || calendar === "" || price === "" || select === "" || image === ""){
+                    alert("추가하지않은 정보가 있습니다.");
+                    return false;
+                }
+            }
+
+            // 제품 사진 추가 및 삭제
             function changeImage(input) {
                 let file = input.files[0];
 
-                let img = document.createElement("img");
+                if (file) {
+                    let img = document.createElement("img");
+                    img.src = URL.createObjectURL(file);
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                    img.style.objectfit = "cover";
 
-                img.src = URL.createObjectURL(file);
-                img.style.width = "100%";
-                img.style.height = "100%";
-                img.style.objectFit = "cover";
-
-                let container = document.getElementById('image');
-                container.innerHTML = "";
-                container.appendChild(img);
+                    let container = document.getElementById("image_preview"); // ✅ 미리보기 영역으로 변경
+                    container.innerHTML = ""; // 기존 이미지 삭제
+                    container.appendChild(img); // 새 이미지 추가
+                }
             }
         </script>
 </body>

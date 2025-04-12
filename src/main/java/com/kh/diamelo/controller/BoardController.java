@@ -21,7 +21,9 @@ public class BoardController {
     private final BoardService boardService;
     // 게시판관리 페이지로 가기
     @GetMapping("board.erp")
-    public String board(@RequestParam(defaultValue = "1")int bpage, Model model) {
+    public String board(@RequestParam(defaultValue = "1")int bpage, Model model,HttpSession session) {
+        String svg = "/image/erpIcon/boardIcon.png";
+        
         int boardCount = boardService.selectBoardAllCount();
 
         PageInfo pi = new PageInfo(boardCount, bpage, 10, 10);
@@ -29,6 +31,9 @@ public class BoardController {
 
         model.addAttribute("list1", list1);
         model.addAttribute("pi", pi);
+
+        session.setAttribute("selectIcon", svg);
+        session.setAttribute("seletTitle", "게시판");
 
         return "erpPage/boardMainPage";
     }

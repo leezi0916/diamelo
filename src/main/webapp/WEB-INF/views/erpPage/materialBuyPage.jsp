@@ -6,9 +6,9 @@
     <title>Diamelo</title>
     <%-- 공통 레이아웃 및 스타일 css 파일들 --%>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/erpLayout.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/erp/materialBuyPageStyle.css" />
+    <link rel="stylesheet" href="/css/erp/erpLayout.css" />
+    <link rel="stylesheet" href="/css/default.css" />
+    <link rel="stylesheet" href="/css/erp/materialBuyPageStyle.css" />
 
 </head>
 <body>
@@ -60,6 +60,7 @@
                                     <td>
                                         <input type="number"
                                                class="input-box order-input"
+                                               data-proNo="${m.proNo}"
                                                data-name="${m.proName}"
                                                data-price="${m.proPrice}"
                                                min="0"
@@ -82,7 +83,7 @@
                 </div>
                 <!-- 하단 버튼 영역(승인, 반려, 돌아가기) -->
                 <div id="page-body-button-div">
-                    <button class="searchBtn">
+                    <button class="searchBtn" onclick="location.href='buyList.erp'">
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.15422 1.00586V12.2245M1.54492 6.61516H12.7635" stroke="white"
@@ -90,7 +91,7 @@
                         </svg>
                         구매 신청
                     </button>
-                    <button class="searchBtn" type="button" onclick="location.href='buy.erp'">
+                    <button class="searchBtn" type="button" onclick="location.href='buyList.erp'">
                         돌아가기
                     </button>
                 </div>
@@ -99,6 +100,79 @@
         </form>
     </div>
 </div>
+<script>
+    // 모든 발주 수량 input 요소들을 선택
+    const inputs = document.querySelectorAll('.order-input');
+
+    // 계산 결과를 출력할 DOM 요소들
+    const detailsEl = document.getElementById('order-details');
+    const itemCountEl = document.getElementById('itemsCount');
+    const totalQtyEl = document.getElementById('totalQty');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+
+    const hiddenItemsCount = document.getElementById('hiddenItemsCount');
+    const hiddenTotalQty = document.getElementById('hiddenTotalQty');
+    const hiddenTotalPrice = document.getElementById('hiddenTotalPrice');
+    const hiddenOrderDetails = document.getElementById('hiddenOrderDetails');
+
+    // 수량 입력 시 호출되는 함수
+    function updateSummary() {
+        let totalItems = 0;
+        let totalQty = 0;
+        let totalPrice = 0;
+        let detailsHtml = '';
+        let orderDetailsArray = []; // 각 항목의 상세 정보를 객체 배열로 저장
+
+        inputs.forEach(input => {
+            const qty = parseInt(input.value) || 0;
+            const proNo = parseInt(input.getAttribute('data-proNo'));
+            const name = input.getAttribute('data-name');
+            const price = parseInt(input.getAttribute('data-price'));
+
+
+            if (qty > 0) {
+                const itemTotal = qty * price;
+                console.log("이름:", name, "수량:", qty, "단가:", price,  "제품번호 :", proNo );
+
+
+                totalItems += 1;
+                totalQty += qty;
+                totalPrice += itemTotal;
+
+                detailsHtml +=
+                    "<tr class='page-body-content-material-list-last'>" +
+                    "<td colspan='2'>" + name + "</td>" +
+                    "<td colspan='2'>" + qty + "</td>" +
+                    "<td colspan='2'>" + itemTotal + "<td>" +
+                    "</tr>";
+
+                orderDetailsArray.push({ proName: name, proNo: proNo, qty: qty, itemTotal: itemTotal});
+
+            }
+        });
+
+        itemCountEl.textContent = totalItems;
+        totalQtyEl.textContent = totalQty;
+        totalPriceEl.textContent = totalPrice.toLocaleString();
+        detailsEl.innerHTML = detailsHtml;
+
+        hiddenItemsCount.value = totalItems;
+        hiddenTotalQty.value = totalQty;
+        hiddenTotalPrice.value = totalPrice;
+        hiddenOrderDetails.value = JSON.stringify(orderDetailsArray);
+
+
+    }
+
+    // 모든 input에 이벤트 리스너 등록
+    inputs.forEach(input => {
+        input.addEventListener('input', updateSummary);
+    });
+    document.getElementById('order-details').innerHTML = "<tr><td colspan='6'>테스트 데이터</td></tr>";
+    // 페이지 로딩 시 초기 계산 실행
+    updateSummary();
+</script>
 
 <script>
     // 모든 발주 수량 input 요소들을 선택

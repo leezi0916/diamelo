@@ -2,6 +2,8 @@ package com.kh.diamelo.domain.vo;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,6 +31,8 @@ public class SalesDetails {
     private String companyName;
     private int totalSales;
     private String userName;
+    private String groupDate;
+
 
 
 }

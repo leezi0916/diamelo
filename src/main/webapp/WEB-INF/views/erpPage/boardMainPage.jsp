@@ -90,7 +90,7 @@
                                     </c:if>
                                     </td>
                                     <td>
-                                        <c:if test="${c.userId == loginUser.userId}">
+                                        <c:if test="${c.userId == loginUser.userId or loginUser.jobCode eq 'J5'}">
                                             <form action="delete.bo" method="get" name="deleteBoard">
                                                 <input type="hidden" name="postId" value="${c.postId}">
                                                 <button class="icon-button" type="submit" onclick="return confirm('정말 삭제하시겠습니까??')">

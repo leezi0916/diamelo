@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.diamelo.mappers.ErpMainMapper">
+
+    <resultMap id="ProductResult" type="Product">
+        <result column="PRO_NAME" property="proName"/>
+        <result column="PRO_INVENT_STOCK" property="proInventStock"/>
+    </resultMap>
+
+    <resultMap id="UserInfoResult" type="UserInfo">
+        <result column="USER_ID" property="userId"/>
+        <result column="DEPT_CODE" property="deptCode"/>
+        <result column="DEPT_NAME" property="deptName"/>
+        <result column="JOB_CODE" property="jobCode"/>
+        <result column="JOB_NAME" property="jobName"/>
+        <result column="CHANGE_NAME" property="changeName"/>
+    </resultMap>
+
+
+    <resultMap id="BoardResult" type="Board">
+        <result column="USER_ID" property="userId"/>
+        <result column="TITLE" property="title"/>
+        <result column="CREATED_DATE" property="createdDate"/>
+        <result column="TYPE" property="type"/>
+        <result column="BOARD_DELETED" property="boardDeleted"/>
+    </resultMap>
+
+
+    <!-- 오늘 매출   -->
+    <select id="selectTodaySales" resultType="_int">
+        SELECT NVL(SUM(SALES_AMOUNT),0) AS TOTAL_SALES
+        FROM SALES_DETAILS
+        WHERE STATUS = 'Y'
+        AND TYPE = 'I'
+        AND TO_CHAR(SALES_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+    </select>
+
+    <!-- 판매 현황 조회  w -->
+    <select id="countSalesStatus1" resultType="_int">
+        SELECT COUNT(GROUP_STATUS)
+        FROM INOUT_GROUP
+        WHERE GROUP_STATUS = 'W'
+        AND GROUP_TYPE= 'I'
+    </select>
+    <!-- 판매 현황 조회  y -->
+    <select id="countSalesStatus2" resultType="_int">
+        SELECT COUNT(GROUP_STATUS)
+        FROM INOUT_GROUP
+        WHERE GROUP_STATUS = 'Y'
+        AND GROUP_TYPE= 'I'
+    </select>
+    <!-- 판매 현황 조회   n-->
+    <select id="countSalesStatus3" resultType="_int">
+        SELECT COUNT(GROUP_STATUS)
+        FROM INOUT_GROUP
+        WHERE GROUP_STATUS = 'N'
+        AND GROUP_TYPE= 'I'
+    </select>
+
+    <!-- 직원수 count  -->
+    <select id="countEmployee" resultType="_int">
+        SELECT COUNT(*)
+        FROM USER_INFO
+        WHERE JOB_CODE IN ('J1','J2','J3','J4','J5','J6')
+        AND DEPT_CODE IN ('D1','D2','D3','D4','D5','D6')
+        AND STATUS = 'Y'
+        AND USER_DELETED = 'N'
+    </select>
+
+
+    <!-- 부족한 제품 재고현황  -->
+    <select id="notEnoughProduct" resultMap="ProductResult">
+        SELECT p.PRO_NAME, pi.PRO_INVENT_STOCK
+        FROM PRODUCT p
+        JOIN PRODUCT_INVENTORY pi ON (p.PRO_NO = pi.PRO_NO)
+        WHERE p.IS_PRODUCT = 'Y'
+        AND pi.PRO_INVENT_STOCK &lt;= 100
+        ORDER BY pi.PRO_INVENT_STOCK ASC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
+
+    <!-- 최근 3개월간 매출 합 -->
+    <select id="recentSalesSum" resultType="_int">
+        SELECT NVL(SUM(TOTAL_SALES), 0) AS TOTAL_SUM
+        FROM (
+        SELECT TO_CHAR(SALES_DATE, 'YYYY-MM') AS MONTH,
+        SUM(SALES_AMOUNT) AS TOTAL_SALES
+        FROM SALES_DETAILS
+        WHERE STATUS = 'Y'
+        AND TYPE = 'I'
+        AND SALES_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -2)
+        GROUP BY TO_CHAR(SALES_DATE, 'YYYY-MM')
+        )
+    </select>
+
+    <!-- 최근 3개월간 매출 그래프   -->
+    <select id="selectMonthlySales" resultType="map">
+        SELECT TO_CHAR(SALES_DATE, 'YYYY-MM') AS MONTH,
+        NVL(SUM(SALES_AMOUNT), 0) AS TOTAL_SALES
+        FROM SALES_DETAILS
+        WHERE STATUS = 'Y'
+        AND TYPE = 'I'
+        AND SALES_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -2)
+        GROUP BY TO_CHAR(SALES_DATE, 'YYYY-MM')
+        ORDER BY MONTH
+    </select>
+
+
+
+    <!-- //로그인된 회원의 사진,부서명,직급명 -->
+    <select id="selectUserInfo" resultMap="UserInfoResult">
+        SELECT a.CHANGE_NAME, d.DEPT_NAME, j.JOB_NAME
+        FROM USER_INFO u
+        LEFT JOIN ATTACHMENT a ON (u.USER_ID = a.USER_ID)
+        LEFT JOIN DEPARTMENT d ON (u.DEPT_CODE = d.DEPT_CODE)
+        LEFT JOIN JOB j ON (u.JOB_CODE = j.JOB_CODE)
+        WHERE u.USER_ID = #{userId}
+    </select>
+
+
+    <!-- //최근 공지사항 게시판 리스트 -->
+    <select id="selectBoardList1" resultMap="BoardResult">
+        SELECT USER_ID, TITLE
+        FROM (
+        SELECT USER_ID, TITLE
+        FROM BOARD
+        WHERE BOARD_DELETED = 'N'
+        AND TYPE = '1'
+        ORDER BY CREATED_DATE DESC
+        )
+        WHERE ROWNUM &lt;= 3
+    </select>
+    <!-- //최근 공지사항 게시판 리스트 -->
+    <select id="selectBoardList2" resultMap="BoardResult">
+        SELECT USER_ID, TITLE
+        FROM (
+        SELECT USER_ID, TITLE
+        FROM BOARD
+        WHERE BOARD_DELETED = 'N'
+        AND TYPE = '2'
+        ORDER BY CREATED_DATE DESC
+        )
+        WHERE ROWNUM &lt;= 3
+    </select>
+
+
+</mapper>

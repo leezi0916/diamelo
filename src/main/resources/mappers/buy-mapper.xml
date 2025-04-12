@@ -14,7 +14,7 @@
         <result column="ORIGIN_NAME" property="originName"/>
         <result column="CHANGE_NAME" property="changeName"/>
         <result column="HISTORY_STOCK" property="historyStock"/>
-        <result column="HIS_NO" property="hisNo"/>
+        <result column="HISTORY_NO" property="hisNo"/>
 
 
     </resultMap>
@@ -28,6 +28,8 @@
         <result column="STATUS" property="status"/>
         <result column="SALES_NAME" property="salesName"/>
         <result column="USER_NAME" property="userName"/>
+        <result column="GROUP_NO" property="groupNo" />
+        <result column="GROUP_DATE" property="groupDate"/>
     </resultMap>
     <resultMap id="InoutHistoryResult" type="Product">
         <result column="HIS_NO" property="hisNo"/>
@@ -43,19 +45,22 @@
 
 
     <select id="selectBuyCount" resultType="_int">
-        SELECT COUNT(*) FROM SALES_DETAILS
-        WHERE TYPE = 'O'
+        SELECT COUNT(*) FROM INOUT_GROUP
+        WHERE GROUP_TYPE = 'O'
     </select>
 
 
 
     <select id="selectBuyList" parameterType="SalesDetails" resultMap="SalesDetailsResult">
-        SELECT RNUM, SAL_NO, USER_NAME, SALES_DATE
-        FROM (SELECT ROWNUM AS RNUM, SAL_NO, USER_NAME, SALES_DATE
-        FROM (SELECT  SAL_NO, USER_NAME, SALES_DATE
-        FROM SALES_DETAILS
+        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE
+        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, GROUP_DATE
+        FROM (
+        SELECT GROUP_NO, USER_NAME, GROUP_DATE
+        FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
-        ORDER BY SAL_NO DESC))
+        WHERE GROUP_TYPE = 'O'
+        ORDER BY GROUP_NO DESC))
+
     </select>
 
     <select id="selectProduceBuyList" parameterType="Product" resultMap="ProductResult">
@@ -68,17 +73,14 @@
 
 
     <select id="selectGroupNo" resultType="_int">
-        SELECT GROUP_NO
-        FROM INOUT_HISTORY
-        WHERE GROUP_NO = #{rNum}
-        GROUP BY GROUP_NO
+        SELECT SEQ_GNO.CURRVAL FROM dual
     </select>
 
     <insert id="insertOrderDetails">
-        INSERT INTO INOUT_HISTORY (HIS_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
+        INSERT INTO INOUT_HISTORY (HISTORY_NO, PRO_NO, GROUP_NO, HISTORY_STOCK, HISTORY_PRICE)
             VALUES (
             SEQ_HNO.NEXTVAL,
-            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NAME = #{proName} AND ROWNUM = 1),
+            (SELECT PRO_NO FROM PRODUCT WHERE PRO_NO = #{proNo} AND ROWNUM = 1),
             #{groupNo},
             #{qty},
             #{proPrice}
@@ -90,7 +92,7 @@
         SELECT GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE
         FROM INOUT_GROUP
         JOIN USER_INFO USING(USER_ID)
-        WHERE GROUP_NO = #{sNo}
+        WHERE GROUP_NO = #{gNo}
     </select>
 
     <select id="selectMatDetailList" parameterType="Product" resultMap="ProductResult">
@@ -104,166 +106,87 @@
     <select id="selectMatPrice" resultType="_int">
         SELECT PRO_PRICE
         FROM PRODUCT
-        WHERE PRO_NAME = #{proName}
+        WHERE PRO_NO = #{proNo}
     </select>
 
     <insert id="insertInoutGroup">
         INSERT INTO INOUT_GROUP(GROUP_NO, USER_ID, GROUP_TYPE, GROUP_DATE, GROUP_STATUS)
-        VALUES(#{groupNo}, #{userId}, 'O', SYSDATE, 'Y')
+        VALUES(SEQ_GNO.NEXTVAL, #{userId}, 'O', SYSDATE, 'Y')
     </insert>
 
     <select id="selectfilePath" resultMap="ProductResult" parameterType="Product">
         SELECT CHANGE_NAME
         FROM ATTACHMENT
         JOIN PRODUCT USING(PRO_NO)
-        WHERE PRO_NAME = #{proName}
+        WHERE PRO_NO = #{proNo}
     </select>
 
-    <insert id="insertSalesDetails">
+    <insert id="insertBuySalesDetails">
         INSERT INTO SALES_DETAILS(SAL_NO, SALES_AMOUNT, SALES_STOCK,
         PRO_NAME, CHANGE_NAME, SALES_DATE, STATUS, TYPE, USER_ID, GROUP_NO)
         VALUES(
         SEQ_SNO.NEXTVAL, #{salesAmount}, #{salesStock}, #{proName}, #{changeName}, SYSDATE, 'Y', 'O', #{userId}, #{groupNo})
     </insert>
 
+    <update id="updateProductInventory" parameterType="Product">
+        UPDATE PRODUCT_INVENTORY
+        SET PRO_INVENT_STOCK = PRO_INVENT_STOCK + #{qty}
+        WHERE PRO_NO = #{proNo}
+    </update>
+
+    <select id="selectProNo" resultType="_int">
+        SELECT PRO_NO
+        FROM PRODUCT
+        WHERE PRO_NO = #{proNo}
+        AND IS_PRODUCT = 'N'
+    </select>
+    <select id="selectUserId" resultType="String">
+        SELECT USER_ID
+        FROM USER_INFO
+        WHERE USER_NAME = #{user}
+    </select>
+
+    <select id="selectSearchCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM INOUT_GROUP
+        WHERE GROUP_TYPE = 'O'
+        <if test="startDate != null and endDate == null">
+            AND GROUP_DATE &lt;= #{startDate}
+        </if>
+        <if test="startDate == null and endDate != null">
+            AND GROUP_DATE &gt;= TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND GROUP_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        <if test="user != null and user != ''">
+            AND USER_ID = #{user}
+        </if>
+    </select>
 
 
 
+    <select id="selectSearchList" resultMap="SalesDetailsResult" parameterType="SalesDetails">
+        SELECT RNUM, GROUP_NO, USER_NAME, TO_CHAR(GROUP_DATE, 'YYYY/MM/DD') AS GROUP_DATE
+        FROM (SELECT ROWNUM AS RNUM, GROUP_NO, USER_NAME, GROUP_DATE
+        FROM (SELECT  GROUP_NO, USER_NAME, GROUP_DATE
+        FROM INOUT_GROUP
+        JOIN USER_INFO USING(USER_ID)
+        WHERE GROUP_TYPE = 'O'
+        <if test="startDate != null and endDate == null">
+            AND GROUP_DATE &gt; #{startDate}
+        </if>
+        <if test="startDate == null and endDate != null">
+            AND GROUP_DATE &lt; TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND GROUP_DATE BETWEEN #{startDate} AND TO_DATE(#{endDate} || ' 23:59:59', 'YYYY-MM-DD, HH24:MI:SS')
+        </if>
+        <if test="user != null and user != ''">
+            AND USER_ID = #{user}
+        </if>
+        ORDER BY GROUP_NO DESC))
 
-
-
-
-
-
-
-
-
-<!--    <select id="selectAdminUserInfoCount" resultType="int">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM USER_INFO-->
-<!--        WHERE USER_DELETED = 'N'-->
-<!--        AND JOB_CODE != 'J5'-->
-<!--    </select>-->
-
-<!--    <select id="selectAdminList" parameterType="User_Info" resultMap="UserResult">-->
-<!--        SELECT RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME-->
-<!--        FROM (SELECT ROWNUM AS RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME-->
-<!--        FROM (SELECT USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME-->
-<!--        FROM USER_INFO U-->
-<!--        JOIN JOB J USING(JOB_CODE)-->
-<!--        WHERE USER_DELETED = 'N'-->
-<!--        AND JOB_CODE != 'J5'-->
-<!--        AND JOB_CODE != 'J0'-->
-<!--        ORDER BY STATUS ASC))-->
-<!--    </select>-->
-
-<!--    <select id="selectEmployeeDetail" parameterType="User_Info" resultMap="UserResult">-->
-<!--        SELECT USER_NAME, PHONE, EMAIL, USER_ID, STATUS, SALARY, JOB_NAME, JOB_CODE, ENROLL_DATE, ORIGIN_NAME, CHANGE_NAME, FILE_PATH-->
-<!--        FROM USER_INFO-->
-<!--        LEFT JOIN JOB  USING(JOB_CODE)-->
-<!--        LEFT JOIN ATTACHMENT USING(USER_ID)-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </select>-->
-<!--    -->
-<!--    <select id="selectSearchUserInfoCount" resultType="_int">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM USER_INFO-->
-<!--        WHERE USER_NAME = #{userName}-->
-<!--        AND JOB_CODE = #{jobCode}-->
-<!--    </select>-->
-
-<!--    <select id="selectSearchUserInfoList"  parameterType="User_Info" resultMap="UserResult">-->
-<!--        SELECT RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE-->
-<!--        FROM (SELECT ROWNUM AS RNUM, USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE-->
-<!--        FROM (SELECT USER_NAME, JOB_NAME, PHONE, EMAIL, ENROLL_DATE-->
-<!--        FROM USER_INFO U-->
-<!--        JOIN JOB J USING(JOB_CODE)-->
-<!--        WHERE STATUS = 'Y' AND-->
-<!--        USER_DELETED = 'N'-->
-<!--        AND JOB_CODE != 'J0'-->
-<!--        AND USER_NAME = #{userName}-->
-<!--        AND JOB_CODE = #{jobCode}-->
-<!--        ORDER BY JOB_CODE DESC))-->
-<!--    </select>-->
-
-
-<!--    <select id="selectAdminSearchUserInfoCount" resultType="_int">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM USER_INFO-->
-<!--        WHERE USER_DELETED = 'N'-->
-<!--        AND USER_ID = #{userId}-->
-<!--        AND USER_NAME = #{userName}-->
-<!--    </select>-->
-
-<!--    <select id="selectAdminSearchUserInfoList"  parameterType="User_Info" resultMap="UserResult">-->
-<!--        SELECT RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME-->
-<!--        FROM (SELECT ROWNUM AS RNUM, USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME-->
-<!--        FROM (SELECT USER_ID, USER_NAME, PHONE, EMAIL, STATUS, JOB_NAME-->
-<!--        FROM USER_INFO U-->
-<!--        JOIN JOB J USING(JOB_CODE)-->
-<!--        WHERE USER_DELETED = 'N'-->
-<!--        AND JOB_CODE != 'J5'-->
-<!--        AND USER_ID = #{userId}-->
-<!--        AND USER_NAME = #{userName}-->
-<!--        ORDER BY STATUS ASC))-->
-<!--    </select>-->
-
-<!--    <update id="updateEmployeeDetailSearch">-->
-<!--        UPDATE USER_INFO-->
-<!--        SET USER_NAME = #{userName},-->
-<!--        PHONE = #{phone},-->
-<!--        MODIFY_DATE = SYSDATE,-->
-<!--        EMAIL = #{email},-->
-<!--        JOB_CODE = #{jobCode},-->
-<!--        STATUS = #{status}-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </update>-->
-
-<!--    <update id="updateEmployeeImage">-->
-<!--        UPDATE ATTACHMENT SET-->
-<!--        ORIGIN_NAME = #{originName},-->
-<!--        CHANGE_NAME = #{changeName},-->
-<!--        UPDATE_DATE = SYSDATE-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </update>-->
-
-<!--    <select id="employeeDetailImageSearch" resultType="_int">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM USER_INFO-->
-<!--        JOIN ATTACHMENT USING(USER_ID)-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </select>-->
-
-<!--    <insert id="employeeDetailImageInsert">-->
-<!--        INSERT INTO ATTACHMENT-->
-<!--        (USER_ID,-->
-<!--        ORIGIN_NAME,-->
-<!--        CHANGE_NAME,-->
-<!--        FILE_PATH)-->
-<!--        VALUES-->
-<!--        (#{userId},-->
-<!--        #{originName},-->
-<!--        #{changeName},-->
-<!--        #{filePath})-->
-<!--    </insert>-->
-<!--    -->
-<!--    <update id="empStatusDelete">-->
-<!--        UPDATE USER_INFO SET-->
-<!--        USER_DELETED = 'Y'-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </update>-->
-
-<!--    <select id="empStatusSearch"  parameterType="User_Info" resultMap="UserResult">-->
-<!--        SELECT STATUS-->
-<!--        FROM USER_INFO-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </select>-->
-
-<!--    <delete id="empUserDelete">-->
-<!--        DELETE FROM USER_INFO-->
-<!--        WHERE USER_ID = #{userId}-->
-<!--    </delete>-->
-
-
+    </select>
 
 </mapper>
