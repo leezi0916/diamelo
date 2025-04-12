@@ -53,6 +53,11 @@
                                     <input type="number" placeholder="수량" id="amount-input" name="quantity">
                                 </div>
                             </div>
+                            <div id="product2">
+                                <p id="max-count-wrapper" style="display:none; color: blue">제작 가능: <span id="max-count"></span>개</p>
+                            </div>
+
+
                         </div>
 
                         <div id="header-right">

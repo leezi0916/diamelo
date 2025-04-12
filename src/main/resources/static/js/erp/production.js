@@ -34,6 +34,15 @@
                     let materialList = response.materials; // 재료 목록
                     let imagePath = response.imagePath; // 제품 이미지
                     let materialTableBody = $("#material-list");
+                    let maxCount = response.maxCount;
+
+                    // $("#max-count").text(maxCount); // 최대 생산 수량 표시
+                    if (maxCount != null) {
+                        $("#max-count").text(maxCount); // 0도 포함해서 표시
+                        $("#max-count-wrapper").show(); // 항상 보이게
+                    } else {
+                        $("#max-count-wrapper").hide(); // null일 경우만 숨김
+                    }
 
                     // 제품 이미지 업데이트
                     if (imagePath) {
@@ -74,6 +83,7 @@
             // 제품이 선택되지 않으면 기본 메시지 표시
             $("#material-list").html('<tr><td colspan="3">제품을 선택하면 필요한 재료가 표시됩니다.</td></tr>');
             $("#product-img").hide();
+            $("#max-count-wrapper").hide();
         }
     });
 });

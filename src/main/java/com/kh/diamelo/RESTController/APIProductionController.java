@@ -34,6 +34,10 @@ public class APIProductionController {
         ArrayList<Product> materials = productService.getMaterialsByProductNo(productNo);
         response.put("materials", materials);
 
+        //최대 생산 수량 가져오기
+        int maxCount = productService.getMaxProductionCount(productNo);
+        response.put("maxCount", maxCount);
+
         //리턴
         return ResponseEntity.ok(response);
     }

@@ -30,6 +30,9 @@ public interface ProductMapper {
     void increaseProductStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
     void decreaseMaterialStock(@Param("productNo") int productNo, @Param("quantity") int quantity);
 
+    //제품 최대 몇개 제작가능인지
+    int getMaxProductionCount(@Param("productNo") int productNo);
+
     // crmPage 제품 목록 조회
     ArrayList<Product> getCrmProductList(RowBounds rowBounds);
 
