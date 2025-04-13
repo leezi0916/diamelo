@@ -26,8 +26,8 @@ function updateStock(price, stock) {
     totalPrice.innerText = `총 구매 금액 : ${sumTotalPrice.toLocaleString()}원`;
 }
 
-// Ajax 이용 insert, delete
-function addDeleteCart({proNo, inCart}, callback) {
+// Ajax 이용 delete
+function deleteCart({proNo, inCart}, callback) {
     $.ajax({
         url: '/api/production/cart',
         data: {
@@ -60,7 +60,7 @@ function changeCartStatus(result, button) {
 function CartBtn(button) {
     const proNo = button.dataset.pno;
     const isInCart = button.dataset.include === "true"; // 기존 상태 저장
-    addDeleteCart({
+    deleteCart({
         proNo: proNo,
         inCart: isInCart // 변경 전 상태를 서버로 전송
     }, function (result) {
