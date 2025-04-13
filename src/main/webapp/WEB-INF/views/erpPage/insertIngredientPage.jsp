@@ -46,19 +46,19 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
+                                    <input class="input-box" id="input-box" type="text" name="proName" placeholder="NAME">
                                 </div>
 
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="date" name="proEnrollDate" placeholder="DATE">
+                                    <input class="input-box" type="date" id="calendar" name="proEnrollDate" placeholder="DATE">
                                 </div>
 
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>가격</p>
-                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
+                                    <input class="input-box" type="text" id="price" name="proPrice" placeholder="PRICE">
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         </div>
 
                         <div id="ingre_lower_button">
-                            <button class="button" type="submit">+재료등록</button>
+                            <button class="button" type="submit" onclick="return checkInput()">+재료등록</button>
                             <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                         </div>
                     </div>
@@ -93,6 +93,19 @@
         </div>
 
         <script>
+            // 재료 정보를 추가 안했을 경우
+            function checkInput(){
+                const name = document.querySelector("#input-box").value;
+                const calendar = document.querySelector("#calendar").value;
+                const price = document.querySelector("#price").value;
+                const image = document.querySelector("#insert_image").value;
+
+                if(name === "" || calendar === "" || price === "" || select === "" || image === ""){
+                    alert("추가하지않은 정보가 있습니다.");
+                    return false;
+                }
+            }
+
             // 제품 사진 추가 및 삭제
             function changeImage(input) {
                 let file = input.files[0];

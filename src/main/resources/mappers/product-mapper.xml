@@ -102,6 +102,15 @@
         )
     </update>
 
+    <!--  제품 최대 몇개 제작가능인지  -->
+    <select id="getMaxProductionCount" parameterType="int" resultType="int">
+        SELECT MIN(FLOOR(PI.PRO_INVENT_STOCK / R.AMOUNT)) AS maxCount
+        FROM RECIPE R
+        JOIN PRODUCT_INVENTORY PI ON R.MAT_NO = PI.PRO_NO
+        WHERE R.PRO_NO = #{productNo}
+    </select>
+
+
     <!-- 제품 개수 조회 -->
     <select id="selectProductCount" resultType="_int">
         SELECT COUNT(*)

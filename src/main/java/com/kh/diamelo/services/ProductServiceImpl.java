@@ -146,6 +146,12 @@ public class ProductServiceImpl implements ProductService {
         return true;
     }
 
+    //제품 최대 몇개 제작가능한지
+    @Override
+    public int getMaxProductionCount(int productNo) {
+        return productMapper.getMaxProductionCount(productNo);
+    }
+
 
     // 제품 개수 조회
     @Override

@@ -23,11 +23,15 @@ public interface SaleMapper {
 
     String selectGroupStatus(@Param("sNo") int sNo);
 
+    String selectGroupNo(@Param("sNo") int sNo);
+
     int updateStatus(@Param("sNo") int sNo);
 
     int updateStatusN(@Param("sNo") int sNo);
 
-    int updateProduct(Product product);
+    int updateProductPlus(Product product);
+
+    int updateProductMinus(Product product);
 
     String selectUserId(@Param("sNo") int sNo);
 

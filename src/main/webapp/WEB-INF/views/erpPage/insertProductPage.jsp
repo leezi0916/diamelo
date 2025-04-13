@@ -63,12 +63,12 @@
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>재료명</p>
-                                    <input class="input-box" type="text" name="proName" placeholder="NAME">
+                                    <input class="input-box" id="input-box" type="text" name="proName" placeholder="NAME">
                                 </div>
                                 <div class="input-name">
                                     <div class="star">*</div>
                                     <p>등록일자</p>
-                                    <input class="input-box" type="date" name="ProEnrollDate" placeholder="DATE">
+                                    <input class="input-box" id="calendar" type="date" name="ProEnrollDate" placeholder="DATE">
                                 </div>
                             </div>
                         </div>
@@ -81,9 +81,9 @@
                                 </div>
                                 <div class="input-name">
                                     <p>가격</p>
-                                    <input class="input-box" type="text" name="proPrice" placeholder="PRICE">
+                                    <input class="input-box" id="price" type="text" name="proPrice" placeholder="PRICE">
                                     <div id="category">
-                                        <select name="proCategoryNo" class="select">
+                                        <select name="proCategoryNo" id="select" class="select">
                                             <option disabled selected>분류</option>
                                             <option value="1">스킨</option>
                                             <option value="2">로션</option>
@@ -102,7 +102,7 @@
                             <div class="input-name">
                                 <div class="star">*</div>
                                 <p>재료목록</p>
-                                <input type="button" id="materialList_button" style="height: 25px; width: 25px;">
+                                <input type="button" id="materialList_button" value="List">
                             </div>
 
                             <div id="table-container">
@@ -128,13 +128,13 @@
                                 <input id="insert_image" type="file" name="upfile" accept="image/*" onchange="changeImage(this)">
                                 <div id="image_preview"></div> <!-- ✅ 미리보기 이미지 영역 -->
                             </div>
-                            <p>재료 이미지</p>
+                            <p>제품 이미지</p>
                         </div>
                     </div>
 
 
                     <div id="ingre_lower_button">
-                        <button class="button" type="submit">+제품등록</button>
+                        <button class="button" type="submit" onclick="return checkInput()">+제품등록</button>
                         <button type="button" class="button" onclick="location.href='inv.erp'">뒤로가기</button>
                     </div>
                 </div>
@@ -145,6 +145,19 @@
 
 
 <script>
+    //제품 정보 넣지 않을 경우 오류
+    function checkInput(){
+        const name = document.querySelector("#input-box").value;
+        const calendar = document.querySelector("#calendar").value;
+        const price = document.querySelector("#price").value;
+        const select = document.querySelector("#select").value;
+        const image = document.querySelector("#insert_image").value;
+
+        if(name === "" || calendar === "" || price === "" || select === "" || image === ""){
+            alert("추가하지않은 정보가 있습니다.");
+            return false;
+        }
+    }
 
     // 제품 사진 추가 및 삭제
     function changeImage(input) {
@@ -237,7 +250,7 @@
                 if (!response.ok) {
                     throw new Error("서버 응답 오류: " + response.status);
                 }
-                return response.json(); // ⭐ 서버 응답을 JSON 으로 파싱
+                return response.json();
             })
             .then(data => {
                 console.log('서버에서 받은 데이터:', data);
@@ -247,29 +260,39 @@
                 // 재료명 입력 칸 찾기
                 const proNameInput = row.querySelector('input[name="proName[]"]');
                 if (proNameInput) {
-                    proNameInput.value = data.proName; // 서버에서 받은 proName
+                    proNameInput.value = data.proName;
+                    proNameInput.style.color = ""; // 성공 시 원래 색상으로 복구
                 }
 
                 // 가격 입력 칸 찾기
                 const amountInput = row.querySelector('input[name="amount[]"]');
                 const proPriceInput = row.querySelector('input[name="proPrice[]"]');
                 if (proPriceInput) {
-                    proPriceInput.value = data.proPrice;// 서버에서 받은 proPrice
+                    proPriceInput.value = data.proPrice;
                     amountInput.value = 1;
 
-                    // 💡 단가 저장 (수량 변경 시 사용!)
                     row.dataset.unitPrice = data.proPrice;
-
-                    // 기본 가격: 단가 * 1
                     proPriceInput.value = data.proPrice;
-
-
                 }
-
-
             })
             .catch(error => {
                 console.error('에러 발생:', error);
+
+                const row = inputElement.closest('tr');
+                const proNameInput = row.querySelector('input[name="proName[]"]');
+                if (proNameInput) {
+                    proNameInput.value = "번호 재입력";
+                    proNameInput.style.color = "red"; // 빨간 글씨로 표시
+                }
+
+                const proPriceInput = row.querySelector('input[name="proPrice[]"]');
+                const amountInput = row.querySelector('input[name="amount[]"]');
+                if (proPriceInput) {
+                    proPriceInput.value = "";
+                }
+                if (amountInput) {
+                    amountInput.value = "";
+                }
             });
     }
 

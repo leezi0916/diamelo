@@ -38,4 +38,6 @@ public interface EmployeeService {
     UserInfo empStatusSearch(String userId);
 
     int empUserDelete(String userId);
+
+    int empStatusUpdate(String userId);
 }

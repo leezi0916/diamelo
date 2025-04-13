@@ -49,6 +49,7 @@ public class SaleController {
     public String detailSale(@RequestParam("sNo")int sNo, Model model) {
         System.out.println("sNo: " + sNo);
         int resSum = 0;
+
         InoutGroup inoutGroup = new InoutGroup();
         ArrayList<Product> list = saleService.selectSaleDetailList(sNo);
         String companyName = saleService.selectInoutGroup(sNo);
@@ -61,11 +62,21 @@ public class SaleController {
         System.out.println("resSum: " + resSum);
 
         System.out.println("inoutGroup: " + inoutGroup);
+        String groupStatus = saleService.selectGroupStatus(sNo);
+        inoutGroup.setGroupStatus(groupStatus);
         inoutGroup.setSalesAmount(resSum);
         System.out.println("list: " + list);
-
+//        boolean YAndN = false;
+//        for(Product product : list){
+//            YAndN = product.getProInventStock() >= product.getHistoryStock();
+//            System.out.println("YAndN::::::" +YAndN);
+//            if(!YAndN){
+//                break;
+//            }
+//        }
 
         System.out.println("inoutGroup2 :: " + inoutGroup);
+        model.addAttribute("groupStatus", groupStatus);
 
         model.addAttribute("sNo", sNo);
         model.addAttribute("resSum", resSum);
@@ -87,40 +98,60 @@ public class SaleController {
             session.setAttribute("alertMsg", "이미 승인상태입니다.");
             return "redirect:/saleList.erp";
         } else if(groupStatus.equals("W")) {
-            int updateStatus = saleService.updateStatus(sNo);
-
 
             ArrayList<Product> list = saleService.selectSaleDetailList(sNo);
-            System.out.println("Statuslist: " + list);
-            for (Product product : list) {
-
-                resSum += product.getHistoryStock() * product.getProPrice();
-
-                int updateProduct = saleService.updateProduct(product);
-                String userId = saleService.selectUserId(sNo);
-                System.out.println("userId: " + userId);
-                salesDetails.setUserId(userId);
-                salesDetails.setSalesAmount(resSum);
-                salesDetails.setSalesStock(product.getHistoryStock());
-                salesDetails.setChangeName(product.getChangeName());
-                salesDetails.setGroupNo(product.getGroupNo());
-                salesDetails.setProName(product.getProName());
-
-                System.out.println("salesDetails: " + salesDetails);
-
-                int resIn = saleService.insertSalesDetails(salesDetails);
+            boolean YAndN = false;
+            for(Product product : list){
+                YAndN = product.getProInventStock() >= product.getHistoryStock();
+                System.out.println("YAndN::::::" +YAndN);
+                if(!YAndN){
+                    break;
+                }
             }
 
+            System.out.println("YAndN" +YAndN);
 
+            if (YAndN) {
+                int updateStatus = saleService.updateStatus(sNo);
 
-            //여기 들어가야함
+                String groupType = saleService.selectGroupNo(sNo);
+                System.out.println("Statuslist: " + list);
+                for (Product product : list) {
+                    resSum += product.getHistoryStock() * product.getProPrice();
 
-            if(updateStatus == 1) {
-                session.setAttribute("alertMsg", "수정 되었습니다.");
+                    if("O".equals(groupType)) {
+                        int updateProduct = saleService.updateProductPlus(product);
+                    }else{
+                        int updateProduct = saleService.updateProductMinus(product);
+                    }
+
+                    String userId = saleService.selectUserId(sNo);
+                    System.out.println("userId: " + userId);
+                    salesDetails.setUserId(userId);
+                    salesDetails.setSalesAmount(resSum);
+                    salesDetails.setSalesStock(product.getHistoryStock());
+                    salesDetails.setChangeName(product.getChangeName());
+                    salesDetails.setGroupNo(product.getGroupNo());
+                    salesDetails.setProName(product.getProName());
+
+                    System.out.println("salesDetails: " + salesDetails);
+
+                    int resIn = saleService.insertSalesDetails(salesDetails);
+                }
+
+                if(updateStatus == 1) {
+                    session.setAttribute("alertMsg", "수정 되었습니다.");
+                }else{
+                    session.setAttribute("alertMsg", "실패하였습니다.");
+                }
+                return "redirect:/saleList.erp";
             }else{
-                session.setAttribute("alertMsg", "실패하였습니다.");
-            }
+
+
+            session.setAttribute("alertMsg", "재고부족인해 거절되었습니다.");
             return "redirect:/saleList.erp";
+          }
+
         }else{
             session.setAttribute("alertMsg", "반려는 변경하실 수 없습니다.");
             return "redirect:/saleList.erp";
