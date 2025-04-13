@@ -1,5 +1,17 @@
 // 직업 / 기업(개인) 버튼 눌렀을 때 기업명 입력란 숨김 / 보임
 document.addEventListener('DOMContentLoaded', function () {
+    //URL의 쿼리파라미터 값을 가져온다.
+    const params = new URLSearchParams(location.search);
+
+    const memberId = params.get("memberId");
+
+    if (memberId != null) {
+        const idInput = document.querySelector("#enroll-form #userId");
+        idInput.value = memberId;
+        idCheck(idInput);
+    }
+
+
     const employeeButton = document.getElementById('employee-btn');
     const personalCompanyButton = document.getElementById('personal-company-btn');
     const companyInputContainer = document.getElementById('company-input-container');

@@ -1,8 +1,8 @@
 package com.kh.diamelo.controller;
 
 import com.kh.diamelo.domain.vo.UserInfo;
+import com.kh.diamelo.services.GoogleApiService;
 import com.kh.diamelo.services.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -17,10 +18,12 @@ public class MemberController {
 
     private final MemberService memberService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final GoogleApiService googleApiService;
 
-    public MemberController(MemberService memberService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public MemberController(MemberService memberService, BCryptPasswordEncoder bCryptPasswordEncoder, GoogleApiService googleApiService) {
         this.memberService = memberService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.googleApiService = googleApiService;
     }
 
     // 로그인 폼
@@ -219,6 +222,22 @@ public class MemberController {
                 return ("common/errorPage");
             }
 
+        }
+    }
+
+    @GetMapping("login.go")
+    public String loginGoogle(String code, HttpSession session) {
+        System.out.println("code : " + code);
+        String memberId = googleApiService.requestGoogleEmail(code);
+
+        UserInfo loginMember = memberService.loginMember(memberId);
+
+        if(loginMember == null){
+            session.setAttribute("alertMsg", "회원가입 후 이용이 가능합니다.");
+            return ("redirect:/signUpEnrollForm.me?memberId=" + memberId);
+        } else {
+            session.setAttribute("loginUser", loginMember);
+            return ("redirect:/");
         }
     }
 }
