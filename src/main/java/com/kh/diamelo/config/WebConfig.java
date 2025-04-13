@@ -22,6 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns(
                         "/css/**",
+                        "/js/**",
                         "/image/**",
                         "/uploadfile/**",
                         "/default.png",
