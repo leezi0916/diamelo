@@ -52,6 +52,19 @@ function changeCartStatus(result, button) {
         if (row) {
             row.remove();
         }
+
+        // 장바구니가 완전히 비었는지 확인 -> 비어있을시 장바구니 추가 -> 제품 추가
+        const shoppingListTr = document.querySelectorAll("#list_content table tr.table_header");
+        if (shoppingListTr.length <= 1) {
+            const buyButton = document.querySelector("#buy_button input[type='submit']");
+            if (buyButton) {
+                buyButton.type = "button";
+                buyButton.value = "장바구니 추가";
+                buyButton.onclick = function () {
+                    location.href = "productList.crm";
+                };
+            }
+        }
     }
 }
 
