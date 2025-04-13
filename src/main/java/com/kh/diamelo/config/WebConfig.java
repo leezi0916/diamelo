@@ -31,6 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/logoutSuccess.me",
                         "/signUpEnrollForm.me",
                         "/signUp.me",
+                        "/login.go",
                         "/api/**");
 
         registry.addInterceptor(new LoginAdminInterceptor())

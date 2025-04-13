@@ -45,6 +45,7 @@
                             type="text"
                             placeholder="아이디"
                             name="userId"
+                            id="userId"
                             required
                             onkeyup="idCheck(this)"
                         />
