@@ -1,24 +1,24 @@
-
-    // 첫 로딩시
-    $(document).ready(function() {
+// 첫 로딩시
+$(document).ready(function () {
     // 처음 로딩 시 수량 입력 필드를 비활성화
     $("#amount-input").prop("readonly", true);
 
-    $("#product-select1").change(function() {
-    let selectedProductNo = $(this).val();
-    $("#amount-input").val(''); // 수량 초기화
+    $("#product-select1").change(function () {
+        let selectedProductNo = $(this).val();
+        $("#amount-input").val(''); // 수량 초기화
 
-    if (selectedProductNo) {
-    $("#amount-input").prop("readonly", false); // 제품 선택 시 입력 가능
-} else {
-    $("#amount-input").prop("readonly", true); // 제품 선택 안 하면 다시 비활성화
-}
-});
+        if (selectedProductNo) {
+            $("#amount-input").prop("readonly", false); // 제품 선택 시 입력 가능
+        } else {
+            $("#amount-input").prop("readonly", true); // 제품 선택 안 하면 다시 비활성화
+        }
+    });
+
 });
 
-   // select 누를시 제품의 맞는 이미지와 레시피 재료정보
-    $(document).ready(function() {
-    $("#product-select1").change(function() {
+// select 누를시 제품의 맞는 이미지와 레시피 재료정보
+$(document).ready(function () {
+    $("#product-select1").change(function () {
         let selectedProductNo = $(this).val();
 
         // 수량 입력 필드 초기화
@@ -28,9 +28,10 @@
             $.ajax({
                 url: "/api/production/details",
                 method: "GET",
-                data: { productNo: selectedProductNo },
-                success: function(response) {
+                data: {productNo: selectedProductNo},
+                success: function (response) {
                     console.log(response); // 응답 데이터 확인
+
                     let materialList = response.materials; // 재료 목록
                     let imagePath = response.imagePath; // 제품 이미지
                     let materialTableBody = $("#material-list");
@@ -63,19 +64,19 @@
 
 
                     //  새로운 데이터 추가
-                    materialList.forEach(function(material) {
+                    materialList.forEach(function (material) {
                         console.log(material); // 각 재료 데이터가 정상적으로 출력되는지 확인
 
                         let row = "<tr>" +
-                            "<td>" + material.proNo  + "</td>" +
-                            "<td>" + material.proName  + "</td>" +
-                            "<td>" + (material.amount ? material.amount + ' g' : '정보 없음')  + "</td>" +
+                            "<td>" + material.proNo + "</td>" +
+                            "<td>" + material.proName + "</td>" +
+                            "<td>" + (material.amount ? material.amount + ' g' : '정보 없음') + "</td>" +
                             "</tr>";
 
                         materialTableBody.append(row); // 테이블에 추가
                     });
                 },
-                error: function() {
+                error: function () {
                     alert("레시피 정보를 불러오는 데 실패했습니다.");
                 }
             });
@@ -88,9 +89,9 @@
     });
 });
 
-    // 제품 및 수량입력 안하고 제작 버튼 클릭시 메세지
-    $(document).ready(function() {
-    $("#produce-btn").click(function(event) {
+// 제품 및 수량입력 안하고 제작 버튼 클릭시 메세지
+$(document).ready(function () {
+    $("#produce-btn").click(function (event) {
         let selectedProductNo = $("#product-select1").val();
         let quantity = $("#amount-input").val();
 
