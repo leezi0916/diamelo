@@ -231,4 +231,10 @@ public class ProductServiceImpl implements ProductService {
         return 0;
     }
 
+    // 장바구니의 해당 재품 개수 조회
+    @Override
+    public int getProductStock(Integer proNo) {
+        return productMapper.getProductStock(proNo);
+    }
+
 }
