@@ -64,12 +64,8 @@ public class ShoppingListController {
         UserInfo loginUser = (UserInfo) session.getAttribute("loginUser");
         String userId = loginUser.getUserId();
 
-
-
-        //  제품 입출고 정보 묶음 추가
-        int resultGroup = productService.insertInoutGroup(userId);
-
         int resultHistory = 0;
+        int resultGroup = 0;
 
         for (int i = 0; i < proNoes.size(); i++) {
             int availableStock = productService.getProductStock(proNoes.get(i));
@@ -77,6 +73,10 @@ public class ShoppingListController {
                 model.addAttribute("errorMsg", proNames.get(i)+"의 남은 재고보다 주문하신 수량이 많습니다.");
                 return "common/errorPage";
             }
+
+            //  제품 입출고 정보 묶음 추가
+            resultGroup = productService.insertInoutGroup(userId);
+
             // 제품 입출고 내역 추가
             resultHistory = productService.insertInoutHistory(proNoes.get(i), proStocks.get(i), proPrices.get(i));
         }
