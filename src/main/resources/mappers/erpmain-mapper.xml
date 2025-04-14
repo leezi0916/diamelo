@@ -74,6 +74,7 @@
         FROM PRODUCT p
         JOIN PRODUCT_INVENTORY pi ON (p.PRO_NO = pi.PRO_NO)
         WHERE p.IS_PRODUCT = 'Y'
+        AND PRO_DELETED = 'N'
         AND pi.PRO_INVENT_STOCK &lt;= 100
         ORDER BY pi.PRO_INVENT_STOCK ASC
         FETCH FIRST 1 ROWS ONLY
