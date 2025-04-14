@@ -52,4 +52,7 @@ public interface ProductService {
 
     // 제품 입출고 내역 추가
     int insertInoutHistory(int proNo, int proStock, int proPrice);
+
+    // 장바구니의 해당 재품 개수 조회
+    int getProductStock(Integer proNo);
 }

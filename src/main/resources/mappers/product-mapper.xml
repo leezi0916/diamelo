@@ -211,4 +211,11 @@
             #{totalPrice}
         )
     </insert>
+
+    <!-- 장바구니의 해당 재품 개수 조회 -->
+    <select id="getProductStock" resultType="_int">
+        SELECT PRO_INVENT_STOCK
+        FROM PRODUCT_INVENTORY
+        WHERE PRO_NO = #{proNo}
+    </select>
 </mapper>
