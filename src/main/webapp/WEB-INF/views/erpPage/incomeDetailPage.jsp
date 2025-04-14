@@ -39,7 +39,7 @@
                     <table class="content-table table-hover">
                         <thead>
                         <tr class="page-body-content-th">
-                            <th>거래처: <c:out value="${list[0].companyName}" /></th>
+                            <th>거래처: <c:out value="${list[0].companyName}" default="A공장" /></th>
                             <th></th>
                             <th colspan="2">총 매출금액: <span style="font-weight: 500; color: ${list[0].type eq 'I' ? 'blue' : 'red'};">
                         <c:choose>
