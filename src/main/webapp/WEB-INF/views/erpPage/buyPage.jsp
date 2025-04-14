@@ -77,16 +77,6 @@
                 <td>${b.groupDate}</td>
               </tr>
             </c:forEach>
-
-            <c:forEach var="b" items="${blist}">
-              <tr onclick="location.href='buyDetail.erp?gNo=${b.groupNo}'">
-                <td>${b.groupNo}</td>
-                <td>${b.userName}</td>
-                <td>A공장</td>
-                <td>${b.groupDate}</td>
-              </tr>
-            </c:forEach>
-
             </tbody>
           </table>
         </div>

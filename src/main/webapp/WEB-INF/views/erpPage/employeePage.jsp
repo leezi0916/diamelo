@@ -34,7 +34,7 @@
           <form action="empSearch.erp" class="search-form" method="get">
             <input type="text" class="input-box" placeholder="사용자명" name="userName" value="${userName}">
             <select class="input-box" name="jobCode">
-              <option value="all">전체</option>
+              <option value="">전체</option>
               <option value="J1">사원</option>
               <option value="J2">대리</option>
               <option value="J3">과장</option>

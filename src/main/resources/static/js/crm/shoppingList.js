@@ -26,8 +26,8 @@ function updateStock(price, stock) {
     totalPrice.innerText = `총 구매 금액 : ${sumTotalPrice.toLocaleString()}원`;
 }
 
-// Ajax 이용 insert, delete
-function addDeleteCart({proNo, inCart}, callback) {
+// Ajax 이용 delete
+function deleteCart({proNo, inCart}, callback) {
     $.ajax({
         url: '/api/production/cart',
         data: {
@@ -52,6 +52,19 @@ function changeCartStatus(result, button) {
         if (row) {
             row.remove();
         }
+
+        // 장바구니가 완전히 비었는지 확인 -> 비어있을시 장바구니 추가 -> 제품 추가
+        const shoppingListTr = document.querySelectorAll("#list_content table tr.table_header");
+        if (shoppingListTr.length <= 1) {
+            const buyButton = document.querySelector("#buy_button input[type='submit']");
+            if (buyButton) {
+                buyButton.type = "button";
+                buyButton.value = "장바구니 추가";
+                buyButton.onclick = function () {
+                    location.href = "productList.crm";
+                };
+            }
+        }
     }
 }
 
@@ -60,7 +73,7 @@ function changeCartStatus(result, button) {
 function CartBtn(button) {
     const proNo = button.dataset.pno;
     const isInCart = button.dataset.include === "true"; // 기존 상태 저장
-    addDeleteCart({
+    deleteCart({
         proNo: proNo,
         inCart: isInCart // 변경 전 상태를 서버로 전송
     }, function (result) {

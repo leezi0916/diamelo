@@ -74,7 +74,13 @@
             </table>
         </div>
 
-        <div id="buy_button"><input type="submit" value="구매 확정"/></div>
+        <c:if test="${not empty cartList}">
+            <div id="buy_button"><input type="submit" value="구매 확정"/></div>
+        </c:if>
+
+        <c:if test="${empty cartList}">
+            <div id="buy_button"><input type="button" value="제품 추가하기" onclick="location.href='productList.crm'"/></div>
+        </c:if>
     </form>
 </div>
 

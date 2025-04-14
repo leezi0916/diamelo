@@ -87,6 +87,15 @@
                       </svg>
                     </td>
                   </c:when>
+                  <c:when test="${u.status =='N'}">
+                    <td>
+                    <svg width="49" height="23" viewBox="0 0 49 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="0.078125" y="0.302734" width="48.9246" height="21.8464" rx="10.9232" fill="#F6C6C6"/>
+                      <circle cx="9.69386" cy="11.2246" r="2.88478" fill="#BA2714"/>
+                      <path d="M27.2531 5.63755H28.4532V13.3918H27.2531V5.63755ZM28.0954 8.73003H29.9417V9.73394H28.0954V8.73003ZM21.7835 14.9842H28.8916V15.9651H21.7835V14.9842ZM21.7835 12.6303H22.9952V15.2035H21.7835V12.6303ZM20.595 6.38759H21.7951V8.03768H24.3683V6.38759H25.5684V11.6725H20.595V6.38759ZM21.7951 8.97235V10.7032H24.3683V8.97235H21.7951ZM38.3759 5.62601H39.576V16.1958H38.3759V5.62601ZM36.4489 7.95691H38.6298V8.93774H36.4489V7.95691ZM31.2216 12.7803H32.0294C32.5679 12.7803 33.0756 12.7764 33.5526 12.7687C34.0372 12.7533 34.5218 12.7264 35.0065 12.688C35.4911 12.6418 35.995 12.5764 36.5181 12.4918L36.6104 13.4842C36.0796 13.5688 35.5642 13.6342 35.0642 13.6803C34.5718 13.7265 34.0795 13.7572 33.5872 13.7726C33.0948 13.788 32.5756 13.7957 32.0294 13.7957H31.2216V12.7803ZM31.1986 6.54914H35.8488V10.4609H32.4102V13.011H31.2216V9.49162H34.6603V7.52996H31.1986V6.54914ZM36.3912 10.8417H38.5721V11.811H36.3912V10.8417Z" fill="#850C03"/>
+                    </svg>
+                    </td>
+                  </c:when>
                   <c:otherwise>
                     <td>
                       <svg width="49" height="23" viewBox="0 0 49 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -186,86 +195,6 @@
 
   </div>
 </div>
-<script>
-
-  // 모달 요소 가져오기
-
-  const modal = document.getElementById("deleteModal");
-  const deleteBtn = document.querySelectorAll(".userDelete")
-  const confirmDelete = document.getElementById("confirmDelete");
-  const cancelDelete = document.getElementById("cancelDelete");
-  const confirmCheck = document.getElementById("confirmCheck"); // 체크박스
-  const passwordInput = document.getElementById("thPwd"); // 비밀번호 입력창
-  const modalText = document.getElementById("modalText")
-
-
-  let selectedUserId = null;
-  // 회원 탈퇴 버튼 클릭 시 모달 표시
-  deleteBtn.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      selectedUserId = btn.dataset.userid;
-      const status= btn.dataset.status;
-
-      modalText.innerText = `${selectedUserId} 아이디를 입력해주세요.\n상태: ${status == 'Y' ? '승인 → 상태변경' : '대기 → 삭제'}`;
-
-      passwordInput.value = "";
-      confirmCheck.checked = false;
-      modal.style.display = "block";
-      confirmDelete.disabled = true; // 기본 비활성화
-    });
-  });
-
-  // 체크박스 상태 감지하여 버튼 활성화/비활성화
-  confirmCheck.onchange = function () {
-    confirmDelete.disabled = !this.checked; // 체크박스가 체크되면 버튼 활성화
-  };
-
-  // 취소 버튼 클릭 시 모달 닫기
-  cancelDelete.onclick = function () {
-    modal.style.display = "none";
-  };
-
-  // 탈퇴 버튼 클릭 시 탈퇴 처리
-  confirmDelete.onclick = function () {
-    const inputId = passwordInput.value.trim();
-
-    if (inputId === "") {
-      alert("아이디를 입력해주세요.");
-      return;
-    }
-
-    if (inputId !== selectedUserId) {
-      alert("아이디가 일치하지 않습니다.");
-      return;
-    }
-
-    $.ajax({
-      url: "/api/employee/empDelete.erp",
-      type: "POST",
-      data:{userId: selectedUserId},
-      success: function(res) {
-        if (res === "1") {
-          alert("삭제 성공");
-          location.href = "empAdminList.erp";
-        } else {
-          alert("삭제 실패");
-        }},
-      error: function (){
-        alert("AJAX 통신 실패");
-        modal.style.display = "none";
-      }
-    });
-    // 실제 삭제 AJAX 또는 location.href 등으로 연결 가능
-  };
-
-  // 모달 외부 클릭 시 닫기
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  };
-
-
-</script>
+<script src="/js/erp/employeeAdminPage.js"></script>
 </body>
 </html>
