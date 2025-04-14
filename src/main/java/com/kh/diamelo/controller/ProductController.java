@@ -50,7 +50,7 @@ public class ProductController {
     //제작 기능
     @PostMapping("/create.pro")
     public String createProduct(@RequestParam("productNo") int productNo, @RequestParam("quantity") int quantity,
-                                RedirectAttributes redirectAttributes, Model model) {
+                                RedirectAttributes redirectAttributes) {
 
         boolean success = productService.produceProduct(productNo, quantity);
 
