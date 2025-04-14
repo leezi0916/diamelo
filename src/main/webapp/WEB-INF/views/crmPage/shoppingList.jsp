@@ -47,6 +47,7 @@
                                     </td>
                                     <td>
                                         <span>${product.proName}</span>
+                                        <input type="hidden" name="proName" value="${product.proName}"/>
                                         <input type="hidden" name="proNo" value="${product.proNo}"/>
                                     </td>
                                     <td>

@@ -62,4 +62,7 @@ public interface ProductMapper {
 
     // 제품 입출고 내역 추가
     int insertInoutHistory(@Param("proNo") int proNo,@Param("proStock") int proStock, @Param("totalPrice") int totalPrice);
+
+    // 장바구니의 해당 재품 개수 조회
+    int getProductStock(@Param("proNo") Integer proNo);
 }
